@@ -1,0 +1,51 @@
+<header class="topheader">
+  <div class="header-brand">
+    <div class="brand-mark">Pe</div>
+    <span class="brand-name">Laboratorio Clínico</span>
+  </div>
+
+  <div class="header-right">
+    <span class="header-datetime">
+      <i class="bi bi-clock"></i>
+      13 sep 2026, 2:45 PM
+    </span>
+
+    <button class="header-icon-btn" title="Notificaciones">
+      <i class="bi bi-bell"></i>
+    </button>
+
+    <div class="user-menu-wrapper">
+      <div class="user-chip" (click)="toggleUserMenu()">
+        <div class="user-avatar">MC</div>
+        <span class="user-name">M. Castaño</span>
+        <i class="bi bi-chevron-down"></i>
+      </div>
+
+      @if (isUserMenuOpen()) {
+        <div class="user-dropdown">
+          <div class="dropdown-header">
+            <div class="dropdown-name">M. Castaño</div>
+            <div class="dropdown-email">m.castano&#64;laboratorio.com</div>
+          </div>
+
+          <a class="dropdown-item">
+            <i class="bi bi-person"></i>
+            Mi perfil
+          </a>
+
+          <a class="dropdown-item">
+            <i class="bi bi-key"></i>
+            Cambiar contraseña
+          </a>
+
+          <div class="dropdown-divider"></div>
+
+          <button class="dropdown-item logout" (click)="onLogout()">
+            <i class="bi bi-box-arrow-right"></i>
+            Cerrar sesión
+          </button>
+        </div>
+      }
+    </div>
+  </div>
+</header>

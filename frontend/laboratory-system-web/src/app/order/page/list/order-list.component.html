@@ -1,0 +1,344 @@
+<div class="list">
+  <!-- =====================================================
+       LIST TITLE
+       ===================================================== -->
+
+  <div class="list-title">
+    <h1>
+      {{ title }}
+    </h1>
+
+    <p>Administra las órdenes registradas.</p>
+  </div>
+
+  <!-- =====================================================
+       LIST HEADER
+       ===================================================== -->
+
+  <div class="list-header">
+    <!-- FILTER -->
+
+    <button type="button" class="btn-filter" (click)="openFilterModal()">
+      <i class="bi bi-filter"></i>
+      Filtros
+    </button>
+
+    <!-- ASCENDING -->
+
+    <button
+      type="button"
+      class="btn-filter"
+      (click)="onAscendingDate()"
+      title="Ordenar del más antiguo al más reciente"
+    >
+      <i class="bi bi-sort-up-alt"></i>
+    </button>
+
+    <!-- DESCENDING -->
+
+    <button
+      type="button"
+      class="btn-filter"
+      (click)="onDescendingDate()"
+      title="Ordenar del más reciente al más antiguo"
+    >
+      <i class="bi bi-sort-down"></i>
+    </button>
+
+    <!-- SEARCH -->
+
+    <div class="list-search">
+      <i class="bi bi-search"></i>
+
+      <input
+        type="text"
+        class="list-search-input"
+        placeholder="Buscar orden por doctor..."
+        [value]="filter.doctorName || ''"
+        (input)="onSearch($event)"
+      />
+
+      <button
+        *ngIf="filter.doctorName"
+        type="button"
+        class="list-search-clear"
+        (click)="clearSearch()"
+        title="Limpiar búsqueda"
+      >
+        <i class="bi bi-x"></i>
+      </button>
+    </div>
+
+    <!-- CREATE -->
+
+    <button
+      type="button"
+      class="btn btn-create"
+      [routerLink]="['/patients', patientId, 'orders', 'create']"
+    >
+      <i class="bi bi-plus-lg"></i>
+
+      Crear Nueva Orden
+    </button>
+  </div>
+
+  <!-- =====================================================
+       MODAL
+       ===================================================== -->
+
+  <app-modal>
+    <!-- ===================================================
+         FILTER CONTENT
+         ==================================================== -->
+
+    <div *ngIf="modalService.modalConfig()?.type === 'filter'">
+      <app-order-filter [filter]="draftFilter" (filterChange)="draftFilter = $event">
+      </app-order-filter>
+    </div>
+
+    <!-- ===================================================
+         REPORT CONTENT
+         ==================================================== -->
+
+    <div *ngIf="modalService.modalConfig()?.type === 'report'">
+      <!-- LOADING -->
+
+      <div class="report-loading" *ngIf="reportLoading">
+        <i class="bi bi-hourglass-split"></i>
+
+        <span> Cargando reporte... </span>
+      </div>
+
+      <!-- REPORT -->
+
+      <app-order-report
+        *ngIf="!reportLoading && selectedOrderReport"
+        [report]="selectedOrderReport"
+      >
+      </app-order-report>
+    </div>
+
+    <!-- ===================================================
+         FILTER FOOTER
+         ==================================================== -->
+
+    <div modal-footer class="filter-footer" *ngIf="modalService.modalConfig()?.type === 'filter'">
+      <button type="button" class="filter-btn filter-btn-apply" (click)="resetModal()">
+        <i class="bi bi-arrow-clockwise"></i>
+
+        Resetear
+      </button>
+
+      <button type="button" class="filter-btn filter-btn-cancel" (click)="closeFilterModal()">
+        Cancelar
+      </button>
+
+      <button type="button" class="filter-btn filter-btn-apply" (click)="applyFilters()">
+        <i class="bi bi-check2"></i>
+
+        Aplicar
+      </button>
+    </div>
+
+    <!-- ===================================================
+         REPORT FOOTER
+         ==================================================== -->
+
+    <div modal-footer class="report-footer" *ngIf="modalService.modalConfig()?.type === 'report'">
+      <button type="button" class="filter-btn filter-btn-cancel" (click)="closeOrderReport()">
+        <i class="bi bi-x-lg"></i>
+
+        Cerrar
+      </button>
+    </div>
+  </app-modal>
+
+  <!-- =====================================================
+       TABLE
+       ===================================================== -->
+
+  <div class="list-table-wrapper">
+    <div class="list-table-scroll">
+      <table class="table list-table mb-0">
+        <!-- =================================================
+             TABLE HEADER
+             ================================================= -->
+
+        <thead>
+          <tr>
+            <th>ID</th>
+
+            <th>Estado</th>
+
+            <th>Contacto</th>
+
+            <th>Total</th>
+
+            <th>Creado</th>
+
+            <th class="text-center">Ver Reporte</th>
+
+            <th class="text-center">Toggle</th>
+
+            <th class="text-center">Editar</th>
+
+            <th class="text-center">Borrar</th>
+          </tr>
+        </thead>
+
+        <!-- =================================================
+             TABLE BODY
+             ================================================= -->
+
+        <tbody>
+          <tr *ngFor="let order of orders">
+            <!-- ID -->
+
+            <td>
+              <a
+                class="btn-detail"
+                [routerLink]="['/patients', patientId, 'orders', order.id, 'test-results']"
+                title="Ver resultados de la orden"
+              >
+                <i class="bi bi-clipboard2-pulse"></i>
+
+                Orden #{{ order.id }}
+              </a>
+            </td>
+
+            <!-- STATUS -->
+
+            <td>
+              <span
+                class="status-badge"
+                [class.status-pending]="order.status === OrderStatus.PENDING"
+                [class.status-progress]="order.status === OrderStatus.IN_PROGRESS"
+                [class.status-completed]="order.status === OrderStatus.COMPLETED"
+              >
+                {{ order.status }}
+              </span>
+            </td>
+
+            <!-- DOCTOR -->
+
+            <td>
+              <span class="table-secondary">
+                {{ order.doctorTitle }}.
+                {{ order.doctorFullName }}
+              </span>
+            </td>
+            <!-- Total Order -->
+            <td>
+              <span class="table-secondary">
+                ${{ order.totalOrder }}
+              </span>
+            </td>
+
+            <!-- CREATED -->
+
+            <td>
+              <span class="table-secondary">
+                {{ order.createdAt }}
+              </span>
+            </td>
+
+            <!-- REPORT -->
+
+            <td class="text-center">
+              <button
+                type="button"
+                class="btn table-action report"
+                (click)="openOrderReport(order)"
+                title="Ver reporte de laboratorio"
+              >
+                <i class="bi bi-eye"></i>
+              </button>
+            </td>
+
+            <!-- TOGGLE -->
+
+            <td class="text-center">
+              <button
+                type="button"
+                class="btn btn-sm"
+                [class.btn-success]="order.status === OrderStatus.COMPLETED"
+                [class.btn-secondary]="order.status === OrderStatus.IN_PROGRESS"
+                [title]="
+                  order.status === OrderStatus.COMPLETED
+                    ? 'Completada. Clic para reabrir'
+                    : 'En progreso. Clic para completar'
+                "
+                (click)="toggleStatus(order)"
+              >
+                <i
+                  class="bi"
+                  [class.bi-toggle-on]="order.status === OrderStatus.COMPLETED"
+                  [class.bi-toggle-off]="order.status === OrderStatus.IN_PROGRESS"
+                >
+                </i>
+              </button>
+            </td>
+
+            <!-- EDIT -->
+
+            <td class="text-center">
+              <button
+                type="button"
+                class="btn table-action edit"
+                [routerLink]="['/patients', patientId, 'orders', order.id]"
+                title="Editar orden"
+              >
+                <i class="bi bi-pencil"></i>
+              </button>
+            </td>
+
+            <!-- DELETE -->
+
+            <td class="text-center">
+              <button
+                type="button"
+                class="btn table-action delete"
+                (click)="delete(order)"
+                title="Borrar orden"
+              >
+                <i class="bi bi-trash"></i>
+              </button>
+            </td>
+          </tr>
+
+          <!-- =================================================
+               EMPTY STATE
+               ================================================= -->
+
+          <tr *ngIf="orders.length === 0">
+            <td colspan="8" class="empty-state">
+              <div class="empty-icon">
+                <i class="bi bi-file-earmark-medical"></i>
+              </div>
+
+              <div class="empty-title">No hay órdenes disponibles</div>
+
+              <div class="empty-text">Registra una orden para comenzar.</div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- =====================================================
+         PAGINATION
+         ===================================================== -->
+
+    <div class="list-pagination" *ngIf="paginator">
+      <div class="pagination-content">
+        <span class="pagination-info">
+          {{ paginator.totalElements }}
+          órdenes
+        </span>
+
+        <paginator-nav [paginator]="paginator" [route]="'/patients/' + patientId + '/results'">
+        </paginator-nav>
+      </div>
+    </div>
+  </div>
+</div>

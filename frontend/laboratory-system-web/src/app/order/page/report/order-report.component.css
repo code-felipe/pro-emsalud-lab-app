@@ -1,0 +1,1070 @@
+/* =====================================================
+   REPORT WRAPPER
+===================================================== */
+
+.order-report-wrapper {
+  display: flex;
+  flex-direction: column;
+
+  width: 100%;
+  min-width: 0;
+  min-height: 0;
+}
+
+
+/* =====================================================
+   REPORT
+===================================================== */
+
+.order-report {
+  width: 100%;
+  min-width: 0;
+
+  background: var(--paper-raised);
+  color: var(--ink);
+
+  border: 1px solid var(--line);
+  border-radius: var(--radius-s);
+
+  overflow: hidden;
+
+  font-family:
+    Inter,
+    system-ui,
+    -apple-system,
+    BlinkMacSystemFont,
+    "Segoe UI",
+    sans-serif;
+}
+
+
+/* =====================================================
+   HEADER
+===================================================== */
+
+.report-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  padding: 14px 16px;
+
+  background: var(--teal-wash);
+
+  border-bottom: 2px solid var(--teal);
+
+  gap: 16px;
+}
+
+.report-brand {
+  display: flex;
+  align-items: center;
+
+  gap: 10px;
+
+  min-width: 0;
+}
+
+.report-icon {
+  width: 56px;
+  height: 56px;
+
+  padding: 0;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 14px;
+
+  flex-shrink: 0;
+
+  overflow: hidden;
+}
+
+.report-icon img {
+  width: 100%;
+  height: 100%;
+
+  object-fit: contain;
+
+  border-radius: 50%;
+}
+
+.report-title {
+  color: var(--teal-deep);
+
+  font-size: 15px;
+  font-weight: 700;
+
+  line-height: 1.2;
+}
+
+.report-subtitle {
+  margin-top: 2px;
+
+  color: var(--ink-soft);
+
+  font-size: 10px;
+  line-height: 1.2;
+}
+
+.report-order {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+
+  min-width: 70px;
+
+  flex-shrink: 0;
+}
+
+.report-order strong {
+  color: var(--teal-deep);
+
+  font-size: 15px;
+  font-weight: 700;
+}
+
+.report-label {
+  display: block;
+
+  color: var(--ink-soft);
+
+  font-size: 8px;
+  font-weight: 700;
+
+  letter-spacing: 0.12em;
+
+  text-transform: uppercase;
+}
+
+
+/* =====================================================
+   PATIENT / DOCTOR INFORMATION
+===================================================== */
+
+.report-info {
+  display: grid;
+
+  grid-template-columns:
+    1.5fr
+    1.5fr
+    1fr;
+
+  border-bottom: 1px solid var(--line);
+
+  background: var(--paper-raised);
+}
+
+.report-info-block {
+  min-height: 58px;
+  min-width: 0;
+
+  padding: 9px 13px;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+
+  border-right: 1px solid var(--line);
+}
+
+.report-info-block:last-child {
+  border-right: none;
+}
+
+.report-info-block strong {
+  margin-top: 3px;
+
+  color: var(--ink);
+
+  font-size: 11px;
+  font-weight: 650;
+
+  line-height: 1.25;
+
+  overflow-wrap: anywhere;
+}
+
+.report-secondary {
+  margin-top: 2px;
+
+  color: var(--ink-soft);
+
+  font-size: 9px;
+}
+
+
+/* =====================================================
+   RESULTS SECTION
+===================================================== */
+
+.report-section {
+  padding: 12px;
+
+  min-width: 0;
+  min-height: 0;
+
+  display: flex;
+  flex-direction: column;
+}
+
+
+/* =====================================================
+   RESULTS HEADER
+===================================================== */
+
+.report-section-header {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+
+  padding-bottom: 8px;
+
+  border-bottom: 1px solid var(--line);
+
+  gap: 12px;
+
+  flex-shrink: 0;
+}
+
+.report-section-kicker {
+  display: block;
+
+  margin-bottom: 1px;
+
+  color: var(--teal);
+
+  font-size: 8px;
+  font-weight: 700;
+
+  letter-spacing: 0.14em;
+}
+
+.report-section-header h3 {
+  margin: 0;
+
+  color: var(--ink);
+
+  font-size: 14px;
+  font-weight: 700;
+}
+
+.report-result-count {
+  padding: 3px 7px;
+
+  background: var(--teal-wash);
+
+  color: var(--teal-deep);
+
+  border: 1px solid #c9ddd5;
+
+  border-radius: var(--radius-s);
+
+  font-size: 9px;
+  font-weight: 600;
+
+  white-space: nowrap;
+
+  flex-shrink: 0;
+}
+
+
+/* =====================================================
+   RESULTS SCROLL
+===================================================== */
+
+.report-results-scroll {
+  max-height: 300px;
+
+  margin-top: 8px;
+
+  overflow-y: auto;
+  overflow-x: auto;
+
+  padding-bottom: 3px;
+
+  scrollbar-width: thin;
+
+  scrollbar-color:
+    var(--teal)
+    var(--paper);
+}
+
+
+/* =====================================================
+   SCROLLBAR
+===================================================== */
+
+.report-results-scroll::-webkit-scrollbar {
+  width: 5px;
+  height: 5px;
+}
+
+.report-results-scroll::-webkit-scrollbar-track {
+  background: var(--paper);
+
+  border-radius: var(--radius-s);
+}
+
+.report-results-scroll::-webkit-scrollbar-thumb {
+  background: var(--teal);
+
+  border-radius: var(--radius-s);
+}
+
+.report-results-scroll::-webkit-scrollbar-thumb:hover {
+  background: var(--teal-deep);
+}
+
+
+/* =====================================================
+   RESULTS TABLE
+===================================================== */
+
+.report-results-table {
+  width: 100%;
+
+  border-collapse: collapse;
+
+  background: var(--paper-raised);
+
+  font-size: 10px;
+
+  table-layout: fixed;
+}
+
+
+/* =====================================================
+   TABLE HEADER
+===================================================== */
+
+.report-results-table thead {
+  position: sticky;
+
+  top: 0;
+
+  z-index: 2;
+}
+
+.report-results-table th {
+  padding: 6px 7px;
+
+  background: var(--teal-wash);
+
+  border-bottom: 1px solid var(--line-strong);
+
+  color: var(--teal-deep);
+
+  font-size: 8px;
+  font-weight: 700;
+
+  letter-spacing: 0.06em;
+
+  text-align: left;
+
+  text-transform: uppercase;
+
+  white-space: nowrap;
+}
+
+
+/* =====================================================
+   TABLE BODY
+===================================================== */
+
+.report-results-table tbody tr {
+  transition:
+    background-color var(--transition-fast);
+}
+
+.report-results-table tbody tr:hover {
+  background: #faf9f6;
+}
+
+
+/* =====================================================
+   TABLE CELLS
+===================================================== */
+
+.report-results-table td {
+  padding: 6px 7px;
+
+  border-bottom: 1px solid var(--line);
+
+  vertical-align: middle;
+
+  line-height: 1.2;
+
+  overflow-wrap: anywhere;
+}
+
+.report-results-table tbody tr:last-child td {
+  border-bottom: none;
+}
+
+
+/* =====================================================
+   TEST NAME
+===================================================== */
+
+.report-results-table .result-name {
+  color: var(--ink);
+
+  font-size: 10px;
+  font-weight: 650;
+
+  text-transform: capitalize;
+}
+
+
+/* =====================================================
+   TEST TYPE
+===================================================== */
+
+.report-results-table .result-type {
+  display: inline-block;
+
+  padding: 2px 5px;
+
+  background: var(--teal-wash);
+
+  color: var(--teal-deep);
+
+  border: 1px solid #c9ddd5;
+
+  border-radius: var(--radius-s);
+
+  font-size: 7px;
+  font-weight: 700;
+
+  letter-spacing: 0.04em;
+
+  text-transform: uppercase;
+
+  white-space: nowrap;
+}
+
+
+/* =====================================================
+   RESULT VALUE
+===================================================== */
+
+.report-results-table .result-value {
+  color: var(--teal-deep);
+
+  font-size: 10px;
+  font-weight: 700;
+
+  white-space: nowrap;
+  
+}
+
+
+/* =====================================================
+   REFERENCE
+===================================================== */
+
+.report-results-table .result-reference {
+  color: var(--ink-soft);
+
+  font-size: 9px;
+
+  white-space: normal;
+
+  white-space: pre-wrap;
+
+
+  overflow-wrap: anywhere;
+}
+
+
+/* =====================================================
+   EMPTY
+===================================================== */
+
+.report-empty {
+  min-height: 70px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  flex-direction: column;
+
+  gap: 5px;
+
+  background: var(--paper);
+
+  border: 1px dashed var(--line-strong);
+
+  border-radius: var(--radius-s);
+
+  color: var(--ink-soft);
+
+  font-size: 10px;
+}
+
+.report-empty i {
+  color: var(--brick);
+
+  font-size: 17px;
+}
+
+
+/* =====================================================
+   FOOTER NOTE
+===================================================== */
+
+.report-note {
+  display: flex;
+  align-items: flex-start;
+
+  margin: 0 12px 8px;
+
+  padding: 7px 9px;
+
+  background: var(--paper);
+
+  border-left: 3px solid var(--amber);
+
+  color: var(--ink-soft);
+
+  font-size: 9px;
+
+  line-height: 1.35;
+
+  gap: 7px;
+}
+
+.report-note i {
+  margin-top: 1px;
+
+  color: var(--amber);
+
+  flex-shrink: 0;
+}
+
+
+/* =====================================================
+   REPORT FOOTER
+   Empresa | Sello | Validación | PDF
+===================================================== */
+
+.report-technician {
+  display: grid;
+
+  grid-template-columns:
+    minmax(0, 1fr)
+    minmax(92px, auto)
+    auto;
+
+  align-items: center;
+
+  column-gap: 14px;
+
+  margin: 0 12px 12px;
+
+  min-width: 0;
+
+  padding-top: 9px;
+
+  border-top: 1px solid var(--line);
+}
+
+
+/* =====================================================
+   COMPANY
+   Sello + información de empresa
+===================================================== */
+
+.report-company {
+    
+    display: flex;
+    
+    align-items: center;
+
+    justify-content: space-around;
+
+    gap: 8px;
+
+    min-width: 0;
+}
+
+
+/* =====================================================
+   COMPANY SEAL
+   ÚNICA IMAGEN DEL SELLO
+===================================================== */
+
+.report-company img {
+    
+    width: 100px;
+
+    height: 100px;
+
+    flex: 0 0 58px;
+
+    object-fit: contain;
+
+    opacity: 0.9;
+
+}
+
+
+/* =====================================================
+   COMPANY INFORMATION
+===================================================== */
+
+.report-company-info {
+  display: flex;
+  flex-direction: column;
+
+  justify-content: center;
+
+  gap: 1px;
+
+  min-width: 0;
+
+   padding-left: 10px;
+
+  border-left: 1px solid var(--line);
+}
+
+.report-company-location {
+  color: var(--teal-deep);
+
+  font-size: 7px;
+  font-weight: 700;
+
+  line-height: 1.25;
+
+  letter-spacing: 0.03em;
+
+  text-transform: uppercase;
+
+  overflow-wrap: anywhere;
+}
+
+.report-company-info span {
+  color: var(--ink-soft);
+
+  font-size: 6.5px;
+  font-weight: 500;
+
+  line-height: 1.3;
+
+  white-space: nowrap;
+}
+
+
+/* =====================================================
+   VALIDATION
+===================================================== */
+
+.report-validation {
+  display: flex;
+  flex-direction: column;
+
+  justify-content: center;
+
+  gap: 1px;
+
+  min-width: 92px;
+
+  padding-left: 10px;
+
+  border-left: 1px solid var(--line);
+}
+
+.report-validation .report-label {
+  font-size: 7px;
+
+  line-height: 1.2;
+}
+
+.report-validation strong {
+  color: var(--ink);
+
+  font-size: 9px;
+  font-weight: 650;
+
+  line-height: 1.2;
+
+  white-space: nowrap;
+}
+
+
+/* =====================================================
+   ACTIONS
+===================================================== */
+
+.report-actions {
+  display: flex;
+  align-items: center;
+
+  flex-shrink: 0;
+}
+
+.report-download-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  gap: 5px;
+
+  min-height: 30px;
+
+  padding: 6px 10px;
+
+  border: 1px solid var(--teal);
+
+  border-radius: var(--radius-s);
+
+  background: var(--teal);
+
+  color: #ffffff;
+
+  font-size: 9px;
+  font-weight: 650;
+
+  white-space: nowrap;
+
+  cursor: pointer;
+
+  transition:
+    background-color var(--transition-fast),
+    border-color var(--transition-fast),
+    opacity var(--transition-fast);
+}
+
+.report-download-btn:hover:not(:disabled) {
+  background: var(--teal-deep);
+
+  border-color: var(--teal-deep);
+}
+
+.report-download-btn:disabled {
+  opacity: 0.65;
+
+  cursor: wait;
+}
+
+.report-download-btn i {
+  font-size: 11px;
+}
+
+/*
+===================
+    BTN WHASAP
+===================
+*/
+.report-whatsapp-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  margin-left: 10px;
+  
+  gap: 5px;
+
+  min-height: 30px;
+
+  padding: 6px 10px;
+
+  border: 1px solid #25d366;
+
+  border-radius: var(--radius-s);
+
+  background: #25d366;
+
+  color: #ffffff;
+
+  font-size: 9px;
+  font-weight: 650;
+
+  white-space: nowrap;
+
+  cursor: pointer;
+
+  transition:
+    background-color var(--transition-fast),
+    border-color var(--transition-fast),
+    opacity var(--transition-fast);
+}
+
+.report-whatsapp-btn:hover {
+  background: #1ebe5d;
+
+  border-color: #1ebe5d;
+}
+
+.report-whatsapp-btn i {
+  font-size: 11px;
+}
+
+
+/* =====================================================
+   PDF GENERATION
+===================================================== */
+
+.order-report.generating-pdf {
+  width: 794px;
+  max-width: 794px;
+
+  height: auto;
+  max-height: none;
+
+  overflow: visible;
+}
+
+.order-report.generating-pdf .report-results-scroll {
+  max-height: none;
+  height: auto;
+
+  margin-top: 8px;
+  padding-bottom: 0;
+
+  overflow: visible;
+}
+
+.order-report.generating-pdf .report-results-table {
+  width: 100%;
+  min-width: 0;
+
+  table-layout: fixed;
+}
+
+.order-report.generating-pdf .report-results-table thead {
+  position: static;
+}
+
+.order-report.generating-pdf .report-results-table tbody tr:hover {
+  background: transparent;
+}
+
+
+/* =====================================================
+   RESPONSIVE
+===================================================== */
+
+@media (max-width: 700px) {
+
+  .report-header {
+    align-items: flex-start;
+    flex-direction: column;
+
+    padding: 12px 14px;
+  }
+
+  .report-order {
+    align-items: flex-start;
+  }
+
+
+  /* =================================================
+     PATIENT / DOCTOR / DATE
+  ================================================= */
+
+  .report-info {
+    grid-template-columns: 1fr;
+  }
+
+  .report-info-block {
+    min-height: auto;
+
+    padding: 8px 12px;
+
+    border-right: none;
+    border-bottom: 1px solid var(--line);
+  }
+
+  .report-info-block:last-child {
+    border-bottom: none;
+  }
+
+
+  /* =================================================
+     RESULTS
+  ================================================= */
+
+  .report-section {
+    padding: 10px;
+  }
+
+  .report-results-scroll {
+    max-height: 300px;
+
+    overflow-y: auto;
+    overflow-x: auto;
+  }
+
+  .report-results-table {
+    min-width: 540px;
+
+    table-layout: auto;
+  }
+
+  .report-results-table th,
+  .report-results-table td {
+    padding: 6px 7px;
+  }
+
+
+  /* =================================================
+     NOTE
+  ================================================= */
+
+  .report-note {
+    margin: 0 10px 8px;
+  }
+
+
+  /* =================================================
+     FOOTER
+  ================================================= */
+
+  .report-technician {
+    grid-template-columns:
+      minmax(0, 1fr)
+      auto;
+
+    column-gap: 8px;
+    row-gap: 8px;
+
+    margin: 0 10px 10px;
+
+    align-items: center;
+  }
+
+
+  /* =================================================
+     COMPANY
+  ================================================= */
+
+  .report-company {
+    grid-column: 1 / -1;
+
+    gap: 7px;
+
+    min-width: 0;
+  }
+
+  .report-company img {
+    width: 52px;
+    height: 52px;
+
+    flex-basis: 52px;
+  }
+
+  .report-company-location {
+    font-size: 6.5px;
+  }
+
+  .report-company-info span {
+    font-size: 6px;
+
+    white-space: normal;
+
+    overflow-wrap: anywhere;
+  }
+
+
+  /* =================================================
+     VALIDATION
+  ================================================= */
+
+  .report-validation {
+    grid-column: 1;
+
+    min-width: 0;
+
+    padding-left: 7px;
+  }
+
+  .report-validation .report-label {
+    font-size: 6.5px;
+  }
+
+  .report-validation strong {
+    font-size: 8px;
+
+    white-space: normal;
+  }
+
+
+  /* =================================================
+     ACTION
+  ================================================= */
+
+  .report-actions {
+    grid-column: 2;
+
+    justify-self: end;
+  }
+
+  .report-download-btn {
+    min-height: 29px;
+
+    padding: 6px 9px;
+
+    font-size: 8px;
+  }
+
+  .report-download-btn i {
+    font-size: 10px;
+  }
+}
+
+
+/* =====================================================
+   PDF MODE
+   El PDF conserva siempre el footer horizontal.
+===================================================== */
+
+.order-report.generating-pdf .report-results-scroll {
+  max-height: none;
+
+  height: auto;
+
+  overflow: visible;
+}
+
+.order-report.generating-pdf .report-results-table {
+  min-width: 0;
+
+  table-layout: fixed;
+}
+
+.order-report.generating-pdf .report-technician {
+  grid-template-columns:
+    minmax(0, 1fr)
+    minmax(92px, auto)
+    auto;
+
+  column-gap: 14px;
+
+  flex-wrap: nowrap;
+}
+
+.order-report.generating-pdf .report-company {
+  grid-column: 1;
+
+  min-width: 0;
+}
+
+.order-report.generating-pdf .report-company img {
+  width: 58px;
+  height: 58px;
+
+  flex-basis: 58px;
+}
+
+.order-report.generating-pdf .report-validation {
+  grid-column: 2;
+}
+
+.order-report.generating-pdf .report-actions {
+  grid-column: 3;
+}

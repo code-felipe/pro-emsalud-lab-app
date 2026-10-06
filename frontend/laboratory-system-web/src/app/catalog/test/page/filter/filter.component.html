@@ -1,0 +1,112 @@
+<div class="test-filter">
+  <!-- Precio mínimo -->
+  <div class="filter-field">
+    <label for="priceMin">Precio mínimo</label>
+    <input
+      id="priceMin"
+      type="number"
+      class="filter-input"
+      [(ngModel)]="filter.priceMin"
+      (ngModelChange)="onFilterChange()"
+      placeholder="0.00"
+      min="0"
+      step="0.01"
+    />
+  </div>
+
+  <!-- Precio máximo -->
+  <div class="filter-field">
+    <label for="priceMax">Precio máximo</label>
+    <input
+      id="priceMax"
+      type="number"
+      class="filter-input"
+      [(ngModel)]="filter.priceMax"
+      (ngModelChange)="onFilterChange()"
+      placeholder="0.00"
+      min="0"
+      step="0.01"
+    />
+  </div>
+
+  <!-- Estado -->
+  <div class="filter-field">
+    <label for="active">Estado</label>
+    <select
+      id="active"
+      class="filter-input"
+      [(ngModel)]="filter.active"
+      (ngModelChange)="onFilterChange()"
+    >
+      <option [ngValue]="undefined">Todos</option>
+      <option [ngValue]="true">Activos</option>
+      <option [ngValue]="false">Inactivos</option>
+    </select>
+  </div>
+
+  <!-- Categoría -->
+  <div class="filter-field">
+    <label for="testCategoryName">Categoría</label>
+
+    <select
+      id="testCategoryName"
+      class="filter-input"
+      [(ngModel)]="filter.testCategoryName"
+      (ngModelChange)="onFilterChange()"
+    >
+      <option [ngValue]="undefined">Todas</option>
+
+      <option *ngFor="let category of testCategories" [ngValue]="category.name">
+        {{ category.name }}
+      </option>
+    </select>
+  </div>
+
+  <!-- Creado desde -->
+  <div class="filter-field filter-date">
+    <label for="createdAtAfter">Creado desde</label>
+    <input
+      id="createdAtAfter"
+      type="date"
+      class="filter-input"
+      [(ngModel)]="filter.createdAtAfter"
+      (ngModelChange)="onFilterChange()"
+    />
+  </div>
+
+  <!-- Creado hasta -->
+  <div class="filter-field filter-date">
+    <label for="createdAtBefore">Creado hasta</label>
+    <input
+      id="createdAtBefore"
+      type="date"
+      class="filter-input"
+      [(ngModel)]="filter.createdAtBefore"
+      (ngModelChange)="onFilterChange()"
+    />
+  </div>
+
+  <!-- Actualizado desde -->
+  <div class="filter-field filter-date">
+    <label for="updatedAtAfter">Actualizado desde</label>
+    <input
+      id="updatedAtAfter"
+      type="date"
+      class="filter-input"
+      [(ngModel)]="filter.updatedAtAfter"
+      (ngModelChange)="onFilterChange()"
+    />
+  </div>
+
+  <!-- Actualizado hasta -->
+  <div class="filter-field filter-date">
+    <label for="updatedAtBefore">Actualizado hasta</label>
+    <input
+      id="updatedAtBefore"
+      type="date"
+      class="filter-input"
+      [(ngModel)]="filter.updatedAtBefore"
+      (ngModelChange)="onFilterChange()"
+    />
+  </div>
+</div>

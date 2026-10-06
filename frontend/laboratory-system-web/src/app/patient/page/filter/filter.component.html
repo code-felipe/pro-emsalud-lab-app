@@ -1,0 +1,77 @@
+<div class="test-filter">
+  <!-- Género -->
+  <div class="filter-field">
+    <label for="gender">Género</label>
+    <select
+      id="gender"
+      class="filter-input"
+      [(ngModel)]="filter.gender"
+      (ngModelChange)="onFilterChange()"
+    >
+      <option [ngValue]="undefined">Todos</option>
+      <option value="MALE">Masculino</option>
+      <option value="FEMALE">Femenino</option>
+      <option value="OTHER">Otro</option>
+    </select>
+  </div>
+
+  <!-- Fecha de nacimiento -->
+  <div class="filter-field filter-date">
+    <label for="dateOfBirth">Fecha de nacimiento</label>
+    <input
+      id="dateOfBirth"
+      type="date"
+      class="filter-input"
+      [(ngModel)]="filter.dateOfBirth"
+      (ngModelChange)="onFilterChange()"
+    />
+  </div>
+
+  <!-- Creado desde -->
+  <div class="filter-field filter-date">
+    <label for="createdAtAfter">Creado desde</label>
+    <input
+      id="createdAtAfter"
+      type="date"
+      class="filter-input"
+      [(ngModel)]="filter.createdAtAfter"
+      (ngModelChange)="onFilterChange()"
+    />
+  </div>
+
+  <!-- Creado hasta -->
+  <div class="filter-field filter-date">
+    <label for="createdAtBefore">Creado hasta</label>
+    <input
+      id="createdAtBefore"
+      type="date"
+      class="filter-input"
+      [(ngModel)]="filter.createdAtBefore"
+      (ngModelChange)="onFilterChange()"
+    />
+  </div>
+
+  <!-- Actualizado desde -->
+  <div class="filter-field filter-date">
+    <label for="updatedAtAfter">Actualizado desde</label>
+    <input
+      id="updatedAtAfter"
+      type="date"
+      class="filter-input"
+      [(ngModel)]="filter.updatedAtAfter"
+      (ngModelChange)="onFilterChange()"
+    />
+  </div>
+
+  <!-- Actualizado hasta -->
+  <div class="filter-field filter-date">
+    <label for="updatedAtBefore">Actualizado hasta</label>
+    <input
+      id="updatedAtBefore"
+      type="date"
+      class="filter-input"
+      [(ngModel)]="filter.updatedAtBefore"
+      (ngModelChange)="onFilterChange()"
+    />
+  </div>
+</div>

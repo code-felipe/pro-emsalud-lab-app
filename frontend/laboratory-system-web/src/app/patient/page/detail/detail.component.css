@@ -1,0 +1,376 @@
+.app{
+    max-width: 1500px;
+    margin: 0 auto;
+}
+
+/* =========================================================
+   PATIENT HEADER
+========================================================= */
+
+.patient-header {
+  padding: 15px 21px 0;
+}
+
+/* =========================================================
+   BACK LINK
+========================================================= */
+
+.back-link {
+  display: inline-flex;
+  align-items: center;
+
+  color: var(--ink-soft);
+
+  font-size: 13px;
+
+  text-decoration: none;
+
+  margin-bottom: 18px;
+
+  cursor: pointer;
+
+  transition:
+    color var(--transition-fast),
+    transform var(--transition-fast);
+}
+
+.back-link:hover {
+  color: var(--ink);
+}
+
+.back-link > span {
+  margin-right: 6px;
+
+  font-size: 15px;
+}
+
+/* =========================================================
+   PATIENT MAIN ROW
+========================================================= */
+
+.patient-row {
+  display: flex;
+
+  justify-content: space-between;
+  align-items: flex-end;
+
+  gap: 24px;
+
+  padding: 16px 0;
+
+  border-bottom: 1px solid var(--line-strong);
+}
+
+.patient-main {
+  min-width: 0;
+}
+
+.patient-name {
+  color: var(--ink);
+
+  font-size: 26px;
+  font-weight: 500;
+
+  line-height: 1.2;
+
+  overflow-wrap: anywhere;
+}
+
+.patient-code {
+  margin-top: 4px;
+
+  color: var(--ink-soft);
+
+  font-size: 12px;
+
+  font-variant-numeric: tabular-nums;
+}
+
+.patient-id {
+  flex-shrink: 0;
+
+  color: var(--ink-soft);
+
+  font-size: 12.5px;
+
+  font-variant-numeric: tabular-nums;
+
+  white-space: nowrap;
+}
+
+/* =========================================================
+   PATIENT FACTS
+========================================================= */
+
+.patient-facts {
+  display: grid;
+
+  /*
+   * Auto-fit permite que las columnas se adapten
+   * al espacio disponible.
+   *
+   * 4 columnas aproximadamente en escritorio.
+   * 2 en tablet.
+   * 1 en móvil.
+   */
+  grid-template-columns: repeat(
+    auto-fit,
+    minmax(170px, 1fr)
+  );
+
+  gap: 0;
+
+  margin-top: 0;
+
+  border-bottom: 1px solid var(--line);
+}
+
+/* =========================================================
+   FACT
+========================================================= */
+
+.fact {
+  display: flex;
+
+  flex-direction: column;
+
+  min-width: 0;
+
+  padding: 13px 18px 13px 0;
+
+  margin-right: 18px;
+
+  border-bottom: 1px solid var(--line);
+}
+
+.fact-label {
+  margin-bottom: 3px;
+
+  color: var(--ink-soft);
+
+  font-size: 10.5px;
+
+  line-height: 1.3;
+
+  letter-spacing: 0.02em;
+}
+
+.fact-value {
+  color: var(--ink);
+
+  font-size: 13px;
+
+  line-height: 1.4;
+
+  font-variant-numeric: tabular-nums;
+
+  overflow-wrap: anywhere;
+}
+
+/* =========================
+   PATIENT TABS
+   ========================= */
+
+.patient-tabs {
+  display: flex;
+  align-items: center;
+  gap: 0;
+
+  padding: 0 2rem;
+
+  background-color: var(--paper-raised);
+  border-top: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
+
+  overflow-x: auto;
+}
+
+/* =========================
+   TAB
+   ========================= */
+
+.patient-tab {
+  position: relative;
+
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  min-height: 52px;
+  padding: 0.85rem 1.25rem;
+
+  color: var(--ink-soft);
+  background-color: transparent;
+
+  font-size: 0.82rem;
+  font-weight: 600;
+  text-decoration: none;
+  white-space: nowrap;
+
+  transition:
+    color var(--transition-fast),
+    background-color var(--transition-fast);
+}
+
+/* Línea inferior */
+.patient-tab::after {
+  content: '';
+
+  position: absolute;
+  left: 1rem;
+  right: 1rem;
+  bottom: 0;
+
+  height: 2px;
+
+  background-color: transparent;
+
+  transition:
+    background-color var(--transition-fast),
+    transform var(--transition-fast);
+}
+
+/* =========================
+   HOVER
+   ========================= */
+
+.patient-tab:hover {
+  color: var(--teal-deep);
+  background-color: var(--teal-wash);
+}
+
+.patient-tab:hover::after {
+  background-color: var(--teal);
+}
+
+/* =========================
+   ACTIVE
+   ========================= */
+
+.patient-tab.active {
+  color: var(--teal-deep);
+  background-color: var(--teal-wash);
+}
+
+.patient-tab.active::after {
+  background-color: var(--teal);
+}
+
+/* =========================
+   FOCUS
+   ========================= */
+
+.patient-tab:focus-visible {
+  outline: 2px solid var(--teal);
+  outline-offset: -2px;
+}
+
+
+
+/* =========================================================
+   OPTIONAL / EMPTY VALUE
+========================================================= */
+
+.fact-value:empty::after {
+  content: "No registrado";
+
+  color: var(--ink-soft);
+
+  font-style: italic;
+}
+
+/* =========================================================
+   TABLET
+========================================================= */
+
+@media (max-width: 768px) {
+
+  .patient-header {
+    padding: 18px 20px 0;
+  }
+
+  .patient-row {
+    align-items: flex-start;
+
+    flex-direction: column;
+
+    gap: 6px;
+  }
+
+  .patient-name {
+    font-size: 23px;
+  }
+
+  .patient-id {
+    order: -1;
+
+    font-size: 11.5px;
+  }
+
+  .patient-facts {
+    grid-template-columns: repeat(
+      2,
+      minmax(0, 1fr)
+    );
+  }
+
+  .fact {
+    margin-right: 0;
+
+    padding-right: 14px;
+  }
+}
+
+/* =========================================================
+   MOBILE
+========================================================= */
+
+@media (max-width: 480px) {
+
+  .patient-header {
+    padding: 16px 16px 0;
+  }
+
+  .patient-name {
+    font-size: 21px;
+  }
+
+  .patient-facts {
+    grid-template-columns: 1fr;
+  }
+
+  .fact {
+    padding: 10px 0;
+
+    margin: 0;
+
+    border-bottom: 1px solid var(--line);
+  }
+
+  .fact:last-child {
+    border-bottom: none;
+  }
+/* =========================
+   RESPONSIVE - TABS
+   ========================= */
+
+@media (max-width: 576px) {
+
+  .patient-tabs {
+    padding: 0 1rem;
+  }
+
+  .patient-tab {
+    min-height: 48px;
+    padding: 0.75rem 1rem;
+
+    font-size: 0.78rem;
+  }
+
+  .patient-tab::after {
+    left: 0.75rem;
+    right: 0.75rem;
+  }
+
+}
+}

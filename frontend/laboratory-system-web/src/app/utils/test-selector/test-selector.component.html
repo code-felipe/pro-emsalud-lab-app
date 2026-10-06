@@ -1,0 +1,147 @@
+<div class="selector-container">
+  <!-- SEARCH -->
+
+  <div class="search-container">
+    <div class="search-header">
+      <label class="search-label"> Buscar test </label>
+
+      <small class="search-description"> Escribe el nombre del test para buscar. </small>
+    </div>
+
+    <div class="search-field">
+      <div class="search-input-wrapper">
+        <i class="bi bi-search search-icon"></i>
+
+        <input
+          type="text"
+          class="form-control search-input"
+          [(ngModel)]="search"
+          (input)="searchTest()"
+          placeholder="Buscar por nombre o categoria"
+        />
+      </div>
+    </div>
+
+    <!-- SEARCH RESULTS -->
+
+    <div class="search-results" *ngIf="tests.length > 0">
+      <div class="results-header">
+        <span> Tests encontrados </span>
+
+        <span class="results-count">
+          {{ tests.length }}
+        </span>
+      </div>
+
+      <button
+        type="button"
+        class="search-result"
+        *ngFor="let test of tests"
+        (click)="selectTest(test)"
+      >
+        <div class="result-icon">
+          <i class="bi bi-clipboard2-pulse"></i>
+        </div>
+
+        <div class="result-info">
+          <strong class="result-title">
+            {{ test.name }}
+          </strong>
+
+          <small class="result-secondary"> Categoría: {{ test.testCategoryName }} </small>
+          <small class="result-secondary"> Tipo: {{ test.testType }} </small>
+          <small class="result-secondary"> Test ID: {{ test.id }} </small>
+        </div>
+
+        <i class="bi bi-chevron-right result-arrow"></i>
+      </button>
+    </div>
+  </div>
+
+  <!-- SELECTED TEST -->
+
+  <div *ngIf="selectedTest" class="selected-item">
+    <div class="selected-icon">
+      <i class="bi bi-check-lg"></i>
+    </div>
+
+    <div class="selected-info">
+      <div class="selected-header">
+        <span class="selected-label"> Test seleccionado </span>
+
+        <span class="selected-status"> Seleccionado </span>
+      </div>
+
+      <div class="selected-details">
+        <!-- TEST NAME -->
+
+        <div class="detail-item">
+          <small> Nombre </small>
+
+          <strong>
+            {{ selectedTest.name }}
+          </strong>
+        </div>
+
+        <!-- CATEGORY -->
+
+        <div class="detail-item">
+          <small> Categoría </small>
+
+          <strong>
+            {{ selectedTest.testCategoryName }}
+          </strong>
+        </div>
+
+        <!-- TEST ID -->
+
+        <div class="detail-item">
+          <small> Test ID </small>
+
+          <span>
+            {{ selectedTest.id }}
+          </span>
+        </div>
+
+        <!-- REFERENCE -->
+
+        <div class="detail-item">
+          <small> Referencia </small>
+
+          <span>
+            {{ selectedTest.reference || 'Sin referencia' }}
+          </span>
+        </div>
+
+        <!-- PRICE -->
+
+        <div class="detail-item">
+          <small> Precio </small>
+
+          <span>
+            {{ selectedTest.price }}
+          </span>
+        </div>
+
+        <!-- Type -->
+        <div class="detail-item">
+          <small> Tipo </small>
+
+          <span>
+            {{ selectedTest.testType }}
+          </span>
+        </div>
+      </div>
+    </div>
+
+    <!-- CHANGE TEST -->
+
+    <div class="form-actions">
+      <button type="button" class="btn btn-cancel" (click)="clearSelection()">
+        <i class="bi bi-arrow-repeat"></i>
+
+        Cambiar
+      </button>
+    </div>
+  </div>
+</div>

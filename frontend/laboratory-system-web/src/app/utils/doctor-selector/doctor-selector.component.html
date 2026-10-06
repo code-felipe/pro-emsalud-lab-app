@@ -1,0 +1,99 @@
+<div class="selector-container">
+  <!-- SEARCH -->
+
+  <div class="search-container">
+    <div class="search-header">
+      <label class="search-label">Buscar doctor</label>
+
+      <small class="search-description"> Escribe el nombre del doctor para buscar. </small>
+    </div>
+
+    <div class="search-field">
+      <div class="search-input-wrapper">
+        <i class="bi bi-search search-icon"></i>
+
+        <input
+          type="text"
+          class="form-control search-input"
+          [(ngModel)]="search"
+          (input)="searchDoctor()"
+          placeholder="Buscar por nombre"
+        />
+      </div>
+    </div>
+
+    <!-- SEARCH RESULTS -->
+
+    <div class="search-results" *ngIf="doctors.length > 0">
+      <div class="results-header">
+        <span>Doctores encontrados</span>
+
+        <span class="results-count">
+          {{ doctors.length }}
+        </span>
+      </div>
+
+      <button
+        type="button"
+        class="search-result"
+        *ngFor="let doctor of doctors"
+        (click)="selectDoctor(doctor)"
+      >
+        <div class="result-icon">
+          <i class="bi bi-person-badge"></i>
+        </div>
+
+        <div class="result-info">
+          <strong class="result-title">
+            {{ doctor.firstName }}
+          </strong>
+
+          <small class="result-secondary"> Doctor ID: {{ doctor.id }} </small>
+        </div>
+
+        <i class="bi bi-chevron-right result-arrow"></i>
+      </button>
+    </div>
+  </div>
+
+  <!-- SELECTED DOCTOR -->
+
+  <div *ngIf="selectedDoctor" class="selected-item">
+    <div class="selected-icon">
+      <i class="bi bi-check-lg"></i>
+    </div>
+
+    <div class="selected-info">
+      <div class="selected-header">
+        <span class="selected-label"> Doctor seleccionado </span>
+
+        <span class="selected-status"> Seleccionado </span>
+      </div>
+
+      <div class="selected-details">
+        <div class="detail-item">
+          <small>Nombre</small>
+
+          <strong>
+            {{ selectedDoctor.firstName }}
+          </strong>
+        </div>
+
+        <div class="detail-item">
+          <small>Doctor ID</small>
+
+          <span>
+            {{ selectedDoctor.id }}
+          </span>
+        </div>
+      </div>
+    </div>
+
+    <div class="form-actions">
+      <button type="button" class="btn btn-cancel" (click)="clearSelection()">
+        <i class="bi bi-arrow-repeat"></i>
+        Cambiar
+      </button>
+    </div>
+  </div>
+</div>

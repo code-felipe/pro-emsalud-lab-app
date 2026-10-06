@@ -1,0 +1,200 @@
+<div class="list">
+  <!-- BACK TO ORDER -->
+  <a class="btn-back" [routerLink]="['/patients', patientId]">
+    <i class="bi bi-arrow-left"></i>
+    Órdenes</a
+  >
+  <!-- ===================================================== LIST TITLE ===================================================== -->
+  <div class="list-title">
+    <h1>{{ title }}</h1>
+    <p>Administra los resultados registrados.</p>
+  </div>
+  <!-- ===================================================== LIST HEADER ===================================================== -->
+  <div class="list-header">
+    <button type="button" class="btn-filter" (click)="openFilterModal()">
+      <i class="bi bi-filter"></i> Filtros
+    </button>
+    <button
+      type="button"
+      class="btn-filter"
+      (click)="onAscendingDate()"
+      title="Ordenar del más antiguo al más reciente"
+    >
+      <i class="bi bi-sort-up-alt"></i>
+    </button>
+
+    <button
+      type="button"
+      class="btn-filter"
+      (click)="onDescendingDate()"
+      title="Ordenar del más reciente al más antiguo"
+    >
+      <i class="bi bi-sort-down"></i>
+    </button>
+
+    <!-- SEARCH -->
+
+    <div class="list-search">
+      <i class="bi bi-search"></i>
+
+      <input
+        type="text"
+        class="list-search-input"
+        placeholder="Buscar resultado por nombre - categoria..."
+        [value]="filter.search || ''"
+        (input)="onSearch($event)"
+      />
+
+      <button
+        *ngIf="filter.search"
+        type="button"
+        class="list-search-clear"
+        (click)="clearSearch()"
+        title="Limpiar búsqueda"
+      >
+        <i class="bi bi-x"></i>
+      </button>
+    </div>
+    <button
+      type="button"
+      class="btn btn-create"
+      [routerLink]="['/patients', patientId, 'orders', orderId, 'test-results', 'create']"
+    >
+      <i class="bi bi-plus-lg"></i>
+      Crear Nuevo Resultado
+    </button>
+  </div>
+  <!-- ===================================================== FILTER MODAL ===================================================== -->
+  <app-modal>
+    <div>
+      <app-test-result-filter [filter]="draftFilter" (filterChange)="draftFilter = $event">
+      </app-test-result-filter>
+    </div>
+    <div modal-footer class="filter-footer">
+      <button type="button" class="filter-btn filter-btn-apply" (click)="resetModal()">
+        <i class="bi bi-arrow-clockwise"></i>
+        Resetear
+      </button>
+
+      <button type="button" class="filter-btn filter-btn-cancel" (click)="closeFilterModal()">
+        Cancelar
+      </button>
+
+      <button type="button" class="filter-btn filter-btn-apply" (click)="applyFilters()">
+        <i class="bi bi-check2"></i>
+        Aplicar
+      </button>
+    </div>
+  </app-modal>
+  <!-- ===================================================== TABLE ===================================================== -->
+  <div class="list-table-wrapper">
+    <div class="list-table-scroll">
+      <table class="table list-table mb-0">
+        <!-- =================================================
+         TABLE HEADER
+         ================================================= -->
+
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>Test Nombre</th>
+            <th>Categoria</th>
+            <th>Precio</th>
+            <th>Orden</th>
+            <th>Resultado</th>
+            <th>Creado</th>
+            <th>Actualizado</th>
+          </tr>
+        </thead>
+
+        <!-- =================================================
+         TABLE BODY
+         ================================================= -->
+
+        <tbody>
+          <tr *ngFor="let result of results">
+            <!-- ID -->
+
+            <td>
+              <span class="table-link">
+                {{ result.id }}
+              </span>
+            </td>
+            <!-- Test nombre -->
+            <td>
+              <span class="table-secondary">
+                {{ result.testName }}
+              </span>
+            </td>
+            <td>
+              <span class="table-secondary">
+                {{ result.categoryName }}
+              </span>
+            </td>
+
+            <!-- PRICE -->
+
+            <td>
+              <span class="table-secondary"> ${{ result.unitPrice }} </span>
+            </td>
+            <!-- Order -->
+            <td>
+              <span class="table-secondary"> Orden #{{ result.orderId }} </span>
+            </td>
+
+            <td>
+              <span class="table-secondary">
+                {{ result.result }}
+              </span>
+            </td>
+
+            <!-- CREATED -->
+
+            <td>
+              <span class="table-secondary">
+                {{ result.createdAt }}
+              </span>
+            </td>
+
+            <!-- UPDATED -->
+
+            <td>
+              <span class="table-secondary">
+                {{ result.updatedAt }}
+              </span>
+            </td>
+
+            <!-- =================================================
+           EMPTY STATE
+           ================================================= -->
+          </tr>
+
+          <tr *ngIf="results.length === 0">
+            <td colspan="6" class="empty-state">
+              <div class="empty-icon">
+                <i class="bi bi-file-earmark-medical"></i>
+              </div>
+
+              <div class="empty-title">No hay resultados disponibles</div>
+
+              <div class="empty-text">No se encontraron resultados para esta orden.</div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- =====================================================
+     PAGINATION
+     ===================================================== -->
+
+    <div class="list-pagination" *ngIf="paginator">
+      <div class="pagination-content">
+        <span class="pagination-info"> {{ paginator.totalElements }} resultados </span>
+
+        <paginator-nav [paginator]="paginator" [route]="'/patients/' + patientId + '/history'">
+        </paginator-nav>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,278 @@
+.topheader {
+  height: var(--header-h);
+  flex-shrink: 0;
+
+  background: var(--paper-raised);
+  border-bottom: 1px solid var(--line-strong);
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  padding: 0 24px;
+
+  gap: 20px;
+}
+
+.breadcrumb {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+
+  font-size: 13px;
+  color: var(--ink-soft);
+
+  white-space: nowrap;
+}
+
+.breadcrumb .crumb-current {
+  color: var(--ink);
+  font-weight: 500;
+}
+
+.breadcrumb .sep {
+  color: var(--line-strong);
+}
+
+.header-search {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+
+  border: 1px solid var(--line-strong);
+  border-radius: var(--radius-s);
+
+  padding: 7px 12px;
+
+  width: 100%;
+  max-width: 360px;
+
+  background: var(--paper);
+}
+
+.header-search i {
+  font-size: 14px;
+  color: var(--ink-soft);
+  flex-shrink: 0;
+}
+
+.header-search input {
+  border: none;
+  outline: none;
+  background: transparent;
+
+  font-size: 13px;
+  width: 100%;
+
+  color: var(--ink);
+  font-family: inherit;
+}
+
+.header-search input::placeholder {
+  color: var(--ink-soft);
+}
+
+.header-right {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+
+  flex-shrink: 0;
+}
+
+.header-icon-btn {
+  width: 32px;
+  height: 32px;
+
+  border: 1px solid transparent;
+  border-radius: var(--radius-s);
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  color: var(--ink-soft);
+  background: transparent;
+
+  cursor: pointer;
+}
+
+.header-icon-btn:hover {
+  border-color: var(--line);
+  color: var(--ink);
+}
+
+.header-icon-btn i {
+  font-size: 16px;
+}
+
+.user-chip {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+
+  padding: 4px 10px 4px 4px;
+
+  border: 1px solid var(--line);
+  border-radius: 20px;
+
+  cursor: pointer;
+}
+
+.user-chip:hover {
+  border-color: var(--line-strong);
+}
+
+.user-avatar {
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+
+  background: var(--teal-wash);
+  color: var(--teal-deep);
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  font-size: 10.5px;
+  font-weight: 600;
+}
+
+.user-chip .user-name {
+  font-size: 12.5px;
+  color: var(--ink);
+}
+
+.header-brand {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.brand-mark {
+  width: 28px;
+  height: 28px;
+  flex-shrink: 0;
+
+  background: var(--teal-deep);
+  color: #fff;
+  border-radius: var(--radius-s);
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.brand-name {
+  font-family: "Fraunces", serif;
+  font-size: 16px;
+  font-weight: 500;
+  color: var(--ink);
+}
+
+.header-datetime {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+
+  font-size: 12.5px;
+  color: var(--ink-soft);
+
+  white-space: nowrap;
+}
+
+.header-datetime i {
+  font-size: 13px;
+}
+
+.user-menu-wrapper {
+  position: relative;
+}
+
+.user-chip i.bi-chevron-down {
+  font-size: 11px;
+  color: var(--ink-soft);
+  margin-left: 2px;
+}
+
+.user-dropdown {
+  position: absolute;
+  top: calc(100% + 8px);
+  right: 0;
+
+  width: 220px;
+
+  background: var(--paper-raised);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-s);
+  box-shadow: 0 8px 24px rgba(27, 36, 32, 0.12);
+
+  z-index: 100;
+
+  overflow: hidden;
+}
+
+.dropdown-header {
+  padding: 12px 14px;
+  border-bottom: 1px solid var(--line);
+}
+
+.dropdown-name {
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--ink);
+}
+
+.dropdown-email {
+  font-size: 11.5px;
+  color: var(--ink-soft);
+  margin-top: 2px;
+}
+
+.dropdown-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+
+  width: 100%;
+
+  padding: 10px 14px;
+
+  font-size: 13px;
+  color: var(--ink);
+
+  text-decoration: none;
+  background: transparent;
+  border: none;
+  text-align: left;
+  font-family: inherit;
+  cursor: pointer;
+}
+
+.dropdown-item:hover {
+  background: var(--teal-wash);
+}
+
+.dropdown-item i {
+  font-size: 15px;
+  color: var(--ink-soft);
+  width: 16px;
+}
+
+.dropdown-divider {
+  height: 1px;
+  background: var(--line);
+  margin: 4px 0;
+}
+
+.dropdown-item.logout {
+  color: var(--brick);
+}
+
+.dropdown-item.logout i {
+  color: var(--brick);
+}

@@ -1,0 +1,77 @@
+<div class="test-filter">
+  <!-- Doctor -->
+  <div class="filter-field">
+    <label for="doctorName">Doctor</label>
+    <input
+      id="doctorName"
+      type="text"
+      class="filter-input"
+      placeholder="Nombre del doctor"
+      [(ngModel)]="filter.doctorName"
+      (ngModelChange)="onFilterChange()"
+    />
+  </div>
+
+  <!-- Estado -->
+  <div class="filter-field">
+    <label for="status">Estado</label>
+    <select
+      id="status"
+      class="filter-input"
+      [(ngModel)]="filter.status"
+      (ngModelChange)="onFilterChange()"
+    >
+      <option [ngValue]="undefined">Todos</option>
+      <option value="IN_PROGRESS">Pendiente</option>
+      <option value="COMPLETED">Completada</option>
+    </select>
+  </div>
+
+  <!-- Creado desde -->
+  <div class="filter-field filter-date">
+    <label for="createdAtAfter">Creado desde</label>
+    <input
+      id="createdAtAfter"
+      type="date"
+      class="filter-input"
+      [(ngModel)]="filter.createdAtAfter"
+      (ngModelChange)="onFilterChange()"
+    />
+  </div>
+
+  <!-- Creado hasta -->
+  <div class="filter-field filter-date">
+    <label for="createdAtBefore">Creado hasta</label>
+    <input
+      id="createdAtBefore"
+      type="date"
+      class="filter-input"
+      [(ngModel)]="filter.createdAtBefore"
+      (ngModelChange)="onFilterChange()"
+    />
+  </div>
+
+  <!-- Actualizado desde -->
+  <div class="filter-field filter-date">
+    <label for="updatedAtAfter">Actualizado desde</label>
+    <input
+      id="updatedAtAfter"
+      type="date"
+      class="filter-input"
+      [(ngModel)]="filter.updatedAtAfter"
+      (ngModelChange)="onFilterChange()"
+    />
+  </div>
+
+  <!-- Actualizado hasta -->
+  <div class="filter-field filter-date">
+    <label for="updatedAtBefore">Actualizado hasta</label>
+    <input
+      id="updatedAtBefore"
+      type="date"
+      class="filter-input"
+      [(ngModel)]="filter.updatedAtBefore"
+      (ngModelChange)="onFilterChange()"
+    />
+  </div>
+</div>

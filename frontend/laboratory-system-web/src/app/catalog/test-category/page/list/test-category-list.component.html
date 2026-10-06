@@ -1,0 +1,159 @@
+<div class="list">
+  <!-- =====================================================
+       LIST TITLE
+       ===================================================== -->
+
+  <div class="list-title">
+    <h1>{{title}}</h1>
+    <p>Administra las categorías disponibles para los tests de laboratorio.</p>
+  </div>
+
+  <!-- =====================================================
+       LIST HEADER
+       ===================================================== -->
+
+  <div class="list-header">
+    <button type="button" class="btn btn-create" [routerLink]="['/test-category-references/form']">
+      <i class="bi bi-plus-lg"></i>
+      Crear Nueva Categoría
+    </button>
+  </div>
+
+  <!-- =====================================================
+       TABLE
+       ===================================================== -->
+
+  <div class="list-table-wrapper">
+    <div class="list-table-scroll">
+      <table class="table list-table mb-0">
+        <!-- =================================================
+             TABLE HEADER
+             ================================================= -->
+
+        <thead>
+          <tr>
+            <th>Id</th>
+
+            <th>Nombre</th>
+
+            <th class="text-center">Estado</th>
+
+            <th>Creado</th>
+
+            <th>Actualizado</th>
+
+            <th class="text-center">Editar</th>
+
+            <th class="text-center">Borrar</th>
+          </tr>
+        </thead>
+
+        <!-- =================================================
+             TABLE BODY
+             ================================================= -->
+
+        <tbody>
+          <tr *ngFor="let category of categories">
+            <!-- ID -->
+
+            <td>
+              <a class="table-link" [routerLink]="['/test-categories', category.id]">
+                #CAT{{ category.id }}
+              </a>
+            </td>
+
+            <!-- NAME -->
+
+            <td>
+              <span class="table-emphasis">
+                {{ category.name }}
+              </span>
+            </td>
+
+            <!-- STATUS -->
+
+            <td class="text-center">
+              <span
+                class="status-badge"
+                [class.status-active]="category.active"
+                [class.status-inactive]="!category.active"
+              >
+                {{ category.active ? 'Active' : 'Inactive' }}
+              </span>
+            </td>
+
+            <!-- CREATED -->
+
+            <td>
+              <span class="created-date">
+                {{ category.createdAt | date: 'yyyy-MM-dd HH:mm:ss' }}
+              </span>
+            </td>
+
+            <!-- UPDATED -->
+
+            <td>
+              <span class="created-date">
+                {{ category.updatedAt | date: 'yyyy-MM-dd HH:mm:ss' }}
+              </span>
+            </td>
+
+            <!-- EDIT -->
+
+            <td class="text-center">
+              <button
+                type="button"
+                class="btn table-action edit"
+                [routerLink]="['/test-category-references/form', category.id]"
+                title="Editar categoría"
+              >
+                <i class="bi bi-pencil"></i>
+              </button>
+            </td>
+
+            <!-- DELETE -->
+
+            <td class="text-center">
+              <button
+                type="button"
+                class="btn table-action delete"
+                (click)="delete(category)"
+                title="Borrar categoría"
+              >
+                <i class="bi bi-trash"></i>
+              </button>
+            </td>
+          </tr>
+
+          <!-- =================================================
+               EMPTY STATE
+               ================================================= -->
+
+          <tr *ngIf="categories.length === 0">
+            <td colspan="7" class="empty-state">
+              <div class="empty-icon">
+                <i class="bi bi-folder2-open"></i>
+              </div>
+
+              <div class="empty-title">No hay categorías disponibles</div>
+
+              <div class="empty-text">Crea una categoría para comenzar.</div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- =====================================================
+         PAGINATION
+         ===================================================== -->
+
+    <div class="list-pagination" *ngIf="paginator">
+      <div class="pagination-content">
+        <span class="pagination-info"> {{ paginator.totalElements }} categorías </span>
+
+        <paginator-nav [paginator]="paginator" [route]="'/test-categories'"> </paginator-nav>
+      </div>
+    </div>
+  </div>
+</div>

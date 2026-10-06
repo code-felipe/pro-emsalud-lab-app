@@ -1,0 +1,83 @@
+<div class="list">
+  <!-- TITLE -->
+  <div class="list-title">
+    <h1>{{ title }}</h1>
+    <p>Administra los contactos registrados.</p>
+  </div>
+
+  <!-- HEADER -->
+  <div class="list-header">
+    <button type="button" class="btn btn-create" [routerLink]="['/doctors/form']">
+      <i class="bi bi-plus-lg"></i>
+      Crear Nuevo Contacto
+    </button>
+  </div>
+
+  <!-- CARDS -->
+  <div class="row g-3 p-2" *ngIf="doctors.length > 0">
+    <div class="col-12 col-md-6 col-xl-4" *ngFor="let doctor of doctors; trackBy: trackById">
+      <article class="item-card h-100">
+        <div class="item-card-body">
+          <div class="item-card-avatar" aria-hidden="true">
+            {{ getInitials(doctor.fullName) }}
+          </div>
+
+          <div class="item-card-info">
+            <h3 
+            class="item-card-title" 
+            [title]="doctor.fullName">{{doctor.title}}. {{ doctor.fullName }}</h3>
+
+            <div class="item-card-meta">
+              <i class="bi bi-hash"></i>
+              <span>ID {{ doctor.id }}</span>
+            </div>
+
+            <div class="item-card-meta">
+              <i class="bi bi-calendar3"></i>
+              <span>Creado: {{ doctor.createdAt | date: 'dd/MM/yyyy' }}</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="item-card-footer">
+          <button
+            type="button"
+            class="btn table-action edit"
+            [routerLink]="['/doctors/form', doctor.id]"
+            title="Editar médico"
+            aria-label="Editar médico"
+          >
+            <i class="bi bi-pencil"></i>
+          </button>
+
+          <button
+            type="button"
+            class="btn table-action delete"
+            (click)="delete(doctor)"
+            title="Borrar médico"
+            aria-label="Borrar médico"
+          >
+            <i class="bi bi-trash"></i>
+          </button>
+        </div>
+      </article>
+    </div>
+  </div>
+
+  <!-- EMPTY STATE -->
+  <div class="empty-state" *ngIf="doctors.length === 0">
+    <div class="empty-icon">
+      <i class="bi bi-person-badge"></i>
+    </div>
+    <div class="empty-title">No hay contactos disponibles</div>
+    <div class="empty-text">Registra un contacto para comenzar.</div>
+  </div>
+
+  <!-- PAGINATION -->
+  <div class="list-pagination" *ngIf="paginator">
+    <div class="pagination-content">
+      <span class="pagination-info">{{ paginator.totalElements }} Contactos</span>
+      <paginator-nav [paginator]="paginator" [route]="'/doctors'"></paginator-nav>
+    </div>
+  </div>
+</div>

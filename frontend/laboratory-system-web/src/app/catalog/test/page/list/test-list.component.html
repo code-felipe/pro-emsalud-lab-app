@@ -1,0 +1,273 @@
+<div class="list">
+  <!-- =====================================================
+       LIST TITLE
+       ===================================================== -->
+
+  <div class="list-title">
+    <h1>{{ title }}</h1>
+    <p>Administra los tests de laboratorio disponibles.</p>
+  </div>
+
+  <!-- =====================================================
+       LIST HEADER
+       ===================================================== -->
+
+  <div class="list-header">
+    <button type="button" class="btn-filter" (click)="openFilterModal()">
+      <i class="bi bi-filter"></i>
+      Filtros
+    </button>
+
+    <button
+      type="button"
+      class="btn-filter"
+      (click)="onAscendingDate()"
+      title="Ordenar del más antiguo al más reciente"
+    >
+      <i class="bi bi-sort-up-alt"></i>
+    </button>
+
+    <button
+      type="button"
+      class="btn-filter"
+      (click)="onDescendingDate()"
+      title="Ordenar del más reciente al más antiguo"
+    >
+      <i class="bi bi-sort-down"></i>
+    </button>
+
+    <!-- SEARCH -->
+
+    <div class="list-search">
+      <i class="bi bi-search"></i>
+
+      <input
+        type="text"
+        class="list-search-input"
+        placeholder="Buscar test por nombre..."
+        [value]="filter.name || ''"
+        (input)="onNameSearch($event)"
+      />
+
+      <button
+        *ngIf="filter.name"
+        type="button"
+        class="list-search-clear"
+        (click)="clearNameSearch()"
+        title="Limpiar búsqueda"
+      >
+        <i class="bi bi-x"></i>
+      </button>
+    </div>
+
+    <!-- CREATE -->
+
+    <button type="button" class="btn btn-create" [routerLink]="['/tests/form']">
+      <i class="bi bi-plus-lg"></i>
+      Crear Nueva Referencia
+    </button>
+  </div>
+
+  <!-- =====================================================
+       FILTER MODAL
+       ===================================================== -->
+
+  <app-modal>
+    <div>
+      <app-test-filter
+        [filter]="draftFilter"
+        [testCategories]="testCategories"
+        (filterChange)="draftFilter = $event"
+      >
+      </app-test-filter>
+    </div>
+
+    <div modal-footer class="filter-footer">
+      <button type="button" class="filter-btn filter-btn-apply" (click)="resetModal()">
+        <i class="bi bi-arrow-clockwise"></i>
+        Resetear
+      </button>
+
+      <button type="button" class="filter-btn filter-btn-cancel" (click)="closeFilterModal()">
+        Cancelar
+      </button>
+
+      <button type="button" class="filter-btn filter-btn-apply" (click)="applyFilters()">
+        <i class="bi bi-check2"></i>
+        Aplicar
+      </button>
+    </div>
+  </app-modal>
+
+  <!-- =====================================================
+       TABLE
+       ===================================================== -->
+
+  <div class="list-table-wrapper">
+    <div class="list-table-scroll">
+      <table class="table list-table mb-0">
+        <!-- =================================================
+             TABLE HEADER
+             ================================================= -->
+
+        <thead>
+          <tr>
+            <th>Id</th>
+
+            <th>Nombre</th>
+
+            <th>Tipo</th>
+
+            <th>Categoría</th>
+
+            <th>Precio</th>
+
+            <th class="text-center">Estado</th>
+
+            <th>Creado</th>
+
+            <th class="text-center">Toggle</th>
+
+            <th class="text-center">Editar</th>
+
+            <th class="text-center">Borrar</th>
+          </tr>
+        </thead>
+
+        <!-- =================================================
+             TABLE BODY
+             ================================================= -->
+
+        <tbody>
+          <tr *ngFor="let test of tests">
+            <!-- ID -->
+
+            <td>
+              <a class="btn-back" [routerLink]="['/tests', test.id]"> #TR{{ test.id }} </a>
+            </td>
+
+            <!-- NAME -->
+
+            <td>
+              <span class="table-emphasis">
+                {{ test.name }}
+              </span>
+            </td>
+
+            <!-- TYPE -->
+
+            <td>
+              <span class="table-secondary">
+                {{ testTypeLabels[test.testType] }}
+              </span>
+            </td>
+
+            <!-- CATEGORY -->
+
+            <td>
+              <span class="table-secondary">
+                {{ test.testCategoryName != null ? test.testCategoryName : '-' }}
+              </span>
+            </td>
+
+            <!-- PRICE -->
+
+            <td>
+              <span class="table-emphasis">
+                {{ test.price | currency }}
+              </span>
+            </td>
+
+            <!-- STATUS -->
+
+            <td class="text-center">
+              <span
+                class="status-badge"
+                [class.status-active]="test.active"
+                [class.status-inactive]="!test.active"
+              >
+                {{ test.active ? 'Activo' : 'Inactivo' }}
+              </span>
+            </td>
+
+            <!-- CREATED -->
+
+            <td>
+              <span class="created-date">
+                {{ test.createdAt | date: 'yyyy-MM-dd HH:mm:ss' }}
+              </span>
+            </td>
+            <!-- Toggle -->
+            <td class="text-center">
+              <button
+                type="button"
+                class="btn btn-sm"
+                [class.btn-success]="test.active"
+                [class.btn-secondary]="!test.active"
+                (click)="toggleActive(test)"
+              >
+                <i
+                  class="bi"
+                  [class.bi-toggle-on]="test.active"
+                  [class.bi-toggle-off]="!test.active"
+                ></i>
+              </button>
+            </td>
+            <!-- EDIT -->
+            <td class="text-center">
+              <button
+                type="button"
+                class="btn table-action edit"
+                [routerLink]="['/tests/form', test.id]"
+                title="Editar test"
+              >
+                <i class="bi bi-pencil"></i>
+              </button>
+            </td>
+
+            <!-- DELETE -->
+
+            <td class="text-center">
+              <button
+                type="button"
+                class="btn table-action delete"
+                (click)="delete(test)"
+                title="Borrar test"
+              >
+                <i class="bi bi-trash"></i>
+              </button>
+            </td>
+          </tr>
+
+          <!-- =================================================
+               EMPTY STATE
+               ================================================= -->
+
+          <tr *ngIf="tests.length === 0">
+            <td colspan="9" class="empty-state">
+              <div class="empty-icon">
+                <i class="bi bi-clipboard2-pulse"></i>
+              </div>
+
+              <div class="empty-title">No hay tests disponibles</div>
+
+              <div class="empty-text">Crea un test para comenzar.</div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- =====================================================
+         PAGINATION
+         ===================================================== -->
+
+    <div class="list-pagination" *ngIf="paginator">
+      <div class="pagination-content">
+        <span class="pagination-info"> {{ paginator.totalElements }} tests </span>
+
+        <paginator-nav [paginator]="paginator" [route]="'/tests'"> </paginator-nav>
+      </div>
+    </div>
+  </div>
+</div>

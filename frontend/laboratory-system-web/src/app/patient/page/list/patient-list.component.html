@@ -1,0 +1,250 @@
+<div class="list">
+  <!-- =====================================================
+       LIST TITLE
+       ===================================================== -->
+
+  <div class="list-title">
+    <h1>{{ title }}</h1>
+    <p>Administra los pacientes registrados.</p>
+  </div>
+
+  <!-- =====================================================
+       LIST HEADER
+       ===================================================== -->
+
+  <div class="list-header">
+    <button type="button" class="btn-filter" (click)="openFilterModal()">
+      <i class="bi bi-filter"></i>
+      Filtros
+    </button>
+
+    <button
+      type="button"
+      class="btn-filter"
+      (click)="onAscendingDate()"
+      title="Ordenar del más antiguo al más reciente"
+    >
+      <i class="bi bi-sort-up-alt"></i>
+    </button>
+
+    <button
+      type="button"
+      class="btn-filter"
+      (click)="onDescendingDate()"
+      title="Ordenar del más reciente al más antiguo"
+    >
+      <i class="bi bi-sort-down"></i>
+    </button>
+
+    <!-- SEARCH -->
+
+    <div class="list-search">
+      <i class="bi bi-search"></i>
+
+      <input
+        type="text"
+        class="list-search-input"
+        placeholder="Buscar paciente por nombre, código, city..."
+        [value]="filter.search || ''"
+        (input)="onSearch($event)"
+      />
+
+      <button
+        *ngIf="filter.search"
+        type="button"
+        class="list-search-clear"
+        (click)="clearSearch()"
+        title="Limpiar búsqueda"
+      >
+        <i class="bi bi-x"></i>
+      </button>
+    </div>
+
+    <!-- CREATE -->
+
+    <button type="button" class="btn btn-create" [routerLink]="['/patients/form']">
+      <i class="bi bi-plus-lg"></i>
+      Crear Nuevo Paciente
+    </button>
+  </div>
+
+  <!-- =====================================================
+       FILTER MODAL
+       ===================================================== -->
+
+  <app-modal>
+    <div>
+      <app-patient-filter [filter]="draftFilter" (filterChange)="draftFilter = $event">
+      </app-patient-filter>
+    </div>
+
+    <div modal-footer class="filter-footer">
+      <button type="button" class="filter-btn filter-btn-apply" (click)="resetModal()">
+        <i class="bi bi-arrow-clockwise"></i>
+        Resetear
+      </button>
+
+      <button type="button" class="filter-btn filter-btn-cancel" (click)="closeFilterModal()">
+        Cancelar
+      </button>
+
+      <button type="button" class="filter-btn filter-btn-apply" (click)="applyFilters()">
+        <i class="bi bi-check2"></i>
+        Aplicar
+      </button>
+    </div>
+  </app-modal>
+
+  <!-- =====================================================
+       TABLE
+       ===================================================== -->
+
+  <div class="list-table-wrapper">
+    <div class="list-table-scroll">
+      <table class="table list-table mb-0">
+        <!-- =================================================
+             TABLE HEADER
+             ================================================= -->
+
+        <thead>
+          <tr>
+            <th>Código</th>
+
+            <th>Nombre</th>
+
+            <th>Apellido paterno</th>
+
+            <th>Edad</th>
+
+            <th>Teléfono</th>
+
+            <th>Ciudad</th>
+
+            <th>Creado</th>
+
+            <th class="text-center">Editar</th>
+
+            <th class="text-center">Borrar</th>
+          </tr>
+        </thead>
+
+        <!-- =================================================
+             TABLE BODY
+             ================================================= -->
+
+        <tbody>
+          <tr *ngFor="let patient of patients">
+            <!-- CODE -->
+
+            <td>
+              <a class="btn-detail" [routerLink]="['/patients', patient.id]">
+                <i class="bi bi-person-lines-fill"></i>
+                {{ patient.code }}
+              </a>
+            </td>
+
+            <!-- FIRST NAME -->
+
+            <td>
+              <span class="table-emphasis">
+                {{ patient.firstName }}
+              </span>
+            </td>
+
+            <!-- FATHER LAST NAME -->
+
+            <td>
+              <span class="table-secondary">
+                {{ patient.fatherLastName }}
+              </span>
+            </td>
+
+            <!-- AGE -->
+
+            <td>
+              <span class="table-emphasis"> {{ patient.age }}</span>
+            </td>
+
+            <!-- PHONE -->
+
+            <td>
+              <span class="table-secondary">
+                +502{{ patient.primaryPhoneNumber }}
+              </span>
+            </td>
+
+            <!-- CITY -->
+
+            <td>
+              <span class="table-secondary">
+                {{ patient.city }}
+              </span>
+            </td>
+
+            <!-- CREATED -->
+
+            <td>
+              <span class="created-date">
+                {{ patient.createdAt | date: 'yyyy-MM-dd HH:mm:ss' }}
+              </span>
+            </td>
+
+            <!-- EDIT -->
+
+            <td class="text-center">
+              <button
+                type="button"
+                class="btn table-action edit"
+                [routerLink]="['/patients/form', patient.id]"
+                title="Editar paciente"
+              >
+                <i class="bi bi-pencil"></i>
+              </button>
+            </td>
+
+            <!-- DELETE -->
+
+            <td class="text-center">
+              <button
+                type="button"
+                class="btn table-action delete"
+                (click)="delete(patient)"
+                title="Borrar paciente"
+              >
+                <i class="bi bi-trash"></i>
+              </button>
+            </td>
+          </tr>
+
+          <!-- =================================================
+               EMPTY STATE
+               ================================================= -->
+
+          <tr *ngIf="patients.length === 0">
+            <td colspan="9" class="empty-state">
+              <div class="empty-icon">
+                <i class="bi bi-person-vcard"></i>
+              </div>
+
+              <div class="empty-title">No hay pacientes disponibles</div>
+
+              <div class="empty-text">Registra un paciente para comenzar.</div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- =====================================================
+         PAGINATION
+         ===================================================== -->
+
+    <div class="list-pagination" *ngIf="paginator">
+      <div class="pagination-content">
+        <span class="pagination-info"> {{ paginator.totalElements }} pacientes </span>
+
+        <paginator-nav [paginator]="paginator" [route]="'/patients'"> </paginator-nav>
+      </div>
+    </div>
+  </div>
+</div>

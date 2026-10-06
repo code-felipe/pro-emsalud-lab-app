@@ -1,0 +1,210 @@
+<div class="order-report-wrapper" *ngIf="report">
+  <!-- ===================================================== REPORT CONTENT Todo lo que esté dentro de #reportContent se exporta al PDF. ===================================================== -->
+  <div #reportContent class="order-report">
+    <!-- ===================================================
+     REPORT HEADER
+     =================================================== -->
+
+    <div class="report-header">
+      <div class="report-brand">
+        <div class="report-icon">
+          <img src="/proemsalud-logo.png" alt="Proemsalud logo" />
+        </div>
+
+        <div>
+          <div class="report-title">Reporte de Laboratorio</div>
+
+          <div class="report-subtitle">Resultado de análisis clínicos</div>
+
+          <div class="report-subtitle">
+            <strong>PROEMSALUD</strong>
+          </div>
+        </div>
+      </div>
+
+      <div class="report-order">
+        <span class="report-label"> ORDEN </span>
+
+        <strong> #{{ report.id }} </strong>
+      </div>
+    </div>
+
+    <!-- ===================================================
+     PATIENT / DOCTOR INFORMATION
+     =================================================== -->
+
+    <div class="report-info">
+      <!-- PACIENTE -->
+
+      <div class="report-info-block">
+        <span class="report-label"> Paciente </span>
+
+        <strong>
+          {{ report.patientFullName }}
+        </strong>
+
+        <span class="report-secondary" *ngIf="report.patientAge">
+          {{ report.patientAge }}
+        </span>
+      </div>
+
+      <!-- MÉDICO -->
+
+      <div class="report-info-block">
+        <span class="report-label"> Solicitado Por </span>
+
+        <strong>
+          {{ report.doctorTitle }}.
+          {{ report.doctorFullName }}
+        </strong>
+      </div>
+
+      <!-- FECHA -->
+
+      <div class="report-info-block">
+        <span class="report-label"> Fecha </span>
+
+        <strong>
+          {{ report.createdAt | date: 'dd/MM/yyyy HH:mm' }}
+        </strong>
+      </div>
+    </div>
+
+    <!-- ===================================================
+     RESULTS
+     =================================================== -->
+
+    <div class="report-section">
+      <!-- RESULTS HEADER -->
+
+      <div class="report-section-header">
+        <div>
+          <span class="report-section-kicker"> LABORATORIO </span>
+
+          <h3>Resultados</h3>
+        </div>
+
+        <span class="report-result-count">
+          {{ report.results.length }}
+
+          resultado(s)
+        </span>
+      </div>
+
+      <!-- RESULTS TABLE -->
+
+      <div class="report-results-scroll">
+        <table class="report-results-table" *ngIf="report.results.length > 0">
+          <thead>
+            <tr>
+              <th>Prueba</th>
+
+              <th>Tipo</th>
+
+              <th>Resultado</th>
+
+              <th>Referencia</th>
+            </tr>
+          </thead>
+
+          <tbody>
+            <tr *ngFor="let result of report.results">
+              <!-- PRUEBA -->
+
+              <td class="result-name">
+                {{ result.testName }}
+              </td>
+
+              <!-- TIPO -->
+
+              <td>
+                <span class="result-type">
+                  {{ result.testType }}
+                </span>
+              </td>
+
+              <!-- RESULTADO -->
+
+              <td class="result-value">
+                {{ result.result }}
+              </td>
+
+              <!-- REFERENCIA -->
+
+              <td class="result-reference">
+                {{ result.reference || '—' }}
+              </td>
+            </tr>
+          </tbody>
+        </table>
+
+        <!-- EMPTY STATE -->
+
+        <div class="report-empty" *ngIf="report.results.length === 0">
+          <i class="bi bi-clipboard-x"></i>
+
+          <span> No hay resultados registrados para esta orden. </span>
+        </div>
+      </div>
+    </div>
+
+    <!-- ===================================================
+     REPORT NOTE
+     =================================================== -->
+
+    <div class="report-note">
+      <i class="bi bi-info-circle"></i>
+
+      <span> Este reporte corresponde a los resultados registrados en la orden indicada. </span>
+    </div>
+
+    <!-- ===================================================
+     TECHNICIAN SEAL
+     =================================================== -->
+
+    <div class="report-technician">
+      <!-- SELLO + INFORMACIÓN DE LA EMPRESA -->
+      <div class="report-company">
+        <div class="report-company-info">
+          <strong class="report-company-location"> San Antonio Huista · Cantón Central </strong>
+
+          <span> L–V 7:30–13:00 · 14:00–17:00 </span>
+
+          <span> S–D 7:30–13:00 · Tel. 3938-9383 </span>
+        </div>
+        <img src="/emelyn-tech.png" alt="Sello de técnico de laboratorio" />
+
+        <!-- VALIDACIÓN -->
+        <div class="report-validation">
+          <span class="report-label"> Emelyn López </span>
+
+          <strong> Técnico de Laboratorista </strong>
+        </div>
+        <!-- ACCIÓN -->
+        <div class="report-actions">
+          <button
+            type="button"
+            class="report-download-btn"
+            (click)="downloadPdf()"
+            [disabled]="downloadingPdf"
+          >
+            <i
+              class="bi"
+              [class.bi-file-earmark-pdf]="!downloadingPdf"
+              [class.bi-hourglass-split]="downloadingPdf"
+            ></i>
+
+            <span>
+              {{ downloadingPdf ? 'Generando PDF...' : 'Descargar PDF' }}
+            </span>
+          </button>
+          <button type="button" class="report-whatsapp-btn" (click)="openWhatsApp()">
+            <i class="bi bi-whatsapp"></i>
+
+            <span> WhatsApp </span>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

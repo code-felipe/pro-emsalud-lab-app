@@ -1,0 +1,52 @@
+<section class="report-page">
+  <header>
+    <h2>Generar reporte</h2>
+
+    <p>
+      Paciente:
+      <strong>Juan Pérez</strong>
+    </p>
+
+    <p>
+      ID:
+      <strong>123</strong>
+    </p>
+  </header>
+
+  <nav class="report-navigation">
+    <a [routerLink]="['/patients', 123, 'results']" routerLinkActive="active"> Resultados </a>
+
+    <a [routerLink]="['/patients', 123, 'history']" routerLinkActive="active"> Historial </a>
+
+    <a
+      [routerLink]="['/patients', 123, 'report']"
+      routerLinkActive="active"
+      [routerLinkActiveOptions]="{ exact: true }"
+    >
+      Reporte
+    </a>
+  </nav>
+
+  <hr />
+
+  <div class="report-preview">
+    <h3>Resumen del paciente</h3>
+
+    <p><strong>Nombre:</strong> Juan Pérez</p>
+    <p><strong>Edad:</strong> 42 años</p>
+    <p><strong>Sexo:</strong> Masculino</p>
+
+    <h4>Últimos resultados</h4>
+
+    <ul>
+      <li>Presión arterial: 120/80 mmHg</li>
+      <li>Glucosa: 95 mg/dL</li>
+      <li>Colesterol: 185 mg/dL</li>
+    </ul>
+
+    <button type="button">Descargar reporte</button>
+  </div>
+
+  <hr />
+
+</section>

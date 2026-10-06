@@ -1,0 +1,369 @@
+<div class="home-page">
+  <!-- HERO -->
+  <section class="hero-section">
+    <div class="hero-content">
+      <div class="eyebrow">
+        <span class="eyebrow-dot"></span>
+        Sistema de gestión de laboratorio
+      </div>
+
+      <h1>
+        Bienvenido a tu
+        <span>espacio de trabajo.</span>
+      </h1>
+
+      <p class="hero-description">
+        Configura tu catálogo, registra tus contactos y pacientes, y comienza a crear órdenes de
+        laboratorio desde un solo lugar.
+      </p>
+
+      <div class="hero-actions">
+        <a class="btn-primary-custom" routerLink="/test-category-references">
+          <i class="bi bi-play-fill"></i>
+          Comenzar configuración
+        </a>
+
+        <a class="btn-secondary-custom" routerLink="/patients">
+          Ver pacientes
+          <i class="bi bi-arrow-right"></i>
+        </a>
+      </div>
+    </div>
+
+    <!-- ILUSTRACIÓN -->
+    <div class="hero-illustration">
+      <div class="illustration-card">
+        <div class="illustration-header">
+          <span></span>
+          <span></span>
+          <span></span>
+        </div>
+
+        <div class="lab-scene">
+          <!-- Microscopio -->
+          <div class="microscope">
+            <div class="microscope-head"></div>
+            <div class="microscope-arm"></div>
+            <div class="microscope-stage"></div>
+            <div class="microscope-base"></div>
+            <div class="microscope-lens"></div>
+          </div>
+
+          <!-- Tubos -->
+          <div class="test-tubes">
+            <div class="tube tube-one">
+              <div class="tube-liquid"></div>
+            </div>
+
+            <div class="tube tube-two">
+              <div class="tube-liquid"></div>
+            </div>
+
+            <div class="tube tube-three">
+              <div class="tube-liquid"></div>
+            </div>
+          </div>
+
+          <!-- Hoja -->
+          <div class="lab-sheet">
+            <div class="sheet-title"></div>
+
+            <div class="sheet-line"></div>
+            <div class="sheet-line short"></div>
+            <div class="sheet-line"></div>
+
+            <div class="sheet-result">
+              <i class="bi bi-check-lg"></i>
+              <span></span>
+            </div>
+          </div>
+
+          <!-- Tarjeta flotante -->
+          <div class="floating-result">
+            <div class="floating-icon">
+              <i class="bi bi-check2"></i>
+            </div>
+
+            <div>
+              <strong>Trabajo organizado</strong>
+              <small>Todo listo para comenzar</small>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- WORKFLOW -->
+  <section class="workflow-section">
+    <div class="section-heading">
+      <div>
+        <span class="section-label"> GUÍA DE TRABAJO </span>
+
+        <h2>
+          Prepara tu laboratorio
+          <span>paso a paso.</span>
+        </h2>
+      </div>
+
+      <p>
+        Te recomendamos completar estos pasos antes de comenzar a registrar y procesar órdenes de
+        laboratorio.
+      </p>
+    </div>
+
+    <!-- STEP 1 -->
+    <article class="workflow-card">
+      <div class="step-number">01</div>
+
+      <div class="step-icon teal">
+        <i class="bi bi-tags"></i>
+      </div>
+
+      <div class="step-content">
+        <div class="step-heading">
+          <h3>Categorías</h3>
+          <span class="step-badge"> Primer paso </span>
+        </div>
+
+        <p>
+          Las categorías son la base de tu catálogo de pruebas. Te permiten organizar los estudios y
+          facilitan su búsqueda y administración dentro del sistema.
+        </p>
+
+        <a routerLink="/test-category-references" class="step-link">
+          Administrar categorías
+          <i class="bi bi-arrow-right"></i>
+        </a>
+      </div>
+    </article>
+
+    <!-- STEP 2 -->
+    <article class="workflow-card">
+      <div class="step-number">02</div>
+
+      <div class="step-icon brick">
+        <i class="bi bi-clipboard2-pulse"></i>
+      </div>
+
+      <div class="step-content">
+        <div class="step-heading">
+          <h3>Catálogo de pruebas</h3>
+
+          <span class="step-badge"> Catálogo </span>
+        </div>
+
+        <p>
+          Registra las pruebas que utilizarás en tu laboratorio. El catálogo te permitirá buscar,
+          filtrar, activar y administrar tus pruebas de forma rápida y organizada.
+        </p>
+
+        <a routerLink="/tests" class="step-link">
+          Administrar catálogo
+          <i class="bi bi-arrow-right"></i>
+        </a>
+      </div>
+    </article>
+
+    <!-- STEP 3 -->
+    <article class="workflow-card">
+      <div class="step-number">03</div>
+
+      <div class="step-icon amber">
+        <i class="bi bi-card-list"></i>
+      </div>
+
+      <div class="step-content">
+        <div class="step-heading">
+          <h3>Contactos</h3>
+
+          <span class="step-badge"> Destinatarios </span>
+        </div>
+
+        <p>
+          Los contactos representan a la persona, profesional o entidad a quien estará dirigido el
+          reporte de laboratorio. Puede tratarse de un médico, enfermero, otra persona o una
+          entidad.
+        </p>
+
+        <a routerLink="/doctors" class="step-link">
+          Administrar contactos
+          <i class="bi bi-arrow-right"></i>
+        </a>
+      </div>
+    </article>
+
+    <!-- STEP 4 -->
+    <article class="workflow-card">
+      <div class="step-number">04</div>
+
+      <div class="step-icon teal">
+        <i class="bi bi-people"></i>
+      </div>
+
+      <div class="step-content">
+        <div class="step-heading">
+          <h3>Pacientes</h3>
+
+          <span class="step-badge"> Personas </span>
+        </div>
+
+        <p>
+          Gestiona los pacientes que utilizarán los servicios del laboratorio. Una vez configuradas
+          las categorías, pruebas y contactos, registrar un paciente es sencillo.
+        </p>
+
+        <a routerLink="/patients" class="step-link">
+          Administrar pacientes
+          <i class="bi bi-arrow-right"></i>
+        </a>
+      </div>
+    </article>
+
+    <!-- STEP 5 -->
+    <article class="workflow-card">
+      <div class="step-number">05</div>
+
+      <div class="step-icon brick">
+        <i class="bi bi-file-earmark-medical"></i>
+      </div>
+
+      <div class="step-content">
+        <div class="step-heading">
+          <h3>Órdenes y reportes</h3>
+
+          <span class="step-badge"> Flujo de trabajo </span>
+        </div>
+
+        <p>
+          Una vez registrado el paciente, puedes crear una orden de laboratorio y agregar las
+          pruebas o estudios que correspondan. Cuando los resultados estén registrados, podrás
+          generar la vista del reporte de laboratorio, descargarlo en PDF y compartirlo por
+          WhatsApp.
+        </p>
+
+        <p>
+          Para utilizar la opción de envío por WhatsApp es necesario tener previamente instalada la
+          aplicación de WhatsApp de escritorio. El sistema abrirá WhatsApp con el número de teléfono
+          del paciente previamente registrado para facilitar el envío del reporte.
+        </p>
+
+        <a routerLink="/patients" class="step-link">
+          Gestionar pacientes y órdenes
+          <i class="bi bi-arrow-right"></i>
+        </a>
+      </div>
+    </article>
+  </section>
+
+  <!-- FLOW SUMMARY -->
+  <section class="flow-section">
+    <div class="flow-header">
+      <span class="section-label"> FLUJO RECOMENDADO </span>
+
+      <h2>
+        De la configuración
+        <span>al reporte.</span>
+      </h2>
+
+      <p>Sigue este flujo para preparar tu laboratorio y completar una orden de principio a fin.</p>
+    </div>
+
+    <div class="flow">
+      <!-- Categorías -->
+      <div class="flow-item">
+        <div class="flow-icon">
+          <i class="bi bi-tags"></i>
+        </div>
+
+        <span> Categorías </span>
+      </div>
+
+      <div class="flow-arrow">
+        <i class="bi bi-arrow-right"></i>
+      </div>
+
+      <!-- Pruebas -->
+      <div class="flow-item">
+        <div class="flow-icon">
+          <i class="bi bi-clipboard2-pulse"></i>
+        </div>
+
+        <span> Pruebas </span>
+      </div>
+
+      <div class="flow-arrow">
+        <i class="bi bi-arrow-right"></i>
+      </div>
+
+      <!-- Contactos -->
+      <div class="flow-item">
+        <div class="flow-icon">
+          <i class="bi bi-card-list"></i>
+        </div>
+
+        <span> Contactos </span>
+      </div>
+
+      <div class="flow-arrow">
+        <i class="bi bi-arrow-right"></i>
+      </div>
+
+      <!-- Pacientes -->
+      <div class="flow-item">
+        <div class="flow-icon">
+          <i class="bi bi-people"></i>
+        </div>
+
+        <span> Pacientes </span>
+      </div>
+
+      <div class="flow-arrow">
+        <i class="bi bi-arrow-right"></i>
+      </div>
+
+      <!-- Orden -->
+      <div class="flow-item">
+        <div class="flow-icon">
+          <i class="bi bi-clipboard2-check"></i>
+        </div>
+
+        <span> Orden </span>
+      </div>
+
+      <div class="flow-arrow">
+        <i class="bi bi-arrow-right"></i>
+      </div>
+
+      <!-- Reporte -->
+      <div class="flow-item final">
+        <div class="flow-icon">
+          <i class="bi bi-file-earmark-medical"></i>
+        </div>
+
+        <span> Reporte </span>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER MESSAGE -->
+  <section class="home-footer">
+    <div class="footer-icon">
+      <i class="bi bi-info-circle"></i>
+    </div>
+
+    <div>
+      <strong> ¿Ya tienes todo configurado? </strong>
+
+      <p>
+        Puedes comenzar directamente desde el menú lateral para gestionar tus pacientes, crear
+        órdenes y generar sus reportes de laboratorio.
+      </p>
+    </div>
+
+    <a routerLink="/patients" class="footer-action">
+      Ir a pacientes
+      <i class="bi bi-arrow-right"></i>
+    </a>
+  </section>
+</div>

@@ -1,0 +1,137 @@
+.test-filter {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 18px 20px;
+
+  padding: 4px 2px;
+}
+
+
+/* =====================================================
+BOOTSTRAP GRID
+===================================================== */
+
+.test-filter .row {
+--bs-gutter-x: 20px;
+--bs-gutter-y: 18px;
+}
+
+/* =====================================================
+FIELD
+===================================================== */
+
+.filter-field {
+display: flex;
+flex-direction: column;
+gap: 7px;
+
+min-width: 0;
+}
+
+.filter-field label {
+margin: 0;
+
+color: var(--ink);
+
+font-size: 0.82rem;
+font-weight: 600;
+letter-spacing: 0.01em;
+}
+
+/* =====================================================
+INPUTS
+===================================================== */
+
+.filter-input {
+width: 100%;
+min-height: 40px;
+
+padding: 8px 11px;
+
+background: var(--paper-raised);
+color: var(--ink);
+
+border: 1px solid var(--line);
+border-radius: var(--radius-s);
+
+font-size: 0.88rem;
+
+outline: none;
+
+transition:
+border-color 0.15s ease,
+box-shadow 0.15s ease,
+background-color 0.15s ease;
+}
+
+.filter-input::placeholder {
+color: var(--ink-soft);
+opacity: 0.75;
+}
+
+.filter-input:hover {
+border-color: var(--line-strong);
+}
+
+.filter-input:focus {
+border-color: var(--teal);
+
+box-shadow:
+0 0 0 2px var(--teal-wash);
+
+background: var(--paper-raised);
+}
+
+/* =====================================================
+SELECT
+===================================================== */
+
+select.filter-input {
+cursor: pointer;
+}
+
+/* =====================================================
+DATE
+===================================================== */
+
+.filter-date {
+position: relative;
+}
+
+.filter-date .filter-input {
+color-scheme: light;
+}
+
+.filter-date .filter-input::-webkit-calendar-picker-indicator {
+cursor: pointer;
+opacity: 0.7;
+}
+
+.filter-date .filter-input::-webkit-calendar-picker-indicator:hover {
+opacity: 1;
+}
+
+/* =====================================================
+NUMBER
+===================================================== */
+
+input[type="number"].filter-input {
+appearance: textfield;
+}
+
+input[type="number"].filter-input::-webkit-inner-spin-button,
+input[type="number"].filter-input::-webkit-outer-spin-button {
+margin: 0;
+}
+
+/* =====================================================
+RESPONSIVE
+===================================================== */
+
+@media (max-width: 767.98px) {
+
+.test-filter {
+padding: 2px 0;
+}
+
+}

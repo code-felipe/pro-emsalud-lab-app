@@ -1,0 +1,125 @@
+<div class="container-fluid test-detail-page">
+  <div class="row justify-content-center align-items-center min-vh-100 py-5">
+    <div class="col-12 col-md-10 col-lg-8 col-xl-7">
+      <div class="test-card">
+        <!-- Header -->
+        <div class="test-card-header">
+          <div>
+            <span class="section-label">Detalle del Test de Referencia</span>
+            <h1 class="test-title">{{ test.name }}</h1>
+          </div>
+
+          <span
+            class="status-badge"
+            [class.status-active]="test.active"
+            [class.status-inactive]="!test.active"
+          >
+            <span class="status-dot"></span>
+            {{ test.active ? 'Activo' : 'Inactivo' }}
+          </span>
+        </div>
+
+        <!-- Body -->
+        <div class="test-card-body">
+          <!-- Basic information -->
+          <div class="detail-section">
+            <div class="section-heading">
+              <span>Informacion basica</span>
+            </div>
+
+            <div class="row g-4">
+              <div class="col-12 col-sm-6">
+                <div class="detail-item">
+                  <span class="detail-label">Test Referencia ID</span>
+                  <span class="detail-value">#{{ test.id }}</span>
+                </div>
+              </div>
+
+              <div class="col-12 col-sm-6">
+                <div class="detail-item">
+                  <span class="detail-label">Tipo de Test</span>
+                  <span class="detail-value">{{ testTypeLabels[test.testType] }}</span>
+                </div>
+              </div>
+
+              <div class="col-12 col-sm-6">
+                <div class="detail-item">
+                  <span class="detail-label">Referencia</span>
+
+                  <span class="detail-value" [class.text-muted-custom]="!test.reference">
+                    {{ test.reference || 'Referencia no especificada' }}
+                  </span>
+                </div>
+              </div>
+
+              <div class="col-12 col-sm-6">
+                <div class="detail-item">
+                  <span class="detail-label">Precio</span>
+                  <span class="detail-value price">
+                    {{ test.price | currency }}
+                  </span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Category -->
+          <div class="detail-section">
+            <div class="section-heading">
+              <span>Categoria</span>
+            </div>
+
+            <div class="category-card">
+              <div class="category-icon">
+                <span>TC</span>
+              </div>
+
+              <div>
+                <span class="detail-label">Categoria</span>
+                <div class="category-name">
+                  {{ test.testCategoryName }}
+                </div>
+                <span class="category-id"> Categoria #{{ test.testCategoryId }} </span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Dates -->
+          <div class="detail-section mb-0">
+            <div class="section-heading">
+              <span>Informacion de registro</span>
+            </div>
+
+            <div class="row g-4">
+              <div class="col-12 col-sm-6">
+                <div class="detail-item">
+                  <span class="detail-label">Creado en</span>
+                  <span class="detail-value">
+                    {{ test.createdAt | date: 'medium' }}
+                  </span>
+                </div>
+              </div>
+
+              <div class="col-12 col-sm-6">
+                <div class="detail-item">
+                  <span class="detail-label">Ultima actualizacion</span>
+                  <span class="detail-value">
+                    {{ test.updatedAt | date: 'medium' }}
+                  </span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Footer -->
+        <div class="test-card-footer">
+          <button type="button" class="btn btn-back" routerLink="/tests">
+            <span class="me-2">←</span>
+            Volver
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

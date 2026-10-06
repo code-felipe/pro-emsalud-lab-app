@@ -1,0 +1,1198 @@
+/* =========================================================
+   GENERIC LIST
+   ========================================================= */
+
+.list {
+  width: 100%;
+  padding: 15px 21px 0;
+}
+
+
+/* =========================================================
+   LIST HEADER
+   ========================================================= */
+
+.list-header {
+  width: 100%;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  gap: 14px;
+
+  margin-bottom: 14px;
+}
+
+/* =========================================================
+   LIST TITLE
+   ========================================================= */
+
+.list-title {
+  width: 100%;
+
+  margin: 10px 0;
+}
+
+
+.list-title h1 {
+  margin: 0;
+
+  color: var(--ink);
+
+  font-family: "Fraunces", serif;
+  font-size: 24px;
+  font-weight: 500;
+
+  line-height: 1.2;
+}
+
+
+.list-title p {
+  margin: 5px 0 0;
+
+  color: var(--ink-soft);
+
+  font-size: 12px;
+}
+
+
+
+/* =========================================================
+   SEARCH
+   ========================================================= */
+
+.list-search {
+  position: relative;
+
+  width: 320px;
+  max-width: 100%;
+
+  display: flex;
+  align-items: center;
+}
+
+
+.list-search > .bi-search {
+  position: absolute;
+  left: 12px;
+
+  color: var(--ink-soft);
+
+  font-size: 13px;
+
+  pointer-events: none;
+}
+
+
+.list-search-input {
+  width: 100%;
+  height: 36px;
+
+  padding: 7px 36px 7px 34px;
+
+  background: var(--paper-raised);
+  color: var(--ink);
+
+  border: 1px solid var(--line);
+  border-radius: var(--radius-s);
+
+  font-family: inherit;
+  font-size: 12px;
+
+  outline: none;
+
+  transition:
+    border-color 0.15s ease,
+    box-shadow 0.15s ease,
+    background-color 0.15s ease;
+}
+
+
+.list-search-input::placeholder {
+  color: var(--ink-soft);
+  opacity: 0.75;
+}
+
+
+.list-search-input:hover {
+  border-color: var(--line-strong);
+}
+
+
+.list-search-input:focus {
+  border-color: var(--teal);
+
+  box-shadow:
+    0 0 0 2px var(--teal-wash);
+}
+
+
+/* =========================================================
+   SEARCH CLEAR
+   ========================================================= */
+
+.list-search-clear {
+  position: absolute;
+  right: 7px;
+
+  width: 24px;
+  height: 24px;
+
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  padding: 0;
+
+  background: transparent;
+  color: var(--ink-soft);
+
+  border: none;
+  border-radius: var(--radius-s);
+
+  font-size: 14px;
+
+  cursor: pointer;
+
+  transition:
+    background-color 0.15s ease,
+    color 0.15s ease;
+}
+
+
+.list-search-clear:hover {
+  background: var(--brick-wash);
+  color: var(--brick);
+}
+
+
+/* =========================================================
+   FILTER BUTTON
+   ========================================================= */
+
+.btn-filter {
+  min-height: 36px;
+
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  gap: 7px;
+
+  padding: 7px 14px;
+
+  background: var(--paper-raised);
+
+  border: 1px solid var(--line);
+
+  border-radius: 7px;
+
+  color: var(--ink-soft);
+
+  font-size: 12px;
+  font-weight: 500;
+
+  cursor: pointer;
+
+  transition:
+    background-color 0.15s ease,
+    border-color 0.15s ease,
+    color 0.15s ease,
+    box-shadow 0.15s ease,
+    transform 0.1s ease;
+}
+
+
+.btn-filter i {
+  font-size: 13px;
+  line-height: 1;
+}
+
+
+.btn-filter:hover {
+  background: var(--paper);
+
+  border-color: var(--line-strong);
+
+  color: var(--ink);
+
+  box-shadow:
+    0 2px 5px rgba(27, 36, 32, 0.06);
+}
+
+
+.btn-filter:active {
+  background: var(--teal-wash);
+
+  border-color: var(--teal);
+
+  color: var(--teal-deep);
+
+  transform: translateY(1px);
+}
+
+
+/* =========================================================
+   CREATE BUTTON
+   ========================================================= */
+
+.btn-create {
+  color: var(--teal-deep);
+
+  background: var(--teal-wash);
+
+  border: 1px solid var(--teal);
+
+  border-radius: var(--radius-s);
+
+  font-size: 12px;
+
+  font-weight: 600;
+
+  cursor: pointer;
+
+  transition: var(--transition-slow);
+}
+
+
+.btn-create:hover {
+  color: var(--paper-raised);
+
+  background: var(--teal);
+
+  border-color: var(--teal);
+
+  transform: translateY(-1px);
+}
+
+/* =========================================================
+   CREATE BUTTON
+   ========================================================= */
+
+.btn-back {
+  color: var(--teal-deep);
+
+  background: var(--teal-wash);
+
+  border: 1px solid var(--teal);
+
+  border-radius: var(--radius-s);
+
+  font-weight: 600;
+
+  cursor: pointer;
+
+  padding: 7px 12px;
+
+  transition: var(--transition-slow);
+
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.btn-back:hover {
+  background: var(--teal);
+  color: white;
+
+  transform: translateX(-3px);
+}
+
+
+/* =========================================================
+   DETAIL BUTTON
+   ========================================================= */
+
+.btn-detail {
+  color: var(--teal-deep);
+
+  background: var(--teal-wash);
+
+  border: 1px solid var(--teal);
+
+  border-radius: var(--radius-s);
+
+  font-weight: 600;
+
+  cursor: pointer;
+
+  padding: 7px 12px;
+
+  transition: var(--transition-slow);
+
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.btn-detail:hover {
+  background: var(--teal);
+  color: white;
+
+  transform: translateX(-3px);
+}
+
+
+/* =========================================================
+   FILTER MODAL FOOTER
+   ========================================================= */
+
+.filter-footer {
+  width: 100%;
+
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+
+  gap: 10px;
+
+  padding-top: 2px;
+}
+
+
+/* =========================================================
+   FILTER BUTTON BASE
+   ========================================================= */
+
+.filter-btn {
+  min-height: 38px;
+
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  gap: 7px;
+
+  padding: 8px 16px;
+
+  border-radius: var(--radius-s);
+
+  font-family: inherit;
+  font-size: 0.82rem;
+  font-weight: 600;
+
+  line-height: 1;
+
+  cursor: pointer;
+
+  outline: none;
+
+  transition:
+    background-color 0.15s ease,
+    border-color 0.15s ease,
+    color 0.15s ease,
+    box-shadow 0.15s ease,
+    transform 0.1s ease;
+}
+
+
+.filter-btn i {
+  font-size: 0.9rem;
+  line-height: 1;
+}
+
+
+/* =========================================================
+   CANCEL BUTTON
+   ========================================================= */
+
+.filter-btn-cancel {
+  background: var(--paper-raised);
+
+  color: var(--ink-soft);
+
+  border: 1px solid var(--line);
+}
+
+
+.filter-btn-cancel:hover {
+  background: var(--paper);
+
+  color: var(--ink);
+
+  border-color: var(--line-strong);
+
+  box-shadow:
+    0 2px 5px rgba(27, 36, 32, 0.06);
+}
+
+
+.filter-btn-cancel:focus-visible {
+  color: var(--teal-deep);
+
+  border-color: var(--teal);
+
+  box-shadow:
+    0 0 0 2px var(--teal-wash);
+}
+
+
+.filter-btn-cancel:active {
+  background: var(--teal-wash);
+
+  transform: translateY(1px);
+
+  box-shadow: none;
+}
+
+
+/* =========================================================
+   APPLY BUTTON
+   ========================================================= */
+
+.filter-btn-apply {
+  min-width: 92px;
+
+  background: var(--teal);
+
+  color: var(--paper-raised);
+
+  border: 1px solid var(--teal);
+}
+
+
+.filter-btn-apply:hover {
+  background: var(--teal-deep);
+
+  border-color: var(--teal-deep);
+
+  color: var(--paper-raised);
+
+  box-shadow:
+    0 3px 8px rgba(32, 78, 66, 0.20);
+
+  transform: translateY(-1px);
+}
+
+
+.filter-btn-apply:focus-visible {
+  background: var(--teal-deep);
+
+  border-color: var(--teal-deep);
+
+  box-shadow:
+    0 0 0 3px var(--teal-wash);
+}
+
+
+.filter-btn-apply:active {
+  background: var(--teal-deep);
+
+  border-color: var(--teal-deep);
+
+  transform: translateY(1px);
+
+  box-shadow: none;
+}
+
+
+/* =========================================================
+   BUTTON DISABLED
+   ========================================================= */
+
+.filter-btn:disabled {
+  opacity: 0.5;
+
+  cursor: not-allowed;
+
+  transform: none;
+
+  box-shadow: none;
+}
+
+
+/* =========================================================
+   TABLE WRAPPER
+   ========================================================= */
+
+.list-table-wrapper {
+  width: 100%;
+
+  overflow: hidden;
+
+  border: 1px solid var(--line);
+
+  border-radius: 8px;
+
+  background: var(--paper-raised);
+}
+
+
+/* =========================================================
+   TABLE SCROLL
+   ========================================================= */
+
+.list-table-scroll {
+  width: 100%;
+
+  max-height: 450px;
+
+  overflow-y: auto;
+  overflow-x: auto;
+
+  -webkit-overflow-scrolling: touch;
+}
+
+
+
+/* =========================================================
+   TABLE
+   ========================================================= */
+
+.list-table {
+  width: 100%;
+
+  min-width: 900px;
+
+  margin-bottom: 0;
+
+  font-size: 12px;
+
+  white-space: nowrap;
+}
+
+
+.list-table th,
+.list-table td {
+  padding: 7px 10px;
+
+  vertical-align: middle;
+}
+
+
+.list-table th {
+  height: 34px;
+
+  background: var(--paper);
+
+  color: var(--ink-soft);
+
+  font-size: 11px;
+  font-weight: 600;
+
+  border-bottom: 1px solid var(--line);
+}
+
+
+.list-table td {
+  height: 38px;
+
+  color: var(--ink);
+
+  border-bottom: 1px solid var(--line);
+}
+
+
+.list-table tbody tr:last-child td {
+  border-bottom: none;
+}
+
+
+.list-table tbody tr {
+  transition: var(--transition-ui);
+}
+
+
+.list-table tbody tr:hover {
+  background-color: var(--teal-wash);
+}
+
+
+/* =========================================================
+   TABLE LINK
+   ========================================================= */
+
+.table-link {
+  color: var(--ink);
+
+  font-weight: 500;
+
+  text-decoration: none;
+
+  cursor: pointer;
+
+  transition: var(--transition-ui);
+}
+
+
+.table-link:hover {
+  color: var(--teal);
+
+  text-decoration: underline;
+}
+
+
+/* =========================================================
+   SECONDARY TEXT
+   ========================================================= */
+
+.table-secondary {
+  color: var(--ink-soft);
+
+  font-size: 11px;
+}
+
+
+/* =========================================================
+   EMPHASIZED TEXT
+   ========================================================= */
+
+.table-emphasis {
+  color: var(--ink);
+
+  font-size: 12px;
+
+  font-weight: 600;
+}
+
+
+/* =========================================================
+   STATUS
+   ========================================================= */
+
+.status-badge {
+  display: inline-flex;
+
+  align-items: center;
+  justify-content: center;
+
+  min-width: 58px;
+
+  padding: 3px 7px;
+
+  border-radius: var(--radius-s);
+
+  font-size: 10px;
+
+  font-weight: 600;
+
+  line-height: 1.2;
+}
+
+
+.status-active {
+  color: var(--teal-deep);
+
+  background: var(--teal-wash);
+
+  border: 1px solid var(--teal);
+}
+
+
+.status-inactive {
+  color: var(--brick);
+
+  background: var(--brick-wash);
+
+  border: 1px solid var(--brick);
+}
+
+.status-pending {
+  color: var(--amber);
+  background: var(--amber-wash);
+  border: 1px solid var(--amber);
+}
+
+.status-progress {
+  color: var(--sea-deep);
+  background: var(--sea-wash);
+  border: 1px solid var(--sea);
+}
+
+.status-completed {
+  color: var(--teal-deep);
+  background: var(--teal-wash);
+  border: 1px solid var(--teal);
+}
+
+
+
+/* =========================================================
+   DATE
+   ========================================================= */
+
+.created-date {
+  color: var(--ink-soft);
+
+  font-size: 11px;
+}
+
+
+/* =========================================================
+   TABLE ACTION
+   ========================================================= */
+
+.table-action {
+  width: 26px;
+  height: 26px;
+
+  min-height: 26px;
+
+  padding: 0;
+
+  display: inline-flex;
+
+  align-items: center;
+  justify-content: center;
+
+  border-radius: var(--radius-s);
+
+  font-size: 12px;
+
+  cursor: pointer;
+
+  transition: var(--transition-slow);
+}
+
+
+.table-action.edit {
+  color: var(--teal-deep);
+
+  background: var(--teal-wash);
+
+  border: 1px solid var(--teal);
+}
+
+
+.table-action.edit:hover {
+  color: var(--paper-raised);
+
+  background: var(--teal);
+
+  border-color: var(--teal);
+
+  transform: translateY(-1px);
+}
+
+
+.table-action.delete {
+  color: var(--brick);
+
+  background: var(--brick-wash);
+
+  border: 1px solid var(--brick);
+}
+
+
+.table-action.delete:hover {
+  color: var(--paper-raised);
+
+  background: var(--brick);
+
+  border-color: var(--brick);
+
+  transform: translateY(-1px);
+}
+
+
+.table-action.report {
+  color: var(--teal);
+  background-color: var(--teal-wash);
+  border-color: var(--teal);
+}
+
+.table-action.report:hover {
+  color: #ffffff;
+  background-color: var(--teal);
+  border-color: var(--teal);
+}
+
+
+.table-action:active {
+  transform: translateY(0);
+}
+
+
+/* =========================================================
+   EMPTY STATE
+   ========================================================= */
+
+.empty-state {
+  height: 150px;
+
+  padding: 25px 20px !important;
+
+  text-align: center;
+
+  color: var(--ink-soft);
+}
+
+
+.empty-icon {
+  margin-bottom: 7px;
+
+  color: var(--teal);
+
+  font-size: 24px;
+}
+
+
+.empty-title {
+  margin-bottom: 3px;
+
+  color: var(--ink);
+
+  font-size: 13px;
+
+  font-weight: 600;
+}
+
+
+.empty-text {
+  color: var(--ink-soft);
+
+  font-size: 11px;
+}
+
+
+/* =========================================================
+   PAGINATION
+   ========================================================= */
+
+.list-pagination {
+  width: 100%;
+
+  display: flex;
+
+  justify-content: center;
+  align-items: center;
+
+  min-height: 64px;
+
+  padding: 10px 16px;
+
+  border-top: 1px solid var(--line);
+
+  background: var(--paper-raised);
+}
+
+
+.pagination-content {
+  width: 100%;
+
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+
+  gap: 24px;
+}
+
+
+.pagination-info {
+  color: var(--ink-soft);
+
+  font-size: 13px;
+
+  font-weight: 500;
+
+  white-space: nowrap;
+}
+
+
+/* =========================================================
+   PAGINATION
+   ========================================================= */
+
+.list-pagination .pagination {
+  margin: 0;
+
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+
+  gap: 4px;
+}
+
+
+.list-pagination .page-link {
+  min-width: 36px;
+  height: 36px;
+
+  display: inline-flex;
+
+  align-items: center;
+  justify-content: center;
+
+  padding: 0 10px;
+
+  color: var(--ink-soft);
+
+  background: var(--paper-raised);
+
+  border: 1px solid var(--line);
+
+  border-radius: var(--radius-s);
+
+  font-size: 13px;
+
+  font-weight: 500;
+
+  text-decoration: none;
+
+  transition: var(--transition-ui);
+}
+
+
+.list-pagination .page-link:hover {
+  color: var(--teal-deep);
+
+  background: var(--teal-wash);
+
+  border-color: var(--line-strong);
+}
+
+
+.list-pagination .page-item.active .page-link,
+.list-pagination .page-item .page-link.active {
+  color: var(--paper-raised);
+
+  background: var(--teal);
+
+  border-color: var(--teal);
+}
+
+
+.list-pagination .page-item.disabled .page-link {
+  color: var(--line-strong);
+
+  background: var(--paper);
+
+  border-color: var(--line);
+
+  pointer-events: none;
+}
+
+
+/* =========================================================
+   TABLET
+   ========================================================= */
+
+@media (max-width: 1100px) {
+
+  .list-table {
+    min-width: 820px;
+
+    font-size: 11px;
+  }
+
+
+  .list-table th,
+  .list-table td {
+    padding: 6px 8px;
+  }
+
+
+  .list-table th {
+    font-size: 10px;
+  }
+
+
+  .list-table td {
+    font-size: 11px;
+  }
+
+
+  .table-secondary,
+  .created-date {
+    font-size: 10px;
+  }
+
+
+  .table-emphasis {
+    font-size: 11px;
+  }
+
+}
+
+
+/* =========================================================
+   SMALL TABLET
+   ========================================================= */
+
+@media (max-width: 850px) {
+
+  .list-table {
+    min-width: 760px;
+  }
+
+
+  .list-table th,
+  .list-table td {
+    padding: 5px 7px;
+  }
+
+
+  .status-badge {
+    min-width: 52px;
+
+    padding: 3px 6px;
+
+    font-size: 9px;
+  }
+
+
+  .table-action {
+    width: 25px;
+    height: 25px;
+  }
+
+}
+
+
+/* =========================================================
+   MOBILE
+   ========================================================= */
+
+@media (max-width: 600px) {
+
+  .btn-filter {
+    min-height: 34px;
+
+    padding: 6px 11px;
+
+    font-size: 11px;
+  }
+
+
+  .btn-filter i {
+    font-size: 12px;
+  }
+
+
+  .filter-footer {
+    gap: 8px;
+  }
+
+
+  .filter-btn {
+    min-height: 36px;
+
+    padding: 7px 13px;
+
+    font-size: 0.8rem;
+  }
+
+
+  .filter-btn-apply {
+    min-width: 82px;
+  }
+
+
+  .list-table {
+    min-width: 720px;
+
+    font-size: 10px;
+  }
+
+
+  .list-table th,
+  .list-table td {
+    padding: 5px 6px;
+  }
+
+
+  .list-table th {
+    height: 30px;
+
+    font-size: 9px;
+  }
+
+
+  .list-table td {
+    height: 34px;
+  }
+
+
+  .table-secondary,
+  .created-date {
+    font-size: 9px;
+  }
+
+
+  .table-emphasis {
+    font-size: 10px;
+  }
+
+
+  .status-badge {
+    min-width: 48px;
+
+    padding: 2px 5px;
+
+    font-size: 8px;
+  }
+
+
+  .table-action {
+    width: 24px;
+    height: 24px;
+
+    font-size: 11px;
+  }
+
+
+  .list-pagination {
+    min-height: 58px;
+
+    padding: 8px;
+  }
+
+
+  .pagination-content {
+    gap: 10px;
+  }
+
+
+  .pagination-info {
+    font-size: 11px;
+  }
+
+
+  .list-pagination .page-link {
+    min-width: 32px;
+    height: 32px;
+
+    padding: 0 7px;
+
+    font-size: 11px;
+  }
+
+}
+
+
+/* =========================================================
+   VERY SMALL MOBILE
+   ========================================================= */
+
+@media (max-width: 400px) {
+
+  .list-table {
+    min-width: 680px;
+  }
+
+
+  .pagination-info {
+    display: none;
+  }
+
+
+  .pagination-content {
+    justify-content: center;
+  }
+
+
+  .filter-footer {
+    flex-direction: column-reverse;
+
+    align-items: stretch;
+  }
+
+
+  .filter-btn {
+    width: 100%;
+  }
+
+}

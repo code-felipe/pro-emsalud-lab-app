@@ -1,0 +1,213 @@
+<div class="form-page">
+  <ul class="alert alert-danger list-unstyled api-error" *ngIf="apiError?.errors as errors">
+    <li *ngFor="let error of errors | keyvalue">
+      <b>{{ error.key }}</b
+      >: {{ error.value }}
+    </li>
+  </ul>
+  <div class="form-card">
+    <!-- ===================================================== HEADER ===================================================== -->
+    <div class="form-card-header">
+      <div class="form-header-icon">
+        <i class="bi bi-measuring-cup"></i>
+      </div>
+
+      <div>
+        <h5 class="form-title">
+          {{ test.id != null ? 'Editar Test Referencial' : title}}
+        </h5>
+
+        <small class="form-subtitle"> Detalle del Test</small>
+      </div>
+    </div>
+    <!-- ===================================================== BODY ===================================================== -->
+    <div class="form-card-body">
+      <form #testForm="ngForm">
+        <!-- =================================================
+       NAME
+       ================================================= -->
+
+        <div class="form-row">
+          <label class="form-label"> Nombre de Prueba </label>
+
+          <div class="form-field">
+            <input
+              type="text"
+              class="form-control form-input"
+              placeholder="e.g. Complete Blood Count"
+              [(ngModel)]="test.name"
+              name="name"
+              required
+              minlength="4"
+              #name="ngModel"
+            />
+
+            <div class="validation-message" *ngIf="name.invalid && (name.dirty || name.touched)">
+              <div *ngIf="name.errors?.['required']">Nombre de prueba es requerido</div>
+
+              <div *ngIf="name.errors?.['minlength']">
+                El nombre de prueba debe tener al menos 4 caracteres
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- =================================================
+       TEST TYPE
+       ================================================= -->
+
+        <div class="form-row">
+          <label class="form-label"> Tipo de prueba </label>
+
+          <div class="form-field">
+            <select
+              class="form-control form-input"
+              [(ngModel)]="test.testType"
+              name="testType"
+              required
+              #testType="ngModel"
+            >
+              <option [ngValue]="undefined">Seleccionar tipo</option>
+
+              <option *ngFor="let type of testTypes" [ngValue]="type.value">
+                {{ type.label }}
+              </option>
+            </select>
+
+            <div
+              class="validation-message"
+              *ngIf="testType.invalid && (testType.dirty || testType.touched)"
+            >
+              <div *ngIf="testType.errors?.['required']">El tipo es requerido</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- =================================================
+       REFERENCE
+       ================================================= -->
+
+        <div class="form-row">
+          <label class="form-label">Referencia</label>
+
+          <div class="form-field">
+            <textarea
+              class="form-control form-input"
+              placeholder="Ej: Hombre: 34 mg/dL&#10;Mujer: 30 mg/dL"
+              [(ngModel)]="test.reference"
+              name="reference"
+              #reference="ngModel"
+              rows="4"
+            ></textarea>
+          </div>
+        </div>
+
+        <!-- =================================================
+       PRICE
+       ================================================= -->
+
+        <div class="form-row">
+          <label class="form-label"> Precio </label>
+
+          <div class="form-field">
+            <input
+              type="number"
+              class="form-control form-input"
+              placeholder="e.g. 25.00"
+              [(ngModel)]="test.price"
+              name="price"
+              required
+              min="0"
+              step="0.01"
+              #price="ngModel"
+            />
+
+            <div class="validation-message" *ngIf="price.invalid && (price.dirty || price.touched)">
+              <div *ngIf="price.errors?.['required']">Precio es requerido</div>
+
+              <div *ngIf="price.errors?.['min']">El precio no debe ser negativo</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- =================================================
+       CATEGORY
+       ================================================= -->
+
+        <div class="form-row">
+          <label class="form-label"> Categoría del Test </label>
+
+          <div class="form-field">
+            <select
+              class="form-control form-input"
+              [(ngModel)]="test.testCategoryId"
+              name="testCategoryId"
+              required
+              #testCategoryId="ngModel"
+            >
+              <option [ngValue]="0">Seleccionar categoría</option>
+
+              <option *ngFor="let category of testCategories" [ngValue]="category.id">
+                {{ category.name }}
+              </option>
+            </select>
+
+            <div
+              class="validation-message"
+              *ngIf="testCategoryId.invalid && (testCategoryId.dirty || testCategoryId.touched)"
+            >
+              <div *ngIf="testCategoryId.errors?.['required']">La categoría es requerida</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- =================================================
+       DIVIDER
+       ================================================= -->
+
+        <hr class="form-divider" />
+
+        <!-- =================================================
+       ACTIONS
+       ================================================= -->
+
+        <div class="form-actions">
+          <button type="button" class="btn btn-cancel" [routerLink]="['/tests']">Cancelar</button>
+
+          <!-- =================================================
+         CREATE
+         ================================================= -->
+
+          <button
+            type="submit"
+            class="btn btn-primary-action"
+            (click)="create()"
+            *ngIf="!test.id; else editBlock"
+            [disabled]="!testForm.form.valid"
+          >
+            <i class="ti ti-plus"></i>
+
+            Crear
+          </button>
+
+          <!-- =================================================
+         EDIT
+         ================================================= -->
+
+          <ng-template #editBlock>
+            <button
+              type="submit"
+              class="btn btn-primary-action"
+              (click)="update()"
+              [disabled]="!testForm.form.valid"
+            >
+              <i class="ti ti-edit"></i>
+
+              Editar
+            </button>
+          </ng-template>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,331 @@
+<div class="form-page">
+  <ul class="alert alert-danger list-unstyled api-error" *ngIf="apiError?.errors as errors">
+    <li *ngFor="let error of errors | keyvalue">
+      <b>{{ error.key }}</b
+      >: {{ error.value }}
+    </li>
+  </ul>
+
+  <div class="form-card">
+    <!-- ===================================================== HEADER ===================================================== -->
+    <div class="form-card-header">
+      <div class="form-header-icon">
+        <i class="bi bi-person"></i>
+      </div>
+
+      <div>
+        <h5 class="form-title">
+          {{ patient.id != null ? 'Editar Paciente' : title }}
+        </h5>
+
+        <small class="form-subtitle">Detalle del Paciente</small>
+      </div>
+    </div>
+
+    <!-- ===================================================== BODY ===================================================== -->
+    <div class="form-card-body">
+      <form #patientForm="ngForm">
+        <!-- =================================================
+        FIRST NAME
+        ================================================= -->
+
+        <div class="form-row">
+          <label class="form-label">Nombre</label>
+
+          <div class="form-field">
+            <input
+              type="text"
+              class="form-control form-input"
+              placeholder="Ej: Juan"
+              [(ngModel)]="patient.firstName"
+              name="firstName"
+              required
+              minlength="2"
+              #firstName="ngModel"
+            />
+
+            <div
+              class="validation-message"
+              *ngIf="firstName.invalid && (firstName.dirty || firstName.touched)"
+            >
+              <div *ngIf="firstName.errors?.['required']">El nombre es requerido</div>
+
+              <div *ngIf="firstName.errors?.['minlength']">
+                El nombre debe tener al menos 2 caracteres
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- =================================================
+        MIDDLE NAME
+        ================================================= -->
+
+        <div class="form-row">
+          <label class="form-label">Segundo Nombre</label>
+
+          <div class="form-field">
+            <input
+              type="text"
+              class="form-control form-input"
+              placeholder="Ej: Carlos"
+              [(ngModel)]="patient.middleName"
+              name="middleName"
+              #middleName="ngModel"
+            />
+          </div>
+        </div>
+
+        <!-- =================================================
+        FATHER LAST NAME
+        ================================================= -->
+
+        <div class="form-row">
+          <label class="form-label">Apellido Paterno</label>
+
+          <div class="form-field">
+            <input
+              type="text"
+              class="form-control form-input"
+              placeholder="Ej: García"
+              [(ngModel)]="patient.fatherLastName"
+              name="fatherLastName"
+              required
+              minlength="2"
+              #fatherLastName="ngModel"
+            />
+
+            <div
+              class="validation-message"
+              *ngIf="fatherLastName.invalid && (fatherLastName.dirty || fatherLastName.touched)"
+            >
+              <div *ngIf="fatherLastName.errors?.['required']">
+                El apellido paterno es requerido
+              </div>
+
+              <div *ngIf="fatherLastName.errors?.['minlength']">
+                El apellido debe tener al menos 2 caracteres
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- =================================================
+        MOTHER LAST NAME
+        ================================================= -->
+
+        <div class="form-row">
+          <label class="form-label">Apellido Materno</label>
+
+          <div class="form-field">
+            <input
+              type="text"
+              class="form-control form-input"
+              placeholder="Ej: López"
+              [(ngModel)]="patient.motherLastName"
+              name="motherLastName"
+              minlength="2"
+              #motherLastName="ngModel"
+            />
+
+          </div>
+        </div>
+
+        <!-- =================================================
+        GENDER
+        ================================================= -->
+
+        <div class="form-row">
+          <label class="form-label">Género</label>
+
+          <div class="form-field">
+            <select
+              class="form-control form-input"
+              [(ngModel)]="patient.gender"
+              name="gender"
+              required
+              #gender="ngModel"
+            >
+              <option [ngValue]="undefined">Seleccionar género</option>
+
+              <option *ngFor="let genderOption of genders" [ngValue]="genderOption.value">
+                {{ genderOption.label }}
+              </option>
+            </select>
+
+            <div
+              class="validation-message"
+              *ngIf="gender.invalid && (gender.dirty || gender.touched)"
+            >
+              <div *ngIf="gender.errors?.['required']">El género es requerido</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- =================================================
+        DATE OF BIRTH
+        ================================================= -->
+
+        <div class="form-row">
+          <label class="form-label">Fecha de Nacimiento</label>
+
+          <div class="form-field">
+            <input
+              type="date"
+              class="form-control form-input"
+              [(ngModel)]="patient.dateOfBirth"
+              name="dateOfBirth"
+              required
+              #dateOfBirth="ngModel"
+            />
+
+            <div
+              class="validation-message"
+              *ngIf="dateOfBirth.invalid && (dateOfBirth.dirty || dateOfBirth.touched)"
+            >
+              <div *ngIf="dateOfBirth.errors?.['required']">
+                La fecha de nacimiento es requerida
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- =================================================
+        PRIMARY PHONE
+        ================================================= -->
+
+        <div class="form-row">
+          <label class="form-label">Teléfono Principal</label>
+
+          <div class="form-field">
+            <input
+              type="tel"
+              class="form-control form-input"
+              placeholder="Ej: 23456789"
+              [(ngModel)]="patient.primaryPhoneNumber"
+              name="primaryPhoneNumber"
+              required
+              pattern="^[2345][0-9]{7}$"
+              maxlength="8"
+              inputmode="numeric"
+              #primaryPhoneNumber="ngModel"
+            />
+
+            <div
+              class="validation-message"
+              *ngIf="
+                primaryPhoneNumber.invalid &&
+                (primaryPhoneNumber.dirty || primaryPhoneNumber.touched)
+              "
+            >
+              <div *ngIf="primaryPhoneNumber.errors?.['required']">
+                El teléfono principal es requerido
+              </div>
+
+              <div *ngIf="primaryPhoneNumber.errors?.['pattern']">
+                El teléfono debe tener 8 dígitos y comenzar con 2, 3, 4 o 5
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- =================================================
+        OPTIONAL PHONE
+        ================================================= -->
+
+        <div class="form-row">
+          <label class="form-label">Teléfono Opcional</label>
+
+          <div class="form-field">
+            <input
+              type="tel"
+              class="form-control form-input"
+              placeholder="Ej: 5559876543"
+              [(ngModel)]="patient.optionalPhoneNumber"
+              name="optionalPhoneNumber"
+              #optionalPhoneNumber="ngModel"
+            />
+          </div>
+        </div>
+
+        <!-- =================================================
+        CITY
+        ================================================= -->
+
+        <div class="form-row">
+          <label class="form-label">Ciudad</label>
+
+          <div class="form-field">
+            <input
+              type="text"
+              class="form-control form-input"
+              placeholder="Ej: Escuintla"
+              [(ngModel)]="patient.city"
+              name="city"
+              required
+              minlength="2"
+              #city="ngModel"
+            />
+
+            <div class="validation-message" *ngIf="city.invalid && (city.dirty || city.touched)">
+              <div *ngIf="city.errors?.['required']">La ciudad es requerida</div>
+
+              <div *ngIf="city.errors?.['minlength']">
+                La ciudad debe tener al menos 2 caracteres
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- =================================================
+        DIVIDER
+        ================================================= -->
+
+        <hr class="form-divider" />
+
+        <!-- =================================================
+        ACTIONS
+        ================================================= -->
+
+        <div class="form-actions">
+          <button type="button" class="btn btn-cancel" [routerLink]="['/patients']">
+            Cancelar
+          </button>
+
+          <!-- =================================================
+          CREATE
+          ================================================= -->
+
+          <button
+            type="submit"
+            class="btn btn-primary-action"
+            (click)="create()"
+            *ngIf="!patient.id; else editBlock"
+            [disabled]="!patientForm.form.valid"
+          >
+            <i class="ti ti-plus"></i>
+
+            Crear
+          </button>
+
+          <!-- =================================================
+          EDIT
+          ================================================= -->
+
+          <ng-template #editBlock>
+            <button
+              type="submit"
+              class="btn btn-primary-action"
+              (click)="update()"
+              [disabled]="!patientForm.form.valid"
+            >
+              <i class="ti ti-edit"></i>
+
+              Editar
+            </button>
+          </ng-template>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

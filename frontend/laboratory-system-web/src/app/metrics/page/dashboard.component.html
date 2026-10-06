@@ -1,0 +1,235 @@
+<div class="dashboard">
+  <div class="dashboard-header">
+    <div>
+      <h1>Dashboard</h1>
+
+      <p>Resumen general de métricas</p>
+    </div>
+  </div>
+
+  @if (loading) {
+    <div class="loading-container">
+      <div class="spinner"></div>
+
+      <span>Cargando métricas...</span>
+    </div>
+  }
+
+  @if (!loading && error) {
+    <div class="error-container">
+      <div class="error-icon">
+        <i class="bi bi-exclamation-lg"></i>
+      </div>
+
+      <div>
+        <h3>No se pudieron cargar las métricas</h3>
+
+        <p>Ocurrió un error al obtener el resumen.</p>
+      </div>
+    </div>
+  }
+
+  @if (!loading && !error) {
+    <div class="metrics-grid">
+      <div class="metric-card">
+        <div class="metric-icon sales-icon">
+          <i class="bi bi-cash-stack"></i>
+        </div>
+
+        <div class="metric-content">
+          <span class="metric-label"> Ventas totales </span>
+
+          <span class="metric-value">
+            {{ dashboardSummary.totalSales | number: '1.0-2' }}
+          </span>
+        </div>
+      </div>
+
+      <div class="metric-card">
+        <div class="metric-icon current-sales-icon">
+          <i class="bi bi-graph-up"></i>
+        </div>
+
+        <div class="metric-content">
+          <span class="metric-label"> Ventas actuales </span>
+
+          <span class="metric-value">
+            {{ dashboardSummary.currentTotalSales | number: '1.0-2' }}
+          </span>
+        </div>
+      </div>
+
+      <div class="metric-card">
+        <div class="metric-icon tests-icon">
+          <i class="bi bi-clipboard2-pulse"></i>
+        </div>
+
+        <div class="metric-content">
+          <span class="metric-label"> Resultados de pruebas </span>
+
+          <span class="metric-value">
+            {{ dashboardSummary.totalTestResults | number }}
+          </span>
+        </div>
+      </div>
+
+      <div class="metric-card">
+        <div class="metric-icon patients-icon">
+          <i class="bi bi-people"></i>
+        </div>
+
+        <div class="metric-content">
+          <span class="metric-label"> Pacientes </span>
+
+          <span class="metric-value">
+            {{ dashboardSummary.totalPatients | number }}
+          </span>
+        </div>
+      </div>
+    </div>
+
+    <div class="dashboard-content">
+      <div class="dashboard-panel chart-panel">
+        <div class="panel-header">
+          <div>
+            <h2>Tendencia de ventas</h2>
+
+            <span> Ventas y resultados mensuales </span>
+          </div>
+        </div>
+
+        <div class="chart-filters">
+          <div class="filter-group">
+            <label for="startDate"> Fecha inicial </label>
+
+            <input id="startDate" type="date" [(ngModel)]="startDate" [max]="endDate" />
+          </div>
+
+          <div class="filter-group">
+            <label for="endDate"> Fecha final </label>
+
+            <input id="endDate" type="date" [(ngModel)]="endDate" [min]="startDate" />
+          </div>
+
+          <button
+            type="button"
+            class="btn btn-dark filter-button"
+            (click)="loadTestResultSaleTrend()"
+            [disabled]="trendLoading"
+          >
+            @if (trendLoading) {
+              <span class="spinner-border spinner-border-sm me-2"> </span>
+
+              Consultando...
+            } @else {
+              <i class="bi bi-search me-2"></i>
+
+              Consultar
+            }
+          </button>
+        </div>
+
+        <div class="chart-container">
+          @if (!trendLoading && !trendError) {
+            <canvas
+              baseChart
+              [type]="lineChartType"
+              [data]="lineChartData"
+              [options]="lineChartOptions"
+            >
+            </canvas>
+          }
+
+          @if (trendLoading) {
+            <div class="chart-state">
+              <div class="spinner-border text-secondary"></div>
+
+              <span> Cargando información... </span>
+            </div>
+          }
+
+          @if (trendError) {
+            <div class="chart-state error">
+              <i class="bi bi-exclamation-circle"></i>
+
+              <span> No se pudo cargar la información. </span>
+            </div>
+          }
+        </div>
+      </div>
+
+      <div class="dashboard-side">
+        <div class="dashboard-panel">
+          <div class="panel-header">
+            <div>
+              <h2>Pruebas más solicitadas</h2>
+
+              <span> Top 5 </span>
+            </div>
+          </div>
+
+          <div class="top-tests-container">
+            @if (topRequestedTestsLoading) {
+              <div class="top-tests-state">
+                <div class="spinner-border spinner-border-sm"></div>
+
+                <span> Cargando pruebas... </span>
+              </div>
+            } @else if (topRequestedTestsError) {
+              <div class="top-tests-state error">
+                <i class="bi bi-exclamation-circle"></i>
+
+                <span> No se pudo cargar la información. </span>
+              </div>
+            } @else if (topRequestedTests.length === 0) {
+              <div class="top-tests-state">
+                <i class="bi bi-clipboard-x"></i>
+
+                <span> No hay pruebas registradas. </span>
+              </div>
+            } @else {
+              <div class="top-tests-list">
+                @for (test of topRequestedTests; track test.testId; let i = $index) {
+                  <div class="top-test-item">
+                    <div class="top-test-position">
+                      {{ i + 1 }}
+                    </div>
+
+                    <div class="top-test-info">
+                      <span class="top-test-name">
+                        {{ test.testName }}
+                      </span>
+
+                      <span class="top-test-count">
+                        {{ test.total | number }}
+                        {{ test.total === 1 ? 'resultado' : 'resultados' }}
+                      </span>
+                    </div>
+
+                    <div class="top-test-sales">
+                      <span>
+                        {{ test.totalSales | number: '1.0-2' }}
+                      </span>
+                    </div>
+                  </div>
+                }
+              </div>
+            }
+          </div>
+        </div>
+
+        <div class="dashboard-panel">
+          <div class="panel-header">
+            <div>
+              <h2>Resumen</h2>
+
+              <span> Información adicional </span>
+            </div>
+          </div>
+
+          <div class="table-placeholder">Próximamente</div>
+        </div>
+      </div>
+    </div>
+  }
+</div>

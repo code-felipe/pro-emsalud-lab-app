@@ -1,0 +1,93 @@
+<div class="form-page">
+  <ul class="alert alert-danger list-unstyled api-error" *ngIf="apiError?.errors as errors">
+    <li *ngFor="let error of errors | keyvalue">
+      <b>{{ error.key }}</b
+      >: {{ error.value }}
+    </li>
+  </ul>
+  <div class="form-card">
+    <!-- HEADER -->
+    <div class="form-card-header">
+      <div class="form-header-icon"><i class="bi bi-folder2-open"></i></div>
+      <div>
+        <h5 class="form-title">
+          {{ title }}
+        </h5>
+
+        <small class="form-subtitle"> Detalle de la Categoría </small>
+      </div>
+    </div>
+    <!-- BODY -->
+    <div class="form-card-body">
+      <form #testCategoryForm="ngForm">
+        <!-- ========================= -->
+        <!-- NAME -->
+        <!-- ========================= -->
+
+        <div class="form-row">
+          <label class="form-label"> Nombre de Categoría </label>
+
+          <div class="form-field">
+            <input
+              type="text"
+              class="form-control form-input"
+              placeholder="e.g. Hematología"
+              [(ngModel)]="testCategory.name"
+              name="name"
+              required
+              minlength="4"
+              #name="ngModel"
+            />
+
+            <div class="validation-message" *ngIf="name.invalid && (name.dirty || name.touched)">
+              <div *ngIf="name.errors?.['required']">El nombre de la categoría es requerido</div>
+
+              <div *ngIf="name.errors?.['minlength']">
+                El nombre debe tener al menos 4 caracteres
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <hr class="form-divider" />
+
+        <!-- ========================= -->
+        <!-- ACTIONS -->
+        <!-- ========================= -->
+
+        <div class="form-actions">
+          <button type="button" class="btn btn-cancel" [routerLink]="['/test-category-references']">
+            Cancelar
+          </button>
+
+          <!-- CREATE -->
+
+          <button
+            type="submit"
+            class="btn btn-primary-action"
+            (click)="create()"
+            *ngIf="!testCategory.id; else editBlock"
+            [disabled]="!testCategoryForm.form.valid"
+          >
+            <i class="ti ti-plus"></i>
+            Crear
+          </button>
+
+          <!-- EDIT -->
+
+          <ng-template #editBlock>
+            <button
+              type="submit"
+              class="btn btn-primary-action"
+              (click)="update()"
+              [disabled]="!testCategoryForm.form.valid"
+            >
+              <i class="ti ti-edit"></i>
+              Editar
+            </button>
+          </ng-template>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

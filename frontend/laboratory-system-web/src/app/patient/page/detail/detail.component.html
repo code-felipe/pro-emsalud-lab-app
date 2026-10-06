@@ -1,0 +1,128 @@
+@if (patient) {
+  <!-- =====================================================
+       PACIENTE
+  ===================================================== -->
+
+  <div id="screen-paciente" class="screen">
+    <div class="app">
+      <div class="patient-header">
+        <!-- Volver a pacientes -->
+        <a class="btn-back" [routerLink]="['/patients']">
+          <i class="bi bi-arrow-left"></i>
+          Pacientes
+        </a>
+
+        <!-- Identidad principal -->
+        <div class="patient-row">
+          <div class="patient-main">
+            <div class="patient-name serif">
+              {{ patient.firstName }}
+              {{ patient.middleName }}
+              {{ patient.fatherLastName }}
+              {{ patient.motherLastName }}
+            </div>
+
+            <div class="patient-code">Código: {{ patient.code }}</div>
+          </div>
+
+          <div class="patient-id">ID: {{ patient.id }}</div>
+        </div>
+
+        <!-- Información del paciente -->
+        <div class="patient-facts">
+          <div class="fact">
+            <span class="fact-label">Fecha de nacimiento</span>
+            <span class="fact-value">
+              {{ patient.dateOfBirth | date: 'dd/MM/yyyy' }}
+            </span>
+          </div>
+
+          <div class="fact">
+            <span class="fact-label">Edad</span>
+            <span class="fact-value">
+              {{ patient.age }}
+            </span>
+          </div>
+
+          <div class="fact">
+            <span class="fact-label">Sexo</span>
+            <span class="fact-value">
+              {{ patient.gender }}
+            </span>
+          </div>
+
+          <div class="fact">
+            <span class="fact-label">Teléfono principal</span>
+            <span class="fact-value">
+              {{ patient.primaryPhoneNumber }}
+            </span>
+          </div>
+
+          <div class="fact">
+            <span class="fact-label">Teléfono opcional</span>
+            <span class="fact-value">
+              {{ patient.optionalPhoneNumber || 'No registrado' }}
+            </span>
+          </div>
+
+          <div class="fact">
+            <span class="fact-label">Ciudad</span>
+            <span class="fact-value">
+              {{ patient.city }}
+            </span>
+          </div>
+
+          <div class="fact">
+            <span class="fact-label">Registro</span>
+            <span class="fact-value">
+              {{ patient.createdAt | date: 'dd/MM/yyyy HH:mm' }}
+            </span>
+          </div>
+
+          <div class="fact">
+            <span class="fact-label">Última actualización</span>
+            <span class="fact-value">
+              {{ patient.updatedAt | date: 'dd/MM/yyyy HH:mm' }}
+            </span>
+          </div>
+        </div>
+      </div>
+
+      <!-- =====================================================
+           NAVEGACIÓN DEL PACIENTE
+      ===================================================== -->
+
+      <nav class="patient-tabs">
+        <a
+          class="patient-tab"
+          [routerLink]="['/patients', patient.id, 'results']"
+          routerLinkActive="active"
+          [routerLinkActiveOptions]="{ exact: true }"
+        >
+          <i class="bi bi-list-ul" aria-hidden="true"></i>
+          <span>Ordenes</span>
+        </a>
+
+        <a
+          class="patient-tab"
+          [routerLink]="['/patients', patient.id, 'history']"
+          routerLinkActive="active"
+        >
+          <i class="bi bi-clock-history" aria-hidden="true"></i>
+          <span>Historial</span>
+        </a>
+
+        <a
+          class="patient-tab"
+          [routerLink]="['/patients', patient.id, 'report']"
+          routerLinkActive="active"
+        >
+          <i class="bi bi-file-earmark-text" aria-hidden="true"></i>
+          <span>Generar reporte</span>
+        </a>
+      </nav>
+
+      <router-outlet></router-outlet>
+    </div>
+  </div>
+}

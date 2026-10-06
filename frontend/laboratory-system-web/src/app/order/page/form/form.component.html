@@ -1,0 +1,98 @@
+<div class="form-page">
+  <div class="form-card">
+    <!-- =================================================
+         HEADER
+    ================================================== -->
+
+    <div class="form-card-header">
+      <div class="form-header-icon">
+        <i class="bi bi-clipboard2-plus"></i>
+      </div>
+
+      <div>
+        <h2 class="form-title">
+          {{ title }}
+        </h2>
+
+        <div class="form-subtitle">Selecciona el doctor asociado a esta orden.</div>
+      </div>
+    </div>
+
+    <!-- =================================================
+         BODY
+    ================================================== -->
+
+    <div class="form-card-body">
+      <form>
+        <!-- =================================================
+             DOCTOR
+        ================================================== -->
+
+        <div class="form-row">
+          <label class="form-label"> Doctor </label>
+
+          <div class="form-field">
+            <select
+              class="form-control form-input"
+              [(ngModel)]="order.doctorId"
+              name="doctorId"
+              required
+              #doctorId="ngModel"
+            >
+              <option [ngValue]="0">Seleccionar doctor</option>
+
+              <option *ngFor="let doctor of doctors" [ngValue]="doctor.id">
+                {{ doctor.fullName }}
+              </option>
+            </select>
+
+            <div
+              class="validation-message"
+              *ngIf="
+                (doctorId.dirty || doctorId.touched) && (doctorId.invalid || order.doctorId === 0)
+              "
+            >
+              <div>El doctor es requerido</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- =================================================
+             ACTIONS
+        ================================================== -->
+
+        <div class="form-actions">
+          <button
+            type="button"
+            class="btn btn-cancel"
+            [routerLink]="['/patients', patientId, 'results']"
+          >
+            <i class="ti ti-x"></i>
+
+            Cancelar
+          </button>
+
+          <!-- CREATE -->
+          <button
+            *ngIf="!order.id"
+            type="button"
+            class="btn btn-primary-action"
+            [disabled]="order.doctorId <= 0"
+            (click)="create()"
+          >
+            <i class="ti ti-plus"></i>
+
+            Crear orden
+          </button>
+
+          <!-- EDIT -->
+          <button *ngIf="order.id" type="button" class="btn btn-primary-action" (click)="update()">
+            <i class="ti ti-edit"></i>
+
+            Guardar cambios
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

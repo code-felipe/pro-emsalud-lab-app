@@ -1,0 +1,31 @@
+<div class="modal-backdrop-custom" *ngIf="modalService.modalOpen()" (click)="close()">
+  <div
+    class="modal-dialog-custom"
+    [class.modal-report]="modalService.modalConfig()?.type === 'report'"
+    (click)="$event.stopPropagation()"
+  >
+    <!-- HEADER -->
+
+    <div class="modal-header-custom">
+      <h5 class="modal-title">
+        {{ modalService.modalConfig()?.title }}
+      </h5>
+
+      <button type="button" class="modal-close" (click)="close()" aria-label="Cerrar">
+        <i class="bi bi-x-lg"></i>
+      </button>
+    </div>
+
+    <!-- BODY -->
+
+    <div class="modal-body-custom">
+      <ng-content></ng-content>
+    </div>
+
+    <!-- FOOTER -->
+
+    <div class="modal-footer-custom" *ngIf="modalService.modalConfig()?.type !== 'report'">
+      <ng-content select="[modal-footer]"></ng-content>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,470 @@
+/* =========================
+   SELECTOR CONTAINER
+   ========================= */
+
+.selector-container {
+  width: 100%;
+  /* max-width: 720px; */
+
+  /* margin: 0 auto; */
+  /* padding: 20px; */
+
+  color: var(--ink);
+}
+
+
+/* =========================
+   SEARCH CONTAINER
+   ========================= */
+
+.search-container {
+  width: 100%;
+  color: var(--ink);
+}
+
+
+/* =========================
+   SEARCH HEADER
+   ========================= */
+
+.search-header {
+  margin-bottom: 10px;
+}
+
+.search-label {
+  display: block;
+
+  margin-bottom: 3px;
+
+  color: var(--ink);
+
+  font-size: 13px;
+  font-weight: 500;
+}
+
+.search-description {
+  color: var(--ink-soft);
+
+  font-size: 11px;
+}
+
+
+/* =========================
+   SEARCH INPUT
+   ========================= */
+
+.search-field {
+  width: 100%;
+}
+
+.search-input-wrapper {
+  position: relative;
+
+  width: 100%;
+}
+
+.search-icon {
+  position: absolute;
+
+  top: 50%;
+  left: 13px;
+
+  transform: translateY(-50%);
+
+  color: var(--ink-soft);
+
+  font-size: 14px;
+
+  pointer-events: none;
+
+  z-index: 2;
+}
+
+.search-input {
+  min-height: 40px;
+
+  padding-left: 38px;
+
+  background: var(--paper-raised);
+
+  border: 1px solid var(--line);
+
+  border-radius: 8px;
+
+  color: var(--ink);
+
+  font-size: 13px;
+
+  box-shadow: none;
+
+  transition:
+    border-color var(--transition-base),
+    box-shadow var(--transition-base);
+}
+
+.search-input::placeholder {
+  color: var(--ink-soft);
+}
+
+.search-input:hover {
+  border-color: var(--line-strong);
+}
+
+.search-input:focus {
+  border-color: var(--teal);
+
+  box-shadow:
+    0 0 0 3px rgba(47, 111, 94, 0.15);
+
+  outline: none;
+}
+
+
+/* =========================
+   SEARCH RESULTS
+   ========================= */
+
+.search-results {
+  margin-top: 8px;
+
+  background: var(--paper-raised);
+
+  border: 1px solid var(--line);
+
+  border-radius: 8px;
+
+  overflow: hidden;
+
+  box-shadow:
+    0 4px 12px rgba(27, 36, 32, 0.08),
+    0 1px 3px rgba(27, 36, 32, 0.05);
+}
+
+
+/* =========================
+   RESULTS HEADER
+   ========================= */
+
+.results-header {
+  display: flex;
+
+  justify-content: space-between;
+  align-items: center;
+
+  padding: 9px 12px;
+
+  background: var(--paper);
+
+  border-bottom: 1px solid var(--line);
+
+  color: var(--ink-soft);
+
+  font-size: 11px;
+  font-weight: 500;
+}
+
+.results-count {
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+
+  min-width: 20px;
+  height: 20px;
+
+  padding: 0 6px;
+
+  background: var(--teal-wash);
+
+  border-radius: 10px;
+
+  color: var(--teal-deep);
+
+  font-size: 10px;
+  font-weight: 600;
+}
+
+
+/* =========================
+   SEARCH RESULT
+   ========================= */
+
+.search-result {
+  display: flex;
+
+  align-items: center;
+
+  width: 100%;
+
+  padding: 11px 12px;
+
+  background: var(--paper-raised);
+
+  border: 0;
+
+  border-bottom: 1px solid var(--line);
+
+  color: var(--ink);
+
+  text-align: left;
+
+  cursor: pointer;
+
+  transition:
+    background-color var(--transition-base);
+}
+
+.search-result:last-child {
+  border-bottom: none;
+}
+
+.search-result:hover {
+  background-color: var(--teal-wash);
+}
+
+
+/* =========================
+   RESULT ICON
+   ========================= */
+
+.result-icon {
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+
+  flex-shrink: 0;
+
+  width: 32px;
+  height: 32px;
+
+  margin-right: 10px;
+
+  background: var(--teal-wash);
+
+  border: 1px solid var(--line);
+
+  border-radius: 7px;
+
+  color: var(--teal);
+
+  font-size: 14px;
+}
+
+
+/* =========================
+   RESULT INFO
+   ========================= */
+
+.result-info {
+  display: flex;
+
+  flex-direction: column;
+
+  min-width: 0;
+
+  flex: 1;
+}
+
+.result-title {
+  overflow: hidden;
+
+  color: var(--ink);
+
+  font-size: 13px;
+  font-weight: 500;
+
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.result-secondary {
+  margin-top: 2px;
+
+  color: var(--ink-soft);
+
+  font-size: 11px;
+}
+
+
+/* =========================
+   RESULT ARROW
+   ========================= */
+
+.result-arrow {
+  margin-left: 10px;
+
+  color: var(--ink-soft);
+
+  font-size: 12px;
+
+  transition:
+    color var(--transition-base),
+    transform var(--transition-fast);
+}
+
+.search-result:hover .result-arrow {
+  color: var(--teal);
+
+  transform: translateX(2px);
+}
+
+
+/* =========================
+   SELECTED ITEM
+   ========================= */
+
+.selected-item {
+  display: flex;
+
+  align-items: flex-start;
+
+  gap: 12px;
+
+  margin-top: 16px;
+
+  padding: 16px;
+
+  background: var(--teal-wash);
+
+  border: 1px solid var(--line);
+
+  border-left: 3px solid var(--teal);
+
+  border-radius: 8px;
+}
+
+
+/* =========================
+   SELECTED ICON
+   ========================= */
+
+.selected-icon {
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+
+  flex-shrink: 0;
+
+  width: 32px;
+  height: 32px;
+
+  background: var(--teal);
+
+  border-radius: 50%;
+
+  color: var(--paper-raised);
+
+  font-size: 14px;
+}
+
+
+/* =========================
+   SELECTED INFO
+   ========================= */
+
+.selected-info {
+  flex: 1;
+
+  min-width: 0;
+}
+
+.selected-header {
+  display: flex;
+
+  align-items: center;
+
+  gap: 8px;
+
+  margin-bottom: 10px;
+}
+
+.selected-label {
+  color: var(--ink);
+
+  font-size: 13px;
+  font-weight: 500;
+}
+
+.selected-status {
+  padding: 3px 7px;
+
+  background: var(--paper-raised);
+
+  border: 1px solid var(--line);
+
+  border-radius: 10px;
+
+  color: var(--teal-deep);
+
+  font-size: 9px;
+  font-weight: 600;
+
+  text-transform: uppercase;
+}
+
+
+/* =========================
+   SELECTED DETAILS
+   ========================= */
+
+.selected-details {
+  display: flex;
+
+  flex-wrap: wrap;
+
+  gap: 20px;
+}
+
+.detail-item {
+  display: flex;
+
+  flex-direction: column;
+
+  min-width: 100px;
+}
+
+.detail-item small {
+  margin-bottom: 2px;
+
+  color: var(--ink-soft);
+
+  font-size: 10px;
+}
+
+.detail-item strong,
+.detail-item span {
+  color: var(--ink);
+
+  font-size: 12px;
+}
+
+
+/* =========================
+   RESPONSIVE
+   ========================= */
+
+@media (max-width: 576px) {
+
+  .selector-container {
+    padding: 14px;
+  }
+
+  .selected-item {
+    flex-wrap: wrap;
+
+    padding: 14px;
+  }
+
+  .selected-info {
+    width: calc(100% - 44px);
+  }
+
+  .selected-details {
+    gap: 12px;
+
+    flex-direction: column;
+  }
+
+}

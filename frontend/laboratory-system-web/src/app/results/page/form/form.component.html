@@ -1,0 +1,104 @@
+<div class="form-page">
+  <div class="form-card">
+    <div class="form-card-header">
+      <div class="form-header-icon">
+        <i class="bi bi-clipboard2-plus"></i>
+      </div>
+
+      <div>
+        <h2 class="form-title">
+          {{ title }}
+        </h2>
+
+        <div class="form-subtitle">Selecciona el test e ingresa el resultado.</div>
+      </div>
+    </div>
+
+    <div class="form-card-body">
+      <form>
+        <!-- =================================================
+             TEST
+        ================================================== -->
+
+        <div class="form-row">
+          <label class="form-label"> Test </label>
+
+          <div class="form-field">
+            <app-test-selector
+              [selectedTest]="selectedTest"
+              (testSelected)="onTestSelected($event)"
+            >
+            </app-test-selector>
+
+            <div class="validation-message" *ngIf="!testResult.testId">
+              <div>El test es requerido</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- =================================================
+             RESULT
+        ================================================== -->
+
+        <div class="form-row">
+          <label class="form-label" for="result"> Resultado </label>
+
+          <div class="form-field">
+            <textarea
+              id="result"
+              name="result"
+              class="form-control form-input"
+              [(ngModel)]="testResult.result"
+              placeholder="Ingrese el resultado"
+              rows="4"
+              required
+              #result="ngModel"
+            ></textarea>
+
+            <div
+              class="validation-message"
+              *ngIf="(result.dirty || result.touched) && result.invalid"
+            >
+              <div>El resultado es requerido</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="form-actions">
+          <button
+            type="button"
+            class="btn btn-cancel"
+            [routerLink]="['/patients', patientId, 'orders', orderId, 'test-results']"
+          >
+            <i class="ti ti-x"></i>
+            Cancelar
+          </button>
+
+          <!-- CREATE -->
+          <button
+            *ngIf="!testResultId"
+            type="button"
+            class="btn btn-primary-action"
+            [disabled]="!testResult.testId || !testResult.result.trim()"
+            (click)="create()"
+          >
+            <i class="ti ti-plus"></i>
+            Crear resultado
+          </button>
+
+          <!-- EDIT -->
+          <button
+            *ngIf="testResultId"
+            type="button"
+            class="btn btn-primary-action"
+            [disabled]="!testResult.testId || !testResult.result.trim()"
+            (click)="update()"
+          >
+            <i class="ti ti-edit"></i>
+            Actualizar resultado
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
