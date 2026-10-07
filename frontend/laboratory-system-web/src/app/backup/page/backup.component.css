@@ -1,0 +1,526 @@
+/* =========================================================
+   PAGE
+========================================================= */
+
+.backup-page {
+  width: 100%;
+  max-width: 1050px;
+  margin: 0 auto;
+  padding: 1rem 1.25rem 2rem;
+  color: var(--ink);
+}
+
+
+/* =========================================================
+   HEADER
+========================================================= */
+
+.backup-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 1rem;
+}
+
+.backup-title {
+  margin: 0;
+  color: var(--ink);
+  font-size: 1.4rem;
+  font-weight: 600;
+}
+
+.backup-subtitle {
+  margin: 0.2rem 0 0;
+  color: var(--ink-soft);
+  font-size: 0.85rem;
+}
+
+
+/* =========================================================
+   LOADING
+========================================================= */
+
+.backup-loading {
+  padding: 2rem;
+  text-align: center;
+  color: var(--ink-soft);
+  font-size: 0.85rem;
+}
+
+
+/* =========================================================
+   LAST BACKUP CARD
+========================================================= */
+
+.backup-card {
+  width: 100%;
+  background: var(--paper-raised);
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 2px 6px rgba(27, 36, 32, 0.04);
+}
+
+
+/* HEADER */
+
+.backup-card-header {
+  display: flex;
+  align-items: center;
+  gap: 0.7rem;
+
+  padding: 0.75rem 1rem;
+
+  background: var(--teal-wash);
+  border-bottom: 1px solid var(--line);
+}
+
+.backup-header-icon {
+  width: 34px;
+  height: 34px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  flex-shrink: 0;
+
+  border-radius: 6px;
+
+  background: var(--teal);
+  color: #fff;
+
+  font-size: 0.95rem;
+}
+
+.backup-card-header h3 {
+  margin: 0;
+
+  color: var(--teal-deep);
+
+  font-size: 0.95rem;
+  font-weight: 600;
+}
+
+.backup-card-header p {
+  margin: 0.15rem 0 0;
+
+  color: var(--ink-soft);
+
+  font-size: 0.75rem;
+}
+
+
+/* BODY */
+
+.backup-card-body {
+  padding: 0.9rem 1rem;
+}
+
+
+/* =========================================================
+   BACKUP INFORMATION
+========================================================= */
+
+.backup-info {
+  display: flex;
+  flex-direction: column;
+}
+
+.backup-info-row,
+.backup-status-row {
+  display: grid;
+  grid-template-columns: 120px minmax(0, 1fr);
+
+  align-items: center;
+
+  min-height: 36px;
+
+  border-bottom: 1px solid var(--line);
+
+  font-size: 0.82rem;
+}
+
+.backup-info-row:last-child {
+  border-bottom: none;
+}
+
+.backup-label {
+  color: var(--ink-soft);
+  font-weight: 500;
+}
+
+.backup-file {
+  color: var(--ink);
+  word-break: break-all;
+}
+
+
+/* =========================================================
+   STATUS
+========================================================= */
+
+.backup-status {
+  display: inline-flex;
+  width: fit-content;
+  align-items: center;
+
+  padding: 0.18rem 0.55rem;
+
+  border-radius: 20px;
+
+  font-size: 0.7rem;
+  font-weight: 600;
+}
+
+.backup-status.success {
+  background: var(--teal-wash);
+  color: var(--teal-deep);
+}
+
+.backup-status.failed {
+  background: var(--brick-wash);
+  color: var(--brick);
+}
+
+
+/* =========================================================
+   EMPTY LAST BACKUP
+========================================================= */
+
+.backup-empty {
+  padding: 1.25rem 1rem;
+
+  text-align: center;
+
+  color: var(--ink-soft);
+}
+
+.backup-empty i {
+  display: block;
+
+  margin-bottom: 0.4rem;
+
+  color: var(--line-strong);
+
+  font-size: 1.8rem;
+}
+
+.backup-empty h4 {
+  margin: 0 0 0.2rem;
+
+  color: var(--ink);
+
+  font-size: 0.9rem;
+  font-weight: 600;
+}
+
+.backup-empty p {
+  margin: 0;
+
+  font-size: 0.78rem;
+}
+
+
+/* =========================================================
+   DIVIDER
+========================================================= */
+
+.backup-divider {
+  margin: 0.85rem 0;
+
+  border: 0;
+  border-top: 1px solid var(--line);
+}
+
+
+/* =========================================================
+   ACTIONS
+========================================================= */
+
+.backup-actions {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+
+/* =========================================================
+   BUTTONS
+========================================================= */
+
+.btn-primary-action {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+
+  padding: 0.48rem 0.8rem;
+
+  border: 1px solid var(--teal);
+  border-radius: 6px;
+
+  background: var(--teal);
+  color: #fff;
+
+  font-size: 0.8rem;
+  font-weight: 500;
+
+  transition:
+    background 0.2s ease,
+    border-color 0.2s ease;
+}
+
+.btn-primary-action:hover:not(:disabled) {
+  background: var(--teal-deep);
+  border-color: var(--teal-deep);
+}
+
+.btn-primary-action:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+
+.btn-cancel {
+  padding: 0.43rem 0.75rem;
+
+  border: 1px solid var(--line-strong);
+  border-radius: 6px;
+
+  background: var(--paper-raised);
+  color: var(--ink);
+
+  font-size: 0.78rem;
+}
+
+.btn-cancel:hover {
+  background: var(--paper);
+}
+
+
+/* =========================================================
+   HISTORY
+========================================================= */
+
+.backup-history {
+  width: 100%;
+
+  margin-top: 1rem;
+
+  background: var(--paper-raised);
+
+  border: 1px solid var(--line);
+  border-radius: 8px;
+
+  overflow: hidden;
+
+  box-shadow: 0 2px 6px rgba(27, 36, 32, 0.04);
+}
+
+
+/* HISTORY HEADER */
+
+.backup-history-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  padding: 0.75rem 1rem;
+
+  background: var(--paper);
+
+  border-bottom: 1px solid var(--line);
+}
+
+.backup-history-header h3 {
+  margin: 0;
+
+  color: var(--ink);
+
+  font-size: 0.95rem;
+  font-weight: 600;
+}
+
+.backup-history-header p {
+  margin: 0.15rem 0 0;
+
+  color: var(--ink-soft);
+
+  font-size: 0.75rem;
+}
+
+
+/* =========================================================
+   TABLE
+========================================================= */
+
+.backup-table-wrapper {
+  width: 100%;
+  overflow-x: auto;
+}
+
+.backup-table {
+  width: 100%;
+
+  border-collapse: collapse;
+
+  font-size: 0.78rem;
+}
+
+
+/* TABLE HEADER */
+
+.backup-table thead {
+  background: var(--teal-wash);
+}
+
+.backup-table th {
+  padding: 0.6rem 0.75rem;
+
+  color: var(--teal-deep);
+
+  font-size: 0.72rem;
+  font-weight: 600;
+
+  text-align: left;
+
+  white-space: nowrap;
+
+  border-bottom: 1px solid var(--line);
+}
+
+
+/* TABLE BODY */
+
+.backup-table td {
+  padding: 0.6rem 0.75rem;
+
+  color: var(--ink);
+
+  border-bottom: 1px solid var(--line);
+
+  vertical-align: middle;
+}
+
+.backup-table tbody tr:last-child td {
+  border-bottom: none;
+}
+
+.backup-table tbody tr {
+  transition: background 0.15s ease;
+}
+
+.backup-table tbody tr:hover {
+  background: var(--paper);
+}
+
+
+/* FILE */
+
+.backup-table-file {
+  max-width: 300px;
+
+  overflow: hidden;
+
+  text-overflow: ellipsis;
+
+  white-space: nowrap;
+}
+
+
+/* TYPE */
+
+.backup-type {
+  color: var(--ink-soft);
+
+  font-size: 0.76rem;
+}
+
+
+/* =========================================================
+   HISTORY EMPTY
+========================================================= */
+
+.backup-history-empty {
+  padding: 1.5rem 1rem;
+
+  text-align: center;
+
+  color: var(--ink-soft);
+}
+
+.backup-history-empty .empty-icon {
+  margin-bottom: 0.4rem;
+
+  color: var(--line-strong);
+
+  font-size: 1.7rem;
+}
+
+.backup-history-empty .empty-title {
+  margin-bottom: 0.15rem;
+
+  color: var(--ink);
+
+  font-size: 0.85rem;
+  font-weight: 600;
+}
+
+.backup-history-empty .empty-text {
+  font-size: 0.75rem;
+}
+
+
+/* =========================================================
+   RESPONSIVE
+========================================================= */
+
+@media (max-width: 700px) {
+
+  .backup-page {
+    max-width: 100%;
+    padding: 0.75rem;
+  }
+
+  .backup-header {
+    align-items: flex-start;
+  }
+
+  .backup-title {
+    font-size: 1.2rem;
+  }
+
+  .backup-info-row,
+  .backup-status-row {
+    grid-template-columns: 100px minmax(0, 1fr);
+  }
+
+  .backup-table {
+    min-width: 650px;
+  }
+
+  .backup-history {
+    overflow: hidden;
+  }
+}
+
+
+@media (max-width: 480px) {
+
+  .backup-info-row,
+  .backup-status-row {
+    grid-template-columns: 1fr;
+    gap: 0.15rem;
+
+    padding: 0.5rem 0;
+  }
+
+  .backup-actions {
+    justify-content: stretch;
+  }
+
+  .backup-actions .btn {
+    flex: 1;
+  }
+}

@@ -1,0 +1,158 @@
+<div class="form-page">
+  <div class="form-card">
+    <!-- HEADER -->
+    <div class="form-card-header">
+      <div class="form-header-icon">
+        <i class="bi bi-database-fill"></i>
+      </div>
+
+      <div>
+        <h5 class="form-title">{{ title }}</h5>
+
+        <small class="form-subtitle"> Configuración de respaldos de la base de datos </small>
+      </div>
+    </div>
+
+    <!-- LOADING -->
+    <div class="form-card-body" *ngIf="loading">
+      <div class="loading-container">
+        <i class="bi bi-arrow-repeat"></i>
+        <p>Cargando configuración...</p>
+      </div>
+    </div>
+
+    <!-- FORM -->
+    <div class="form-card-body" *ngIf="!loading">
+      <form [formGroup]="form" (ngSubmit)="updateConfiguration()">
+        <!-- HABILITAR BACKUPS -->
+        <div class="form-row">
+          <label class="form-label"> Backups automáticos </label>
+
+          <div class="form-field">
+            <div class="backup-switch">
+              <input
+                class="form-check-input"
+                type="checkbox"
+                id="enabled"
+                formControlName="enabled"
+              />
+
+              <label class="form-check-label" for="enabled"> Habilitar backups automáticos </label>
+            </div>
+          </div>
+        </div>
+
+        <!-- INTERVALO -->
+        <div class="form-row">
+          <label class="form-label" for="intervalHours"> Intervalo </label>
+
+          <div class="form-field">
+            <input
+              type="number"
+              class="form-control form-input"
+              id="intervalHours"
+              formControlName="intervalHours"
+              min="1"
+            />
+
+            <small class="form-hint"> Tiempo entre cada backup automático. </small>
+
+            <div
+              class="validation-message"
+              *ngIf="form.get('intervalHours')?.touched && form.get('intervalHours')?.invalid"
+            >
+              El intervalo debe ser de al menos 1 hora.
+            </div>
+          </div>
+        </div>
+
+        <!-- HORA DIARIA -->
+        <div class="form-row">
+          <label class="form-label" for="dailyTime"> Hora diaria </label>
+
+          <div class="form-field">
+            <input
+              type="time"
+              class="form-control form-input"
+              id="dailyTime"
+              formControlName="dailyTime"
+            />
+
+            <small class="form-hint"> Hora utilizada cuando no existe un backup anterior. </small>
+
+            <div
+              class="validation-message"
+              *ngIf="form.get('dailyTime')?.touched && form.get('dailyTime')?.invalid"
+            >
+              La hora diaria es obligatoria.
+            </div>
+          </div>
+        </div>
+
+        <!-- DIRECTORIO -->
+        <div class="form-row">
+          <label class="form-label" for="backupDirectory"> Directorio </label>
+
+          <div class="form-field">
+            <input
+              type="text"
+              class="form-control form-input"
+              id="backupDirectory"
+              formControlName="backupDirectory"
+              placeholder="C:\LabBackups"
+            />
+
+            <small class="form-hint">
+              Carpeta donde se almacenarán los archivos de respaldo.
+            </small>
+
+            <div
+              class="validation-message"
+              *ngIf="form.get('backupDirectory')?.touched && form.get('backupDirectory')?.invalid"
+            >
+              El directorio es obligatorio.
+            </div>
+          </div>
+        </div>
+
+        <!-- RETENCIÓN -->
+        <div class="form-row">
+          <label class="form-label" for="retentionDays"> Retención </label>
+
+          <div class="form-field">
+            <input
+              type="number"
+              class="form-control form-input"
+              id="retentionDays"
+              formControlName="retentionDays"
+              min="1"
+            />
+
+            <small class="form-hint"> Cantidad de días que se conservarán los backups. </small>
+
+            <div
+              class="validation-message"
+              *ngIf="form.get('retentionDays')?.touched && form.get('retentionDays')?.invalid"
+            >
+              Los días de retención deben ser al menos 1.
+            </div>
+          </div>
+        </div>
+
+        <hr class="form-divider" />
+
+        <!-- GUARDAR -->
+        <div class="form-actions">
+          <button type="button" class="btn btn-cancel" (click)="cancel()">Cancelar</button>
+          <button type="submit" class="btn btn-primary-action" [disabled]="saving || form.invalid">
+            <i class="bi bi-save"></i>
+
+            <span *ngIf="!saving"> Guardar configuración </span>
+
+            <span *ngIf="saving"> Guardando... </span>
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

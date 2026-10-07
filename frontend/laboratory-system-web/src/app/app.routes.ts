@@ -18,6 +18,9 @@ import { OrderComponentList } from './order/page/list/order-list.component';
 import { TestResultFormComponent } from './results/page/form/form.component';
 import { HomeComponent } from './home/home.component';
 import { DashboardComponent } from './metrics/page/dashboard.component';
+import { BackupConfigurationComponent } from './backup/page/backup-configuration.component';
+import { SettingsComponent } from './settings/settings.component';
+import { BackupComponent } from './backup/page/backup.component';
 
 export const routes: Routes = [
 
@@ -90,5 +93,13 @@ export const routes: Routes = [
 {path: 'doctors', component: DoctorComponentList},
 {path: 'doctors/form', component: DoctorFormComponent},
 {path: 'doctors/form/:id', component: DoctorFormComponent},
+
+{ path: 'settings', component: SettingsComponent },
+
+{ path: 'backup', component: BackupComponent },
+
+{ path: 'backup/configuration', component: BackupConfigurationComponent },
+
+
 
 ];

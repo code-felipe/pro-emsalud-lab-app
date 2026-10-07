@@ -1,0 +1,42 @@
+<div class="settings-container">
+  <div class="settings-header">
+    <h2>{{ title }}</h2>
+    <p>Administra las configuraciones del sistema.</p>
+  </div>
+
+  <div class="settings-grid">
+    <!-- Configuración -->
+    <a routerLink="/backup/configuration" class="settings-card">
+      <div class="settings-icon">
+        <i class="bi bi-database-fill"></i>
+      </div>
+
+      <div class="settings-content">
+        <h3>Configuración Backup</h3>
+
+        <p>Configura los respaldos automáticos de la base de datos.</p>
+      </div>
+
+      <div class="settings-arrow">
+        <i class="bi bi-chevron-right"></i>
+      </div>
+    </a>
+
+    <!-- Backup manual -->
+    <a routerLink="/backup" class="settings-card">
+      <div class="settings-icon">
+        <i class="bi bi-database-check"></i>
+      </div>
+
+      <div class="settings-content">
+        <h3>Respaldo de base de datos</h3>
+
+        <p>Realiza un respaldo manual y consulta el último backup realizado.</p>
+      </div>
+
+      <div class="settings-arrow">
+        <i class="bi bi-chevron-right"></i>
+      </div>
+    </a>
+  </div>
+</div>

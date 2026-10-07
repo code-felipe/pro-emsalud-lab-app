@@ -1,0 +1,188 @@
+<div class="backup-page">
+  <!-- HEADER -->
+  <div class="backup-header">
+    <div>
+      <h2 class="backup-title">{{ title }}</h2>
+      <p class="backup-subtitle">Administra y crea respaldos de la base de datos.</p>
+    </div>
+  </div>
+
+  <!-- LOADING -->
+  <div *ngIf="loading" class="backup-loading">
+    <p>Cargando información del backup...</p>
+  </div>
+
+  <!-- CONTENT -->
+  <div *ngIf="!loading">
+    <!-- ÚLTIMO BACKUP -->
+    <div class="backup-card">
+      <div class="backup-card-header">
+        <div class="backup-header-icon">
+          <i class="bi bi-database-fill"></i>
+        </div>
+
+        <div>
+          <h3>Último respaldo</h3>
+          <p>Información del respaldo más reciente.</p>
+        </div>
+      </div>
+
+      <div class="backup-card-body">
+        <!-- SIN BACKUP -->
+        <div *ngIf="!backup" class="backup-empty">
+          <i class="bi bi-database-x"></i>
+
+          <h4>No hay respaldos registrados</h4>
+
+          <p>Todavía no se ha realizado ningún respaldo.</p>
+        </div>
+
+        <!-- ÚLTIMO BACKUP -->
+        <div *ngIf="backup" class="backup-info">
+          <div class="backup-status-row">
+            <span class="backup-label">Estado</span>
+
+            <span
+              class="backup-status"
+              [class.success]="backup.status === 'SUCCESS'"
+              [class.failed]="backup.status === 'FAILED'"
+            >
+              {{ backup.status === 'SUCCESS' ? 'Exitoso' : 'Fallido' }}
+            </span>
+          </div>
+
+          <div class="backup-info-row">
+            <span class="backup-label">Tipo</span>
+
+            <span>
+              {{ backup.type === 'MANUAL' ? 'Manual' : 'Automático' }}
+            </span>
+          </div>
+
+          <div class="backup-info-row">
+            <span class="backup-label">Fecha</span>
+
+            <span>
+              {{ backup.createdAt | date: 'dd/MM/yyyy HH:mm:ss' }}
+            </span>
+          </div>
+
+          <div class="backup-info-row">
+            <span class="backup-label">Archivo</span>
+
+            <span class="backup-file">
+              {{ backup.fileName || '-' }}
+            </span>
+          </div>
+
+          <div class="backup-info-row">
+            <span class="backup-label">Tamaño</span>
+
+            <span>
+              {{ formatSize(backup.size) }}
+            </span>
+          </div>
+
+          <div *ngIf="backup.filePath" class="backup-info-row">
+            <span class="backup-label">Ubicación</span>
+
+            <span class="backup-file">
+              {{ backup.filePath }}
+            </span>
+          </div>
+        </div>
+
+        <hr class="backup-divider" />
+
+        <!-- ACTIONS -->
+        <div class="backup-actions">
+          <button type="button" class="btn btn-cancel me-2" [routerLink]="['/settings']">
+            Volver
+          </button>
+
+          <button
+            type="button"
+            class="btn btn-primary-action"
+            (click)="createBackup()"
+            [disabled]="saving"
+          >
+            <i class="bi bi-database-add"></i>
+
+            <span *ngIf="!saving"> Crear backup ahora </span>
+
+            <span *ngIf="saving"> Creando backup... </span>
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- HISTORIAL -->
+    <div class="backup-history">
+      <div class="backup-history-header">
+        <div>
+          <h3>Historial de respaldos</h3>
+
+          <p>Registro de los respaldos realizados.</p>
+        </div>
+      </div>
+
+      <!-- TABLA -->
+      <div class="backup-table-wrapper" *ngIf="backups.length > 0">
+        <table class="backup-table">
+          <thead>
+            <tr>
+              <th>Fecha</th>
+              <th>Tipo</th>
+              <th>Estado</th>
+              <th>Archivo</th>
+              <th>Tamaño</th>
+            </tr>
+          </thead>
+
+          <tbody>
+            <tr *ngFor="let item of backups">
+              <td>
+                {{ item.createdAt | date: 'dd/MM/yyyy HH:mm:ss' }}
+              </td>
+
+              <td>
+                <span class="backup-type">
+                  {{ item.type === 'MANUAL' ? 'Manual' : 'Automático' }}
+                </span>
+              </td>
+
+              <td>
+                <span
+                  class="backup-status"
+                  [class.success]="item.status === 'SUCCESS'"
+                  [class.failed]="item.status === 'FAILED'"
+                >
+                  {{ item.status === 'SUCCESS' ? 'Exitoso' : 'Fallido' }}
+                </span>
+              </td>
+
+              <td class="backup-table-file">
+                {{ item.fileName || '-' }}
+              </td>
+
+              <td>
+                {{ formatSize(item.size) }}
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- EMPTY -->
+      <div class="backup-history-empty" *ngIf="backups.length === 0">
+        <div class="empty-icon">
+          <i class="bi bi-database-x"></i>
+        </div>
+
+        <div class="empty-title">No hay respaldos disponibles</div>
+
+        <div class="empty-text">Los respaldos realizados aparecerán aquí.</div>
+      </div>
+    </div>
+  </div>
+</div>
