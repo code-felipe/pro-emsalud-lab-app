@@ -1,0 +1,32 @@
+package com.proemsalud.laboratory.user.dto.create;
+
+import java.util.List;
+
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+
+@Getter
+@Setter
+@AllArgsConstructor
+@NoArgsConstructor
+@Builder
+public class CreateUserRequest {
+	
+	@NotBlank(message = "El nombre de usuario es requerido")
+	private String username;
+	
+	@NotBlank(message = "El password de usuario es requerido")
+	private String password;
+	
+	private Boolean enabled;
+	
+	private String picture;
+	
+	@NotNull(message = "El role debe tener al menos un role")
+	private List<Long> roleIds;
+}

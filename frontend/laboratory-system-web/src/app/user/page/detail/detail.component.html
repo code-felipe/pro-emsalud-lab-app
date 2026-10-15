@@ -1,0 +1,179 @@
+<div class="container-fluid test-detail-page">
+  <div class="row justify-content-center align-items-center min-vh-100 py-5">
+    <div class="col-12 col-md-10 col-lg-8 col-xl-7">
+      <!-- Detalle del usuario: solo se muestra cuando está cargado -->
+      <div class="test-card" *ngIf="user as u">
+        <!-- Header -->
+        <div class="test-card-header">
+          <div>
+            <span class="section-label">Detalle del Usuario</span>
+            <h1 class="test-title">{{ u.username }}</h1>
+          </div>
+
+          <span
+            class="status-badge"
+            [class.status-active]="u.enabled"
+            [class.status-inactive]="!u.enabled"
+          >
+            <span class="status-dot"></span>
+            {{ u.enabled ? 'Activo' : 'Inactivo' }}
+          </span>
+        </div>
+
+        <!-- Body -->
+        <div class="test-card-body">
+          <!-- Subir foto -->
+          <div class="input-group mb-4">
+            <input (change)="selectPicture($event)" type="file" class="form-control" id="inputGroupFile04" accept="image/*" />
+
+            <button (click)="uploadPicture()" class="btn btn-outline-secondary" type="button" id="inputGroupFileAddon04">
+              Subir
+            </button>
+          </div>
+
+          <!-- Información básica -->
+          <div class="detail-section">
+            <div class="section-heading">
+              <span>Información básica</span>
+            </div>
+
+            <div class="row g-4">
+              <div class="col-12 col-sm-6">
+                <div class="detail-item">
+                  <span class="detail-label">Usuario ID</span>
+                  <span class="detail-value">#{{ u.id }}</span>
+                </div>
+              </div>
+
+              <div class="col-12 col-sm-6">
+                <div class="detail-item">
+                  <span class="detail-label">Nombre de usuario</span>
+                  <span class="detail-value">
+                    {{ u.username }}
+                  </span>
+                </div>
+              </div>
+
+              <div class="col-12">
+                <div class="detail-item">
+                  <span class="detail-label">Estado de la cuenta</span>
+
+                  <span class="detail-value" [class.text-muted-custom]="!u.enabled">
+                    {{ u.enabled ? 'Cuenta habilitada' : 'Cuenta deshabilitada' }}
+                  </span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Foto de perfil -->
+          <div class="detail-section">
+            <div class="section-heading">
+              <span>Foto de perfil</span>
+            </div>
+
+            <div class="category-card">
+              <div class="category-icon user-picture">
+                <img
+                  *ngIf="u.picture; else defaultPicture"
+                  src="http://localhost:8080/api/users/uploads/img/{{u.picture}}"
+                  alt="'Foto de perfil de ' + u.username"
+                  class="profile-image"
+                />
+
+                <ng-template #defaultPicture>
+                  <span>US</span>
+                </ng-template>
+              </div>
+
+              <div>
+                <span class="detail-label">Imagen del usuario</span>
+
+                <div class="category-name">
+                  {{ u.username }}
+                </div>
+
+                <span class="category-id">
+                  {{ u.picture ? 'Foto de perfil configurada' : 'Sin foto de perfil' }}
+                </span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Roles -->
+          <div class="detail-section">
+            <div class="section-heading">
+              <span>Roles y permisos</span>
+            </div>
+
+            <div class="row g-3">
+              <div class="col-12 col-sm-6" *ngFor="let role of u.roles">
+                <div class="detail-item">
+                  <span class="detail-label">Rol</span>
+
+                  <span class="detail-value">
+                    {{ role.authority }}
+                  </span>
+
+                  <span class="category-id"> Rol #{{ role.id }} </span>
+                </div>
+              </div>
+
+              <div class="col-12" *ngIf="!u.roles || u.roles.length === 0">
+                <div class="detail-item">
+                  <span class="detail-label">Roles asignados</span>
+
+                  <span class="detail-value text-muted-custom">
+                    Este usuario no tiene roles asignados.
+                  </span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Información de registro -->
+          <div class="detail-section mb-0">
+            <div class="section-heading">
+              <span>Información de registro</span>
+            </div>
+
+            <div class="row g-4">
+              <div class="col-12 col-sm-6">
+                <div class="detail-item">
+                  <span class="detail-label">Creado en</span>
+
+                  <span class="detail-value">
+                    {{ u.createdAt | date: 'medium' }}
+                  </span>
+                </div>
+              </div>
+
+              <div class="col-12 col-sm-6">
+                <div class="detail-item">
+                  <span class="detail-label">Última actualización</span>
+
+                  <span class="detail-value">
+                    {{ u.updatedAt | date: 'medium' }}
+                  </span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Footer -->
+        <div class="test-card-footer">
+          <button type="button" class="btn btn-back" routerLink="/users">
+            <span class="me-2">←</span>
+            Volver
+          </button>
+        </div>
+      </div>
+
+      <!-- Estado de carga -->
+      <div class="test-card p-4 text-center" *ngIf="!user">
+        <p class="mb-0">Cargando información del usuario...</p>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,22 @@
+package com.proemsalud.laboratory.user.dto.response;
+
+
+
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+
+
+@Getter
+@Setter
+@AllArgsConstructor
+@NoArgsConstructor
+@Builder
+public class RoleResponse {
+	
+	private Long id;
+	
+	private String authority;
+}

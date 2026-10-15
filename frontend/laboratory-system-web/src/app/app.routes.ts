@@ -21,6 +21,9 @@ import { DashboardComponent } from './metrics/page/dashboard.component';
 import { BackupConfigurationComponent } from './backup/page/backup-configuration.component';
 import { SettingsComponent } from './settings/settings.component';
 import { BackupComponent } from './backup/page/backup.component';
+import { UserComponentList } from './user/page/list/user-list.component';
+import { UserFormComponent } from './user/page/form/form.component';
+import { UserDetailComponent } from './user/page/detail/detail.component';
 
 export const routes: Routes = [
 
@@ -96,10 +99,17 @@ export const routes: Routes = [
 
 { path: 'settings', component: SettingsComponent },
 
+{ path: 'users', component: UserComponentList },
+
+{ path: 'users/form', component: UserFormComponent },
+
+{ path: 'users/form/:id', component: UserFormComponent },
+
+{ path: 'users/view/:id', component: UserDetailComponent },
+
 { path: 'backup', component: BackupComponent },
 
 { path: 'backup/configuration', component: BackupConfigurationComponent },
-
 
 
 ];

@@ -1,0 +1,114 @@
+<div class="list">
+  <!-- TITLE -->
+  <div class="list-title">
+    <h1>{{ title }}</h1>
+    <p>Administra los usuarios registrados.</p>
+
+    <!-- HEADER -->
+    <div class="list-header">
+      <button type="button" class="btn btn-create" [routerLink]="['/users/form']">
+        <i class="bi bi-plus-lg"></i>
+        Crear Nuevo Usuario
+      </button>
+    </div>
+  </div>
+
+  <!-- USER CARDS -->
+  <div class="row g-3 p-2" *ngIf="users.length > 0">
+    <div class="col-12 col-md-6 col-xl-4" *ngFor="let user of users">
+      <article class="item-card user-card h-100">
+        <div class="user-card-body">
+          <!-- AVATAR -->
+          <div class="user-card-avatar" aria-hidden="true">
+            <img
+              *ngIf="user?.picture"
+              src="http://localhost:8080/api/users/uploads/img/{{ user.picture }}"
+              alt="'Foto de perfil de ' + user.username"
+              class="user-card-picture"
+            />
+          </div>
+
+          <!-- USER INFO -->
+          <div class="user-card-info">
+            <h3 class="user-card-title" [title]="user.username">
+              {{ user.username }}
+            </h3>
+
+            <!-- ID -->
+            <div class="user-card-meta">
+              <i class="bi bi-hash"></i>
+              <span>ID {{ user.id }}</span>
+            </div>
+
+            <!-- STATUS -->
+            <div class="user-card-meta">
+              <i
+                class="bi"
+                [class.bi-check-circle-fill]="user.enabled"
+                [class.bi-x-circle-fill]="!user.enabled"
+              ></i>
+              <span>
+                {{ user.enabled ? 'Activo' : 'Inactivo' }}
+              </span>
+            </div>
+
+            <!-- CREATED -->
+            <div class="user-card-meta">
+              <i class="bi bi-calendar3"></i>
+              <span>Creado: {{ user.createdAt }}</span>
+            </div>
+
+            <!-- UPDATED -->
+            <div class="user-card-meta">
+              <i class="bi bi-calendar-check"></i>
+              <span>Actualizado: {{ user.updatedAt }}</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- CARD FOOTER -->
+        <div class="user-card-footer">
+          <button
+            type="button"
+            class="btn table-action edit"
+            [routerLink]="['/users/form', user.id]"
+            title="Editar usuario"
+            aria-label="Editar usuario"
+          >
+            <i class="bi bi-pencil"></i>
+          </button>
+
+          <button
+            type="button"
+            class="btn table-action delete"
+            (click)="delete(user)"
+            title="Borrar usuario"
+            aria-label="Borrar usuario"
+          >
+            <i class="bi bi-trash"></i>
+          </button>
+
+          <button
+            class="btn table-action report"
+            type="button"
+            title="Ver detalle"
+            aria-label="Detalle de usuario"
+            [routerLink]="['/users/view', user.id]"
+          >
+            <i class="bi bi-eye"></i>
+          </button>
+        </div>
+      </article>
+    </div>
+  </div>
+
+  <!-- EMPTY STATE -->
+  <div class="empty-state" *ngIf="users.length === 0">
+    <div class="empty-icon">
+      <i class="bi bi-person-badge"></i>
+    </div>
+
+    <div class="empty-title">No hay usuarios disponibles</div>
+    <div class="empty-text">Registra un usuario para comenzar.</div>
+  </div>
+</div>

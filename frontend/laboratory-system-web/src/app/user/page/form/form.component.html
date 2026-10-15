@@ -1,0 +1,227 @@
+
+<div class="form-page">
+
+  <!-- API ERRORS -->
+  <ul
+    class="alert alert-danger list-unstyled api-error"
+    *ngIf="apiError?.errors as errors"
+  >
+    <li *ngFor="let error of errors | keyvalue">
+      <b>{{ error.key }}</b>: {{ error.value }}
+    </li>
+  </ul>
+
+  <div class="form-card">
+
+    <!-- HEADER -->
+    <div class="form-card-header">
+      <div class="form-header-icon">
+        <i class="bi bi-person-badge"></i>
+      </div>
+
+      <div>
+        <h5 class="form-title">{{ title }}</h5>
+        <small class="form-subtitle">Detalle del Usuario</small>
+      </div>
+    </div>
+
+    <!-- BODY -->
+    <div class="form-card-body">
+
+      <form #userForm="ngForm">
+
+        <!-- USERNAME -->
+        <div class="form-row">
+          <label class="form-label">Nombre de usuario</label>
+
+          <div class="form-field">
+            <input
+              type="text"
+              class="form-control form-input"
+              placeholder="e.g. jperez"
+              [(ngModel)]="user.username"
+              name="username"
+              required
+              minlength="3"
+              #username="ngModel"
+              autocomplete="username"
+            />
+
+            <div
+              class="validation-message"
+              *ngIf="username.invalid && (username.dirty || username.touched)"
+            >
+              <div *ngIf="username.errors?.['required']">
+                El nombre de usuario es requerido
+              </div>
+
+              <div *ngIf="username.errors?.['minlength']">
+                El nombre debe tener al menos 3 caracteres
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- PASSWORD -->
+        <div class="form-row">
+          <label class="form-label">Contraseña</label>
+
+          <div class="form-field">
+            <input
+              type="password"
+              class="form-control form-input"
+              [placeholder]="user.id
+                ? 'Dejar vacío para conservar la contraseña'
+                : 'Introduce la contraseña'"
+              [(ngModel)]="user.password"
+              name="password"
+              [required]="!user.id"
+              [minlength]="8"
+              #password="ngModel"
+              autocomplete="new-password"
+            />
+
+            <div
+              class="validation-message"
+              *ngIf="password.invalid && (password.dirty || password.touched)"
+            >
+              <div *ngIf="password.errors?.['required']">
+                La contraseña es requerida
+              </div>
+
+              <div *ngIf="password.errors?.['minlength']">
+                La contraseña debe tener al menos 8 caracteres
+              </div>
+            </div>
+
+            <small *ngIf="user.id" class="form-subtitle">
+              Si dejas el campo vacío, se conserva la contraseña actual.
+            </small>
+          </div>
+        </div>
+
+        <hr class="form-divider" />
+
+        <!-- ENABLED TOGGLE -->
+        <div class="form-row">
+          <label class="form-label">Estado</label>
+
+          <div class="form-field">
+            <div class="form-check form-switch">
+              <input
+                id="enabled"
+                type="checkbox"
+                class="form-check-input"
+                role="switch"
+                [(ngModel)]="user.enabled"
+                name="enabled"
+              />
+
+              <label class="form-check-label" for="enabled">
+                {{ user.enabled ? 'Usuario habilitado' : 'Usuario deshabilitado' }}
+              </label>
+            </div>
+          </div>
+        </div>
+
+        <hr class="form-divider" />
+
+        <!-- ROLES -->
+        <div class="form-row">
+          <label class="form-label">Roles</label>
+
+          <div class="form-field">
+
+            <div *ngIf="roles.length === 0" class="form-subtitle">
+              No hay roles disponibles.
+            </div>
+
+            <div
+              *ngFor="let role of roles"
+              class="form-check mb-2"
+            >
+              <input
+                type="checkbox"
+                class="form-check-input"
+                [id]="'role-' + role.id"
+                [checked]="hasRole(role.id)"
+                (change)="toggleRole(
+                  role.id,
+                  $any($event.target).checked
+                )"
+              />
+
+              <label
+                class="form-check-label"
+                [for]="'role-' + role.id"
+              >
+                {{ role.authority }}
+              </label>
+            </div>
+
+            <div class="form-subtitle mt-2">
+              Roles seleccionados: {{ user.roleIds.length }}
+            </div>
+
+            <div
+              class="validation-message"
+              *ngIf="user.roleIds.length === 0"
+            >
+              Selecciona al menos un rol.
+            </div>
+
+          </div>
+        </div>
+
+        <hr class="form-divider" />
+
+        <!-- ACTIONS -->
+        <div class="form-actions">
+
+          <button
+            type="button"
+            class="btn btn-cancel"
+            [routerLink]="['/users']"
+          >
+            Cancelar
+          </button>
+
+          <!-- CREATE -->
+          <button
+            type="button"
+            class="btn btn-primary-action"
+            (click)="create()"
+            *ngIf="!user.id; else editBlock"
+            [disabled]="
+              !userForm.form.valid ||
+              user.roleIds.length === 0 ||
+              loading
+            "
+          >
+            <i class="ti ti-plus"></i>
+            {{ loading ? 'Guardando...' : 'Crear' }}
+          </button>
+
+          <!-- EDIT -->
+          <ng-template #editBlock>
+            <button
+              type="button"
+              class="btn btn-primary-action"
+              (click)="update()"
+              [disabled]="
+                !userForm.form.valid ||
+                user.roleIds.length === 0 ||
+                loading
+              "
+            >
+              <i class="ti ti-edit"></i>
+              {{ loading ? 'Guardando...' : 'Editar' }}
+            </button>
+          </ng-template>
+
+        </div>
+
+      </form>
+    </div>
+  </div>
+</div>

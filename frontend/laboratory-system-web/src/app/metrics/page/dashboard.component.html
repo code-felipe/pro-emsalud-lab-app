@@ -40,7 +40,7 @@
           <span class="metric-label"> Ventas totales </span>
 
           <span class="metric-value">
-            {{ dashboardSummary.totalSales | number: '1.0-2' }}
+            Q{{ dashboardSummary.totalSales | number: '1.0-2' }}
           </span>
         </div>
       </div>
@@ -54,7 +54,7 @@
           <span class="metric-label"> Ventas actuales </span>
 
           <span class="metric-value">
-            {{ dashboardSummary.currentTotalSales | number: '1.0-2' }}
+            Q{{ dashboardSummary.currentTotalSales | number: '1.0-2' }}
           </span>
         </div>
       </div>
@@ -208,7 +208,7 @@
 
                     <div class="top-test-sales">
                       <span>
-                        {{ test.totalSales | number: '1.0-2' }}
+                        Q{{ test.totalSales | number: '1.0-2' }}
                       </span>
                     </div>
                   </div>

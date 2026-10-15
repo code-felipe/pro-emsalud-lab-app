@@ -1,10 +1,38 @@
 /* You can add global styles to this file, and also import other style files */
-@import url('https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@500&display=swap');
 
 @import './styles/_list.css';
 @import './styles/_form.css';
 @import './styles/_selector.css';
 @import './styles/_card.css';
+@import './styles/_user-card.css';
+@import './styles/_upload-picture.css';
+
+@font-face {
+  font-family: 'Fraunces';
+  src: url('./assets/fonts/Fraunces/Fraunces_72pt-Regular.ttf')
+       format('truetype');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* @font-face {
+  font-family: 'Fraunces';
+  src: url('./assets/fonts/Fraunces/Fraunces_72pt-Medium.ttf')
+       format('truetype');
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+} */
+
+@font-face {
+  font-family: 'Fraunces';
+  src: url('./assets/fonts/Fraunces/Fraunces_72pt-SemiBold.ttf')
+       format('truetype');
+  font-weight: 600;
+  font-style: normal;
+  font-display: swap;
+}
 
 :root {
   --paper: #f3f1eb;

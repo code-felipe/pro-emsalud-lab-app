@@ -10,6 +10,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -31,10 +32,11 @@ import jakarta.validation.Valid;
 @RestController
 @RequestMapping("/api/patients")
 public class PatientController {
-	
+
 	@Autowired
 	private IPatientService patientService;
-	
+
+//	@PreAuthorize("hasAnyAuthority('ROLE_ADMIN', 'ROLE_USER')")
 	@GetMapping
 	public ResponseEntity<Page<PatientResponse>> list(PatientFilter filter,
 			@PageableDefault(page = 0, size = 20, sort = "id", direction = Sort.Direction.DESC) Pageable pageable) {
@@ -47,7 +49,6 @@ public class PatientController {
 
 		return ResponseEntity.ok(patientService.findById(id));
 	}
-	
 
 	@PostMapping
 	public ResponseEntity<Map<String, Object>> create(@Valid @RequestBody CreatePatientRequest request) {
@@ -60,7 +61,7 @@ public class PatientController {
 
 		return ResponseEntity.created(URI.create("/api/patients/" + patient.getId())).body(body);
 	}
-	
+
 	@PutMapping("/{id}")
 	public ResponseEntity<Map<String, Object>> update(@PathVariable Long id,
 			@Valid @RequestBody UpdatePatientRequest request) {
@@ -73,7 +74,7 @@ public class PatientController {
 
 		return ResponseEntity.ok(body);
 	}
-	
+
 	@DeleteMapping("/{id}")
 	public ResponseEntity<Map<String, Object>> delete(@PathVariable Long id) {
 
@@ -84,6 +85,5 @@ public class PatientController {
 
 		return ResponseEntity.ok(body);
 	}
-
 
 }
