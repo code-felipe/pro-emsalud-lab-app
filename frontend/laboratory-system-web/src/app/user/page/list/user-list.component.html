@@ -26,7 +26,7 @@
               [src]="
                 user?.picture
                   ? 'http://localhost:8080/api/users/uploads/img/' + user.picture
-                  : 'assets/images/no-user.png'
+                  : 'http://localhost:8080/images/no-user.png'
               "
               [alt]="'Foto de perfil de ' + (user?.username || 'usuario')"
               class="user-card-picture"

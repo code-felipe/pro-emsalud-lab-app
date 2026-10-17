@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { Router, RouterLink, ActivatedRoute } from '@angular/router';
 import { CommonModule } from '@angular/common';
@@ -7,6 +7,7 @@ import { CreateTestCategoryRequest, TestCategoryResponse, UpdateTestCategoryRequ
 import { TestCategoryService } from '../../../test-category/components/test-category.service';
 import { AlertService } from '../../../../utils/alert/alert.service';
 import Swal from 'sweetalert2';
+import { AuthService } from '../../../../auth/components/auth.service';
 
 
 @Component({
@@ -32,6 +33,9 @@ export class TestCategoryFormComponent implements OnInit {
   public title: string = 'Nueva Categoria de Test Referencial';
 
   public apiError: any = null;
+
+    private readonly authService = inject(AuthService);
+    protected readonly isAdmin = this.authService.isAdmin;
 
   constructor(
     private testCategoryService: TestCategoryService,

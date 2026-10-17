@@ -78,6 +78,7 @@ public class SpringSecurityConfig {
 						.requestMatchers(HttpMethod.OPTIONS, "/**").permitAll()
 						.requestMatchers(HttpMethod.POST, "/api/login").permitAll()
 						.requestMatchers(HttpMethod.GET, "/api/users/uploads/img/**").permitAll()
+						.requestMatchers(HttpMethod.GET, "/images/**").permitAll()
 						.anyRequest().authenticated())
 				.addFilter(authenticationFilter)
 				.addFilterBefore(authorizationFilter,

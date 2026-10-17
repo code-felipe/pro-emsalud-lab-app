@@ -28,6 +28,7 @@ import com.proemsalud.laboratory.patient.service.IPatientService;
 
 import jakarta.validation.Valid;
 
+@PreAuthorize("hasAnyRole('ADMIN', 'USER')")
 @CrossOrigin(origins = { "http://localhost:4200" })
 @RestController
 @RequestMapping("/api/patients")
@@ -36,7 +37,7 @@ public class PatientController {
 	@Autowired
 	private IPatientService patientService;
 
-//	@PreAuthorize("hasAnyAuthority('ROLE_ADMIN', 'ROLE_USER')")
+
 	@GetMapping
 	public ResponseEntity<Page<PatientResponse>> list(PatientFilter filter,
 			@PageableDefault(page = 0, size = 20, sort = "id", direction = Sort.Direction.DESC) Pageable pageable) {

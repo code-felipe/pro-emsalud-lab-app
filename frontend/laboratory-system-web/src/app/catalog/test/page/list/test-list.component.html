@@ -61,11 +61,12 @@
     </div>
 
     <!-- CREATE -->
-
-    <button type="button" class="btn btn-create" [routerLink]="['/tests/form']">
-      <i class="bi bi-plus-lg"></i>
-      Crear Nueva Referencia
-    </button>
+    @if (isAdmin()) {
+      <button type="button" class="btn btn-create" [routerLink]="['/tests/form']">
+        <i class="bi bi-plus-lg"></i>
+        Crear Nueva Referencia
+      </button>
+    }
   </div>
 
   <!-- =====================================================
@@ -125,12 +126,16 @@
             <th class="text-center">Estado</th>
 
             <th>Creado</th>
+            @if (isAdmin()) {
+              <th class="text-center">Toggle</th>
+            }
 
-            <th class="text-center">Toggle</th>
-
-            <th class="text-center">Editar</th>
-
-            <th class="text-center">Borrar</th>
+            @if (isAdmin()) {
+              <th class="text-center">Editar</th>
+            }
+            @if (isAdmin()) {
+              <th class="text-center">Borrar</th>
+            }
           </tr>
         </thead>
 
@@ -173,9 +178,7 @@
             <!-- PRICE -->
 
             <td>
-              <span class="table-emphasis">
-                Q{{ test.price }}
-              </span>
+              <span class="table-emphasis"> Q{{ test.price }} </span>
             </td>
 
             <!-- STATUS -->
@@ -198,45 +201,50 @@
               </span>
             </td>
             <!-- Toggle -->
-            <td class="text-center">
-              <button
-                type="button"
-                class="btn btn-sm"
-                [class.btn-success]="test.active"
-                [class.btn-secondary]="!test.active"
-                (click)="toggleActive(test)"
-              >
-                <i
-                  class="bi"
-                  [class.bi-toggle-on]="test.active"
-                  [class.bi-toggle-off]="!test.active"
-                ></i>
-              </button>
-            </td>
+            @if (isAdmin()) {
+              <td class="text-center">
+                <button
+                  type="button"
+                  class="btn btn-sm"
+                  [class.btn-success]="test.active"
+                  [class.btn-secondary]="!test.active"
+                  (click)="toggleActive(test)"
+                >
+                  <i
+                    class="bi"
+                    [class.bi-toggle-on]="test.active"
+                    [class.bi-toggle-off]="!test.active"
+                  ></i>
+                </button>
+              </td>
+            }
             <!-- EDIT -->
-            <td class="text-center">
-              <button
-                type="button"
-                class="btn table-action edit"
-                [routerLink]="['/tests/form', test.id]"
-                title="Editar test"
-              >
-                <i class="bi bi-pencil"></i>
-              </button>
-            </td>
+            @if (isAdmin()) {
+              <td class="text-center">
+                <button
+                  type="button"
+                  class="btn table-action edit"
+                  [routerLink]="['/tests/form', test.id]"
+                  title="Editar test"
+                >
+                  <i class="bi bi-pencil"></i>
+                </button>
+              </td>
+            }
 
             <!-- DELETE -->
-
-            <td class="text-center">
-              <button
-                type="button"
-                class="btn table-action delete"
-                (click)="delete(test)"
-                title="Borrar test"
-              >
-                <i class="bi bi-trash"></i>
-              </button>
-            </td>
+            @if (isAdmin()) {
+              <td class="text-center">
+                <button
+                  type="button"
+                  class="btn table-action delete"
+                  (click)="delete(test)"
+                  title="Borrar test"
+                >
+                  <i class="bi bi-trash"></i>
+                </button>
+              </td>
+            }
           </tr>
 
           <!-- =================================================

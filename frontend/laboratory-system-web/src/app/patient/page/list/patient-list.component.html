@@ -61,11 +61,12 @@
     </div>
 
     <!-- CREATE -->
-
-    <button type="button" class="btn btn-create" [routerLink]="['/patients/form']">
-      <i class="bi bi-plus-lg"></i>
-      Crear Nuevo Paciente
-    </button>
+    @if (isAdmin() || isUser()) {
+      <button type="button" class="btn btn-create" [routerLink]="['/patients/form']">
+        <i class="bi bi-plus-lg"></i>
+        Crear Nuevo Paciente
+      </button>
+    }
   </div>
 
   <!-- =====================================================
@@ -121,10 +122,12 @@
             <th>Ciudad</th>
 
             <th>Creado</th>
-
-            <th class="text-center">Editar</th>
-
-            <th class="text-center">Borrar</th>
+            @if (isAdmin() || isUser()) {
+              <th class="text-center">Editar</th>
+            }
+            @if (isAdmin() || isUser()) {
+              <th class="text-center">Borrar</th>
+            }
           </tr>
         </thead>
 
@@ -168,9 +171,7 @@
             <!-- PHONE -->
 
             <td>
-              <span class="table-secondary">
-                +502{{ patient.primaryPhoneNumber }}
-              </span>
+              <span class="table-secondary"> +502{{ patient.primaryPhoneNumber }} </span>
             </td>
 
             <!-- CITY -->
@@ -190,30 +191,32 @@
             </td>
 
             <!-- EDIT -->
-
-            <td class="text-center">
-              <button
-                type="button"
-                class="btn table-action edit"
-                [routerLink]="['/patients/form', patient.id]"
-                title="Editar paciente"
-              >
-                <i class="bi bi-pencil"></i>
-              </button>
-            </td>
+            @if (isAdmin() || isUser()) {
+              <td class="text-center">
+                <button
+                  type="button"
+                  class="btn table-action edit"
+                  [routerLink]="['/patients/form', patient.id]"
+                  title="Editar paciente"
+                >
+                  <i class="bi bi-pencil"></i>
+                </button>
+              </td>
+            }
 
             <!-- DELETE -->
-
-            <td class="text-center">
-              <button
-                type="button"
-                class="btn table-action delete"
-                (click)="delete(patient)"
-                title="Borrar paciente"
-              >
-                <i class="bi bi-trash"></i>
-              </button>
-            </td>
+            @if (isAdmin() || isUser()) {
+              <td class="text-center">
+                <button
+                  type="button"
+                  class="btn table-action delete"
+                  (click)="delete(patient)"
+                  title="Borrar paciente"
+                >
+                  <i class="bi bi-trash"></i>
+                </button>
+              </td>
+            }
           </tr>
 
           <!-- =================================================

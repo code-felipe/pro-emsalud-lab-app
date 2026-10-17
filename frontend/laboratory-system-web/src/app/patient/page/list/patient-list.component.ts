@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 
@@ -11,6 +11,7 @@ import { ModalService } from '../../../utils/modal/modal-service';
 import { AlertService } from '../../../utils/alert/alert.service';
 import { FilterUtils } from '../../../utils/filter/filter-utils.model';
 import { PatientFilterComponent } from '../filter/filter.component';
+import { AuthService } from '../../../auth/components/auth.service';
 
 
 @Component({
@@ -42,6 +43,10 @@ export class PatientComponentList implements OnInit {
   hasError = false;
 
   title: string = 'Pacientes'
+  
+  private readonly authService = inject(AuthService);
+  protected readonly isAdmin = this.authService.isAdmin;
+  protected readonly isUser = this.authService.isUser;
 
   genderLabels: Record<Gender, string> = {
   [Gender.FEMALE]: 'Mujer',

@@ -24,7 +24,7 @@ export class HeaderComponent implements OnInit {
   private readonly router = inject(Router);
 
   private readonly imagesUrl = 'http://localhost:8080/api/users/uploads/img/';
-  private readonly defaultPicture = 'assets/images/no-user.png';
+  private readonly defaultPicture = 'http://localhost:8080/images/no-user.png';
 
   protected readonly isUserMenuOpen = signal(false);
 

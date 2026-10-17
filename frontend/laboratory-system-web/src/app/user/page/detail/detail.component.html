@@ -24,9 +24,21 @@
         <div class="test-card-body">
           <!-- Subir foto -->
           <div class="input-group mb-4">
-            <input (change)="selectPicture($event)" type="file" class="form-control" id="inputGroupFile04" accept="image/*" />
+            <input
+              (change)="selectPicture($event)"
+              type="file"
+              class="form-control"
+              id="inputGroupFile04"
+              accept="image/*"
+            />
 
-            <button (click)="uploadPicture()" [disabled]="!pictureSelected" class="btn btn-outline-secondary" type="button" id="inputGroupFileAddon04">
+            <button
+              (click)="uploadPicture()"
+              [disabled]="!pictureSelected"
+              class="btn btn-outline-secondary"
+              type="button"
+              id="inputGroupFileAddon04"
+            >
               Subir
             </button>
           </div>
@@ -76,8 +88,8 @@
               <div class="category-icon user-picture">
                 <img
                   *ngIf="u.picture; else defaultPicture"
-                  src="http://localhost:8080/api/users/uploads/img/{{u.picture}}"
-                  alt="'Foto de perfil de ' + u.username"
+                  [src]="'http://localhost:8080/api/users/uploads/img/' + u.picture"
+                  [alt]="'Foto de perfil de ' + u.username"
                   class="profile-image"
                 />
 
