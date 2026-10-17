@@ -5,12 +5,14 @@
     <p>Administra los usuarios registrados.</p>
 
     <!-- HEADER -->
-    <div class="list-header">
-      <button type="button" class="btn btn-create" [routerLink]="['/users/form']">
-        <i class="bi bi-plus-lg"></i>
-        Crear Nuevo Usuario
-      </button>
-    </div>
+    @if (isAdmin()) {
+      <div class="list-header">
+        <button type="button" class="btn btn-create" [routerLink]="['/users/form']">
+          <i class="bi bi-plus-lg"></i>
+          Crear Nuevo Usuario
+        </button>
+      </div>
+    }
   </div>
 
   <!-- USER CARDS -->
@@ -21,9 +23,12 @@
           <!-- AVATAR -->
           <div class="user-card-avatar" aria-hidden="true">
             <img
-              *ngIf="user?.picture"
-              src="http://localhost:8080/api/users/uploads/img/{{ user.picture }}"
-              alt="'Foto de perfil de ' + user.username"
+              [src]="
+                user?.picture
+                  ? 'http://localhost:8080/api/users/uploads/img/' + user.picture
+                  : 'assets/images/no-user.png'
+              "
+              [alt]="'Foto de perfil de ' + (user?.username || 'usuario')"
               class="user-card-picture"
             />
           </div>
@@ -67,37 +72,39 @@
         </div>
 
         <!-- CARD FOOTER -->
-        <div class="user-card-footer">
-          <button
-            type="button"
-            class="btn table-action edit"
-            [routerLink]="['/users/form', user.id]"
-            title="Editar usuario"
-            aria-label="Editar usuario"
-          >
-            <i class="bi bi-pencil"></i>
-          </button>
+        @if (isAdmin()) {
+          <div class="user-card-footer">
+            <button
+              type="button"
+              class="btn table-action edit"
+              [routerLink]="['/users/form', user.id]"
+              title="Editar usuario"
+              aria-label="Editar usuario"
+            >
+              <i class="bi bi-pencil"></i>
+            </button>
 
-          <button
-            type="button"
-            class="btn table-action delete"
-            (click)="delete(user)"
-            title="Borrar usuario"
-            aria-label="Borrar usuario"
-          >
-            <i class="bi bi-trash"></i>
-          </button>
+            <button
+              type="button"
+              class="btn table-action delete"
+              (click)="delete(user)"
+              title="Borrar usuario"
+              aria-label="Borrar usuario"
+            >
+              <i class="bi bi-trash"></i>
+            </button>
 
-          <button
-            class="btn table-action report"
-            type="button"
-            title="Ver detalle"
-            aria-label="Detalle de usuario"
-            [routerLink]="['/users/view', user.id]"
-          >
-            <i class="bi bi-eye"></i>
-          </button>
-        </div>
+            <button
+              class="btn table-action report"
+              type="button"
+              title="Ver detalle"
+              aria-label="Detalle de usuario"
+              [routerLink]="['/users/view', user.id]"
+            >
+              <i class="bi bi-camera"></i>
+            </button>
+          </div>
+        }
       </article>
     </div>
   </div>

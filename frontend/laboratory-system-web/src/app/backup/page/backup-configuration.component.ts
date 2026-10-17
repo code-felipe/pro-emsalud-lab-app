@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 import {
@@ -12,6 +12,7 @@ import { BackupConfiguration, UpdateBackupConfigurationRequest } from '../compon
 import { BackupConfigurationService } from '../components/backup-configuration.service';
 import { AlertService } from '../../utils/alert/alert.service';
 import { Router } from '@angular/router';
+import { AuthService } from '../../auth/components/auth.service';
 
 
 
@@ -36,6 +37,9 @@ export class BackupConfigurationComponent implements OnInit {
   hasError = false;
   loading = false;
   saving = false;
+  
+  private readonly authService = inject(AuthService);
+  protected readonly isAdmin = this.authService.isAdmin;
 
   title: string = 'Configuración de backups';
 

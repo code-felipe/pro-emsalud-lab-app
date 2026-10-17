@@ -11,6 +11,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -45,13 +46,15 @@ public class DoctorController {
 	private IDoctorService doctorService;
 
 	
+	@PreAuthorize("hasAnyRole('ADMIN', 'USER')")
 	@GetMapping("/{id}")
 	public ResponseEntity<DoctorResponse> findById(@PathVariable Long id) {
 
 		return ResponseEntity.ok(doctorService.findById(id));
 	}
 
-
+	
+	@PreAuthorize("hasAnyRole('ADMIN', 'USER')")
 	@GetMapping
 	public ResponseEntity<Page<DoctorResponse>> list(DoctorFilter filter,
 			@PageableDefault(page = 0, size = 20, sort = "id", direction = Sort.Direction.DESC) Pageable pageable) {
@@ -59,7 +62,7 @@ public class DoctorController {
 		return ResponseEntity.ok(doctorService.findAll(filter, pageable));
 	}
 
-
+	@PreAuthorize("hasAnyRole('ADMIN', 'USER')")
 	@PostMapping
 	public ResponseEntity<Map<String, Object>> create(@Valid @RequestBody CreateDoctorRequest request) {
 
@@ -72,7 +75,7 @@ public class DoctorController {
 		return ResponseEntity.created(URI.create("/api/doctors/" + doctor.getId())).body(body);
 	}
 
-
+	@PreAuthorize("hasAnyRole('ADMIN', 'USER')")
 	@PutMapping("/{id}")
 	public ResponseEntity<Map<String, Object>> update(@PathVariable Long id,
 			@Valid @RequestBody UpdateDoctorRequest request) {
@@ -85,8 +88,9 @@ public class DoctorController {
 
 		return ResponseEntity.ok(body);
 	}
-
-
+	
+	
+	@PreAuthorize("hasRole('ADMIN')")
 	@DeleteMapping("/{id}")
 	public ResponseEntity<Map<String, Object>> delete(@PathVariable Long id) {
 

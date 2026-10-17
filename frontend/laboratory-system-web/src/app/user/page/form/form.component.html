@@ -1,18 +1,13 @@
-
 <div class="form-page">
-
   <!-- API ERRORS -->
-  <ul
-    class="alert alert-danger list-unstyled api-error"
-    *ngIf="apiError?.errors as errors"
-  >
+  <ul class="alert alert-danger list-unstyled api-error" *ngIf="apiError?.errors as errors">
     <li *ngFor="let error of errors | keyvalue">
-      <b>{{ error.key }}</b>: {{ error.value }}
+      <b>{{ error.key }}</b
+      >: {{ error.value }}
     </li>
   </ul>
 
   <div class="form-card">
-
     <!-- HEADER -->
     <div class="form-card-header">
       <div class="form-header-icon">
@@ -27,9 +22,7 @@
 
     <!-- BODY -->
     <div class="form-card-body">
-
       <form #userForm="ngForm">
-
         <!-- USERNAME -->
         <div class="form-row">
           <label class="form-label">Nombre de usuario</label>
@@ -51,9 +44,7 @@
               class="validation-message"
               *ngIf="username.invalid && (username.dirty || username.touched)"
             >
-              <div *ngIf="username.errors?.['required']">
-                El nombre de usuario es requerido
-              </div>
+              <div *ngIf="username.errors?.['required']">El nombre de usuario es requerido</div>
 
               <div *ngIf="username.errors?.['minlength']">
                 El nombre debe tener al menos 3 caracteres
@@ -70,9 +61,9 @@
             <input
               type="password"
               class="form-control form-input"
-              [placeholder]="user.id
-                ? 'Dejar vacío para conservar la contraseña'
-                : 'Introduce la contraseña'"
+              [placeholder]="
+                user.id ? 'Dejar vacío para conservar la contraseña' : 'Introduce la contraseña'
+              "
               [(ngModel)]="user.password"
               name="password"
               [required]="!user.id"
@@ -85,9 +76,7 @@
               class="validation-message"
               *ngIf="password.invalid && (password.dirty || password.touched)"
             >
-              <div *ngIf="password.errors?.['required']">
-                La contraseña es requerida
-              </div>
+              <div *ngIf="password.errors?.['required']">La contraseña es requerida</div>
 
               <div *ngIf="password.errors?.['minlength']">
                 La contraseña debe tener al menos 8 caracteres
@@ -131,45 +120,27 @@
           <label class="form-label">Roles</label>
 
           <div class="form-field">
+            <div *ngIf="roles.length === 0" class="form-subtitle">No hay roles disponibles.</div>
 
-            <div *ngIf="roles.length === 0" class="form-subtitle">
-              No hay roles disponibles.
-            </div>
-
-            <div
-              *ngFor="let role of roles"
-              class="form-check mb-2"
-            >
+            <div *ngFor="let role of roles" class="form-check mb-2">
               <input
                 type="checkbox"
                 class="form-check-input"
                 [id]="'role-' + role.id"
                 [checked]="hasRole(role.id)"
-                (change)="toggleRole(
-                  role.id,
-                  $any($event.target).checked
-                )"
+                (change)="toggleRole(role.id, $any($event.target).checked)"
               />
 
-              <label
-                class="form-check-label"
-                [for]="'role-' + role.id"
-              >
+              <label class="form-check-label" [for]="'role-' + role.id">
                 {{ role.authority }}
               </label>
             </div>
 
-            <div class="form-subtitle mt-2">
-              Roles seleccionados: {{ user.roleIds.length }}
-            </div>
+            <div class="form-subtitle mt-2">Roles seleccionados: {{ user.roleIds.length }}</div>
 
-            <div
-              class="validation-message"
-              *ngIf="user.roleIds.length === 0"
-            >
+            <div class="validation-message" *ngIf="user.roleIds.length === 0">
               Selecciona al menos un rol.
             </div>
-
           </div>
         </div>
 
@@ -177,14 +148,7 @@
 
         <!-- ACTIONS -->
         <div class="form-actions">
-
-          <button
-            type="button"
-            class="btn btn-cancel"
-            [routerLink]="['/users']"
-          >
-            Cancelar
-          </button>
+          <button type="button" class="btn btn-cancel" [routerLink]="['/users']">Cancelar</button>
 
           <!-- CREATE -->
           <button
@@ -192,11 +156,7 @@
             class="btn btn-primary-action"
             (click)="create()"
             *ngIf="!user.id; else editBlock"
-            [disabled]="
-              !userForm.form.valid ||
-              user.roleIds.length === 0 ||
-              loading
-            "
+            [disabled]="!userForm.form.valid || user.roleIds.length === 0 || loading"
           >
             <i class="ti ti-plus"></i>
             {{ loading ? 'Guardando...' : 'Crear' }}
@@ -208,19 +168,13 @@
               type="button"
               class="btn btn-primary-action"
               (click)="update()"
-              [disabled]="
-                !userForm.form.valid ||
-                user.roleIds.length === 0 ||
-                loading
-              "
+              [disabled]="!userForm.form.valid || user.roleIds.length === 0 || loading"
             >
               <i class="ti ti-edit"></i>
               {{ loading ? 'Guardando...' : 'Editar' }}
             </button>
           </ng-template>
-
         </div>
-
       </form>
     </div>
   </div>

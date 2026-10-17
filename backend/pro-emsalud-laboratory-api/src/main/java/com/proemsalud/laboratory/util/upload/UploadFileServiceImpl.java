@@ -1,4 +1,4 @@
-package com.proemsalud.laboratory.patient.util.upload;
+package com.proemsalud.laboratory.util.upload;
 
 import java.io.File;
 import java.io.IOException;

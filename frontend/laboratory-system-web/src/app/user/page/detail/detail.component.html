@@ -26,7 +26,7 @@
           <div class="input-group mb-4">
             <input (change)="selectPicture($event)" type="file" class="form-control" id="inputGroupFile04" accept="image/*" />
 
-            <button (click)="uploadPicture()" class="btn btn-outline-secondary" type="button" id="inputGroupFileAddon04">
+            <button (click)="uploadPicture()" [disabled]="!pictureSelected" class="btn btn-outline-secondary" type="button" id="inputGroupFileAddon04">
               Subir
             </button>
           </div>

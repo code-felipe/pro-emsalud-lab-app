@@ -1,10 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterLink } from '@angular/router';
 
 import { BackupService } from '../components/backup.service';
 import { Backup } from '../components/backup.model';
 import { AlertService } from '../../utils/alert/alert.service';
+import { AuthService } from '../../auth/components/auth.service';
 
 @Component({
   selector: 'app-backup',
@@ -28,6 +29,9 @@ export class BackupComponent implements OnInit {
   saving = false;
 
   title = 'Respaldo de base de datos';
+  
+  private readonly authService = inject(AuthService);
+  protected readonly isAdmin = this.authService.isAdmin;
 
   constructor(
     private backupService: BackupService,

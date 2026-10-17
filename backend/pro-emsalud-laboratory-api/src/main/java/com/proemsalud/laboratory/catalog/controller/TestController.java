@@ -11,6 +11,7 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -40,13 +41,15 @@ public class TestController {
 
 	@Autowired
 	private ITestService testService;
-
+	
+	@PreAuthorize("hasAnyRole('ADMIN', 'USER')")
 	@GetMapping("/{id}")
 	public ResponseEntity<TestResponse> findById(@PathVariable Long id) {
 
 		return ResponseEntity.ok(testService.findById(id));
 	}
-
+	
+	@PreAuthorize("hasAnyRole('ADMIN', 'USER')")
 	@GetMapping
 	public ResponseEntity<Page<TestResponse>> list(TestFilter filter,
 			@PageableDefault(page = 0, size = 20, sort = "id", direction = Sort.Direction.DESC) Pageable pageable) {
@@ -54,7 +57,8 @@ public class TestController {
 		return ResponseEntity.ok(testService.findAll(filter, pageable));
 	}
 
-
+	
+	@PreAuthorize("hasRole('ADMIN')")
 	@PostMapping
 	public ResponseEntity<Map<String, Object>> create(@Valid @RequestBody CreateTestRequest request) {
 
@@ -67,6 +71,7 @@ public class TestController {
 		return ResponseEntity.created(URI.create("/api/tests/" + test.getId())).body(body);
 	}
 	
+	@PreAuthorize("hasAnyRole('ADMIN', 'USER')")
 	@GetMapping("/search")
 	public ResponseEntity<Map<String, Object>> search(
 	        @RequestParam String query) {
@@ -125,6 +130,7 @@ public class TestController {
 //	}
 	
 
+	@PreAuthorize("hasRole('ADMIN')")
 	@PutMapping("/{id}")
 	public ResponseEntity<Map<String, Object>> update(@PathVariable Long id,
 			@Valid @RequestBody UpdateTestRequest request) {
@@ -138,7 +144,7 @@ public class TestController {
 		return ResponseEntity.ok(body);
 	}
 
-
+	@PreAuthorize("hasRole('ADMIN')")
 	@PatchMapping("/{id}/deactivate")
 	public ResponseEntity<Map<String, Object>> deactivate(@PathVariable Long id) {
 
@@ -150,7 +156,7 @@ public class TestController {
 		return ResponseEntity.ok(body);
 	}
 
-
+	@PreAuthorize("hasRole('ADMIN')")
 	@PatchMapping("/{id}/activate")
 	public ResponseEntity<Map<String, Object>> activate(@PathVariable Long id) {
 
@@ -162,6 +168,7 @@ public class TestController {
 		return ResponseEntity.ok(body);
 	}
 
+	@PreAuthorize("hasRole('ADMIN')")
 	@DeleteMapping("/{id}")
 	public ResponseEntity<Map<String, Object>> delete(@PathVariable Long id) {
 

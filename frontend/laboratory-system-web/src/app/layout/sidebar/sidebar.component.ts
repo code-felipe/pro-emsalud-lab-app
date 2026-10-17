@@ -1,5 +1,6 @@
-import { Component } from '@angular/core';
-import { RouterLink, RouterLinkActive } from '@angular/router';
+import { Component, inject } from '@angular/core';
+import { Router, RouterLink, RouterLinkActive } from '@angular/router';
+import { AuthService } from '../../auth/components/auth.service';
 
 @Component({
   selector: 'app-sidebar',
@@ -9,8 +10,16 @@ import { RouterLink, RouterLinkActive } from '@angular/router';
   styleUrl: './sidebar.component.css'
 })
 export class SidebarComponent {
-    onLogout(): void {
-    // Aquí luego conectas tu servicio real de autenticación
-    console.log('Cerrando sesión...');
+  
+  private readonly authService = inject(AuthService);
+  protected readonly isAdmin = this.authService.isAdmin;
+  private readonly router = inject(Router);
+
+   onLogout(): void {
+    this.authService.logout();
+    this.router.navigate(['/login']);
   }
+
+
+  
 }

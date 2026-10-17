@@ -38,6 +38,13 @@ export class UserService {
     return this.http.delete<ApiResponse>(`${this.url}/${id}`);
   }
 
+  public toggleStatus(id: number): Observable<void> {
+  return this.http.patch<void>(
+    `${this.url}/${id}/toggle-status`,
+    {}
+  );
+}
+
   public uploadPicture(file: File, id: number): Observable<UploadPictureResponse> {
 
     const formData = new FormData();

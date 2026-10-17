@@ -101,6 +101,44 @@ public class TestServiceImpl implements ITestService {
 	            .collect(Collectors.toList());
 	}
 	
+	@Override
+	public void deactivate(Long id) {
+
+		Test test = testRepository.findById(id)
+				.orElseThrow(() -> new ResourceNotFoundException("El test no existe con id: " + id));
+
+		test.setActive(false);
+
+		testRepository.save(test);
+	}
+
+	@Override
+	public void activate(Long id) {
+
+		Test test = testRepository.findById(id)
+				.orElseThrow(() -> new ResourceNotFoundException("El test no existe con id: " + id));
+
+		test.setActive(true);
+
+		testRepository.save(test);
+	}
+
+	@Override
+	public void delete(Long id) {
+		Test test = testRepository.findById(id)
+				.orElseThrow(() -> new ResourceNotFoundException("El test no existe con id: " + id));
+		
+		if (testResultRepository.existsByTestId(id)) {
+		        throw new IllegalArgumentException(
+		            "No se puede eliminar el test porque está siendo utilizado en resultados de pacientes."
+		        );
+		    }
+		
+		testRepository.delete(test);
+		
+	}
+
+	
 //	// SEARCH CASE: 1
 //	@Override
 //	public List<TestResponse> searchByName(String name) {
@@ -139,42 +177,4 @@ public class TestServiceImpl implements ITestService {
 //				.map(testMapper::toResponse)
 //				.collect(Collectors.toList());
 //	}
-
-	@Override
-	public void deactivate(Long id) {
-
-		Test test = testRepository.findById(id)
-				.orElseThrow(() -> new ResourceNotFoundException("El test no existe con id: " + id));
-
-		test.setActive(false);
-
-		testRepository.save(test);
-	}
-
-	@Override
-	public void activate(Long id) {
-
-		Test test = testRepository.findById(id)
-				.orElseThrow(() -> new ResourceNotFoundException("El test no existe con id: " + id));
-
-		test.setActive(true);
-
-		testRepository.save(test);
-	}
-
-	@Override
-	public void delete(Long id) {
-		Test test = testRepository.findById(id)
-				.orElseThrow(() -> new ResourceNotFoundException("El test no existe con id: " + id));
-		
-		if (testResultRepository.existsByTestId(id)) {
-		        throw new IllegalArgumentException(
-		            "No se puede eliminar el test porque está siendo utilizado en resultados de pacientes."
-		        );
-		    }
-		
-		testRepository.delete(test);
-		
-	}
-
 }

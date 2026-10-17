@@ -8,6 +8,7 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
@@ -25,6 +26,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.proemsalud.laboratory.auth.filter.JWTAuthenticationFilter;
 import com.proemsalud.laboratory.auth.filter.JWTAuthorizationFilter;
 import com.proemsalud.laboratory.auth.service.JWTService;
+import com.proemsalud.laboratory.user.service.IUserService;
 import com.proemsalud.laboratory.user.service.JpaUserDetailsService;
 
 @EnableMethodSecurity(securedEnabled = true, prePostEnabled = true)
@@ -54,14 +56,32 @@ public class SpringSecurityConfig {
 	}
 
 	@Bean
-	public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
+	public SecurityFilterChain filterChain(HttpSecurity http,
+			IUserService userService,
+			ObjectMapper objectMapper) throws Exception {
+
+		AuthenticationManager authManager = authenticationManager();
+
+		// Filtro que procesa POST /api/login y genera el JWT
+		JWTAuthenticationFilter authenticationFilter =
+				new JWTAuthenticationFilter(authManager, jwtService, userService, objectMapper);
+
+		// Filtro que valida el JWT de las peticiones posteriores
+		JWTAuthorizationFilter authorizationFilter = new JWTAuthorizationFilter(authManager, jwtService);
+
+		authenticationFilter.setFilterProcessesUrl("/api/login");
 
 		http.cors(cors -> {
 		}).csrf(csrf -> csrf.disable())
 				.sessionManagement(management -> management.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
-				.authorizeHttpRequests(
-						authz -> authz.requestMatchers(org.springframework.http.HttpMethod.OPTIONS, "/**").permitAll()
-								.anyRequest().permitAll());
+				.authorizeHttpRequests(authz -> authz
+						.requestMatchers(HttpMethod.OPTIONS, "/**").permitAll()
+						.requestMatchers(HttpMethod.POST, "/api/login").permitAll()
+						.requestMatchers(HttpMethod.GET, "/api/users/uploads/img/**").permitAll()
+						.anyRequest().authenticated())
+				.addFilter(authenticationFilter)
+				.addFilterBefore(authorizationFilter,
+						org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter.class);
 
 		return http.build();
 	}

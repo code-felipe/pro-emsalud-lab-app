@@ -16,10 +16,14 @@ public interface IUserService {
 	UserResponse update(Long id, UpdateUserRequest request);
 
 	UserResponse findById(Long id);
+	
+	UserResponse findByUsername(String username);
 
 	List<UserResponse> findAll();
 	
 	void delete(Long id);
+	
+	void toggleStatus(Long id);
 	
 	public UserResponse  uploadPicture(Long id, MultipartFile file);
 	 

@@ -6,23 +6,24 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.Resource;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.proemsalud.laboratory.catalog.domain.Test;
 import com.proemsalud.laboratory.exception.FileUploadException;
 import com.proemsalud.laboratory.exception.ResourceNotFoundException;
-import com.proemsalud.laboratory.patient.util.upload.IUploadFileService;
 import com.proemsalud.laboratory.user.domain.Role;
 import com.proemsalud.laboratory.user.domain.User;
 import com.proemsalud.laboratory.user.dto.create.CreateUserRequest;
-import com.proemsalud.laboratory.user.dto.response.RoleResponse;
 import com.proemsalud.laboratory.user.dto.response.UserResponse;
 import com.proemsalud.laboratory.user.dto.update.UpdateUserRequest;
 import com.proemsalud.laboratory.user.mapper.UserMapper;
 import com.proemsalud.laboratory.user.repository.IRoleRepository;
 import com.proemsalud.laboratory.user.repository.IUserRepository;
+import com.proemsalud.laboratory.util.upload.IUploadFileService;
 
 @Service
 public class UserServiceImpl implements IUserService {
@@ -38,7 +39,7 @@ public class UserServiceImpl implements IUserService {
 
 	@Autowired
 	private PasswordEncoder passwordEncoder;
-	
+
 	@Autowired
 	private IUploadFileService uploadFileService;
 
@@ -95,7 +96,6 @@ public class UserServiceImpl implements IUserService {
 
 		return userRepository.findAll().stream().map(userMapper::toResponse).toList();
 
-		
 	}
 
 	@Override
@@ -104,6 +104,10 @@ public class UserServiceImpl implements IUserService {
 
 		User user = userRepository.findById(id)
 				.orElseThrow(() -> new ResourceNotFoundException("El usuario no existe con id: " + id));
+
+		String previusPicture = user.getPicture();
+
+		uploadFileService.delete(previusPicture);
 
 		userRepository.delete(user);
 	}
@@ -126,51 +130,66 @@ public class UserServiceImpl implements IUserService {
 	}
 
 	@Override
-	public UserResponse uploadPicture(Long id, MultipartFile file) {
-		
+	public void toggleStatus(Long id) {
+
 		User user = userRepository.findById(id)
-				   .orElseThrow(() ->
-                   new ResourceNotFoundException(
-                           "El usuario no existe con id: " + id
-                   ));
-		
-		if(!file.isEmpty()) {
-			//Unique picture
+				.orElseThrow(() -> new ResourceNotFoundException("El usuario no existe con id: " + id));
+
+		user.setEnabled(!Boolean.TRUE.equals(user.getEnabled()));
+
+		userRepository.save(user);
+	}
+
+	@Override
+	public UserResponse uploadPicture(Long id, MultipartFile file) {
+
+		User user = userRepository.findById(id)
+				.orElseThrow(() -> new ResourceNotFoundException("El usuario no existe con id: " + id));
+
+		if (!file.isEmpty()) {
+			// Unique picture
 			String fileName = null;
-			
+
 			try {
 				fileName = uploadFileService.copy(file);
 			} catch (IOException e) {
 				// TODO Auto-generated catch block
-				throw new FileUploadException(""
-						+ "Ocurrio un error durante la subida de la imagen "
-						+ e.getCause().getMessage());
+				throw new FileUploadException(
+						"" + "Ocurrio un error durante la subida de la imagen " + e.getCause().getMessage());
 			}
-			
-			//If picture already exists - delete previous
+
+			// If picture already exists - delete previous
 			String previousPicture = user.getPicture();
 			uploadFileService.delete(previousPicture);
-			
-			
+
 			user.setPicture(fileName);
 		}
-		
+
 		return userMapper.toResponse(userRepository.save(user));
 	}
 
 	@Override
 	public Resource viewPicture(String fileName) {
-		
+
 		Resource resource = null;
-		
+
 		try {
-			resource =uploadFileService.load(fileName);
+			resource = uploadFileService.load(fileName);
 		} catch (MalformedURLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-				
+
 		return resource;
+	}
+
+	@Override
+	@Transactional(readOnly = true)
+	public UserResponse findByUsername(String username) {
+		User user = userRepository.findByUsername(username)
+				.orElseThrow(() -> new UsernameNotFoundException("Usuario no encontrado: " + username));
+
+		return userMapper.toResponse(user);
 	}
 
 }

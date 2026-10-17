@@ -6,12 +6,14 @@
   </div>
 
   <!-- HEADER -->
-  <div class="list-header">
-    <button type="button" class="btn btn-create" [routerLink]="['/doctors/form']">
-      <i class="bi bi-plus-lg"></i>
-      Crear Nuevo Contacto
-    </button>
-  </div>
+  @if (isAdmin() || isUser()) {
+    <div class="list-header">
+      <button type="button" class="btn btn-create" [routerLink]="['/doctors/form']">
+        <i class="bi bi-plus-lg"></i>
+        Crear Nuevo Contacto
+      </button>
+    </div>
+  }
 
   <!-- CARDS -->
   <div class="row g-3 p-2" *ngIf="doctors.length > 0">
@@ -23,9 +25,9 @@
           </div>
 
           <div class="item-card-info">
-            <h3 
-            class="item-card-title" 
-            [title]="doctor.fullName">{{doctor.title}}. {{ doctor.fullName }}</h3>
+            <h3 class="item-card-title" [title]="doctor.fullName">
+              {{ doctor.title }}. {{ doctor.fullName }}
+            </h3>
 
             <div class="item-card-meta">
               <i class="bi bi-hash"></i>
@@ -40,25 +42,28 @@
         </div>
 
         <div class="item-card-footer">
-          <button
-            type="button"
-            class="btn table-action edit"
-            [routerLink]="['/doctors/form', doctor.id]"
-            title="Editar médico"
-            aria-label="Editar médico"
-          >
-            <i class="bi bi-pencil"></i>
-          </button>
-
-          <button
-            type="button"
-            class="btn table-action delete"
-            (click)="delete(doctor)"
-            title="Borrar médico"
-            aria-label="Borrar médico"
-          >
-            <i class="bi bi-trash"></i>
-          </button>
+          @if (isAdmin() || isUser()) {
+            <button
+              type="button"
+              class="btn table-action edit"
+              [routerLink]="['/doctors/form', doctor.id]"
+              title="Editar médico"
+              aria-label="Editar médico"
+            >
+              <i class="bi bi-pencil"></i>
+            </button>
+          }
+          @if (isAdmin()) {
+            <button
+              type="button"
+              class="btn table-action delete"
+              (click)="delete(doctor)"
+              title="Borrar médico"
+              aria-label="Borrar médico"
+            >
+              <i class="bi bi-trash"></i>
+            </button>
+          }
         </div>
       </article>
     </div>

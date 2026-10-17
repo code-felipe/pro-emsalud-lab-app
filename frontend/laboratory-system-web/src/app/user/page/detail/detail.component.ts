@@ -4,6 +4,7 @@ import { ActivatedRoute, RouterLink } from '@angular/router';
 import { UserResponse } from '../../components/user.model';
 import { UserService } from '../../components/user.service';
 import Swal from 'sweetalert2';
+import { AuthService } from '../../../auth/components/auth.service';
 
 interface UploadPictureResponse {
   message: string;
@@ -28,7 +29,8 @@ export class UserDetailComponent implements OnInit {
 
   constructor(
     private userService: UserService,
-    private activateRoute: ActivatedRoute
+    private activateRoute: ActivatedRoute,
+    private authService: AuthService
   ) {}
 
   ngOnInit(): void {
@@ -58,6 +60,14 @@ export class UserDetailComponent implements OnInit {
 
     if (input.files && input.files.length > 0) {
       this.pictureSelected = input.files[0];
+
+      if(this.pictureSelected.type.indexOf('image') < 0){
+         Swal.fire({
+        icon: 'warning',
+        title: 'Imagen tipo',
+        text: 'Error al seleccionar imagen: El archivo de ser de tipo imagen'
+      });
+      }
     }
   }
 
@@ -81,6 +91,12 @@ export class UserDetailComponent implements OnInit {
         next: (response: UploadPictureResponse) => {
           this.user = response.user;
           this.pictureSelected = null;
+
+          if(this.authService.currentUser()?.id === response.user.id){
+            this.authService.loadCurrentUser().subscribe({
+                error: err => console.error('No se pudo refrescar el usuario', err)
+            })
+          }
 
           Swal.fire({
             icon: 'success',

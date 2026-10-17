@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 
@@ -8,6 +8,7 @@ import { ModalService } from '../../../utils/modal/modal-service';
 import { AlertService } from '../../../utils/alert/alert.service';
 import { DoctorResponse } from '../../components/doctor.model';
 import { DoctorService } from '../../components/doctor.service';
+import { AuthService } from '../../../auth/components/auth.service';
 
 
 @Component({
@@ -38,6 +39,10 @@ export class DoctorComponentList implements OnInit {
   hasError = false;
 
   title: string = 'Contactos'
+
+  private readonly authService = inject(AuthService);
+  protected readonly isAdmin = this.authService.isAdmin;
+  protected readonly isUser = this.authService.isUser;
 
   constructor(
     private doctorService: DoctorService,

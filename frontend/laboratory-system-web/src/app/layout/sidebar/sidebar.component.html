@@ -51,10 +51,12 @@
     <!-- CUENTA -->
     <div class="nav-section-label mt-3">CUENTA</div>
 
-    <a class="nav-item" routerLink="/settings" routerLinkActive="active">
-      <i class="bi bi-gear"></i>
-      Configuración
-    </a>
+    @if (isAdmin()) {
+      <a class="nav-item" routerLink="/settings" routerLinkActive="active">
+        <i class="bi bi-gear"></i>
+        Configuración
+      </a>
+    }
   </nav>
 
   <!-- LOGOUT -->

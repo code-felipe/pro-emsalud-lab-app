@@ -1,10 +1,11 @@
 
-import { Component, OnInit } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { AlertService } from '../../../utils/alert/alert.service';
 import { UserResponse } from '../../components/user.model';
 import { UserService } from '../../components/user.service';
+import { AuthService } from '../../../auth/components/auth.service';
 
 
 @Component({
@@ -30,6 +31,9 @@ export class UserComponentList implements OnInit {
   title: string = 'Usuarios'
 
   uploadingUserId: number | null = null;
+  
+  private readonly authService = inject(AuthService);
+  protected readonly isAdmin = this.authService.isAdmin;
 
   constructor(
     private userService: UserService,
@@ -105,6 +109,17 @@ private loadUsers(): void {
 
       });
   }
+
+//   public toggleStatus(id: number): void {
+//   this.userService.toggleStatus(id).subscribe({
+//     next: () => {
+//       this.loadUsers();
+//     },
+//     error: (error) => {
+//       console.error('Error al cambiar el estado del usuario:', error);
+//     }
+//   });
+// }
 
 //   /** Selección y subida de la imagen */
 // onPictureSelected(event: Event, user: UserResponse): void {

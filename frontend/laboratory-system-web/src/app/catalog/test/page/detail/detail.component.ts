@@ -18,7 +18,7 @@ import { TestService } from '../../components/test.service';
 })
 export class TestDetailComponent implements OnInit  {
 
-    test!: TestResponse;
+    test: TestResponse | null = null;
 
     title: string =  "Detalle del Test Referencia";
 

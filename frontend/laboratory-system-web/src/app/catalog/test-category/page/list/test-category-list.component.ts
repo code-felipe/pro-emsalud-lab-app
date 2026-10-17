@@ -1,10 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { PaginatorComponent } from '../../../../utils/paginator/paginator.component';
 import { TestCategoryResponse } from '../../../test-category/components/test-category.model';
 import { TestCategoryService } from '../../../test-category/components/test-category.service';
 import { AlertService } from '../../../../utils/alert/alert.service';
+import { AuthService } from '../../../../auth/components/auth.service';
 
 
 @Component({
@@ -32,6 +33,10 @@ export class TestCategoryList implements OnInit {
   hasError = false;
 
   title: string = 'Categorias de Test Referencial'
+
+  private readonly authService = inject(AuthService);
+  protected readonly isAdmin = this.authService.isAdmin;
+  protected readonly isUser = this.authService.isUser;
 
   constructor(
     private testCatgoryService: TestCategoryService,
