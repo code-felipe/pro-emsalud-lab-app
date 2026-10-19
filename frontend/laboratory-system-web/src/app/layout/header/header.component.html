@@ -7,12 +7,70 @@
   <div class="header-right">
     <span class="header-datetime">
       <i class="bi bi-clock"></i>
-      13 sep 2026, 2:45 PM
+      {{ now() | date: 'dd/MM/yyyy, h:mm:ss a' }}
     </span>
 
-    <button class="header-icon-btn" title="Notificaciones">
-      <i class="bi bi-bell"></i>
-    </button>
+    <div class="notification-wrapper">
+      <button
+        class="header-icon-btn notification-btn"
+        type="button"
+        title="Pacientes con órdenes pendientes y en proceso"
+        aria-label="Pacientes con órdenes pendientes y en proceso"
+        [attr.aria-expanded]="isNotificationsOpen()"
+        (click)="toggleNotifications()"
+      >
+        <i class="bi bi-bell"></i>
+
+        @if (pendingOrderNotifications().length > 0) {
+          <span class="notification-badge">
+            {{
+              pendingOrderNotifications().length > 99 ? '99+' : pendingOrderNotifications().length
+            }}
+          </span>
+        }
+      </button>
+
+      @if (isNotificationsOpen()) {
+        <div class="notification-dropdown">
+          <div class="notification-header">
+            <div>
+              <h6>Pacientes por atender</h6>
+              <small>Con órdenes pendientes o en proceso</small>
+            </div>
+
+            <span class="notification-total">
+              {{ pendingOrderNotifications().length }}
+            </span>
+          </div>
+
+          <div class="notification-list">
+            @if (pendingOrderNotifications().length === 0) {
+              <div class="notification-empty">
+                <i class="bi bi-check-circle"></i>
+                <p>No hay órdenes pendientes</p>
+              </div>
+            } @else {
+              @for (item of pendingOrderNotifications(); track item.patientId) {
+                <div class="notification-item">
+                  <span class="notification-order-icon">
+                    <i class="bi bi-clipboard2-pulse"></i>
+                  </span>
+
+                  <span class="notification-order-info">
+                    <strong>{{ item.patientFullName }}</strong>
+
+                    <small>
+                      {{ item.pendingOrdersCount }}
+                      {{ item.pendingOrdersCount === 1 ? 'orden' : 'órdenes' }}
+                    </small>
+                  </span>
+                </div>
+              }
+            }
+          </div>
+        </div>
+      }
+    </div>
 
     <div class="user-menu-wrapper">
       <div class="user-chip" (click)="toggleUserMenu()">
@@ -45,12 +103,6 @@
               Mi perfil
             </a>
           }
-
-          <a class="dropdown-item">
-            <i class="bi bi-key"></i>
-            Cambiar contraseña
-          </a>
-
           <div class="dropdown-divider"></div>
 
           <button class="dropdown-item logout" (click)="onLogout()">

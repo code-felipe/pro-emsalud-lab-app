@@ -1,45 +1,50 @@
+// Modelo del formulario: roleId puede ser null mientras no se elige un rol
+export interface UserForm {
+  id?: number;
+  username: string;
+  password: string;
+  roleId: number | null;
+}
+
 export interface CreateUserRequest {
-  
+
   username: string;
 
   password: string;
 
-  enabled: boolean;
-
-  roleIds: number[];
+  roleId: number;
 }
 
-export interface UpdateUserRequest{
-    
-    id: number;
+export interface UpdateUserRequest {
 
-    username: string;
+  id: number;
 
-    enabled: boolean;
+  username: string;
 
-    roleIds: number[];
+  password?: string;
+
+  roleId: number;
 }
 
-export interface UserResponse{
+export interface UserResponse {
 
-    id: number;
-    
-    username: string;
+  id: number;
 
-    enabled: boolean;
+  username: string;
 
-    createdAt: string;
+  createdAt: string;
 
-    updatedAt: string
+  updatedAt: string;
 
-    picture: string | null;
+  picture: string | null;
 
-    roles: RoleResponse[];
+  role: RoleResponse;
 }
 
 export interface UploadPictureResponse {
+
   message: string;
-  
+
   user: UserResponse;
 }
 
@@ -50,15 +55,14 @@ export interface CreateRole {
 
 export interface UpdatedteRole {
 
-    id: number;
+  id: number;
 
-    authority: string;
+  authority: string;
 }
-
 
 export interface RoleResponse {
 
-    id: number;
+  id: number;
 
-    authority: string;
+  authority: string;
 }

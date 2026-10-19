@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -32,6 +33,7 @@ import jakarta.validation.Valid;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.web.PageableDefault;
 
+@PreAuthorize("hasAnyRole('ADMIN', 'USER')")
 @CrossOrigin(origins = { "http://localhost:4200" })
 @RestController
 @RequestMapping("/api/test-categories")
@@ -66,7 +68,7 @@ public class TestCategoryController {
 		return ResponseEntity.ok(testCategoryService.findAll(filter, pageable));
 	}
 
-
+	@PreAuthorize("hasRole('ADMIN')")
 	@PostMapping
 	public ResponseEntity<Map<String, Object>> create(@Valid @RequestBody CreateTestCategoryRequest request) {
 
@@ -79,7 +81,7 @@ public class TestCategoryController {
 		return ResponseEntity.created(URI.create("/api/test-categories/" + category.getId())).body(body);
 	}
 
-
+	@PreAuthorize("hasRole('ADMIN')")
 	@PutMapping("/{id}")
 	public ResponseEntity<Map<String, Object>> update(@PathVariable Long id,
 			@Valid @RequestBody UpdateTestCategoryRequest request) {
@@ -93,7 +95,7 @@ public class TestCategoryController {
 		return ResponseEntity.ok(body);
 	}
 
-
+	@PreAuthorize("hasRole('ADMIN')")
 	@PatchMapping("/{id}/deactivate")
 	public ResponseEntity<Map<String, Object>> deactivate(@PathVariable Long id) {
 
@@ -105,7 +107,7 @@ public class TestCategoryController {
 		return ResponseEntity.ok(body);
 	}
 
-
+	@PreAuthorize("hasRole('ADMIN')")
 	@PatchMapping("/{id}/activate")
 	public ResponseEntity<Map<String, Object>> activate(@PathVariable Long id) {
 
@@ -116,7 +118,8 @@ public class TestCategoryController {
 
 		return ResponseEntity.ok(body);
 	}
-
+	
+	@PreAuthorize("hasRole('ADMIN')")
 	@DeleteMapping("/{id}")
 	public ResponseEntity<Map<String, Object>> delete(@PathVariable Long id) {
 

@@ -1,5 +1,6 @@
 package com.proemsalud.laboratory.oder.mapper;
 
+import java.time.Instant;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,6 +11,8 @@ import com.proemsalud.laboratory.oder.domain.Order;
 import com.proemsalud.laboratory.oder.dto.create.CreateOrderRequest;
 import com.proemsalud.laboratory.oder.dto.response.OrderReportResponse;
 import com.proemsalud.laboratory.oder.dto.response.OrderResponse;
+import com.proemsalud.laboratory.oder.dto.response.PendingOrderNotificationResponse;
+import com.proemsalud.laboratory.oder.enumerate.OrderStatus;
 import com.proemsalud.laboratory.patient.domain.Patient;
 import com.proemsalud.laboratory.result.dto.response.TestResultReportResponse;
 import com.proemsalud.laboratory.result.mapper.TestResultMapper;
@@ -66,8 +69,17 @@ public class OrderMapper {
 	            .results(results)
 	            .build();
 	}
-
-
+	
+//	public PendingOrderNotificationResponse toNotification(Order order) {
+//		
+//		return PendingOrderNotificationResponse.builder()
+//				.id(order.getId())
+//				.patientId(order.getPatient().getId())
+//				.patientFullName(order.getPatient().getFullName())
+//				.status(order.getStatus())
+//				.createdAt(order.getCreatedAt())
+//				.build();
+//	}
 	
 //	private Double totalOrder(Order order) {
 //		

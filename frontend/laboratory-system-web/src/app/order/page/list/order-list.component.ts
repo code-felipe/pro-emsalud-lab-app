@@ -201,6 +201,8 @@ export class OrderComponentList implements OnInit {
                 o => o.id !== order.id
               );
 
+              this.orderService.notifyOrdersChanged();
+
               this.alertService.success(
                 response.message,
                 'Orden eliminada'
@@ -245,6 +247,8 @@ export class OrderComponentList implements OnInit {
         order.status = isCompleted
           ? OrderStatus.IN_PROGRESS
           : OrderStatus.COMPLETED;
+
+        this.orderService.notifyOrdersChanged();
 
         this.alertService.success(
           response.message,

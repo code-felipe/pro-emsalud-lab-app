@@ -1,8 +1,5 @@
 package com.proemsalud.laboratory.user.dto.update;
 
-
-import java.util.List;
-
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
@@ -28,5 +25,5 @@ public class UpdateUserRequest {
 	private String picture;
 	
 	@NotNull(message = "El role debe tener al menos un role")
-	private List<Long> roleIds;
+	private Long roleId;
 }

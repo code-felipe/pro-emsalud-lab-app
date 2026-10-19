@@ -20,6 +20,7 @@ import { AuthService } from '../../../auth/components/auth.service';
   ],
 
   templateUrl: './user-list.component.html',
+  styleUrl: './user-list.style.css'
   
 })
 export class UserComponentList implements OnInit {

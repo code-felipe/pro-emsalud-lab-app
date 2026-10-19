@@ -1,5 +1,6 @@
 package com.proemsalud.laboratory.user.mapper;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import com.proemsalud.laboratory.user.domain.User;
@@ -9,10 +10,15 @@ import com.proemsalud.laboratory.user.dto.response.UserResponse;
 
 @Component
 public class UserMapper {
-
+	
+	@Autowired
+	private RoleMapper roleMapper;
+	
 	public User toEntity(CreateUserRequest request) {
-		return User.builder().username(request.getUsername()).password(request.getPassword())
-				.enabled(request.getEnabled()).build();
+		return User.builder()
+				.username(request.getUsername())
+				.password(request.getPassword())
+				.build();
 
 	}
 
@@ -20,15 +26,9 @@ public class UserMapper {
 		return UserResponse.builder().
 				id(user.getId())
 				.username(user.getUsername())
-				.enabled(user.getEnabled())
 				.picture(user.getPicture())
 				.createdAt(user.getCreatedAt()).updatedAt(user.getUpdatedAt())
-				.roles(user.getRoles().stream()
-						.map(role -> RoleResponse.builder()
-								.id(role.getId())
-								.authority(role.getAuthority())
-								.build())
-						.toList())
+				.role(roleMapper.toResponse(user.getRole()))
 				.build();
 	}
 

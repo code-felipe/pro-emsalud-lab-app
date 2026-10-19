@@ -1,7 +1,5 @@
 package com.proemsalud.laboratory.user.dto.create;
 
-import java.util.List;
-
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
@@ -28,5 +26,5 @@ public class CreateUserRequest {
 	private String picture;
 	
 	@NotNull(message = "El role debe tener al menos un role")
-	private List<Long> roleIds;
+	private Long roleId;
 }

@@ -9,39 +9,32 @@
             <span class="section-label">Detalle del Usuario</span>
             <h1 class="test-title">{{ u.username }}</h1>
           </div>
-
-          <span
-            class="status-badge"
-            [class.status-active]="u.enabled"
-            [class.status-inactive]="!u.enabled"
-          >
-            <span class="status-dot"></span>
-            {{ u.enabled ? 'Activo' : 'Inactivo' }}
-          </span>
         </div>
 
         <!-- Body -->
         <div class="test-card-body">
-          <!-- Subir foto -->
-          <div class="input-group mb-4">
-            <input
-              (change)="selectPicture($event)"
-              type="file"
-              class="form-control"
-              id="inputGroupFile04"
-              accept="image/*"
-            />
+          <!-- Subir foto: admin sobre cualquiera, usuario sobre sí mismo -->
+          @if (canManage) {
+            <div class="input-group mb-4">
+              <input
+                (change)="selectPicture($event)"
+                type="file"
+                class="form-control"
+                id="inputGroupFile04"
+                accept="image/*"
+              />
 
-            <button
-              (click)="uploadPicture()"
-              [disabled]="!pictureSelected"
-              class="btn btn-outline-secondary"
-              type="button"
-              id="inputGroupFileAddon04"
-            >
-              Subir
-            </button>
-          </div>
+              <button
+                (click)="uploadPicture()"
+                [disabled]="!pictureSelected"
+                class="btn btn-outline-secondary"
+                type="button"
+                id="inputGroupFileAddon04"
+              >
+                Subir
+              </button>
+            </div>
+          }
 
           <!-- Información básica -->
           <div class="detail-section">
@@ -65,16 +58,6 @@
                   </span>
                 </div>
               </div>
-
-              <div class="col-12">
-                <div class="detail-item">
-                  <span class="detail-label">Estado de la cuenta</span>
-
-                  <span class="detail-value" [class.text-muted-custom]="!u.enabled">
-                    {{ u.enabled ? 'Cuenta habilitada' : 'Cuenta deshabilitada' }}
-                  </span>
-                </div>
-              </div>
             </div>
           </div>
 
@@ -87,15 +70,14 @@
             <div class="category-card">
               <div class="category-icon user-picture">
                 <img
-                  *ngIf="u.picture; else defaultPicture"
-                  [src]="'http://localhost:8080/api/users/uploads/img/' + u.picture"
+                  [src]="
+                    u.picture
+                      ? 'http://localhost:8080/api/users/uploads/img/' + u.picture
+                      : 'http://localhost:8080/images/no-user.png'
+                  "
                   [alt]="'Foto de perfil de ' + u.username"
                   class="profile-image"
                 />
-
-                <ng-template #defaultPicture>
-                  <span>US</span>
-                </ng-template>
               </div>
 
               <div>
@@ -112,32 +94,28 @@
             </div>
           </div>
 
-          <!-- Roles -->
+          <!-- Rol -->
           <div class="detail-section">
             <div class="section-heading">
-              <span>Roles y permisos</span>
+              <span>Rol y permisos</span>
             </div>
 
             <div class="row g-3">
-              <div class="col-12 col-sm-6" *ngFor="let role of u.roles">
+              <div class="col-12 col-sm-6">
                 <div class="detail-item">
                   <span class="detail-label">Rol</span>
 
                   <span class="detail-value">
-                    {{ role.authority }}
+                    <span
+                      class="role-badge"
+                      [class.role-admin]="u.role.authority === 'ROLE_ADMIN'"
+                      [class.role-user]="u.role.authority === 'ROLE_USER'"
+                    >
+                      {{ u.role.authority.replace('ROLE_', '') }}
+                    </span>
                   </span>
 
-                  <span class="category-id"> Rol #{{ role.id }} </span>
-                </div>
-              </div>
-
-              <div class="col-12" *ngIf="!u.roles || u.roles.length === 0">
-                <div class="detail-item">
-                  <span class="detail-label">Roles asignados</span>
-
-                  <span class="detail-value text-muted-custom">
-                    Este usuario no tiene roles asignados.
-                  </span>
+                  <span class="category-id"> Rol #{{ u.role.id }} </span>
                 </div>
               </div>
             </div>
@@ -175,10 +153,23 @@
 
         <!-- Footer -->
         <div class="test-card-footer">
-          <button type="button" class="btn btn-back" routerLink="/users">
-            <span class="me-2">←</span>
-            Volver
-          </button>
+          @if (isAdmin()) {
+            <button type="button" class="btn btn-back" routerLink="/users">
+              <span class="me-2">←</span>
+              Volver
+            </button>
+          }
+
+          @if (canManage) {
+            <button
+              type="button"
+              class="btn btn-primary-action"
+              [routerLink]="['/users/form', u.id]"
+            >
+              <i class="bi bi-pencil me-2"></i>
+              Editar
+            </button>
+          }
         </div>
       </div>
 

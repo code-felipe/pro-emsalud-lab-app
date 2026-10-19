@@ -1,10 +1,16 @@
 package com.proemsalud.laboratory.oder.service;
 
+import java.util.LinkedHashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.proemsalud.laboratory.doctor.domain.Doctor;
 import com.proemsalud.laboratory.doctor.repository.IDoctorRepository;
@@ -13,6 +19,7 @@ import com.proemsalud.laboratory.oder.domain.Order;
 import com.proemsalud.laboratory.oder.dto.create.CreateOrderRequest;
 import com.proemsalud.laboratory.oder.dto.response.OrderReportResponse;
 import com.proemsalud.laboratory.oder.dto.response.OrderResponse;
+import com.proemsalud.laboratory.oder.dto.response.PendingOrderNotificationResponse;
 import com.proemsalud.laboratory.oder.dto.update.UpdateOrderRequest;
 import com.proemsalud.laboratory.oder.enumerate.OrderStatus;
 import com.proemsalud.laboratory.oder.filter.OrderFilter;
@@ -139,5 +146,25 @@ public class OrderServiceImpl implements IOrderService {
 
 	    return orderMapper.toReport(order);
 		
+	}
+	
+	/*
+	 * NOTIFICATIONS
+	 */
+
+	@Transactional(readOnly = true)
+	public Long countPendingOrders() {
+	    return orderRepository.countByStatusIn(
+	        List.of(
+	            OrderStatus.PENDING,
+	            OrderStatus.IN_PROGRESS
+	        )
+	    );
+	}
+	
+	@Override
+	public List<PendingOrderNotificationResponse> getPendingOrderNotifications() {
+	    return orderRepository.findOrderNotifications(
+	            List.of(OrderStatus.PENDING, OrderStatus.IN_PROGRESS));
 	}
 }

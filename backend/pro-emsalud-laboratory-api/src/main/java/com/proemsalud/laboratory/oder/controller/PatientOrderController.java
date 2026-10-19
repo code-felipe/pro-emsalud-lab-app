@@ -2,10 +2,12 @@ package com.proemsalud.laboratory.oder.controller;
 
 import java.net.URI;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -21,11 +23,13 @@ import org.springframework.data.domain.Sort;
 import com.proemsalud.laboratory.oder.dto.create.CreateOrderRequest;
 import com.proemsalud.laboratory.oder.dto.response.OrderReportResponse;
 import com.proemsalud.laboratory.oder.dto.response.OrderResponse;
+import com.proemsalud.laboratory.oder.dto.response.PendingOrderNotificationResponse;
 import com.proemsalud.laboratory.oder.filter.OrderFilter;
 import com.proemsalud.laboratory.oder.service.IOrderService;
 
 import jakarta.validation.Valid;
 
+@PreAuthorize("hasAnyRole('ADMIN', 'USER')")
 @CrossOrigin(origins = { "http://localhost:4200" })
 @RestController
 @RequestMapping("/api/patients/{patientId}/orders")

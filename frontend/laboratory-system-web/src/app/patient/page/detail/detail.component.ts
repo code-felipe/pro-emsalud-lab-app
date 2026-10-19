@@ -28,6 +28,8 @@ export class PatientDetailComponent implements OnInit  {
 
     hasError = false;
 
+    
+
     genderLabels: Record<Gender, string> = {
       [Gender.FEMALE]: 'Femenino',
       [Gender.MALE]: 'Masculino'

@@ -39,21 +39,14 @@
               {{ user.username }}
             </h3>
 
-            <!-- ID -->
             <div class="user-card-meta">
-              <i class="bi bi-hash"></i>
-              <span>ID {{ user.id }}</span>
-            </div>
-
-            <!-- STATUS -->
-            <div class="user-card-meta">
-              <i
-                class="bi"
-                [class.bi-check-circle-fill]="user.enabled"
-                [class.bi-x-circle-fill]="!user.enabled"
-              ></i>
-              <span>
-                {{ user.enabled ? 'Activo' : 'Inactivo' }}
+              <i class="bi bi-shield-check"></i>
+              <span
+                class="role-badge"
+                [class.role-admin]="user.role.authority === 'ROLE_ADMIN'"
+                [class.role-user]="user.role.authority === 'ROLE_USER'"
+              >
+                {{ user.role.authority.replace('ROLE_', '') }}
               </span>
             </div>
 
@@ -83,26 +76,28 @@
             >
               <i class="bi bi-pencil"></i>
             </button>
-
-            <button
-              type="button"
-              class="btn table-action delete"
-              (click)="delete(user)"
-              title="Borrar usuario"
-              aria-label="Borrar usuario"
-            >
-              <i class="bi bi-trash"></i>
-            </button>
-
-            <button
-              class="btn table-action report"
-              type="button"
-              title="Ver detalle"
-              aria-label="Detalle de usuario"
-              [routerLink]="['/users/view', user.id]"
-            >
-              <i class="bi bi-camera"></i>
-            </button>
+            @if (isAdmin()) {
+              <button
+                type="button"
+                class="btn table-action delete"
+                (click)="delete(user)"
+                title="Borrar usuario"
+                aria-label="Borrar usuario"
+              >
+                <i class="bi bi-trash"></i>
+              </button>
+            }
+            @if (isAdmin()) {
+              <button
+                class="btn table-action report"
+                type="button"
+                title="Ver detalle"
+                aria-label="Detalle de usuario"
+                [routerLink]="['/users/view', user.id]"
+              >
+                <i class="bi bi-camera"></i>
+              </button>
+            }
           </div>
         }
       </article>

@@ -65,10 +65,6 @@ INSERT INTO test_results (result, unit_price, order_id, test_id, created_at, upd
 INSERT INTO roles (authority) VALUES ('ROLE_USER');
 INSERT INTO roles (authority) VALUES ('ROLE_ADMIN');
 
-INSERT INTO users (username, password, enabled, picture, created_at, updated_at) VALUES ('andres','$2a$10$TWxv618Gpc/6pCiGM/8D2.PZpuFS4Xacu7g75UcLxCfxemFo68Upu',1, '', '2026-01-10 08:30:00', '2026-05-22 09:15:00');
-INSERT INTO users (username, password, enabled, picture, created_at, updated_at) VALUES ('admin','$2a$10$TWxv618Gpc/6pCiGM/8D2.PZpuFS4Xacu7g75UcLxCfxemFo68Upu',1, '', '2026-01-10 08:30:00', '2026-05-22 09:15:00');
-
-INSERT INTO user_roles (user_id, role_id) VALUES (1, 1);
-INSERT INTO user_roles (user_id, role_id) VALUES (2, 1);
-INSERT INTO user_roles (user_id, role_id) VALUES (2, 2);
+INSERT INTO users (username, password, picture, created_at, updated_at, role_id) VALUES ('andres','$2a$10$TWxv618Gpc/6pCiGM/8D2.PZpuFS4Xacu7g75UcLxCfxemFo68Upu', '', '2026-01-10 08:30:00', '2026-05-22 09:15:00', 1);
+INSERT INTO users (username, password, picture, created_at, updated_at, role_id) VALUES ('admin','$2a$10$TWxv618Gpc/6pCiGM/8D2.PZpuFS4Xacu7g75UcLxCfxemFo68Upu', '', '2026-01-10 08:30:00', '2026-05-22 09:15:00', 2);
 

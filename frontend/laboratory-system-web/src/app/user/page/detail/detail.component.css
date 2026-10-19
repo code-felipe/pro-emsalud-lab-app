@@ -240,7 +240,7 @@
 
 .test-card-footer {
   display: flex;
-  justify-content: flex-start;
+  justify-content: space-evenly;
 
   padding: 1.25rem 2.25rem;
 

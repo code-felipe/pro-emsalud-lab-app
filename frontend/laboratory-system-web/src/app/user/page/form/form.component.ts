@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { ActivatedRoute, Router, RouterLink } from '@angular/router';
@@ -8,11 +8,13 @@ import {
   CreateUserRequest,
   UpdateUserRequest,
   UserResponse,
-  RoleResponse
+  RoleResponse,
+  UserForm
 } from '../../components/user.model';
 
 import { UserService } from '../../components/user.service';
 import { AlertService } from '../../../utils/alert/alert.service';
+import { AuthService } from '../../../auth/components/auth.service';
 
 @Component({
   selector: 'app-user-form',
@@ -22,11 +24,10 @@ import { AlertService } from '../../../utils/alert/alert.service';
 })
 export class UserFormComponent implements OnInit {
 
-  public user: CreateUserRequest & { id?: number } = {
+  public user: UserForm = {
     username: '',
     password: '',
-    enabled: true,
-    roleIds: []
+    roleId: null
   };
 
   public roles: RoleResponse[] = [];
@@ -36,6 +37,9 @@ export class UserFormComponent implements OnInit {
   public apiError: any = null;
 
   public loading = false;
+  
+  private readonly authService = inject(AuthService);
+  protected readonly isAdmin = this.authService.isAdmin;
 
   constructor(
     private userService: UserService,
@@ -80,8 +84,7 @@ export class UserFormComponent implements OnInit {
             id: response.id,
             username: response.username,
             password: '',
-            enabled: response.enabled,
-            roleIds: response.roles.map(role => role.id)
+            roleId: response.role.id
           };
 
           this.title = 'Editar Usuario';
@@ -96,21 +99,6 @@ export class UserFormComponent implements OnInit {
     });
   }
 
-  // Seleccionar o deseleccionar un rol
-  public toggleRole(roleId: number, checked: boolean): void {
-    if (checked) {
-      if (!this.user.roleIds.includes(roleId)) {
-        this.user.roleIds = [...this.user.roleIds, roleId];
-      }
-    } else {
-      this.user.roleIds = this.user.roleIds.filter(id => id !== roleId);
-    }
-  }
-
-  public hasRole(roleId: number): boolean {
-    return this.user.roleIds.includes(roleId);
-  }
-
   // Crear usuario
   public create(): void {
     this.apiError = null;
@@ -123,13 +111,17 @@ export class UserFormComponent implements OnInit {
       return;
     }
 
+    if (this.user.roleId === null) {
+      this.alertService.error('Selecciona un rol', 'Validación');
+      return;
+    }
+
     this.loading = true;
 
     const request: CreateUserRequest = {
       username: this.user.username.trim(),
       password: this.user.password,
-      enabled: this.user.enabled,
-      roleIds: [...this.user.roleIds]
+      roleId: this.user.roleId
     };
 
     this.userService.createUser(request).subscribe({
@@ -175,14 +167,23 @@ export class UserFormComponent implements OnInit {
       return;
     }
 
+    if (this.user.roleId === null) {
+      this.alertService.error('Selecciona un rol', 'Validación');
+      return;
+    }
+
     this.loading = true;
 
     const request: UpdateUserRequest = {
       id: this.user.id,
       username: this.user.username.trim(),
-      enabled: this.user.enabled,
-      roleIds: [...this.user.roleIds]
+      roleId: this.user.roleId
     };
+
+    // Solo se envía si el usuario escribió una nueva; si no, el backend conserva la actual
+    if (this.user.password) {
+      request.password = this.user.password;
+    }
 
     this.userService.updateUser(this.user.id, request).subscribe({
       next: response => {
@@ -206,6 +207,4 @@ export class UserFormComponent implements OnInit {
       }
     });
   }
-
-  
 }

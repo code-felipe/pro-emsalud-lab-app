@@ -1,7 +1,6 @@
 package com.proemsalud.laboratory.user.dto.response;
 
 import java.time.Instant;
-import java.util.List;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -30,5 +29,5 @@ public class UserResponse {
     
     private Instant updatedAt;
     
-    private List<RoleResponse> roles;
+    private RoleResponse role;
 }

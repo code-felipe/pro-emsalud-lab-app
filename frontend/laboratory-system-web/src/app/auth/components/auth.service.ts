@@ -18,12 +18,15 @@ export class AuthService {
   public readonly currentUser = this._user.asReadonly();
 
   public readonly isAdmin = computed(() =>
-    this._user()?.roles?.some(r => r.authority === 'ROLE_ADMIN') ?? false
+    this._user()?.role?.authority === 'ROLE_ADMIN'
   );
 
-   public readonly isUser = computed(() =>
-    this._user()?.roles?.some(r => r.authority === 'ROLE_USER') ?? false
+  public readonly isUser = computed(() =>
+    this._user()?.role?.authority === 'ROLE_USER'
   );
+
+  // ADMIN y USER: lo que opera el flujo (pacientes, órdenes, resultados)
+  public readonly canOperate = computed(() => this.isAdmin() || this.isUser());
 
   constructor(private http: HttpClient) {}
 
@@ -78,7 +81,10 @@ export class AuthService {
     if (!raw) return null;
 
     try {
-      return JSON.parse(raw) as UserResponse;
+      const user = JSON.parse(raw) as UserResponse;
+
+      // Descarta usuarios guardados con el formato viejo (roles[])
+      return user?.role ? user : null;
     } catch {
       return null;
     }

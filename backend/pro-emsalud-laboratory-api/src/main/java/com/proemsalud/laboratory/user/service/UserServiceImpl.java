@@ -6,13 +6,13 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.Resource;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
-import com.proemsalud.laboratory.catalog.domain.Test;
 import com.proemsalud.laboratory.exception.FileUploadException;
 import com.proemsalud.laboratory.exception.ResourceNotFoundException;
 import com.proemsalud.laboratory.user.domain.Role;
@@ -50,11 +50,9 @@ public class UserServiceImpl implements IUserService {
 		User user = userMapper.toEntity(request);
 
 		user.setPassword(passwordEncoder.encode(request.getPassword()));
-		user.setRoles(findRolesByIds(request.getRoleIds()));
+		user.setRole(findRoleById(request.getRoleId()));
 
-		User saved = userRepository.save(user);
-
-		return userMapper.toResponse(saved);
+		return userMapper.toResponse(userRepository.save(user));
 	}
 
 	@Override
@@ -65,19 +63,19 @@ public class UserServiceImpl implements IUserService {
 				.orElseThrow(() -> new ResourceNotFoundException("El usuario no existe con id: " + id));
 
 		user.setUsername(request.getUsername());
-		user.setEnabled(request.getEnabled());
 
 		// Si no se envía contraseña, se conserva la existente.
 		if (request.getPassword() != null && !request.getPassword().isBlank()) {
 			user.setPassword(passwordEncoder.encode(request.getPassword()));
 		}
 
-		// Reemplaza los roles anteriores por los recibidos.
-		user.setRoles(findRolesByIds(request.getRoleIds()));
+		// Solo un ADMIN puede cambiar el rol o el estado. Un USER que se edita
+		// a sí mismo no puede promoverse ni reactivarse.
+		if (isCurrentUserAdmin()) {
+			user.setRole(findRoleById(request.getRoleId()));
+		}
 
-		User updated = userRepository.save(user);
-
-		return userMapper.toResponse(updated);
+		return userMapper.toResponse(userRepository.save(user));
 	}
 
 	@Override
@@ -95,7 +93,6 @@ public class UserServiceImpl implements IUserService {
 	public List<UserResponse> findAll() {
 
 		return userRepository.findAll().stream().map(userMapper::toResponse).toList();
-
 	}
 
 	@Override
@@ -105,62 +102,40 @@ public class UserServiceImpl implements IUserService {
 		User user = userRepository.findById(id)
 				.orElseThrow(() -> new ResourceNotFoundException("El usuario no existe con id: " + id));
 
-		String previusPicture = user.getPicture();
-
-		uploadFileService.delete(previusPicture);
+		uploadFileService.delete(user.getPicture());
 
 		userRepository.delete(user);
 	}
 
-	private List<Role> findRolesByIds(List<Long> roleIds) {
-
-		if (roleIds == null || roleIds.isEmpty()) {
-			throw new IllegalArgumentException("Debe asignar al menos un rol");
-		}
-
-		List<Long> uniqueIds = roleIds.stream().distinct().toList();
-
-		List<Role> roles = roleRepository.findAllById(uniqueIds);
-
-		if (roles.size() != uniqueIds.size()) {
-			throw new IllegalArgumentException("Uno o más roles no existen");
-		}
-
-		return roles;
-	}
-
 	@Override
+	@Transactional
 	public void toggleStatus(Long id) {
 
 		User user = userRepository.findById(id)
 				.orElseThrow(() -> new ResourceNotFoundException("El usuario no existe con id: " + id));
 
-		user.setEnabled(!Boolean.TRUE.equals(user.getEnabled()));
-
 		userRepository.save(user);
 	}
 
 	@Override
+	@Transactional
 	public UserResponse uploadPicture(Long id, MultipartFile file) {
 
 		User user = userRepository.findById(id)
 				.orElseThrow(() -> new ResourceNotFoundException("El usuario no existe con id: " + id));
 
 		if (!file.isEmpty()) {
-			// Unique picture
-			String fileName = null;
+
+			String fileName;
 
 			try {
 				fileName = uploadFileService.copy(file);
 			} catch (IOException e) {
-				// TODO Auto-generated catch block
-				throw new FileUploadException(
-						"" + "Ocurrio un error durante la subida de la imagen " + e.getCause().getMessage());
+				throw new FileUploadException("Ocurrió un error durante la subida de la imagen: " + e.getMessage());
 			}
 
-			// If picture already exists - delete previous
-			String previousPicture = user.getPicture();
-			uploadFileService.delete(previousPicture);
+			// Si ya había una foto, se borra la anterior.
+			uploadFileService.delete(user.getPicture());
 
 			user.setPicture(fileName);
 		}
@@ -171,25 +146,40 @@ public class UserServiceImpl implements IUserService {
 	@Override
 	public Resource viewPicture(String fileName) {
 
-		Resource resource = null;
-
 		try {
-			resource = uploadFileService.load(fileName);
+			return uploadFileService.load(fileName);
 		} catch (MalformedURLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			throw new FileUploadException("No se pudo cargar la imagen: " + fileName);
 		}
-
-		return resource;
 	}
 
 	@Override
 	@Transactional(readOnly = true)
 	public UserResponse findByUsername(String username) {
+
 		User user = userRepository.findByUsername(username)
 				.orElseThrow(() -> new UsernameNotFoundException("Usuario no encontrado: " + username));
 
 		return userMapper.toResponse(user);
 	}
 
+	// ───────── helpers ─────────
+
+	private Role findRoleById(Long roleId) {
+
+		if (roleId == null) {
+			throw new IllegalArgumentException("Debe asignar un rol");
+		}
+
+		return roleRepository.findById(roleId)
+				.orElseThrow(() -> new ResourceNotFoundException("El rol no existe con id: " + roleId));
+	}
+
+	private boolean isCurrentUserAdmin() {
+
+		var authentication = SecurityContextHolder.getContext().getAuthentication();
+
+		return authentication != null
+				&& authentication.getAuthorities().stream().anyMatch(a -> a.getAuthority().equals("ROLE_ADMIN"));
+	}
 }

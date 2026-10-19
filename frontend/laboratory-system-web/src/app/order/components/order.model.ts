@@ -39,6 +39,16 @@ export interface OrderResponse{
 
 }
 
+export interface PendingOrderNotificationResponse{
+    
+    patientId: number;
+
+    patientFullName: string;
+
+    pendingOrdersCount: number;
+
+}
+
 export interface TestResultReportResponse {
     id: number;
 

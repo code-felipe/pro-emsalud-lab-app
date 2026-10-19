@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { Observable, Subject, tap } from 'rxjs';
 
 import { Page } from '../../utils/paginator/paginator.model';
 import { FilterUtils } from '../../utils/filter/filter-utils.model';
@@ -10,6 +10,7 @@ import {
   CreateOrderRequest,
   OrderReportResponse,
   OrderResponse,
+  PendingOrderNotificationResponse,
   UpdateOrderRequest
 } from './order.model';
 
@@ -19,6 +20,9 @@ import {
 export class OrderService {
 
   private url: string = 'http://localhost:8080/api';
+
+  private readonly ordersChangedSubject = new Subject<void>();
+  public readonly ordersChanged$ = this.ordersChangedSubject.asObservable();
 
   constructor(private http: HttpClient) {}
 
@@ -50,7 +54,6 @@ export class OrderService {
     patientId: number,
     order: CreateOrderRequest
   ): Observable<ApiResponse> {
-
     const url = `${this.url}/patients/${patientId}/orders`;
 
     return this.http.post<ApiResponse>(url, order);
@@ -117,6 +120,37 @@ export class OrderService {
   return this.http.get<OrderReportResponse>(url);
 }
 
+  public getPendingOrders(): Observable<number> {
+    return this.http.get<number>(
+      `${this.url}/orders/notifications/pending-count`
+    );
+  }
+
+public getPendingOrderNotifications():
+  Observable<PendingOrderNotificationResponse[]> {
+  return this.http.get<PendingOrderNotificationResponse[]>(
+    `${this.url}/orders/notifications`
+  );
+}
+
+public notifyOrdersChanged(): void {
+  this.ordersChangedSubject.next();
+}
 
 
 }
+
+/*
+  public getPendingOrders(): Observable<number> {
+    return this.http.get<number>(
+      `${this.url}/orders/notifications/pending-count`
+    );
+  }
+
+public getPendingOrderNotifications():
+  Observable<PendingOrderNotificationResponse[]> {
+  return this.http.get<PendingOrderNotificationResponse[]>(
+    `${this.url}/orders/notifications`
+  );
+}
+*/

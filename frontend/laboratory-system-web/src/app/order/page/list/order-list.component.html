@@ -229,9 +229,7 @@
             </td>
             <!-- Total Order -->
             <td>
-              <span class="table-secondary">
-                Q{{ order.totalOrder }}
-              </span>
+              <span class="table-secondary"> Q{{ order.totalOrder }} </span>
             </td>
 
             <!-- CREATED -->
@@ -257,23 +255,24 @@
 
             <!-- TOGGLE -->
 
+            <!-- TOGGLE -->
             <td class="text-center">
               <button
                 type="button"
                 class="btn btn-sm"
                 [class.btn-success]="order.status === OrderStatus.COMPLETED"
-                [class.btn-secondary]="order.status === OrderStatus.IN_PROGRESS"
+                [class.btn-secondary]="order.status !== OrderStatus.COMPLETED"
                 [title]="
                   order.status === OrderStatus.COMPLETED
                     ? 'Completada. Clic para reabrir'
-                    : 'En progreso. Clic para completar'
+                    : 'Clic para completar'
                 "
                 (click)="toggleStatus(order)"
               >
                 <i
                   class="bi"
                   [class.bi-toggle-on]="order.status === OrderStatus.COMPLETED"
-                  [class.bi-toggle-off]="order.status === OrderStatus.IN_PROGRESS"
+                  [class.bi-toggle-off]="order.status !== OrderStatus.COMPLETED"
                 >
                 </i>
               </button>
