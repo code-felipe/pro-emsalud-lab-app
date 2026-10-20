@@ -68,3 +68,5 @@ INSERT INTO roles (authority) VALUES ('ROLE_ADMIN');
 INSERT INTO users (username, password, picture, created_at, updated_at, role_id) VALUES ('andres','$2a$10$TWxv618Gpc/6pCiGM/8D2.PZpuFS4Xacu7g75UcLxCfxemFo68Upu', '', '2026-01-10 08:30:00', '2026-05-22 09:15:00', 1);
 INSERT INTO users (username, password, picture, created_at, updated_at, role_id) VALUES ('admin','$2a$10$TWxv618Gpc/6pCiGM/8D2.PZpuFS4Xacu7g75UcLxCfxemFo68Upu', '', '2026-01-10 08:30:00', '2026-05-22 09:15:00', 2);
 
+INSERT INTO backup_configuration (enabled, interval_hours, daily_time, backup_directory, retention_days) VALUES (1, 6, '02:00', 'C:\\LabBackups', 14)
+

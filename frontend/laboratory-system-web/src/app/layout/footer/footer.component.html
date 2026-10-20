@@ -1,5 +1,19 @@
 <footer class="app-footer">
-  <span>Sistema de laboratorio &copy; {{ currentYear }}</span>
+  <span>Sistema de laboratorio Pro-emsalud &copy; {{ currentYear }}</span>
   <span class="sep">·</span>
   <span>v1.0.0</span>
+
+  @if (latestSuccessfulBackup) {
+    <span class="sep">·</span>
+    <span>
+      Último backup: {{ latestSuccessfulBackup.createdAt }} |
+      {{ latestSuccessfulBackup.status }} |
+      {{ latestSuccessfulBackup.type }}
+    </span>
+  }
+
+  @if (hasError) {
+    <span class="sep">·</span>
+    <span>No se pudo cargar el estado del backup</span>
+  }
 </footer>

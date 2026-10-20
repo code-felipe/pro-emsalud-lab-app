@@ -178,7 +178,7 @@
 
             <th class="text-center">Ver Reporte</th>
 
-            <th class="text-center">Toggle</th>
+            <th class="text-center">Finalizar Orden</th>
 
             <th class="text-center">Editar</th>
 
@@ -215,7 +215,7 @@
                 [class.status-progress]="order.status === OrderStatus.IN_PROGRESS"
                 [class.status-completed]="order.status === OrderStatus.COMPLETED"
               >
-                {{ order.status }}
+                {{ statusLabels[order.status] }}
               </span>
             </td>
 

@@ -2,6 +2,7 @@ package com.proemsalud.laboratory.backup.domain;
 
 import java.time.LocalTime;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -27,12 +28,16 @@ public class BackupConfiguration {
     private Long id;
 
     private boolean enabled;
-
+    
+    @Column(name = "interval_hours")
     private Integer intervalHours;
 
+    @Column(name = "daily_time")
     private LocalTime dailyTime;
-
+    
+    @Column(name = "backup_directory")
     private String backupDirectory;
-
+    
+    @Column(name = "retention_days")
     private Integer retentionDays;
 }

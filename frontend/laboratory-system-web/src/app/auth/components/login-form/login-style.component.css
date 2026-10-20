@@ -6,7 +6,7 @@
 
 .login-header { text-align: center; margin-bottom: 28px; color: var(--ink, #1b2420); }
 
-.login-logo { display: flex; align-items: center; justify-content: center; width: 58px; height: 58px; margin: 0 auto 14px; border: 1px solid var(--teal-deep, #204e42); border-radius: 16px; background: var(--teal, #2f6f5e); color: var(--paper-raised, #ffffff); font-size: 38px; font-weight: bold; }
+.login-logo { display: flex; align-items: center; justify-content: center; width: 58px; height: 58px; margin: 0 auto 20px; border: 1px solid var(--teal-deep, #204e42); border-radius: 16px; background: var(--teal, #2f6f5e); color: var(--paper-raised, #ffffff); font-size: 38px; font-weight: bold; }
 
 .login-header h1 { margin: 0; font-size: 28px; color: var(--ink, #1b2420); }
 

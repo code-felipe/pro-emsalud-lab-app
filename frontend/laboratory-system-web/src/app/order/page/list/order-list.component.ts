@@ -42,11 +42,6 @@ export class OrderComponentList implements OnInit {
 
   @Input() patientId!: number;
 
-
-  // =====================================================
-  // LIST
-  // =====================================================
-
   orders: OrderResponse[] = [];
 
   filter: OrderFilter = {};
@@ -58,11 +53,6 @@ export class OrderComponentList implements OnInit {
   hasError = false;
 
   title = 'Órdenes';
-
-
-  // =====================================================
-  // ORDER STATUS
-  // =====================================================
 
   public readonly OrderStatus = OrderStatus;
 
