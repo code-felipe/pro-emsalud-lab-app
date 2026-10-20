@@ -13,25 +13,25 @@
       </h1>
 
       <p class="hero-description">
-        Configura tu catálogo, registra tus contactos y pacientes, y comienza a crear órdenes de
-        laboratorio desde un solo lugar.
+        Configura tu catálogo, registra tus contactos y pacientes, gestiona las órdenes de
+        laboratorio y protege la información mediante copias de seguridad y controles de acceso.
       </p>
 
       <div class="hero-actions">
         <a class="btn-primary-custom" routerLink="/test-category-references">
-          <i class="bi bi-play-fill"></i>
+          <i class="bi bi-play-fill" aria-hidden="true"></i>
           Comenzar configuración
         </a>
 
         <a class="btn-secondary-custom" routerLink="/patients">
           Ver pacientes
-          <i class="bi bi-arrow-right"></i>
+          <i class="bi bi-arrow-right" aria-hidden="true"></i>
         </a>
       </div>
     </div>
 
     <!-- ILUSTRACIÓN -->
-    <div class="hero-illustration">
+    <div class="hero-illustration" aria-hidden="true">
       <div class="illustration-card">
         <div class="illustration-header">
           <span></span>
@@ -40,7 +40,6 @@
         </div>
 
         <div class="lab-scene">
-          <!-- Microscopio -->
           <div class="microscope">
             <div class="microscope-head"></div>
             <div class="microscope-arm"></div>
@@ -49,7 +48,6 @@
             <div class="microscope-lens"></div>
           </div>
 
-          <!-- Tubos -->
           <div class="test-tubes">
             <div class="tube tube-one">
               <div class="tube-liquid"></div>
@@ -64,10 +62,8 @@
             </div>
           </div>
 
-          <!-- Hoja -->
           <div class="lab-sheet">
             <div class="sheet-title"></div>
-
             <div class="sheet-line"></div>
             <div class="sheet-line short"></div>
             <div class="sheet-line"></div>
@@ -78,15 +74,14 @@
             </div>
           </div>
 
-          <!-- Tarjeta flotante -->
           <div class="floating-result">
             <div class="floating-icon">
-              <i class="bi bi-check2"></i>
+              <i class="bi bi-shield-check"></i>
             </div>
 
             <div>
-              <strong>Trabajo organizado</strong>
-              <small>Todo listo para comenzar</small>
+              <strong>Información protegida</strong>
+              <small>Gestión segura del laboratorio</small>
             </div>
           </div>
         </div>
@@ -94,11 +89,11 @@
     </div>
   </section>
 
-  <!-- WORKFLOW -->
+  <!-- CONFIGURACIÓN INICIAL -->
   <section class="workflow-section">
     <div class="section-heading">
       <div>
-        <span class="section-label"> GUÍA DE TRABAJO </span>
+        <span class="section-label">GUÍA DE TRABAJO</span>
 
         <h2>
           Prepara tu laboratorio
@@ -107,263 +102,630 @@
       </div>
 
       <p>
-        Te recomendamos completar estos pasos antes de comenzar a registrar y procesar órdenes de
-        laboratorio.
+        Completa la configuración del catálogo, los contactos, la seguridad y las copias de respaldo
+        antes de comenzar a trabajar con las órdenes de laboratorio.
       </p>
     </div>
 
-    <!-- STEP 1 -->
+    <!-- PASO 1: CATEGORÍAS -->
     <article class="workflow-card">
       <div class="step-number">01</div>
 
       <div class="step-icon teal">
-        <i class="bi bi-tags"></i>
+        <i class="bi bi-tags" aria-hidden="true"></i>
       </div>
 
       <div class="step-content">
         <div class="step-heading">
           <h3>Categorías</h3>
-          <span class="step-badge"> Primer paso </span>
+          <span class="step-badge">Primer paso</span>
         </div>
 
         <p>
-          Las categorías son la base de tu catálogo de pruebas. Te permiten organizar los estudios y
-          facilitan su búsqueda y administración dentro del sistema.
+          Organiza las categorías que servirán de base para clasificar las pruebas de laboratorio y
+          facilitar su búsqueda y administración.
         </p>
 
         <a routerLink="/test-category-references" class="step-link">
           Administrar categorías
-          <i class="bi bi-arrow-right"></i>
+          <i class="bi bi-arrow-right" aria-hidden="true"></i>
         </a>
       </div>
     </article>
 
-    <!-- STEP 2 -->
+    <!-- PASO 2: CATÁLOGO -->
     <article class="workflow-card">
       <div class="step-number">02</div>
 
       <div class="step-icon brick">
-        <i class="bi bi-clipboard2-pulse"></i>
+        <i class="bi bi-clipboard2-pulse" aria-hidden="true"></i>
       </div>
 
       <div class="step-content">
         <div class="step-heading">
           <h3>Catálogo de pruebas</h3>
-
-          <span class="step-badge"> Catálogo </span>
+          <span class="step-badge">Catálogo</span>
         </div>
 
         <p>
-          Registra las pruebas que utilizarás en tu laboratorio. El catálogo te permitirá buscar,
-          filtrar, activar y administrar tus pruebas de forma rápida y organizada.
+          Registra y organiza las pruebas disponibles en el laboratorio. El catálogo permite
+          consultar, filtrar y administrar los estudios que se incorporarán a las órdenes.
         </p>
 
         <a routerLink="/tests" class="step-link">
           Administrar catálogo
-          <i class="bi bi-arrow-right"></i>
+          <i class="bi bi-arrow-right" aria-hidden="true"></i>
         </a>
       </div>
     </article>
 
-    <!-- STEP 3 -->
+    <!-- PASO 3: CONTACTOS -->
     <article class="workflow-card">
       <div class="step-number">03</div>
 
       <div class="step-icon amber">
-        <i class="bi bi-card-list"></i>
+        <i class="bi bi-card-list" aria-hidden="true"></i>
       </div>
 
       <div class="step-content">
         <div class="step-heading">
           <h3>Contactos</h3>
-
-          <span class="step-badge"> Destinatarios </span>
+          <span class="step-badge">Destinatarios</span>
         </div>
 
         <p>
-          Los contactos representan a la persona, profesional o entidad a quien estará dirigido el
-          reporte de laboratorio. Puede tratarse de un médico, enfermero, otra persona o una
-          entidad.
+          Registra a los profesionales, médicos, enfermeros y entidades a quienes se dirigirán los
+          reportes de laboratorio.
         </p>
 
         <a routerLink="/doctors" class="step-link">
           Administrar contactos
-          <i class="bi bi-arrow-right"></i>
+          <i class="bi bi-arrow-right" aria-hidden="true"></i>
         </a>
       </div>
     </article>
 
-    <!-- STEP 4 -->
+    <!-- PASO 4: PACIENTES -->
     <article class="workflow-card">
       <div class="step-number">04</div>
 
       <div class="step-icon teal">
-        <i class="bi bi-people"></i>
+        <i class="bi bi-people" aria-hidden="true"></i>
       </div>
 
       <div class="step-content">
         <div class="step-heading">
           <h3>Pacientes</h3>
-
-          <span class="step-badge"> Personas </span>
+          <span class="step-badge">Personas</span>
         </div>
 
         <p>
-          Gestiona los pacientes que utilizarán los servicios del laboratorio. Una vez configuradas
-          las categorías, pruebas y contactos, registrar un paciente es sencillo.
+          Registra y consulta los pacientes del laboratorio. Cada paciente podrá tener sus órdenes y
+          resultados asociados dentro del flujo de trabajo.
         </p>
 
         <a routerLink="/patients" class="step-link">
           Administrar pacientes
-          <i class="bi bi-arrow-right"></i>
+          <i class="bi bi-arrow-right" aria-hidden="true"></i>
         </a>
       </div>
     </article>
 
-    <!-- STEP 5 -->
+    <!-- PASO 5: ÓRDENES Y RESULTADOS -->
     <article class="workflow-card">
       <div class="step-number">05</div>
 
       <div class="step-icon brick">
-        <i class="bi bi-file-earmark-medical"></i>
+        <i class="bi bi-file-earmark-medical" aria-hidden="true"></i>
       </div>
 
       <div class="step-content">
         <div class="step-heading">
-          <h3>Órdenes y reportes</h3>
-
-          <span class="step-badge"> Flujo de trabajo </span>
+          <h3>Órdenes y resultados</h3>
+          <span class="step-badge">Flujo de trabajo</span>
         </div>
 
         <p>
-          Una vez registrado el paciente, puedes crear una orden de laboratorio y agregar las
-          pruebas o estudios que correspondan. Cuando los resultados estén registrados, podrás
-          generar la vista del reporte de laboratorio, descargarlo en PDF y compartirlo por
-          WhatsApp.
+          Crea órdenes para cada paciente, incorpora las pruebas correspondientes y registra sus
+          resultados. Podrás consultar el reporte, descargarlo en PDF y compartirlo por WhatsApp.
         </p>
 
         <p>
-          Para utilizar la opción de envío por WhatsApp es necesario tener previamente instalada la
-          aplicación de WhatsApp de escritorio. El sistema abrirá WhatsApp con el número de teléfono
-          del paciente previamente registrado para facilitar el envío del reporte.
+          Para enviar reportes por WhatsApp, es necesario tener instalada la aplicación de
+          escritorio. El sistema utilizará el número de teléfono registrado del paciente para
+          facilitar el envío.
         </p>
 
         <a routerLink="/patients" class="step-link">
           Gestionar pacientes y órdenes
-          <i class="bi bi-arrow-right"></i>
+          <i class="bi bi-arrow-right" aria-hidden="true"></i>
         </a>
       </div>
     </article>
   </section>
 
-  <!-- FLOW SUMMARY -->
+  <!-- COPIAS DE SEGURIDAD -->
+  <section class="workflow-section backup-section">
+    <div class="section-heading">
+      <div>
+        <span class="section-label">PROTECCIÓN DE LA INFORMACIÓN</span>
+
+        <h2>
+          Copias de seguridad
+          <span>y recuperación.</span>
+        </h2>
+      </div>
+
+      <p>
+        Configura la estrategia de respaldo de la aplicación, define la frecuencia de ejecución y
+        consulta el historial para verificar el estado de las copias de seguridad.
+      </p>
+    </div>
+
+    <!-- PASO 6: CONFIGURACIÓN DE BACKUPS -->
+    <article class="workflow-card">
+      <div class="step-number">06</div>
+
+      <div class="step-icon teal">
+        <i class="bi bi-database-check" aria-hidden="true"></i>
+      </div>
+
+      <div class="step-content">
+        <div class="step-heading">
+          <h3>Configuración de backups</h3>
+          <span class="step-badge">Configuración inicial</span>
+        </div>
+
+        <p>
+          Define cómo y cuándo se realizarán las copias de seguridad de la aplicación. Podrás
+          seleccionar el modo automático o manual y establecer los intervalos de ejecución que
+          necesite el laboratorio.
+        </p>
+
+        <ul>
+          <li>
+            <strong>Modo automático:</strong>
+            ejecuta las copias según la programación configurada.
+          </li>
+          <li>
+            <strong>Modo manual:</strong>
+            permite iniciar una copia de seguridad cuando el usuario autorizado lo necesite.
+          </li>
+          <li>
+            <strong>Respaldo integral:</strong>
+            contempla los datos y componentes necesarios para recuperar la aplicación, de acuerdo
+            con el alcance de la estrategia de respaldo implementada.
+          </li>
+          <li>
+            <strong>Intervalos:</strong>
+            permite configurar la frecuencia de ejecución de las copias automáticas.
+          </li>
+        </ul>
+
+        <a routerLink="/settings" class="step-link">
+          Configurar copias de seguridad
+          <i class="bi bi-arrow-right" aria-hidden="true"></i>
+        </a>
+      </div>
+    </article>
+
+    <!-- PASO 7: REPORTE DE BACKUPS -->
+    <article class="workflow-card">
+      <div class="step-number">07</div>
+
+      <div class="step-icon amber">
+        <i class="bi bi-clipboard2-data" aria-hidden="true"></i>
+      </div>
+
+      <div class="step-content">
+        <div class="step-heading">
+          <h3>Reporte de backups</h3>
+          <span class="step-badge">Seguimiento</span>
+        </div>
+
+        <p>
+          Consulta el historial de las copias de seguridad y verifica el resultado de cada ejecución
+          para conocer si el respaldo se completó correctamente o requiere atención.
+        </p>
+
+        <ul>
+          <li>Fecha y hora de ejecución.</li>
+          <li>Tipo de respaldo: automático o manual.</li>
+          <li>Estado: en progreso, completado o fallido.</li>
+          <li>Duración, ubicación y detalles del resultado, cuando estén disponibles.</li>
+        </ul>
+
+        <a routerLink="/settings" class="step-link">
+          Consultar reporte de backups
+          <i class="bi bi-arrow-right" aria-hidden="true"></i>
+        </a>
+      </div>
+    </article>
+  </section>
+
+  <!-- SEGURIDAD Y ROLES -->
+  <section class="workflow-section security-section">
+    <div class="section-heading">
+      <div>
+        <span class="section-label">SEGURIDAD Y PERMISOS</span>
+
+        <h2>
+          Controla quién puede
+          <span>acceder y administrar.</span>
+        </h2>
+      </div>
+
+      <p>
+        La autenticación identifica al usuario y sus permisos determinan las funciones y los datos
+        que puede gestionar. El acceso debe respetar el rol asignado en toda la aplicación.
+      </p>
+    </div>
+
+    <!-- PASO 8: AUTENTICACIÓN -->
+    <article class="workflow-card">
+      <div class="step-number">08</div>
+
+      <div class="step-icon teal">
+        <i class="bi bi-shield-lock" aria-hidden="true"></i>
+      </div>
+
+      <div class="step-content">
+        <div class="step-heading">
+          <h3>Autenticación y control de acceso</h3>
+          <span class="step-badge">Acceso seguro</span>
+        </div>
+
+        <p>
+          Cada usuario debe autenticarse para acceder a las funcionalidades autorizadas. El sistema
+          utiliza los roles <code>Role_admin</code> y <code>Role_user</code> para aplicar los
+          permisos correspondientes.
+        </p>
+
+        <p>
+          Las restricciones deben aplicarse tanto en la interfaz como en el servidor o API. Ocultar
+          botones en pantalla no sustituye la validación de permisos en las operaciones de lectura y
+          escritura.
+        </p>
+
+        <a routerLink="/settings" class="step-link">
+          Consultar configuración de seguridad
+          <i class="bi bi-arrow-right" aria-hidden="true"></i>
+        </a>
+      </div>
+    </article>
+
+    <!-- PASO 9: ROLE_ADMIN -->
+    <article class="workflow-card">
+      <div class="step-number">09</div>
+
+      <div class="step-icon brick">
+        <i class="bi bi-person-gear" aria-hidden="true"></i>
+      </div>
+
+      <div class="step-content">
+        <div class="step-heading">
+          <h3>Administrador — Role_admin</h3>
+          <span class="step-badge">Acceso completo</span>
+        </div>
+
+        <p>
+          El administrador dispone de acceso a todas las funcionalidades autorizadas de la
+          aplicación para gestionar su configuración y operación.
+        </p>
+
+        <ul>
+          <li>
+            Crear, consultar, modificar y eliminar las entidades que administra la aplicación.
+          </li>
+          <li>Gestionar categorías, contactos y catálogo de pruebas.</li>
+          <li>Gestionar pacientes, órdenes y resultados.</li>
+          <li>Configurar los backups y consultar sus reportes.</li>
+          <li>
+            Administrar usuarios, roles y permisos, si estas funciones están habilitadas en el
+            sistema.
+          </li>
+        </ul>
+      </div>
+    </article>
+
+    <!-- PASO 10: ROLE_USER -->
+    <article class="workflow-card">
+      <div class="step-number">10</div>
+
+      <div class="step-icon amber">
+        <i class="bi bi-person-check" aria-hidden="true"></i>
+      </div>
+
+      <div class="step-content">
+        <div class="step-heading">
+          <h3>Usuario estándar — Role_user</h3>
+          <span class="step-badge">Acceso limitado</span>
+        </div>
+
+        <p>
+          El usuario estándar puede gestionar los datos necesarios para el flujo de trabajo clínico
+          y operativo, sin disponer de permisos administrativos sobre las demás entidades.
+        </p>
+
+        <ul>
+          <li>
+            <strong>Pacientes:</strong>
+            consultar, registrar, modificar y eliminar, conforme a los permisos asignados.
+          </li>
+          <li>
+            <strong>Órdenes:</strong>
+            crear, consultar, modificar y eliminar órdenes, conforme a las reglas del flujo de
+            trabajo.
+          </li>
+          <li>
+            <strong>Resultados:</strong>
+            registrar, consultar, modificar y eliminar resultados, según las autorizaciones
+            establecidas.
+          </li>
+          <li>
+            <strong>Categorías:</strong>
+            acceso de consulta, sin permisos para crear, modificar ni eliminar.
+          </li>
+          <li>
+            <strong>Contactos:</strong>
+            acceso de consulta, sin permisos para crear, modificar ni eliminar.
+          </li>
+          <li>
+            <strong>Catálogo de pruebas:</strong>
+            acceso de consulta, sin permisos para crear, modificar ni eliminar.
+          </li>
+          <li>
+            <strong>Configuración y seguridad:</strong>
+            sin permisos para administrar usuarios, roles, configuración global o políticas de
+            backups.
+          </li>
+        </ul>
+
+        <p>
+          Los permisos de consulta sobre categorías, contactos y catálogo deben habilitarse
+          explícitamente. Si el usuario no necesita consultar alguna de estas entidades, su acceso
+          también debe denegarse.
+        </p>
+      </div>
+    </article>
+
+    <!-- PASO 11: RESUMEN DE PERMISOS -->
+    <article class="workflow-card">
+      <div class="step-number">11</div>
+
+      <div class="step-icon teal">
+        <i class="bi bi-list-check" aria-hidden="true"></i>
+      </div>
+
+      <div class="step-content">
+        <div class="step-heading">
+          <h3>Resumen de permisos por rol</h3>
+          <span class="step-badge">Referencia</span>
+        </div>
+
+        <div class="table-responsive">
+          <table class="table align-middle">
+            <thead>
+              <tr>
+                <th scope="col">Funcionalidad</th>
+                <th scope="col">Role_admin</th>
+                <th scope="col">Role_user</th>
+              </tr>
+            </thead>
+
+            <tbody>
+              <tr>
+                <td>Pacientes</td>
+                <td>CRUD</td>
+                <td>CRUD autorizado</td>
+              </tr>
+              <tr>
+                <td>Órdenes</td>
+                <td>CRUD</td>
+                <td>CRUD autorizado</td>
+              </tr>
+              <tr>
+                <td>Resultados</td>
+                <td>CRUD</td>
+                <td>CRUD autorizado</td>
+              </tr>
+              <tr>
+                <td>Categorías</td>
+                <td>CRUD</td>
+                <td>Solo consulta*</td>
+              </tr>
+              <tr>
+                <td>Contactos</td>
+                <td>CRUD</td>
+                <td>Solo consulta*</td>
+              </tr>
+              <tr>
+                <td>Catálogo de pruebas</td>
+                <td>CRUD</td>
+                <td>Solo consulta*</td>
+              </tr>
+              <tr>
+                <td>Configuración de backups</td>
+                <td>Administrar</td>
+                <td>Sin acceso administrativo</td>
+              </tr>
+              <tr>
+                <td>Reporte de backups</td>
+                <td>Consultar</td>
+                <td>Sin acceso por defecto</td>
+              </tr>
+              <tr>
+                <td>Usuarios y roles</td>
+                <td>Administrar*</td>
+                <td>Sin acceso</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <p>
+          <small>
+            CRUD significa crear, consultar, modificar y eliminar. Los permisos efectivos deben
+            configurarse y validarse en el servidor. Los asteriscos indican permisos que deben
+            ajustarse a la política definitiva del sistema.
+          </small>
+        </p>
+
+        <a routerLink="/settings" class="step-link">
+          Revisar seguridad y permisos
+          <i class="bi bi-arrow-right" aria-hidden="true"></i>
+        </a>
+      </div>
+    </article>
+  </section>
+
+  <!-- FLUJO RECOMENDADO -->
   <section class="flow-section">
     <div class="flow-header">
-      <span class="section-label"> FLUJO RECOMENDADO </span>
+      <span class="section-label">FLUJO RECOMENDADO</span>
 
       <h2>
         De la configuración
-        <span>al reporte.</span>
+        <span>al reporte seguro.</span>
       </h2>
 
-      <p>Sigue este flujo para preparar tu laboratorio y completar una orden de principio a fin.</p>
+      <p>
+        Configura el laboratorio, protege la información y completa una orden de principio a fin.
+      </p>
     </div>
 
     <div class="flow">
-      <!-- Categorías -->
       <div class="flow-item">
         <div class="flow-icon">
-          <i class="bi bi-tags"></i>
+          <i class="bi bi-tags" aria-hidden="true"></i>
         </div>
-
-        <span> Categorías </span>
+        <span>Categorías</span>
       </div>
 
-      <div class="flow-arrow">
+      <div class="flow-arrow" aria-hidden="true">
         <i class="bi bi-arrow-right"></i>
       </div>
 
-      <!-- Pruebas -->
       <div class="flow-item">
         <div class="flow-icon">
-          <i class="bi bi-clipboard2-pulse"></i>
+          <i class="bi bi-clipboard2-pulse" aria-hidden="true"></i>
         </div>
-
-        <span> Pruebas </span>
+        <span>Pruebas</span>
       </div>
 
-      <div class="flow-arrow">
+      <div class="flow-arrow" aria-hidden="true">
         <i class="bi bi-arrow-right"></i>
       </div>
 
-      <!-- Contactos -->
       <div class="flow-item">
         <div class="flow-icon">
-          <i class="bi bi-card-list"></i>
+          <i class="bi bi-card-list" aria-hidden="true"></i>
         </div>
-
-        <span> Contactos </span>
+        <span>Contactos</span>
       </div>
 
-      <div class="flow-arrow">
+      <div class="flow-arrow" aria-hidden="true">
         <i class="bi bi-arrow-right"></i>
       </div>
 
-      <!-- Pacientes -->
       <div class="flow-item">
         <div class="flow-icon">
-          <i class="bi bi-people"></i>
+          <i class="bi bi-people" aria-hidden="true"></i>
         </div>
-
-        <span> Pacientes </span>
+        <span>Pacientes</span>
       </div>
 
-      <div class="flow-arrow">
+      <div class="flow-arrow" aria-hidden="true">
         <i class="bi bi-arrow-right"></i>
       </div>
 
-      <!-- Orden -->
       <div class="flow-item">
         <div class="flow-icon">
-          <i class="bi bi-clipboard2-check"></i>
+          <i class="bi bi-clipboard2-check" aria-hidden="true"></i>
         </div>
-
-        <span> Orden </span>
+        <span>Órdenes</span>
       </div>
 
-      <div class="flow-arrow">
+      <div class="flow-arrow" aria-hidden="true">
         <i class="bi bi-arrow-right"></i>
       </div>
 
-      <!-- Reporte -->
+      <div class="flow-item">
+        <div class="flow-icon">
+          <i class="bi bi-file-earmark-medical" aria-hidden="true"></i>
+        </div>
+        <span>Resultados</span>
+      </div>
+
+      <div class="flow-arrow" aria-hidden="true">
+        <i class="bi bi-arrow-right"></i>
+      </div>
+
       <div class="flow-item final">
         <div class="flow-icon">
-          <i class="bi bi-file-earmark-medical"></i>
+          <i class="bi bi-shield-check" aria-hidden="true"></i>
         </div>
-
-        <span> Reporte </span>
+        <span>Reporte seguro</span>
       </div>
     </div>
   </section>
 
-  <!-- FOOTER MESSAGE -->
-  <section class="home-footer">
-    <div class="footer-icon">
-      <i class="bi bi-info-circle"></i>
-    </div>
+  <!-- MANTENIMIENTO Y PROTECCIÓN -->
+  <section class="flow-section maintenance-section">
+    <div class="flow-header">
+      <span class="section-label">MANTENIMIENTO Y CONTINUIDAD</span>
 
-    <div>
-      <strong> ¿Ya tienes todo configurado? </strong>
+      <h2>
+        Protege tus datos
+        <span>y mantén el control.</span>
+      </h2>
 
       <p>
-        Puedes comenzar directamente desde el menú lateral para gestionar tus pacientes, crear
-        órdenes y generar sus reportes de laboratorio.
+        Revisa la configuración de seguridad, verifica las copias de respaldo y consulta los
+        reportes para facilitar la continuidad operativa del laboratorio.
       </p>
     </div>
 
-    <a routerLink="/patients" class="footer-action">
-      Ir a pacientes
-      <i class="bi bi-arrow-right"></i>
-    </a>
+    <div class="flow">
+      <div class="flow-item">
+        <div class="flow-icon">
+          <i class="bi bi-shield-lock" aria-hidden="true"></i>
+        </div>
+        <span>Control de acceso</span>
+      </div>
+
+      <div class="flow-arrow" aria-hidden="true">
+        <i class="bi bi-arrow-right"></i>
+      </div>
+
+      <div class="flow-item">
+        <div class="flow-icon">
+          <i class="bi bi-database-check" aria-hidden="true"></i>
+        </div>
+        <span>Copias de seguridad</span>
+      </div>
+
+      <div class="flow-arrow" aria-hidden="true">
+        <i class="bi bi-arrow-right"></i>
+      </div>
+
+      <div class="flow-item">
+        <div class="flow-icon">
+          <i class="bi bi-clipboard2-data" aria-hidden="true"></i>
+        </div>
+        <span>Verificación de respaldos</span>
+      </div>
+
+      <div class="flow-arrow" aria-hidden="true">
+        <i class="bi bi-arrow-right"></i>
+      </div>
+
+      <div class="flow-item final">
+        <div class="flow-icon">
+          <i class="bi bi-shield-check" aria-hidden="true"></i>
+        </div>
+        <span>Recuperación segura</span>
+      </div>
+    </div>
   </section>
 </div>
