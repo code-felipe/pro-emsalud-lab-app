@@ -38,6 +38,7 @@ public class TestResult {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	
+	@Column(name = "result", columnDefinition = "TEXT")
 	private String result;
 	
 	@Column(name = "unit_price")

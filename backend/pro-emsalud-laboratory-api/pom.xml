@@ -15,7 +15,7 @@
 
     <groupId>com.proemsalud</groupId>
     <artifactId>pro-emsalud-laboratory-api</artifactId>
-    <version>0.0.1-SNAPSHOT</version>
+    <version>1.0.0</version>
 
     <name>pro-emsalud-laboratory-api</name>
     <description>Laboratory Management System API for Pro-Emsalud</description>
@@ -50,7 +50,16 @@
             <artifactId>mysql-connector-j</artifactId>
             <scope>runtime</scope>
         </dependency>
-
+        
+        <!-- Flyway -->
+		<dependency>
+    		<groupId>org.flywaydb</groupId>
+    		<artifactId>flyway-core</artifactId>
+		</dependency>
+		<dependency>
+    		<groupId>org.flywaydb</groupId>
+    		<artifactId>flyway-mysql</artifactId>
+		</dependency>
         <!-- Lombok -->
         <dependency>
             <groupId>org.projectlombok</groupId>
@@ -102,10 +111,16 @@
         <plugins>
 
             <plugin>
-                <groupId>org.springframework.boot</groupId>
-                <artifactId>spring-boot-maven-plugin</artifactId>
-            </plugin>
-
+    			<groupId>org.springframework.boot</groupId>
+    			<artifactId>spring-boot-maven-plugin</artifactId>
+    			<executions>
+       			 <execution>
+            		<goals>
+                		<goal>build-info</goal>
+            		</goals>
+        		</execution>
+    			</executions>
+			</plugin>
         </plugins>
     </build>
 

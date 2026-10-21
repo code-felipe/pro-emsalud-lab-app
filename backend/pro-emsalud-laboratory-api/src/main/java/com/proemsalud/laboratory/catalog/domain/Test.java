@@ -42,7 +42,8 @@ public class Test {
 	@Enumerated(EnumType.STRING)
 	@Column(name = "test_type")
 	private TestType testType;
-
+	
+	@Column(name = "reference", columnDefinition = "TEXT")
 	private String reference;
 	
 	@Column(name = "price", nullable = false, precision = 10, scale = 2)

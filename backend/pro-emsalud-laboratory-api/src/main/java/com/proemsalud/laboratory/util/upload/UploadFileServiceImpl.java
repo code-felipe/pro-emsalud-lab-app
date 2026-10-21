@@ -15,13 +15,16 @@ import org.springframework.core.io.Resource;
 import org.springframework.core.io.UrlResource;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.beans.factory.annotation.Value;
+
 
 @Service
 public class UploadFileServiceImpl implements IUploadFileService {
 
 	private static final Logger log = LoggerFactory.getLogger(UploadFileServiceImpl.class);
 
-	private final static String DIRECTORY_UPLOAD = "uploads";
+	@Value("${app.uploads.directory:uploads}")
+	private String directoryUpload;
 	private final static String DEFAULT_IMAGE = "static/images/no-user.png";
 
 	@Override
@@ -65,6 +68,11 @@ public class UploadFileServiceImpl implements IUploadFileService {
 
 	@Override
 	public Path getPath(String fileName) {
-		return Paths.get(DIRECTORY_UPLOAD).resolve(fileName).toAbsolutePath();
+		Path base = Paths.get(directoryUpload).toAbsolutePath().normalize();
+		Path resolved = base.resolve(fileName).normalize();
+		if (!resolved.startsWith(base)) {
+			throw new IllegalArgumentException("Invalid file name");
+		}
+		return resolved;
 	}
 }

@@ -37,20 +37,21 @@
         </div>
 
         <!-- =================================================
-             RESULT
-        ================================================== -->
+     RESULT
+================================================== -->
 
-        <div class="form-row">
+        <div class="form-row form-row-full">
           <label class="form-label" for="result"> Resultado </label>
 
           <div class="form-field">
             <textarea
               id="result"
               name="result"
-              class="form-control form-input"
+              class="form-control form-input result-input"
               [(ngModel)]="testResult.result"
               placeholder="Ingrese el resultado"
-              rows="4"
+              rows="14"
+              spellcheck="false"
               required
               #result="ngModel"
             ></textarea>

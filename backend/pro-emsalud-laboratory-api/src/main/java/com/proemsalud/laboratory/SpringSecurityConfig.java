@@ -79,7 +79,8 @@ public class SpringSecurityConfig {
 						.requestMatchers(HttpMethod.POST, "/api/login").permitAll()
 						.requestMatchers(HttpMethod.GET, "/api/users/uploads/img/**").permitAll()
 						.requestMatchers(HttpMethod.GET, "/images/**").permitAll()
-						.anyRequest().authenticated())
+						.requestMatchers("/api/**").authenticated()
+						.anyRequest().permitAll())
 				.addFilter(authenticationFilter)
 				.addFilterBefore(authorizationFilter,
 						org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter.class);
