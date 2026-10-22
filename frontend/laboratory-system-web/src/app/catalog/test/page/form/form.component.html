@@ -5,8 +5,12 @@
       >: {{ error.value }}
     </li>
   </ul>
+
   <div class="form-card">
-    <!-- ===================================================== HEADER ===================================================== -->
+    <!-- =====================================================
+         HEADER
+    ====================================================== -->
+
     <div class="form-card-header">
       <div class="form-header-icon">
         <i class="bi bi-measuring-cup"></i>
@@ -14,27 +18,32 @@
 
       <div>
         <h5 class="form-title">
-          {{ test.id != null ? 'Editar Test Referencial' : title}}
+          {{ test.id != null ? 'Editar Test Referencial' : title }}
         </h5>
 
-        <small class="form-subtitle"> Detalle del Test</small>
+        <small class="form-subtitle"> Detalle del Test </small>
       </div>
     </div>
-    <!-- ===================================================== BODY ===================================================== -->
+
+    <!-- =====================================================
+         BODY
+    ====================================================== -->
+
     <div class="form-card-body">
       <form #testForm="ngForm">
         <!-- =================================================
-       NAME
-       ================================================= -->
+             NAME
+        ================================================== -->
 
         <div class="form-row">
-          <label class="form-label"> Nombre de Prueba </label>
+          <label class="form-label" for="name"> Nombre de Prueba </label>
 
           <div class="form-field">
             <input
+              id="name"
               type="text"
               class="form-control form-input"
-              placeholder="e.g. Complete Blood Count"
+              placeholder="Ej. Examen general de orina"
               [(ngModel)]="test.name"
               name="name"
               required
@@ -53,14 +62,15 @@
         </div>
 
         <!-- =================================================
-       TEST TYPE
-       ================================================= -->
+             TEST TYPE
+        ================================================== -->
 
         <div class="form-row">
-          <label class="form-label"> Tipo de prueba </label>
+          <label class="form-label" for="testType"> Tipo de prueba </label>
 
           <div class="form-field">
             <select
+              id="testType"
               class="form-control form-input"
               [(ngModel)]="test.testType"
               name="testType"
@@ -83,37 +93,100 @@
           </div>
         </div>
 
-        <!-- =================================================
-       REFERENCE
-       ================================================= -->
+        <!-- REFERENCE TEMPLATES -->
 
-        <div class="form-row">
-          <label class="form-label">Referencia</label>
+        <div class="form-row template-row">
+          <label class="form-label" for="reference"> Referencia </label>
 
           <div class="form-field">
+            <div class="template-selector">
+              <button
+                type="button"
+                class="btn template-toggle"
+                [class.template-toggle-active]="templateMenuOpen"
+                [attr.aria-expanded]="templateMenuOpen"
+                aria-controls="referenceTemplateList"
+                (click)="templateMenuOpen = !templateMenuOpen"
+              >
+                <span class="template-toggle-content">
+                  <i class="bi bi-files"></i>
+                  Plantillas predefinidas
+                </span>
+
+                <i
+                  class="bi"
+                  [class.bi-chevron-down]="!templateMenuOpen"
+                  [class.bi-chevron-up]="templateMenuOpen"
+                ></i>
+              </button>
+
+              <div id="referenceTemplateList" class="template-menu" *ngIf="templateMenuOpen">
+                <div class="template-menu-header">
+                  <span class="template-menu-title"> Selecciona una plantilla </span>
+
+                  <span class="template-menu-hint"> Se insertará el contenido en Referencia </span>
+                </div>
+
+                <button
+                  type="button"
+                  class="template-option"
+                  *ngFor="let template of templates"
+                  (click)="insertTemplate(template.content)"
+                >
+                  <span class="template-option-icon">
+                    <i class="bi bi-file-earmark-text"></i>
+                  </span>
+
+                  <span class="template-option-text">
+                    <span class="template-option-name">
+                      {{ template.name }}
+                    </span>
+
+                    <span class="template-option-description">
+                      {{ template.description }}
+                    </span>
+                  </span>
+
+                  <i class="bi bi-chevron-right template-option-arrow"></i>
+                </button>
+
+                <div class="template-menu-footer">
+                  <i class="bi bi-info-circle"></i>
+                  Seleccionar una plantilla reemplaza el texto actual.
+                </div>
+              </div>
+            </div>
+
             <textarea
-              class="form-control form-input"
-              placeholder="Ej: Hombre: 34 mg/dL&#10;Mujer: 30 mg/dL"
-              [(ngModel)]="test.reference"
+              id="reference"
               name="reference"
+              class="form-control form-input formatted-textarea"
+              placeholder="Selecciona una plantilla o escribe la referencia manualmente..."
+              [(ngModel)]="test.reference"
               #reference="ngModel"
-              rows="4"
+              rows="10"
+              spellcheck="false"
             ></textarea>
+
+            <small class="template-helper">
+              Puedes modificar el contenido insertado antes de guardar.
+            </small>
           </div>
         </div>
 
         <!-- =================================================
-       PRICE
-       ================================================= -->
+             PRICE
+        ================================================== -->
 
         <div class="form-row">
-          <label class="form-label"> Precio </label>
+          <label class="form-label" for="price"> Precio </label>
 
           <div class="form-field">
             <input
+              id="price"
               type="number"
               class="form-control form-input"
-              placeholder="e.g. 25.00"
+              placeholder="Ej. 25.00"
               [(ngModel)]="test.price"
               name="price"
               required
@@ -131,14 +204,15 @@
         </div>
 
         <!-- =================================================
-       CATEGORY
-       ================================================= -->
+             CATEGORY
+        ================================================== -->
 
         <div class="form-row">
-          <label class="form-label"> Categoría del Test </label>
+          <label class="form-label" for="testCategoryId"> Categoría del Test </label>
 
           <div class="form-field">
             <select
+              id="testCategoryId"
               class="form-control form-input"
               [(ngModel)]="test.testCategoryId"
               name="testCategoryId"
@@ -162,21 +236,19 @@
         </div>
 
         <!-- =================================================
-       DIVIDER
-       ================================================= -->
+             DIVIDER
+        ================================================== -->
 
         <hr class="form-divider" />
 
         <!-- =================================================
-       ACTIONS
-       ================================================= -->
+             ACTIONS
+        ================================================== -->
 
         <div class="form-actions">
           <button type="button" class="btn btn-cancel" [routerLink]="['/tests']">Cancelar</button>
 
-          <!-- =================================================
-         CREATE
-         ================================================= -->
+          <!-- CREATE -->
 
           <button
             type="submit"
@@ -186,13 +258,10 @@
             [disabled]="!testForm.form.valid"
           >
             <i class="ti ti-plus"></i>
-
             Crear
           </button>
 
-          <!-- =================================================
-         EDIT
-         ================================================= -->
+          <!-- EDIT -->
 
           <ng-template #editBlock>
             <button
@@ -202,7 +271,6 @@
               [disabled]="!testForm.form.valid"
             >
               <i class="ti ti-edit"></i>
-
               Editar
             </button>
           </ng-template>

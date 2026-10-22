@@ -46,9 +46,9 @@
                 <div class="detail-item">
                   <span class="detail-label">Referencia</span>
 
-                  <span class="detail-value" [class.text-muted-custom]="!test.reference">
+                  <pre class="result-reference" [class.text-muted-custom]="!test.reference">
                     {{ test.reference || 'Referencia no especificada' }}
-                  </span>
+                  </pre>
                 </div>
               </div>
 
@@ -56,7 +56,7 @@
                 <div class="detail-item">
                   <span class="detail-label">Precio</span>
                   <span class="detail-value price">
-                    {{ test.price | currency }}
+                    Q{{ test.price }}
                   </span>
                 </div>
               </div>

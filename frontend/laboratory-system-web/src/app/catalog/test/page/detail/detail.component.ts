@@ -26,10 +26,12 @@ export class TestDetailComponent implements OnInit  {
 
     hasError = false;
 
-    testTypeLabels: Record<TestType, string> = {
-      [TestType.CUANTITATIVA]: 'Cuantitativa',
-      [TestType.RAPIDA]: 'Rápida'
-    };
+  testTypeLabels: Record<TestType, string> = {
+  [TestType.CUANTITATIVA]: 'Cuantitativa',
+  [TestType.RAPIDA]: 'Rápida',
+  [TestType.SEMI_CUANTITATIVA]: 'Semi-cuantitativa',
+  [TestType.OTROS]: 'Otros',
+};
 
 
   constructor(

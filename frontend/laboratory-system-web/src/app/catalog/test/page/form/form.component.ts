@@ -13,6 +13,7 @@ import { TestService } from '../../components/test.service';
 import { TestCategoryResponse } from '../../../test-category/components/test-category.model';
 import { TestCategoryService } from '../../../test-category/components/test-category.service';
 import { AlertService } from '../../../../utils/alert/alert.service';
+import { TEST_TEMPLATES } from '../../../../utils/templates/templates';
 
 
 @Component({
@@ -50,8 +51,25 @@ export class TestFormComponent implements OnInit {
     {
     value: TestType.CUANTITATIVA,
     label: 'Cuantitativa'
+    },
+     {
+    value: TestType.SEMI_CUANTITATIVA,
+    label: 'Semi Cuantitativa'
+    },
+    {
+    value: TestType.OTROS,
+    label: 'Otros'
     }
     ];
+
+  public templates = TEST_TEMPLATES;
+
+  public templateMenuOpen = false;
+
+  public insertTemplate(content: string): void {
+  this.test.reference = content;
+  this.templateMenuOpen = false;
+}
 
   public testCategories: TestCategoryResponse[] = [];
 

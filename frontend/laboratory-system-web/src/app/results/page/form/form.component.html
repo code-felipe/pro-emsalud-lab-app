@@ -1,5 +1,7 @@
+
 <div class="form-page">
   <div class="form-card">
+    <!-- HEADER -->
     <div class="form-card-header">
       <div class="form-header-icon">
         <i class="bi bi-clipboard2-plus"></i>
@@ -10,72 +12,174 @@
           {{ title }}
         </h2>
 
-        <div class="form-subtitle">Selecciona el test e ingresa el resultado.</div>
+        <div class="form-subtitle">
+          Selecciona el test e ingresa el resultado.
+        </div>
       </div>
     </div>
 
+    <!-- BODY -->
     <div class="form-card-body">
       <form>
+
         <!-- =================================================
              TEST
         ================================================== -->
 
         <div class="form-row">
-          <label class="form-label"> Test </label>
+          <label class="form-label">Test</label>
 
           <div class="form-field">
             <app-test-selector
               [selectedTest]="selectedTest"
               (testSelected)="onTestSelected($event)"
-            >
-            </app-test-selector>
+            ></app-test-selector>
 
-            <div class="validation-message" *ngIf="!testResult.testId">
+            <div
+              class="validation-message"
+              *ngIf="!testResult.testId"
+            >
               <div>El test es requerido</div>
             </div>
           </div>
         </div>
 
         <!-- =================================================
-     RESULT
-================================================== -->
+             RESULT + TEMPLATES
+        ================================================== -->
 
-        <div class="form-row form-row-full">
-          <label class="form-label" for="result"> Resultado </label>
+        <div class="form-row form-row-full template-row">
+          <label class="form-label" for="result">
+            Resultado
+          </label>
 
           <div class="form-field">
+
+            <!-- TEMPLATE DROPDOWN -->
+
+            <div class="template-selector">
+              <button
+                type="button"
+                class="btn template-toggle"
+                [class.template-toggle-active]="templateMenuOpen"
+                [attr.aria-expanded]="templateMenuOpen"
+                aria-controls="resultTemplateList"
+                (click)="templateMenuOpen = !templateMenuOpen"
+              >
+                <span class="template-toggle-content">
+                  <i class="bi bi-files"></i>
+                  Plantillas de resultados
+                </span>
+
+                <i
+                  class="bi"
+                  [class.bi-chevron-down]="!templateMenuOpen"
+                  [class.bi-chevron-up]="templateMenuOpen"
+                ></i>
+              </button>
+
+              <!-- DROPDOWN MENU -->
+
+              <div
+                id="resultTemplateList"
+                class="template-menu"
+                *ngIf="templateMenuOpen"
+              >
+                <div class="template-menu-header">
+                  <span class="template-menu-title">
+                    Selecciona una plantilla
+                  </span>
+
+                  <span class="template-menu-hint">
+                    Se insertará el contenido en Resultado
+                  </span>
+                </div>
+
+                <button
+                  type="button"
+                  class="template-option"
+                  *ngFor="let template of templates"
+                  (click)="insertTemplate(template.content)"
+                >
+                  <span class="template-option-icon">
+                    <i class="bi bi-file-earmark-text"></i>
+                  </span>
+
+                  <span class="template-option-text">
+                    <span class="template-option-name">
+                      {{ template.name }}
+                    </span>
+
+                    <span class="template-option-description">
+                      {{ template.description }}
+                    </span>
+                  </span>
+
+                  <i
+                    class="bi bi-chevron-right template-option-arrow"
+                  ></i>
+                </button>
+
+                <div class="template-menu-footer">
+                  <i class="bi bi-info-circle"></i>
+                  Seleccionar una plantilla reemplaza el texto actual.
+                </div>
+              </div>
+            </div>
+
+            <!-- SINGLE RESULT TEXTAREA -->
+
             <textarea
               id="result"
               name="result"
-              class="form-control form-input result-input"
+              class="form-control form-input formatted-textarea"
               [(ngModel)]="testResult.result"
-              placeholder="Ingrese el resultado"
-              rows="14"
+              placeholder="Selecciona una plantilla o pega aquí el resultado completo..."
+              rows="10"
               spellcheck="false"
               required
               #result="ngModel"
             ></textarea>
 
+            <!-- VALIDATION -->
+
             <div
               class="validation-message"
               *ngIf="(result.dirty || result.touched) && result.invalid"
             >
-              <div>El resultado es requerido</div>
+              <div *ngIf="result.errors?.['required']">
+                El resultado es requerido
+              </div>
             </div>
+
+            <small class="template-helper">
+              Puedes modificar el contenido insertado antes de guardar.
+            </small>
           </div>
         </div>
+
+        <!-- =================================================
+             ACTIONS
+        ================================================== -->
 
         <div class="form-actions">
           <button
             type="button"
             class="btn btn-cancel"
-            [routerLink]="['/patients', patientId, 'orders', orderId, 'test-results']"
+            [routerLink]="[
+              '/patients',
+              patientId,
+              'orders',
+              orderId,
+              'test-results'
+            ]"
           >
             <i class="ti ti-x"></i>
             Cancelar
           </button>
 
           <!-- CREATE -->
+
           <button
             *ngIf="!testResultId"
             type="button"
@@ -88,6 +192,7 @@
           </button>
 
           <!-- EDIT -->
+
           <button
             *ngIf="testResultId"
             type="button"
@@ -99,6 +204,7 @@
             Actualizar resultado
           </button>
         </div>
+
       </form>
     </div>
   </div>

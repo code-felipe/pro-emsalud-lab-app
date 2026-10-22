@@ -650,28 +650,30 @@ input[type='date'].form-input {
 }
 
 /* =========================================================
-   RESULT TEXTAREA (formato columnas/filas)
+   TEST CATALOG - REFERENCE TEXTAREA
+   Estilos exclusivos del formulario Test
+========================================================= */
+/* =========================================================
+   TEXTAREA FORMATEADO
+   Compartido por Test.reference y TestResult.result
 ========================================================= */
 
-textarea.result-input {
-  font-family: Consolas, 'Courier New', monospace;
+textarea.formatted-textarea {
+  display: block;
+
+  width: 100%;
+  min-width: 0;
+  min-height: 80px;
+
+  box-sizing: border-box;
+
+  font-family: Consolas, "Courier New", monospace;
   font-size: 13px;
   line-height: 1.5;
 
   white-space: pre;
-  overflow-x: auto;
   tab-size: 8;
 
-  min-height: 260px;
   resize: vertical;
-}
-
-/* Donde se muestre el resultado (detalle, lista, impresión) */
-.result-text {
-  font-family: Consolas, 'Courier New', monospace;
-  font-size: 13px;
-  line-height: 1.5;
-
-  white-space: pre-wrap;
-  tab-size: 8;
+  overflow: auto;
 }

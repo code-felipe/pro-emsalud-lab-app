@@ -1,0 +1,271 @@
+
+/* =========================================================
+   REFERENCE TEMPLATES
+========================================================= */
+
+.template-row .form-field {
+  min-width: 0;
+}
+
+.template-selector {
+  position: relative;
+  width: 100%;
+  margin-bottom: 10px;
+}
+
+/* =========================================================
+   TOGGLE BUTTON
+========================================================= */
+
+.template-toggle {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+
+  width: 100%;
+  min-height: 44px;
+  padding: 10px 14px;
+
+  color: #344054;
+  background-color: #ffffff;
+
+  border: 1px solid #d0d5dd;
+  border-radius: 8px;
+
+  font-size: 14px;
+  font-weight: 500;
+  text-align: left;
+
+  transition:
+    background-color 0.2s ease,
+    border-color 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.template-toggle:hover {
+  background-color: #f8fafc;
+  border-color: #98a2b3;
+}
+
+.template-toggle:focus-visible {
+  outline: none;
+  border-color: #3b82f6;
+  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.15);
+}
+
+.template-toggle-active {
+  border-color: #93b5fd;
+  border-bottom-left-radius: 0;
+  border-bottom-right-radius: 0;
+}
+
+.template-toggle-content {
+  display: inline-flex;
+  align-items: center;
+  gap: 9px;
+}
+
+.template-toggle-content > i {
+  font-size: 17px;
+  color: #475569;
+}
+
+/* =========================================================
+   DROPDOWN MENU
+========================================================= */
+
+.template-menu {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  z-index: 1050;
+
+  overflow: hidden;
+
+  background-color: #ffffff;
+  border: 1px solid #d0d5dd;
+  border-top: none;
+  border-radius: 0 0 8px 8px;
+
+  box-shadow: 0 8px 24px rgba(16, 24, 40, 0.12);
+}
+
+/* =========================================================
+   MENU HEADER
+========================================================= */
+
+.template-menu-header {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+
+  padding: 13px 15px;
+
+  background-color: #f8fafc;
+  border-bottom: 1px solid #eaecf0;
+}
+
+.template-menu-title {
+  color: #344054;
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.template-menu-hint {
+  color: #667085;
+  font-size: 12px;
+  line-height: 1.5;
+}
+
+/* =========================================================
+   TEMPLATE OPTION
+========================================================= */
+
+.template-option {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+
+  width: 100%;
+  padding: 13px 15px;
+
+  color: #344054;
+  background-color: #ffffff;
+
+  border: none;
+  border-bottom: 1px solid #eaecf0;
+
+  text-align: left;
+  cursor: pointer;
+
+  transition: background-color 0.15s ease;
+}
+
+.template-option:last-of-type {
+  border-bottom: none;
+}
+
+.template-option:hover {
+  background-color: #f5f8ff;
+}
+
+.template-option:focus-visible {
+  position: relative;
+  outline: 2px solid #3b82f6;
+  outline-offset: -2px;
+}
+
+.template-option-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  flex: 0 0 38px;
+  width: 38px;
+  height: 38px;
+
+  color: #2563eb;
+  background-color: #eff6ff;
+  border-radius: 8px;
+
+  font-size: 18px;
+}
+
+.template-option-text {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  gap: 4px;
+
+  min-width: 0;
+}
+
+.template-option-name {
+  color: #344054;
+  font-size: 13px;
+  font-weight: 600;
+  line-height: 1.4;
+}
+
+.template-option-description {
+  color: #667085;
+  font-size: 12px;
+  line-height: 1.5;
+}
+
+.template-option-arrow {
+  flex-shrink: 0;
+  color: #98a2b3;
+  font-size: 13px;
+}
+
+/* =========================================================
+   MENU FOOTER
+========================================================= */
+
+.template-menu-footer {
+  display: flex;
+  align-items: flex-start;
+  gap: 7px;
+
+  padding: 11px 14px;
+
+  color: #667085;
+  background-color: #f8fafc;
+
+  border-top: 1px solid #eaecf0;
+
+  font-size: 11px;
+  line-height: 1.5;
+}
+
+.template-menu-footer i {
+  margin-top: 1px;
+  font-size: 13px;
+}
+
+/* =========================================================
+   TEXTAREA HELPER
+========================================================= */
+
+.template-helper {
+  display: block;
+  margin-top: 7px;
+
+  color: #667085;
+  font-size: 12px;
+  line-height: 1.5;
+}
+
+/* =========================================================
+   RESPONSIVE
+========================================================= */
+
+@media (max-width: 576px) {
+  .template-toggle {
+    padding: 10px 12px;
+    font-size: 13px;
+  }
+
+  .template-option {
+    gap: 10px;
+    padding: 12px;
+  }
+
+  .template-option-icon {
+    flex-basis: 34px;
+    width: 34px;
+    height: 34px;
+    font-size: 16px;
+  }
+
+  .template-option-description {
+    font-size: 11px;
+  }
+
+  .template-menu-footer {
+    font-size: 10px;
+  }
+}

@@ -1,173 +1,127 @@
-/* =====================================================
-   REPORT WRAPPER
-===================================================== */
+/* ===================================================== REPORT WRAPPER ===================================================== */
 
 .order-report-wrapper {
   display: flex;
   flex-direction: column;
-
   width: 100%;
   min-width: 0;
   min-height: 0;
 }
 
-
-/* =====================================================
-   REPORT
-===================================================== */
+/* ===================================================== REPORT ===================================================== */
 
 .order-report {
   width: 100%;
   min-width: 0;
-
   background: var(--paper-raised);
   color: var(--ink);
-
   border: 1px solid var(--line);
   border-radius: var(--radius-s);
-
   overflow: hidden;
-
-  font-family:
-    Inter,
-    system-ui,
-    -apple-system,
-    BlinkMacSystemFont,
-    "Segoe UI",
-    sans-serif;
+  box-sizing: border-box;
+  font-family: Inter, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  font-size: 10px;
 }
 
-
-/* =====================================================
-   HEADER
-===================================================== */
+/* ===================================================== HEADER ===================================================== */
 
 .report-header {
   display: flex;
   align-items: center;
   justify-content: space-between;
-
-  padding: 14px 16px;
-
+  gap: 12px;
+  padding: 12px 14px;
   background: var(--teal-wash);
-
   border-bottom: 2px solid var(--teal);
-
-  gap: 16px;
 }
 
 .report-brand {
   display: flex;
   align-items: center;
-
-  gap: 10px;
-
+  gap: 9px;
   min-width: 0;
 }
 
 .report-icon {
-  width: 56px;
-  height: 56px;
-
+  width: 48px;
+  height: 48px;
   padding: 0;
-
   display: flex;
   align-items: center;
   justify-content: center;
-
   border-radius: 14px;
-
   flex-shrink: 0;
-
   overflow: hidden;
 }
 
 .report-icon img {
   width: 100%;
   height: 100%;
-
   object-fit: contain;
-
   border-radius: 50%;
 }
 
 .report-title {
   color: var(--teal-deep);
-
-  font-size: 15px;
+  font-size: 10px;
   font-weight: 700;
-
   line-height: 1.2;
 }
 
 .report-subtitle {
   margin-top: 2px;
-
   color: var(--ink-soft);
-
   font-size: 10px;
   line-height: 1.2;
+}
+
+.report-subtitle h5 {
+  margin: 0;
+  font-size: 10px;
+  font-weight: inherit;
 }
 
 .report-order {
   display: flex;
   flex-direction: column;
   align-items: flex-end;
-
-  min-width: 70px;
-
+  min-width: 65px;
   flex-shrink: 0;
 }
 
 .report-order strong {
   color: var(--teal-deep);
-
-  font-size: 15px;
+  font-size: 10px;
   font-weight: 700;
 }
 
 .report-label {
   display: block;
-
   color: var(--ink-soft);
-
-  font-size: 8px;
+  font-size: 10px;
   font-weight: 700;
-
-  letter-spacing: 0.12em;
-
+  letter-spacing: 0.1em;
   text-transform: uppercase;
 }
 
-
-/* =====================================================
-   PATIENT / DOCTOR INFORMATION
-===================================================== */
+/* ===================================================== PATIENT / DOCTOR / DATE ===================================================== */
 
 .report-info {
   display: grid;
-
-  grid-template-columns:
-    1.5fr
-    1.5fr
-    1fr;
-
+  grid-template-columns: 1.5fr 1.5fr 1fr;
   border-bottom: 1px solid var(--line);
-
   background: var(--paper-raised);
 }
 
 .report-info-block {
-  min-height: 58px;
+  min-height: 48px;
   min-width: 0;
-
-  padding: 9px 13px;
-
+  padding: 7px 10px;
   display: flex;
   flex-direction: column;
   justify-content: center;
-
   border-right: 1px solid var(--line);
+  box-sizing: border-box;
 }
 
 .report-info-block:last-child {
@@ -175,127 +129,85 @@
 }
 
 .report-info-block strong {
-  margin-top: 3px;
-
+  margin-top: 2px;
   color: var(--ink);
-
-  font-size: 11px;
+  font-size: 10px;
   font-weight: 650;
-
   line-height: 1.25;
-
-  overflow-wrap: anywhere;
+  overflow-wrap: break-word;
+  word-break: break-word;
 }
 
 .report-secondary {
   margin-top: 2px;
-
   color: var(--ink-soft);
-
-  font-size: 9px;
+  font-size: 10px;
 }
 
-
-/* =====================================================
-   RESULTS SECTION
-===================================================== */
+/* ===================================================== RESULTS SECTION ===================================================== */
 
 .report-section {
-  padding: 12px;
-
+  padding: 9px;
   min-width: 0;
   min-height: 0;
-
   display: flex;
   flex-direction: column;
+  box-sizing: border-box;
 }
 
-
-/* =====================================================
-   RESULTS HEADER
-===================================================== */
+/* ===================================================== RESULTS HEADER ===================================================== */
 
 .report-section-header {
   display: flex;
   align-items: flex-end;
   justify-content: space-between;
-
-  padding-bottom: 8px;
-
+  padding-bottom: 6px;
   border-bottom: 1px solid var(--line);
-
-  gap: 12px;
-
+  gap: 8px;
   flex-shrink: 0;
 }
 
 .report-section-kicker {
   display: block;
-
   margin-bottom: 1px;
-
   color: var(--teal);
-
-  font-size: 8px;
+  font-size: 10px;
   font-weight: 700;
-
-  letter-spacing: 0.14em;
+  letter-spacing: 0.12em;
 }
 
 .report-section-header h3 {
   margin: 0;
-
   color: var(--ink);
-
-  font-size: 14px;
+  font-size: 10px;
   font-weight: 700;
 }
 
 .report-result-count {
-  padding: 3px 7px;
-
+  padding: 2px 5px;
   background: var(--teal-wash);
-
   color: var(--teal-deep);
-
   border: 1px solid #c9ddd5;
-
   border-radius: var(--radius-s);
-
-  font-size: 9px;
+  font-size: 10px;
   font-weight: 600;
-
   white-space: nowrap;
-
   flex-shrink: 0;
 }
 
-
-/* =====================================================
-   RESULTS SCROLL
-===================================================== */
+/* ===================================================== RESULTS SCROLL ===================================================== */
 
 .report-results-scroll {
+  width: 100%;
+  min-width: 0;
   max-height: 300px;
-
-  margin-top: 8px;
-
+  margin-top: 6px;
   overflow-y: auto;
   overflow-x: auto;
-
-  padding-bottom: 3px;
-
+  padding-bottom: 2px;
   scrollbar-width: thin;
-
-  scrollbar-color:
-    var(--teal)
-    var(--paper);
+  scrollbar-color: var(--teal) var(--paper);
 }
-
-
-/* =====================================================
-   SCROLLBAR
-===================================================== */
 
 .report-results-scroll::-webkit-scrollbar {
   width: 5px;
@@ -304,13 +216,11 @@
 
 .report-results-scroll::-webkit-scrollbar-track {
   background: var(--paper);
-
   border-radius: var(--radius-s);
 }
 
 .report-results-scroll::-webkit-scrollbar-thumb {
   background: var(--teal);
-
   border-radius: var(--radius-s);
 }
 
@@ -318,753 +228,635 @@
   background: var(--teal-deep);
 }
 
-
-/* =====================================================
-   RESULTS TABLE
-===================================================== */
+/* ===================================================== RESULTS TABLE ===================================================== */
 
 .report-results-table {
   width: 100%;
-
+  min-width: 0;
+  max-width: 100%;
   border-collapse: collapse;
-
   background: var(--paper-raised);
-
+  font-family: Inter, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
   font-size: 10px;
-
   table-layout: fixed;
 }
 
+/* Distribución exacta de las columnas: 100 % */
 
-/* =====================================================
-   TABLE HEADER
-===================================================== */
+.report-results-table col.col-test { width: 18%; }
+.report-results-table col.col-type { width: 12%; }
+.report-results-table col.col-result { width: 35%; }
+.report-results-table col.col-reference { width: 35%; }
 
 .report-results-table thead {
   position: sticky;
-
   top: 0;
-
   z-index: 2;
 }
 
 .report-results-table th {
-  padding: 6px 7px;
-
+  padding: 4px 5px;
   background: var(--teal-wash);
-
   border-bottom: 1px solid var(--line-strong);
-
   color: var(--teal-deep);
-
-  font-size: 8px;
+  font-family: inherit;
+  font-size: 10px;
   font-weight: 700;
-
-  letter-spacing: 0.06em;
-
+  letter-spacing: 0.02em;
   text-align: left;
-
   text-transform: uppercase;
-
-  white-space: nowrap;
+  white-space: normal;
+  overflow-wrap: break-word;
+  word-break: break-word;
+  box-sizing: border-box;
 }
 
-
-/* =====================================================
-   TABLE BODY
-===================================================== */
-
 .report-results-table tbody tr {
-  transition:
-    background-color var(--transition-fast);
+  transition: background-color var(--transition-fast);
 }
 
 .report-results-table tbody tr:hover {
   background: #faf9f6;
 }
 
-
-/* =====================================================
-   TABLE CELLS
-===================================================== */
+/* ===================================================== TABLE CELLS ===================================================== */
 
 .report-results-table td {
-  padding: 6px 7px;
-
+  padding: 4px 5px;
   border-bottom: 1px solid var(--line);
-
-  vertical-align: middle;
-
-  line-height: 1.2;
-
-  overflow-wrap: anywhere;
+  vertical-align: top;
+  line-height: 1.3;
+  font-family: inherit;
+  font-size: 10px;
+  font-weight: 400;
+  overflow-wrap: break-word;
+  word-break: break-word;
+  box-sizing: border-box;
+  min-width: 0;
 }
 
 .report-results-table tbody tr:last-child td {
   border-bottom: none;
 }
 
-
-/* =====================================================
-   TEST NAME
-===================================================== */
+/* ===================================================== TEST NAME ===================================================== */
 
 .report-results-table .result-name {
   color: var(--ink);
-
+  font-family: inherit;
   font-size: 10px;
   font-weight: 650;
-
   text-transform: capitalize;
 }
 
-
-/* =====================================================
-   TEST TYPE
-===================================================== */
+/* ===================================================== TEST TYPE ===================================================== */
 
 .report-results-table .result-type {
-  display: inline-block;
-
-  padding: 2px 5px;
-
-  background: var(--teal-wash);
-
-  color: var(--teal-deep);
-
-  border: 1px solid #c9ddd5;
-
-  border-radius: var(--radius-s);
-
-  font-size: 7px;
-  font-weight: 700;
-
-  letter-spacing: 0.04em;
-
-  text-transform: uppercase;
-
-  white-space: nowrap;
-}
-
-
-/* =====================================================
-   RESULT VALUE
-===================================================== */
-
-.report-results-table .result-value {
-  color: var(--teal-deep);
-
+  display: inline;
+  max-width: 100%;
+  padding: 0;
+  background: transparent;
+  color: var(--ink);
+  border: none;
+  border-radius: 0;
+  font-family: inherit;
   font-size: 10px;
-  font-weight: 700;
-
-  white-space: nowrap;
-  
-}
-
-
-/* =====================================================
-   REFERENCE
-===================================================== */
-
-.report-results-table .result-reference {
-  color: var(--ink-soft);
-
-  font-size: 9px;
-
+  font-weight: 400;
+  line-height: inherit;
+  letter-spacing: normal;
+  text-transform: uppercase;
   white-space: normal;
-
-  white-space: pre-wrap;
-
-
-  overflow-wrap: anywhere;
+  overflow-wrap: break-word;
+  word-break: break-word;
+  box-sizing: border-box;
 }
 
+/* ===================================================== RESULT VALUE AND REFERENCE ===================================================== */
 
-/* =====================================================
-   EMPTY
-===================================================== */
+.report-results-table .result-value,
+.report-results-table .result-reference {
+  color: var(--teal-deep);
+  font-family: inherit;
+  font-size: 10px;
+  font-weight: 400;
+  vertical-align: top;
+  white-space: normal;
+  overflow: visible;
+  overflow-wrap: break-word;
+  word-break: break-word;
+  min-width: 0;
+}
+
+.report-results-table .result-text {
+  display: block;
+  width: 100%;
+  min-width: 0;
+  max-width: 100%;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: Consolas, "Courier New", monospace;
+  font-size: 10px;
+  font-weight: 400;
+  line-height: 1.3;
+  white-space: pre-wrap;
+  overflow-wrap: break-word;
+  word-break: break-all;
+  tab-size: 4;
+  color: inherit;
+  background: transparent;
+  border: none;
+}
+
+/* ===================================================== EMPTY STATE ===================================================== */
 
 .report-empty {
-  min-height: 70px;
-
+  min-height: 60px;
   display: flex;
   align-items: center;
   justify-content: center;
-
   flex-direction: column;
-
-  gap: 5px;
-
+  gap: 4px;
   background: var(--paper);
-
   border: 1px dashed var(--line-strong);
-
   border-radius: var(--radius-s);
-
   color: var(--ink-soft);
-
   font-size: 10px;
 }
 
 .report-empty i {
   color: var(--brick);
-
-  font-size: 17px;
+  font-size: 10px;
 }
 
-
-/* =====================================================
-   FOOTER NOTE
-===================================================== */
+/* ===================================================== FOOTER NOTE ===================================================== */
 
 .report-note {
   display: flex;
   align-items: flex-start;
-
-  margin: 0 12px 8px;
-
-  padding: 7px 9px;
-
+  gap: 6px;
+  margin: 0 9px 7px;
+  padding: 5px 7px;
   background: var(--paper);
-
   border-left: 3px solid var(--amber);
-
   color: var(--ink-soft);
-
-  font-size: 9px;
-
-  line-height: 1.35;
-
-  gap: 7px;
+  font-size: 10px;
+  line-height: 1.3;
 }
 
 .report-note i {
   margin-top: 1px;
-
   color: var(--amber);
-
   flex-shrink: 0;
 }
 
-
-/* =====================================================
-   REPORT FOOTER
-   Empresa | Sello | Validación | PDF
-===================================================== */
+/* ===================================================== REPORT FOOTER ===================================================== */
 
 .report-technician {
   display: grid;
-
-  grid-template-columns:
-    minmax(0, 1fr)
-    minmax(92px, auto)
-    auto;
-
+  grid-template-columns: minmax(0, 1fr) minmax(85px, auto) auto;
   align-items: center;
-
-  column-gap: 14px;
-
-  margin: 0 12px 12px;
-
+  column-gap: 9px;
+  margin: 0 9px 9px;
   min-width: 0;
-
-  padding-top: 9px;
-
+  padding-top: 7px;
   border-top: 1px solid var(--line);
+  box-sizing: border-box;
 }
 
-
-/* =====================================================
-   COMPANY
-   Sello + información de empresa
-===================================================== */
+/* ===================================================== COMPANY ===================================================== */
 
 .report-company {
-    
-    display: flex;
-    
-    align-items: center;
-
-    justify-content: space-around;
-
-    gap: 8px;
-
-    min-width: 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  gap: 6px;
+  min-width: 0;
 }
-
-
-/* =====================================================
-   COMPANY SEAL
-   ÚNICA IMAGEN DEL SELLO
-===================================================== */
 
 .report-company img {
-    
-    width: 100px;
-
-    height: 100px;
-
-    flex: 0 0 58px;
-
-    object-fit: contain;
-
-    opacity: 0.9;
-
+  width: 58px;
+  height: 58px;
+  flex: 0 0 48px;
+  object-fit: contain;
+  opacity: 0.9;
 }
-
-
-/* =====================================================
-   COMPANY INFORMATION
-===================================================== */
 
 .report-company-info {
   display: flex;
   flex-direction: column;
-
   justify-content: center;
-
-  gap: 1px;
-
+  gap: 2px;
   min-width: 0;
-
-   padding-left: 10px;
-
+  padding-left: 7px;
   border-left: 1px solid var(--line);
 }
 
 .report-company-location {
   color: var(--teal-deep);
-
-  font-size: 7px;
+  font-size: 10px;
   font-weight: 700;
-
-  line-height: 1.25;
-
-  letter-spacing: 0.03em;
-
+  line-height: 1.2;
+  letter-spacing: 0.02em;
   text-transform: uppercase;
-
-  overflow-wrap: anywhere;
+  overflow-wrap: break-word;
+  word-break: break-word;
 }
 
 .report-company-info span {
   color: var(--ink-soft);
-
-  font-size: 6.5px;
+  font-size: 10px;
   font-weight: 500;
-
-  line-height: 1.3;
-
-  white-space: nowrap;
+  line-height: 1.25;
+  white-space: normal;
+  overflow-wrap: break-word;
+  word-break: break-word;
 }
 
-
-/* =====================================================
-   VALIDATION
-===================================================== */
+/* ===================================================== VALIDATION ===================================================== */
 
 .report-validation {
   display: flex;
   flex-direction: column;
-
   justify-content: center;
-
-  gap: 1px;
-
-  min-width: 92px;
-
-  padding-left: 10px;
-
+  gap: 2px;
+  min-width: 85px;
+  padding-left: 7px;
   border-left: 1px solid var(--line);
 }
 
 .report-validation .report-label {
-  font-size: 7px;
-
+  font-size: 10px;
   line-height: 1.2;
 }
 
 .report-validation strong {
   color: var(--ink);
-
-  font-size: 9px;
+  font-size: 10px;
   font-weight: 650;
-
   line-height: 1.2;
-
-  white-space: nowrap;
+  white-space: normal;
 }
 
-
-/* =====================================================
-   ACTIONS
-===================================================== */
+/* ===================================================== ACTIONS ===================================================== */
 
 .report-actions {
   display: flex;
   align-items: center;
-
+  gap: 5px;
   flex-shrink: 0;
 }
 
-.report-download-btn {
+.report-download-btn,
+.report-whatsapp-btn {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-
-  gap: 5px;
-
-  min-height: 30px;
-
-  padding: 6px 10px;
-
-  border: 1px solid var(--teal);
-
+  gap: 4px;
+  min-height: 27px;
+  padding: 5px 7px;
   border-radius: var(--radius-s);
-
-  background: var(--teal);
-
   color: #ffffff;
-
-  font-size: 9px;
+  font-size: 10px;
   font-weight: 650;
-
   white-space: nowrap;
-
   cursor: pointer;
+  transition: background-color var(--transition-fast), border-color var(--transition-fast), opacity var(--transition-fast);
+}
 
-  transition:
-    background-color var(--transition-fast),
-    border-color var(--transition-fast),
-    opacity var(--transition-fast);
+.report-download-btn {
+  border: 1px solid var(--teal);
+  background: var(--teal);
 }
 
 .report-download-btn:hover:not(:disabled) {
   background: var(--teal-deep);
-
   border-color: var(--teal-deep);
 }
 
 .report-download-btn:disabled {
   opacity: 0.65;
-
   cursor: wait;
 }
 
-.report-download-btn i {
-  font-size: 11px;
+.report-download-btn i,
+.report-whatsapp-btn i {
+  font-size: 10px;
 }
 
-/*
-===================
-    BTN WHASAP
-===================
-*/
 .report-whatsapp-btn {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-
-  margin-left: 10px;
-  
-  gap: 5px;
-
-  min-height: 30px;
-
-  padding: 6px 10px;
-
   border: 1px solid #25d366;
-
-  border-radius: var(--radius-s);
-
   background: #25d366;
-
-  color: #ffffff;
-
-  font-size: 9px;
-  font-weight: 650;
-
-  white-space: nowrap;
-
-  cursor: pointer;
-
-  transition:
-    background-color var(--transition-fast),
-    border-color var(--transition-fast),
-    opacity var(--transition-fast);
 }
 
 .report-whatsapp-btn:hover {
   background: #1ebe5d;
-
   border-color: #1ebe5d;
 }
 
-.report-whatsapp-btn i {
-  font-size: 11px;
-}
-
-
-/* =====================================================
-   PDF GENERATION
-===================================================== */
+/* ===================================================== PDF GENERATION ===================================================== */
 
 .order-report.generating-pdf {
-  width: 794px;
-  max-width: 794px;
-
-  height: auto;
-  max-height: none;
-
-  overflow: visible;
+  display: block;
+  width: 100% !important;
+  min-width: 0 !important;
+  max-width: none !important;
+  height: auto !important;
+  max-height: none !important;
+  overflow: visible !important;
+  box-sizing: border-box;
+  border-radius: 0;
+  font-size: 10px;
 }
 
-.order-report.generating-pdf .report-results-scroll {
-  max-height: none;
-  height: auto;
+/* Encabezado */
 
-  margin-top: 8px;
+.order-report.generating-pdf .report-header { padding: 8px 10px; gap: 8px; }
+.order-report.generating-pdf .report-icon { width: 36px; height: 36px; }
+.order-report.generating-pdf .report-title { font-size: 10px; }
+.order-report.generating-pdf .report-subtitle { font-size: 10px; }
+.order-report.generating-pdf .report-order strong { font-size: 10px; }
+.order-report.generating-pdf .report-label { font-size: 10px; letter-spacing: 0; }
+
+/* Información del paciente */
+
+.order-report.generating-pdf .report-info-block { min-height: 0; padding: 5px 7px; }
+.order-report.generating-pdf .report-info-block strong { font-size: 10px; line-height: 1.2; }
+.order-report.generating-pdf .report-secondary { font-size: 10px; }
+
+/* Sección de resultados */
+
+.order-report.generating-pdf .report-section { padding: 6px; }
+.order-report.generating-pdf .report-section-header { padding-bottom: 4px; gap: 5px; }
+.order-report.generating-pdf .report-section-kicker { font-size: 10px; letter-spacing: 0; }
+.order-report.generating-pdf .report-section-header h3 { font-size: 10px; }
+.order-report.generating-pdf .report-result-count { padding: 2px 4px; font-size: 10px; }
+
+/* Mostrar todos los resultados, sin scroll */
+
+.order-report.generating-pdf .report-results-scroll {
+  width: 100% !important;
+  min-width: 0 !important;
+  max-width: 100% !important;
+  height: auto !important;
+  max-height: none !important;
+  margin-top: 4px;
   padding-bottom: 0;
-
-  overflow: visible;
+  overflow: visible !important;
 }
+
+/* Tabla PDF: misma distribución de columnas */
 
 .order-report.generating-pdf .report-results-table {
-  width: 100%;
-  min-width: 0;
-
-  table-layout: fixed;
+  width: 100% !important;
+  min-width: 0 !important;
+  max-width: 100% !important;
+  table-layout: fixed !important;
+  border-collapse: collapse;
+  font-size: 10px;
 }
 
-.order-report.generating-pdf .report-results-table thead {
-  position: static;
+.order-report.generating-pdf .report-results-table col.col-test { width: 18% !important; }
+.order-report.generating-pdf .report-results-table col.col-type { width: 12% !important; }
+.order-report.generating-pdf .report-results-table col.col-result,
+.order-report.generating-pdf .report-results-table col.col-reference { width: 35% !important; }
+
+.order-report.generating-pdf .report-results-table thead { position: static !important; }
+
+.order-report.generating-pdf .report-results-table th {
+  padding: 3px 4px;
+  font-size: 10px;
+  letter-spacing: 0;
+  white-space: normal;
+  overflow-wrap: break-word;
+  word-break: break-word;
 }
 
-.order-report.generating-pdf .report-results-table tbody tr:hover {
+.order-report.generating-pdf .report-results-table td {
+  padding: 3px 4px;
+  font-size: 10px;
+  line-height: 1.3;
+  vertical-align: top;
+  max-width: none;
+  overflow: visible;
+  overflow-wrap: break-word;
+  word-break: break-word;
+}
+
+/* Nombre de la prueba */
+
+.order-report.generating-pdf .report-results-table .result-name { font-size: 10px; }
+
+/* Tipo */
+
+.order-report.generating-pdf .report-results-table .result-type {
+  font-family: inherit;
+  font-size: 10px;
+  font-weight: 400;
+  line-height: inherit;
+  padding: 0;
+  border: none;
   background: transparent;
+  color: var(--ink);
+  white-space: normal;
+  overflow-wrap: break-word;
+  word-break: break-word;
 }
 
+/* Resultado y referencia */
 
-/* =====================================================
-   RESPONSIVE
-===================================================== */
-
-@media (max-width: 700px) {
-
-  .report-header {
-    align-items: flex-start;
-    flex-direction: column;
-
-    padding: 12px 14px;
-  }
-
-  .report-order {
-    align-items: flex-start;
-  }
-
-
-  /* =================================================
-     PATIENT / DOCTOR / DATE
-  ================================================= */
-
-  .report-info {
-    grid-template-columns: 1fr;
-  }
-
-  .report-info-block {
-    min-height: auto;
-
-    padding: 8px 12px;
-
-    border-right: none;
-    border-bottom: 1px solid var(--line);
-  }
-
-  .report-info-block:last-child {
-    border-bottom: none;
-  }
-
-
-  /* =================================================
-     RESULTS
-  ================================================= */
-
-  .report-section {
-    padding: 10px;
-  }
-
-  .report-results-scroll {
-    max-height: 300px;
-
-    overflow-y: auto;
-    overflow-x: auto;
-  }
-
-  .report-results-table {
-    min-width: 540px;
-
-    table-layout: auto;
-  }
-
-  .report-results-table th,
-  .report-results-table td {
-    padding: 6px 7px;
-  }
-
-
-  /* =================================================
-     NOTE
-  ================================================= */
-
-  .report-note {
-    margin: 0 10px 8px;
-  }
-
-
-  /* =================================================
-     FOOTER
-  ================================================= */
-
-  .report-technician {
-    grid-template-columns:
-      minmax(0, 1fr)
-      auto;
-
-    column-gap: 8px;
-    row-gap: 8px;
-
-    margin: 0 10px 10px;
-
-    align-items: center;
-  }
-
-
-  /* =================================================
-     COMPANY
-  ================================================= */
-
-  .report-company {
-    grid-column: 1 / -1;
-
-    gap: 7px;
-
-    min-width: 0;
-  }
-
-  .report-company img {
-    width: 52px;
-    height: 52px;
-
-    flex-basis: 52px;
-  }
-
-  .report-company-location {
-    font-size: 6.5px;
-  }
-
-  .report-company-info span {
-    font-size: 6px;
-
-    white-space: normal;
-
-    overflow-wrap: anywhere;
-  }
-
-
-  /* =================================================
-     VALIDATION
-  ================================================= */
-
-  .report-validation {
-    grid-column: 1;
-
-    min-width: 0;
-
-    padding-left: 7px;
-  }
-
-  .report-validation .report-label {
-    font-size: 6.5px;
-  }
-
-  .report-validation strong {
-    font-size: 8px;
-
-    white-space: normal;
-  }
-
-
-  /* =================================================
-     ACTION
-  ================================================= */
-
-  .report-actions {
-    grid-column: 2;
-
-    justify-self: end;
-  }
-
-  .report-download-btn {
-    min-height: 29px;
-
-    padding: 6px 9px;
-
-    font-size: 8px;
-  }
-
-  .report-download-btn i {
-    font-size: 10px;
-  }
-}
-
-
-/* =====================================================
-   PDF MODE
-   El PDF conserva siempre el footer horizontal.
-===================================================== */
-
-.order-report.generating-pdf .report-results-scroll {
-  max-height: none;
-
-  height: auto;
-
-  overflow: visible;
-}
-
-.order-report.generating-pdf .report-results-table {
+.order-report.generating-pdf .report-results-table .result-value,
+.order-report.generating-pdf .report-results-table .result-reference {
+  width: auto;
   min-width: 0;
-
-  table-layout: fixed;
+  font-size: 10px;
+  white-space: normal;
+  overflow: visible;
+  overflow-wrap: break-word;
+  word-break: break-word;
 }
+
+.order-report.generating-pdf .report-results-table .result-text {
+  display: block;
+  width: 100% !important;
+  min-width: 0 !important;
+  max-width: 100% !important;
+  height: auto !important;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: Consolas, "Courier New", monospace;
+  font-size: 10px !important;
+  font-weight: 400;
+  line-height: 1.3;
+  white-space: pre-wrap !important;
+  overflow: visible !important;
+  overflow-wrap: break-word !important;
+  word-break: break-all !important;
+  tab-size: 4;
+}
+
+/* Nota */
+
+.order-report.generating-pdf .report-note {
+  margin: 0 6px 5px;
+  padding: 4px 6px;
+  font-size: 10px;
+  line-height: 1.2;
+}
+
+/* Footer PDF */
 
 .order-report.generating-pdf .report-technician {
-  grid-template-columns:
-    minmax(0, 1fr)
-    minmax(92px, auto)
-    auto;
-
-  column-gap: 14px;
-
-  flex-wrap: nowrap;
+  display: grid !important;
+  grid-template-columns: minmax(0, 1fr) minmax(75px, auto) !important;
+  column-gap: 8px;
+  row-gap: 4px;
+  margin: 0 6px 6px;
+  padding-top: 5px;
+  align-items: center;
 }
 
 .order-report.generating-pdf .report-company {
   grid-column: 1;
-
+  grid-row: 1;
+  display: flex;
+  align-items: center;
+  gap: 5px;
   min-width: 0;
 }
 
-.order-report.generating-pdf .report-company img {
-  width: 58px;
-  height: 58px;
-
-  flex-basis: 58px;
-}
+.order-report.generating-pdf .report-company img { width: 42px; height: 42px; flex: 0 0 42px; }
+.order-report.generating-pdf .report-company-info { gap: 1px; padding-left: 5px; }
+.order-report.generating-pdf .report-company-location { font-size: 10px; line-height: 1.2; letter-spacing: 0; }
+.order-report.generating-pdf .report-company-info span { font-size: 10px; line-height: 1.2; }
 
 .order-report.generating-pdf .report-validation {
   grid-column: 2;
+  grid-row: 1;
+  min-width: 0;
+  padding-left: 6px;
 }
 
-.order-report.generating-pdf .report-actions {
-  grid-column: 3;
+.order-report.generating-pdf .report-validation .report-label { font-size: 10px; }
+.order-report.generating-pdf .report-validation strong { font-size: 10px; line-height: 1.2; white-space: normal; }
+
+/* Botones fuera del PDF */
+
+.order-report.generating-pdf .report-actions { display: none !important; }
+
+/* Evitar efectos visuales durante la captura */
+
+.order-report.generating-pdf .report-results-table tbody tr,
+.order-report.generating-pdf .report-results-table tbody tr:hover {
+  background: transparent !important;
+  transition: none !important;
+}
+
+/* ===================================================== RESPONSIVE: BROWSER ===================================================== */
+
+@media (max-width: 700px) {
+  .report-header { align-items: flex-start; flex-direction: column; padding: 12px; }
+
+  .report-order { align-items: flex-start; }
+
+  .report-info { grid-template-columns: 1fr; }
+
+  .report-info-block { min-height: auto; padding: 8px 10px; border-right: none; border-bottom: 1px solid var(--line); }
+
+  .report-info-block:last-child { border-bottom: none; }
+
+  .report-section { padding: 8px; }
+
+  .report-results-scroll { max-height: 300px; overflow-y: auto; overflow-x: auto; }
+
+  .report-results-table { min-width: 540px; table-layout: fixed; }
+
+  .report-results-table th,
+  .report-results-table td { padding: 5px; }
+
+  .report-note { margin: 0 8px 7px; }
+
+  .report-technician {
+    grid-template-columns: minmax(0, 1fr) auto;
+    column-gap: 7px;
+    row-gap: 7px;
+    margin: 0 8px 8px;
+    align-items: center;
+  }
+
+  .report-company { grid-column: 1 / -1; gap: 6px; min-width: 0; }
+
+  .report-company img { width: 48px; height: 48px; flex-basis: 48px; }
+
+  .report-company-location { font-size: 10px; }
+
+  .report-company-info span { font-size: 10px; white-space: normal; overflow-wrap: break-word; word-break: break-word; }
+
+  .report-validation { grid-column: 1; min-width: 0; padding-left: 6px; }
+
+  .report-validation .report-label { font-size: 10px; }
+
+  .report-validation strong { font-size: 10px; white-space: normal; }
+
+  .report-actions { grid-column: 2; justify-self: end; }
+
+  .report-download-btn,
+  .report-whatsapp-btn { min-height: 27px; padding: 5px 7px; font-size: 10px; }
+
+  .report-download-btn i,
+  .report-whatsapp-btn i { font-size: 10px; }
+
+  /* PDF: ignorar el ancho mínimo del modo móvil */
+
+  .order-report.generating-pdf .report-info { grid-template-columns: 1.5fr 1.5fr 1fr; }
+
+  .order-report.generating-pdf .report-results-table {
+    width: 100% !important;
+    min-width: 0 !important;
+    max-width: 100% !important;
+    table-layout: fixed !important;
+  }
+
+  .order-report.generating-pdf .report-technician { grid-template-columns: minmax(0, 1fr) minmax(75px, auto) !important; }
+
+  .order-report.generating-pdf .report-company { grid-column: 1; }
+
+  .order-report.generating-pdf .report-validation { grid-column: 2; }
+}
+
+/* ===================================================== PRINT ===================================================== */
+
+@media print {
+  @page { size: letter portrait; margin: 8mm; }
+
+  .report-results-scroll { max-height: none !important; height: auto !important; overflow: visible !important; }
+
+  .report-results-table { width: 100% !important; min-width: 0 !important; table-layout: fixed !important; }
+
+  .report-results-table col.col-test { width: 18% !important; }
+  .report-results-table col.col-type { width: 12% !important; }
+  .report-results-table col.col-result,
+  .report-results-table col.col-reference { width: 35% !important; }
+
+  .report-results-table .result-value,
+  .report-results-table .result-reference { overflow: visible !important; white-space: normal !important; }
+
+  .report-results-table .result-text {
+    display: block;
+    width: 100% !important;
+    max-width: 100% !important;
+    box-sizing: border-box;
+    font-family: Consolas, "Courier New", monospace;
+    font-size: 10px;
+    line-height: 1.3;
+    white-space: pre-wrap !important;
+    overflow-wrap: break-word !important;
+    word-break: break-all;
+    overflow: visible !important;
+  }
+
+  .report-results-table tr { break-inside: avoid; page-break-inside: avoid; }
+
+  .report-actions { display: none !important; }
 }

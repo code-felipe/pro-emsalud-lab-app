@@ -6,6 +6,7 @@
 @import './styles/_card.css';
 @import './styles/_user-card.css';
 @import './styles/_upload-picture.css';
+@import './styles/_template.css';
 
 @font-face {
   font-family: 'Fraunces';

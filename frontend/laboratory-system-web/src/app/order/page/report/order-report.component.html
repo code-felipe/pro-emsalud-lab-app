@@ -12,12 +12,10 @@
         </div>
 
         <div>
-          <div class="report-title">Reporte de Laboratorio</div>
-
-          <div class="report-subtitle">Resultado de análisis clínicos</div>
+          <div class="report-title">Reporte de Laboratorio Clínico</div>
 
           <div class="report-subtitle">
-            <strong>PROEMSALUD</strong>
+            <h5>PROEMSALUD</h5>
           </div>
         </div>
       </div>
@@ -95,6 +93,12 @@
 
       <div class="report-results-scroll">
         <table class="report-results-table" *ngIf="report.results.length > 0">
+          <colgroup>
+            <col class="col-test" />
+            <col class="col-type" />
+            <col class="col-result" />
+            <col class="col-reference" />
+          </colgroup>
           <thead>
             <tr>
               <th>Prueba</th>
@@ -126,13 +130,13 @@
               <!-- RESULTADO -->
 
               <td class="result-value">
-                {{ result.result }}
+                <pre class="result-text">{{ result.result }}</pre>
               </td>
 
               <!-- REFERENCIA -->
 
               <td class="result-reference">
-                {{ result.reference || '—' }}
+                <pre class="result-text">{{ result.reference || 'N/A' }}</pre>
               </td>
             </tr>
           </tbody>
@@ -168,9 +172,11 @@
         <div class="report-company-info">
           <strong class="report-company-location"> San Antonio Huista · Cantón Central </strong>
 
-          <span> L–V 7:30–13:00 · 14:00–17:00 </span>
+          <span> Lunes - Viernes 7:30–1:00 · 2:00–5:00 </span>
 
-          <span> S–D 7:30–13:00 · Tel. 3938-9383 </span>
+          <span> Sabado - Domingo 7:30–1:00</span>
+
+          <span>Tel. 4836-5187 | Tel. 4873-0645</span>
         </div>
         <img src="/emelyn-tech.png" alt="Sello de técnico de laboratorio" />
 
@@ -178,7 +184,7 @@
         <div class="report-validation">
           <span class="report-label"> Emelyn López </span>
 
-          <strong> Técnico de Laboratorista </strong>
+          <strong>Bioanalista - Technico en Laboratorio Clínico</strong>
         </div>
         <!-- ACCIÓN -->
         <div class="report-actions">

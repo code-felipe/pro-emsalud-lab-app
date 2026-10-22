@@ -42,7 +42,6 @@ public class JWTAuthorizationFilter extends BasicAuthenticationFilter {
                 jwtService.getUsername(header), null, jwtService.getRoles(header));
         }
   
-        System.out.println("Roles cargados: " + authentication.getAuthorities());
 
         SecurityContextHolder.getContext().setAuthentication(authentication);
         System.out.println("Authentication seteado: " + 

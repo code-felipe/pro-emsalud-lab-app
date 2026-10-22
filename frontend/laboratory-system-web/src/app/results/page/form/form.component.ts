@@ -21,6 +21,7 @@ import {
 import { TestResponse } from '../../../catalog/test/components/test.model';
 
 import { TestSelectorComponent } from '../../../utils/test-selector/test-selector.component';
+import { TEST_TEMPLATE_RESULT } from '../../../utils/templates/templates';
 
 
 @Component({
@@ -55,6 +56,16 @@ export class TestResultFormComponent implements OnInit {
   public testResultId?: number;
 
   public selectedTest?: TestResponse;
+
+public templates = TEST_TEMPLATE_RESULT;
+
+public templateMenuOpen = false;
+
+public insertTemplate(content: string): void {
+  this.testResult.result = content;
+  this.templateMenuOpen = false;
+}
+  
 
 
   constructor(
