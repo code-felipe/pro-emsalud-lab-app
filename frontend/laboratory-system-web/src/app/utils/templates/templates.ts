@@ -67,12 +67,12 @@ export const TEST_TEMPLATE_RESULT: TestTemplate[] = [
   description: 'Examen macroscópico y microscópico',
   content: [
     'MACROSCÓPICO\t\t\tMICROSCÓPICO',
-    'COLOR:\t\tMarrón\tLEUCOCITOS:\t\tNEG',
-    'ASPECTO:\tBlando\tERITROCITOS:\t\tNEG',
+    'COLOR:\t\tMarrón\tLEUCOCITOS:\tNEG',
+    'ASPECTO:\tBlando\tERITROCITOS:\tNEG',
     'MOCO:\t\tNEG\tLEVADURAS:\t\tNEG',
     'PH:\t\t8\tCÉLULAS VEGETALES:\t++',
     'SANGRE:\t\tNEG\tFIBRAS MUSCULARES:\t+',
-    'RESTOS ALIMENT:\tNEG\tGRASAS:\t\t\t+',
+    'RESTOS ALIMENT:\tNEG\tGRASAS:\t+',
     '\t\t\tALMIDONES:\t\t+',
     '\t\t\tPARÁSITOS: No se observan',
     '\t\t\tBACTERIAS:\t\t+++'

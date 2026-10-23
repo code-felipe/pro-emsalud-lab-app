@@ -93,12 +93,6 @@
 
       <div class="report-results-scroll">
         <table class="report-results-table" *ngIf="report.results.length > 0">
-          <colgroup>
-            <col class="col-test" />
-            <col class="col-type" />
-            <col class="col-result" />
-            <col class="col-reference" />
-          </colgroup>
           <thead>
             <tr>
               <th>Prueba</th>
@@ -130,13 +124,14 @@
               <!-- RESULTADO -->
 
               <td class="result-value">
-                <pre class="result-text">{{ result.result }}</pre>
+                <div class="reference-content" [innerHTML]="result.result || 'N/A'"></div>
               </td>
 
               <!-- REFERENCIA -->
 
+              <!-- REFERENCIA -->
               <td class="result-reference">
-                <pre class="result-text">{{ result.reference || 'N/A' }}</pre>
+                <div class="reference-content" [innerHTML]="result.reference || 'N/A'"></div>
               </td>
             </tr>
           </tbody>

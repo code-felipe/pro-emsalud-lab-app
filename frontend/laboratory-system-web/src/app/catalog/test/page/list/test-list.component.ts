@@ -57,7 +57,7 @@ export class TestsComponentList implements OnInit {
   testTypeLabels: Record<TestType, string> = {
   [TestType.CUANTITATIVA]: 'Cuantitativa',
   [TestType.RAPIDA]: 'Rápida',
-  [TestType.SEMI_CUANTITATIVA]: 'SEMI-CUANTITATIVA',
+  [TestType.SEMI_CUANTITATIVA]: 'SEMI_CUANTITATIVA',
   [TestType.OTROS]: 'Otros',
 };
 

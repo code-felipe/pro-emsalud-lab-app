@@ -46,18 +46,18 @@
                 <div class="detail-item">
                   <span class="detail-label">Referencia</span>
 
-                  <pre class="result-reference" [class.text-muted-custom]="!test.reference">
-                    {{ test.reference || 'Referencia no especificada' }}
-                  </pre>
+                  <div
+                    class="result-reference"
+                    [class.text-muted-custom]="!test.reference"
+                    [innerHTML]="test.reference || 'Referencia no especificada'"
+                  ></div>
                 </div>
               </div>
 
               <div class="col-12 col-sm-6">
                 <div class="detail-item">
                   <span class="detail-label">Precio</span>
-                  <span class="detail-value price">
-                    Q{{ test.price }}
-                  </span>
+                  <span class="detail-value price"> Q{{ test.price }} </span>
                 </div>
               </div>
             </div>

@@ -105,12 +105,16 @@
 
         <!-- REFERENCE -->
 
+        <!-- REFERENCE -->
+
         <div class="detail-item">
           <small> Referencia </small>
 
-          <span>
-            {{ selectedTest.reference || 'Sin referencia' }}
-          </span>
+          <div
+            class="selected-reference"
+            [class.text-muted-custom]="!selectedTest.reference"
+            [innerHTML]="selectedTest.reference || 'Sin referencia'"
+          ></div>
         </div>
 
         <!-- PRICE -->

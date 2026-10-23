@@ -1,0 +1,69 @@
+
+/* =========================================================
+   CKEDITOR 5 - ESTILOS ESPECÍFICOS
+========================================================= */
+
+.form-field .ck.ck-editor {
+  width: 100%;
+  max-width: 100%;
+  min-width: 0;
+  font-size: 14px;
+}
+
+/* Barra de herramientas: evitar botones gigantes */
+.form-field .ck.ck-editor .ck-toolbar {
+  flex-wrap: wrap;
+}
+
+.form-field .ck.ck-editor .ck-button {
+  margin: 0;
+  font-size: 13px;
+  line-height: 1;
+}
+
+/* Evitar que los iconos SVG se agranden */
+.form-field .ck.ck-editor .ck-button .ck-icon {
+  width: 16px;
+  height: 16px;
+  min-width: 16px;
+  min-height: 16px;
+}
+
+/* Área editable */
+.form-field .ck.ck-editor .ck-editor__editable_inline {
+  min-height: 240px;
+  max-width: 100%;
+  box-sizing: border-box;
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+/* Tablas dentro del contenido editable */
+.form-field .ck.ck-editor .ck-content table {
+  width: 100%;
+  max-width: 100%;
+  margin: 8px 0;
+  border-collapse: collapse;
+}
+
+/* Celdas */
+.form-field .ck.ck-editor .ck-content table td,
+.form-field .ck.ck-editor .ck-content table th {
+  min-width: 0;
+  padding: 6px;
+}
+
+/* Imágenes insertadas en el contenido */
+.form-field .ck.ck-editor .ck-content img {
+  max-width: 100%;
+  height: auto;
+}
+
+
+
+/* Móvil */
+@media (max-width: 576px) {
+  .form-field .ck.ck-editor .ck-editor__editable_inline {
+    min-height: 200px;
+  }
+}

@@ -202,11 +202,11 @@
   min-width: 0;
   max-height: 300px;
   margin-top: 6px;
-  overflow-y: auto;
+
   overflow-x: auto;
+  overflow-y: auto;
+
   padding-bottom: 2px;
-  scrollbar-width: thin;
-  scrollbar-color: var(--teal) var(--paper);
 }
 
 .report-results-scroll::-webkit-scrollbar {
@@ -234,19 +234,27 @@
   width: 100%;
   min-width: 0;
   max-width: 100%;
-  border-collapse: collapse;
-  background: var(--paper-raised);
-  font-family: Inter, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-  font-size: 10px;
   table-layout: fixed;
 }
+.report-results-table th:nth-child(1),
+.report-results-table td:nth-child(1) {
+  width: 12%;
+}
+.report-results-table th:nth-child(2),
+.report-results-table td:nth-child(2) {
+  width: 10%;
+}
 
-/* Distribución exacta de las columnas: 100 % */
+.report-results-table th:nth-child(3),
+.report-results-table td:nth-child(3) {
+  width: 39%;
+}
 
-.report-results-table col.col-test { width: 18%; }
-.report-results-table col.col-type { width: 12%; }
-.report-results-table col.col-result { width: 35%; }
-.report-results-table col.col-reference { width: 35%; }
+.report-results-table th:nth-child(4),
+.report-results-table td:nth-child(4) {
+  width: 39%;
+}
+
 
 .report-results-table thead {
   position: sticky;
@@ -335,16 +343,60 @@
 
 .report-results-table .result-value,
 .report-results-table .result-reference {
-  color: var(--teal-deep);
+  vertical-align: top;
+  min-width: 0;
+  padding: 6px;
+  color: var(--ink);
+  white-space: normal;
+  overflow-wrap: anywhere;
+  word-break: normal;
+}
+
+/* Contenido HTML renderizado */
+
+.report-results-table .reference-content {
+  width: 100%;
+  min-width: 0;
+  max-width: 100%;
   font-family: inherit;
   font-size: 10px;
-  font-weight: 400;
+  line-height: 1.4;
+  overflow-wrap: anywhere;
+  word-break: normal;
+}
+
+.report-results-table .reference-content table {
+  width: 100% !important;
+  max-width: 100% !important;
+  border-collapse: collapse;
+  table-layout: auto;
+  margin: 4px 0;
+  font-size: inherit;
+}
+
+.report-results-table .reference-content th,
+.report-results-table .reference-content td {
+  padding: 3px 4px;
+  border: 1px solid var(--line);
+  text-align: left;
   vertical-align: top;
-  white-space: normal;
-  overflow: visible;
-  overflow-wrap: break-word;
-  word-break: break-word;
-  min-width: 0;
+  overflow-wrap: anywhere;
+  word-break: normal;
+}
+
+.report-results-table .reference-content p {
+  margin: 0 0 4px;
+}
+
+.report-results-table .reference-content p:last-child {
+  margin-bottom: 0;
+}
+
+/* Imágenes y contenido ancho */
+
+.report-results-table .reference-content img {
+  max-width: 100%;
+  height: auto;
 }
 
 .report-results-table .result-text {
@@ -355,14 +407,17 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  font-family: Consolas, "Courier New", monospace;
+
+  font-family: "Courier New", Consolas, monospace;
   font-size: 10px;
   font-weight: 400;
   line-height: 1.3;
-  white-space: pre-wrap;
-  overflow-wrap: break-word;
-  word-break: break-all;
+
+  white-space: pre;
+  overflow-wrap: normal;
+  word-break: normal;
   tab-size: 4;
+
   color: inherit;
   background: transparent;
   border: none;
@@ -616,10 +671,36 @@
   font-size: 10px;
 }
 
-.order-report.generating-pdf .report-results-table col.col-test { width: 18% !important; }
-.order-report.generating-pdf .report-results-table col.col-type { width: 12% !important; }
-.order-report.generating-pdf .report-results-table col.col-result,
-.order-report.generating-pdf .report-results-table col.col-reference { width: 35% !important; }
+.order-report.generating-pdf .report-results-table th:nth-child(1),
+.order-report.generating-pdf .report-results-table td:nth-child(1) {
+  width: 12% !important;
+}
+
+.order-report.generating-pdf .report-results-table th:nth-child(2),
+.order-report.generating-pdf .report-results-table td:nth-child(2) {
+  width: 10% !important;
+}
+
+.order-report.generating-pdf .report-results-table th:nth-child(3),
+.order-report.generating-pdf .report-results-table td:nth-child(3),
+.order-report.generating-pdf .report-results-table th:nth-child(4),
+.order-report.generating-pdf .report-results-table td:nth-child(4) {
+  width: 39% !important;
+}
+
+.order-report.generating-pdf .report-results-table .reference-content {
+  width: 100%;
+  max-width: 100%;
+  font-size: 9px;
+  overflow-wrap: anywhere;
+}
+
+.order-report.generating-pdf .report-results-table .reference-content table {
+  width: 100% !important;
+  max-width: 100% !important;
+  table-layout: auto;
+  border-collapse: collapse;
+}
 
 .order-report.generating-pdf .report-results-table thead { position: static !important; }
 
@@ -651,7 +732,7 @@
 
 .order-report.generating-pdf .report-results-table .result-type {
   font-family: inherit;
-  font-size: 10px;
+  font-size: 9px;
   font-weight: 400;
   line-height: inherit;
   padding: 0;
@@ -669,7 +750,7 @@
 .order-report.generating-pdf .report-results-table .result-reference {
   width: auto;
   min-width: 0;
-  font-size: 10px;
+  font-size: 9px;
   white-space: normal;
   overflow: visible;
   overflow-wrap: break-word;
@@ -678,21 +759,23 @@
 
 .order-report.generating-pdf .report-results-table .result-text {
   display: block;
-  width: 100% !important;
-  min-width: 0 !important;
-  max-width: 100% !important;
-  height: auto !important;
+  width: max-content;
+  min-width: 100%;
+  max-width: none;
+  height: auto;
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  font-family: Consolas, "Courier New", monospace;
-  font-size: 10px !important;
+
+  font-family: "Courier New", Consolas, monospace;
+  font-size: 10px;
   font-weight: 400;
   line-height: 1.3;
-  white-space: pre-wrap !important;
+
+  white-space: pre !important;
   overflow: visible !important;
-  overflow-wrap: break-word !important;
-  word-break: break-all !important;
+  overflow-wrap: normal !important;
+  word-break: normal !important;
   tab-size: 4;
 }
 
@@ -768,7 +851,15 @@
 
   .report-section { padding: 8px; }
 
-  .report-results-scroll { max-height: 300px; overflow-y: auto; overflow-x: auto; }
+  .report-results-scroll {  width: 100%;
+  min-width: 0;
+  max-height: 300px;
+  margin-top: 6px;
+  overflow-y: auto;
+  overflow-x: auto;
+  padding-bottom: 2px;
+  scrollbar-width: thin;
+  scrollbar-color: var(--teal) var(--paper);}
 
   .report-results-table { min-width: 540px; table-layout: fixed; }
 
@@ -834,26 +925,37 @@
 
   .report-results-table { width: 100% !important; min-width: 0 !important; table-layout: fixed !important; }
 
-  .report-results-table col.col-test { width: 18% !important; }
-  .report-results-table col.col-type { width: 12% !important; }
-  .report-results-table col.col-result,
-  .report-results-table col.col-reference { width: 35% !important; }
+.report-results-table col.col-test { width: 10%; }
+.report-results-table col.col-type { width: 10%; }
+.report-results-table col.col-result { width: 40%; }
+.report-results-table col.col-reference { width: 40%; }
 
   .report-results-table .result-value,
   .report-results-table .result-reference { overflow: visible !important; white-space: normal !important; }
 
   .report-results-table .result-text {
-    display: block;
-    width: 100% !important;
-    max-width: 100% !important;
-    box-sizing: border-box;
-    font-family: Consolas, "Courier New", monospace;
-    font-size: 10px;
-    line-height: 1.3;
-    white-space: pre-wrap !important;
-    overflow-wrap: break-word !important;
-    word-break: break-all;
-    overflow: visible !important;
+  display: block;
+  width: max-content;
+  min-width: 100%;
+  max-width: none;
+
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+
+  font-family: "Courier New", Consolas, monospace;
+  font-size: 10px;
+  font-weight: 400;
+  line-height: 1.3;
+
+  white-space: pre;
+  overflow-wrap: normal;
+  word-break: normal;
+  tab-size: 4;
+
+  color: inherit;
+  background: transparent;
+  border: none;
   }
 
   .report-results-table tr { break-inside: avoid; page-break-inside: avoid; }

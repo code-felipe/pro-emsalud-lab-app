@@ -47,6 +47,7 @@ export interface TestSearchResponse{
 export enum TestType {
     CUANTITATIVA = 'CUANTITATIVA',
     RAPIDA = 'RAPIDA',
-    SEMI_CUANTITATIVA= 'SEMI-CUANTITATIVA',
+    SEMI_CUANTITATIVA= 'SEMI_CUANTITATIVA',
     OTROS = 'OTROS'
+    
 }

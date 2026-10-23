@@ -1,35 +1,50 @@
+
 import { Component, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { Router, RouterLink, ActivatedRoute } from '@angular/router';
 import { CommonModule } from '@angular/common';
 
+import { CKEditorModule } from '@ckeditor/ckeditor5-angular';
+import {
+  ClassicEditor,
+  Essentials,
+  Paragraph,
+  Bold,
+  Italic,
+  Link,
+  List,
+  Table,
+  TableToolbar,
+} from 'ckeditor5';
+
 import Swal from 'sweetalert2';
 import { HttpErrorResponse } from '@angular/common/http';
 
-import {CreateTestRequest,TestResponse,TestType,UpdateTestRequest,} from '../../components/test.model';
+import {
+  CreateTestRequest,
+  TestResponse,
+  TestType,
+  UpdateTestRequest,
+} from '../../components/test.model';
 
 import { TestService } from '../../components/test.service';
 
 import { TestCategoryResponse } from '../../../test-category/components/test-category.model';
 import { TestCategoryService } from '../../../test-category/components/test-category.service';
 import { AlertService } from '../../../../utils/alert/alert.service';
-import { TEST_TEMPLATES } from '../../../../utils/templates/templates';
-
 
 @Component({
   selector: 'app-test-form',
   standalone: true,
-
   imports: [
     FormsModule,
     RouterLink,
-    CommonModule
+    CommonModule,
+    CKEditorModule,
   ],
-
   templateUrl: './form.component.html',
 })
 export class TestFormComponent implements OnInit {
-
 
   public test: CreateTestRequest & { id?: number } = {
     name: '',
@@ -43,38 +58,63 @@ export class TestFormComponent implements OnInit {
 
   public apiError: any = null;
 
-  testTypes = [
+  public Editor = ClassicEditor;
+
+public editorConfig = {
+  licenseKey: 'GPL',
+  plugins: [
+    Essentials,
+    Paragraph,
+    Bold,
+    Italic,
+    Link,
+    List,
+    Table,
+    TableToolbar,
+  ],
+  toolbar: [
+    'undo',
+    'redo',
+    '|',
+    'bold',
+    'italic',
+    '|',
+    'link',
+    'bulletedList',
+    'numberedList',
+    '|',
+    'insertTable',
+  ],
+  table: {
+    contentToolbar: [
+      'tableColumn',
+      'tableRow',
+      'mergeTableCells',
+    ],
+  },
+  placeholder: 'Escribe la referencia del test...',
+};
+
+  public testTypes = [
     {
-    value: TestType.RAPIDA,
-    label: 'Rápida'
+      value: TestType.RAPIDA,
+      label: 'Rápida',
     },
     {
-    value: TestType.CUANTITATIVA,
-    label: 'Cuantitativa'
-    },
-     {
-    value: TestType.SEMI_CUANTITATIVA,
-    label: 'Semi Cuantitativa'
+      value: TestType.CUANTITATIVA,
+      label: 'Cuantitativa',
     },
     {
-    value: TestType.OTROS,
-    label: 'Otros'
-    }
-    ];
-
-  public templates = TEST_TEMPLATES;
-
-  public templateMenuOpen = false;
-
-  public insertTemplate(content: string): void {
-  this.test.reference = content;
-  this.templateMenuOpen = false;
-}
+      value: TestType.SEMI_CUANTITATIVA,
+      label: 'Semi Cuantitativa',
+    },
+    {
+      value: TestType.OTROS,
+      label: 'Otros',
+    },
+  ];
 
   public testCategories: TestCategoryResponse[] = [];
-
-
-
 
   constructor(
     private testService: TestService,
@@ -84,23 +124,17 @@ export class TestFormComponent implements OnInit {
     private alertService: AlertService
   ) {}
 
-
   ngOnInit(): void {
-
     this.loadTestCategories();
-
     this.loadTest();
   }
-
 
   // =====================================================
   // LOAD TEST
   // =====================================================
 
   public loadTest(): void {
-
     this.activatedRoute.params.subscribe((params) => {
-
       const id = params['id'];
 
       // CREATE
@@ -110,14 +144,12 @@ export class TestFormComponent implements OnInit {
 
       // EDIT
       this.testService.getTest(+id).subscribe({
-
         next: (response: TestResponse) => {
-
           this.test = {
             id: response.id,
             name: response.name,
             testType: response.testType,
-            reference: response.reference ?? undefined,
+            reference: response.reference ?? '',
             price: response.price,
             testCategoryId: response.testCategoryId,
           };
@@ -126,162 +158,121 @@ export class TestFormComponent implements OnInit {
         },
 
         error: (err: HttpErrorResponse) => {
-
           Swal.fire(
             'Error',
             err.error?.message ?? 'Unexpected error occurred',
             'error'
           ).then(() => {
-
             this.router.navigate(['/tests']);
-
           });
-
         },
-
       });
-
     });
-
   }
-
 
   // =====================================================
   // LOAD CATEGORIES
   // =====================================================
 
   private loadTestCategories(): void {
-
     this.testCategoryService
       .getTestCategories(0, 100)
       .subscribe({
-
         next: (response) => {
-
           this.testCategories = response.content;
-
         },
 
         error: (err) => {
-
-          console.error(
-            'Error loading test categories',
-            err
-          );
-
+          console.error('Error loading test categories', err);
         },
-
       });
-
   }
 
+  // =====================================================
+  // CREATE
+  // =====================================================
 
- public create(): void {
+  public create(): void {
+    this.apiError = null;
 
-  this.apiError = null;
+    const request: CreateTestRequest = {
+      name: this.test.name.trim(),
+      testType: this.test.testType,
+      reference: this.test.reference?.trim() || undefined,
+      price: this.test.price,
+      testCategoryId: this.test.testCategoryId,
+    };
 
-  const request: CreateTestRequest = {
-    name: this.test.name.trim(),
-    testType: this.test.testType,
-    reference: this.test.reference?.trim() || undefined,
-    price: this.test.price,
-    testCategoryId: this.test.testCategoryId,
-  };
+    this.testService.createTest(request).subscribe({
+      next: (response) => {
+        this.alertService.success(
+          response.message,
+          'Test de Referencia'
+        );
 
-  this.testService.createTest(request).subscribe({
+        this.router.navigate(['/tests']);
+      },
 
-    next: (response) => {
+      error: (err: HttpErrorResponse) => {
+        this.apiError = err.error;
 
-      this.alertService.success(
-        response.message,
-        'Test de Referencia'
-      );
+        this.alertService.error(
+          this.apiError?.message ??
+            'Hubo un error al crear el test de referencia',
+          'Error'
+        );
+      },
+    });
+  }
 
-      this.router.navigate(['/tests']);
-
-    },
-
-    error: (err: HttpErrorResponse) => {
-
-      this.apiError = err.error;
-
-      this.alertService.error(
-        this.apiError?.message ??
-          'Hubo un error al crear el test de referencia',
-        'Error'
-      );
-
-    }
-
-  });
-}
-
+  // =====================================================
+  // UPDATE
+  // =====================================================
 
   public update(): void {
+    this.apiError = null;
 
-  this.apiError = null;
-
-  if (!this.test.id) {
-    this.alertService.error(
-        this.apiError?.message ??
+    if (!this.test.id) {
+      this.alertService.error(
         'El ID es requerido para actualizar el test de referencia',
         'Error'
-    )
+      );
 
+      return;
+    }
 
-    return;
-  }
+    const request: UpdateTestRequest = {
+      name: this.test.name.trim(),
+      testType: this.test.testType,
+      reference: this.test.reference?.trim() || undefined,
+      price: this.test.price,
+      testCategoryId: this.test.testCategoryId,
+    };
 
-  const request: UpdateTestRequest = {
-
-    name: this.test.name.trim(),
-
-    testType: this.test.testType,
-
-    reference: this.test.reference?.trim() || undefined,
-
-    price: this.test.price,
-
-    testCategoryId: this.test.testCategoryId,
-  };
-
-  this.testService.updateTest(
-    this.test.id,
-    request
-  ).subscribe({
-
-    next: (response: any) => {
-        
+    this.testService.updateTest(
+      this.test.id,
+      request
+    ).subscribe({
+      next: (response: any) => {
         this.alertService.success(
-        response.message,
-        'Test de Referencia'
-      );
+          response.message,
+          'Test de Referencia'
+        );
 
-      this.router.navigate(['/tests']);
+        this.router.navigate(['/tests']);
+      },
 
+      error: (err: HttpErrorResponse) => {
+        this.apiError = err.error;
 
-    },
-
-    error: (err: HttpErrorResponse) => {
-
-      this.apiError = err.error;
-
-      if (!this.apiError?.errors) {
-
-      this.alertService.error(
-        this.apiError?.message ??
-          'Hubo un error al crear el test de referencia',
-        'Error'
-      );
-
-      }
-
-    },
-
-  });
-}
-
-
-  
-
+        if (!this.apiError?.errors) {
+          this.alertService.error(
+            this.apiError?.message ??
+              'Hubo un error al actualizar el test de referencia',
+            'Error'
+          );
+        }
+      },
+    });
+  }
 }

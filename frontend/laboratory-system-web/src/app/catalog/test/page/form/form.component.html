@@ -1,16 +1,16 @@
+
 <div class="form-page">
-  <ul class="alert alert-danger list-unstyled api-error" *ngIf="apiError?.errors as errors">
+  <ul
+    class="alert alert-danger list-unstyled api-error"
+    *ngIf="apiError?.errors as errors"
+  >
     <li *ngFor="let error of errors | keyvalue">
-      <b>{{ error.key }}</b
-      >: {{ error.value }}
+      <b>{{ error.key }}</b>: {{ error.value }}
     </li>
   </ul>
 
   <div class="form-card">
-    <!-- =====================================================
-         HEADER
-    ====================================================== -->
-
+    <!-- HEADER -->
     <div class="form-card-header">
       <div class="form-header-icon">
         <i class="bi bi-measuring-cup"></i>
@@ -21,22 +21,21 @@
           {{ test.id != null ? 'Editar Test Referencial' : title }}
         </h5>
 
-        <small class="form-subtitle"> Detalle del Test </small>
+        <small class="form-subtitle">
+          Detalle del Test
+        </small>
       </div>
     </div>
 
-    <!-- =====================================================
-         BODY
-    ====================================================== -->
-
+    <!-- BODY -->
     <div class="form-card-body">
       <form #testForm="ngForm">
-        <!-- =================================================
-             NAME
-        ================================================== -->
 
+        <!-- NAME -->
         <div class="form-row">
-          <label class="form-label" for="name"> Nombre de Prueba </label>
+          <label class="form-label" for="name">
+            Nombre de Prueba
+          </label>
 
           <div class="form-field">
             <input
@@ -51,8 +50,13 @@
               #name="ngModel"
             />
 
-            <div class="validation-message" *ngIf="name.invalid && (name.dirty || name.touched)">
-              <div *ngIf="name.errors?.['required']">Nombre de prueba es requerido</div>
+            <div
+              class="validation-message"
+              *ngIf="name.invalid && (name.dirty || name.touched)"
+            >
+              <div *ngIf="name.errors?.['required']">
+                Nombre de prueba es requerido
+              </div>
 
               <div *ngIf="name.errors?.['minlength']">
                 El nombre de prueba debe tener al menos 4 caracteres
@@ -61,12 +65,11 @@
           </div>
         </div>
 
-        <!-- =================================================
-             TEST TYPE
-        ================================================== -->
-
+        <!-- TEST TYPE -->
         <div class="form-row">
-          <label class="form-label" for="testType"> Tipo de prueba </label>
+          <label class="form-label" for="testType">
+            Tipo de prueba
+          </label>
 
           <div class="form-field">
             <select
@@ -77,9 +80,14 @@
               required
               #testType="ngModel"
             >
-              <option [ngValue]="undefined">Seleccionar tipo</option>
+              <option [ngValue]="undefined">
+                Seleccionar tipo
+              </option>
 
-              <option *ngFor="let type of testTypes" [ngValue]="type.value">
+              <option
+                *ngFor="let type of testTypes"
+                [ngValue]="type.value"
+              >
                 {{ type.label }}
               </option>
             </select>
@@ -88,98 +96,35 @@
               class="validation-message"
               *ngIf="testType.invalid && (testType.dirty || testType.touched)"
             >
-              <div *ngIf="testType.errors?.['required']">El tipo es requerido</div>
-            </div>
-          </div>
-        </div>
-
-        <!-- REFERENCE TEMPLATES -->
-
-        <div class="form-row template-row">
-          <label class="form-label" for="reference"> Referencia </label>
-
-          <div class="form-field">
-            <div class="template-selector">
-              <button
-                type="button"
-                class="btn template-toggle"
-                [class.template-toggle-active]="templateMenuOpen"
-                [attr.aria-expanded]="templateMenuOpen"
-                aria-controls="referenceTemplateList"
-                (click)="templateMenuOpen = !templateMenuOpen"
-              >
-                <span class="template-toggle-content">
-                  <i class="bi bi-files"></i>
-                  Plantillas predefinidas
-                </span>
-
-                <i
-                  class="bi"
-                  [class.bi-chevron-down]="!templateMenuOpen"
-                  [class.bi-chevron-up]="templateMenuOpen"
-                ></i>
-              </button>
-
-              <div id="referenceTemplateList" class="template-menu" *ngIf="templateMenuOpen">
-                <div class="template-menu-header">
-                  <span class="template-menu-title"> Selecciona una plantilla </span>
-
-                  <span class="template-menu-hint"> Se insertará el contenido en Referencia </span>
-                </div>
-
-                <button
-                  type="button"
-                  class="template-option"
-                  *ngFor="let template of templates"
-                  (click)="insertTemplate(template.content)"
-                >
-                  <span class="template-option-icon">
-                    <i class="bi bi-file-earmark-text"></i>
-                  </span>
-
-                  <span class="template-option-text">
-                    <span class="template-option-name">
-                      {{ template.name }}
-                    </span>
-
-                    <span class="template-option-description">
-                      {{ template.description }}
-                    </span>
-                  </span>
-
-                  <i class="bi bi-chevron-right template-option-arrow"></i>
-                </button>
-
-                <div class="template-menu-footer">
-                  <i class="bi bi-info-circle"></i>
-                  Seleccionar una plantilla reemplaza el texto actual.
-                </div>
+              <div *ngIf="testType.errors?.['required']">
+                El tipo es requerido
               </div>
             </div>
-
-            <textarea
-              id="reference"
-              name="reference"
-              class="form-control form-input formatted-textarea"
-              placeholder="Selecciona una plantilla o escribe la referencia manualmente..."
-              [(ngModel)]="test.reference"
-              #reference="ngModel"
-              rows="10"
-              spellcheck="false"
-            ></textarea>
-
-            <small class="template-helper">
-              Puedes modificar el contenido insertado antes de guardar.
-            </small>
           </div>
         </div>
 
-        <!-- =================================================
-             PRICE
-        ================================================== -->
+        <!-- REFERENCE: CKEDITOR -->
+        <div class="form-row form-row-full">
+          <label class="form-label" for="reference">
+            Referencia
+          </label>
 
+          <div class="form-field">
+            <ckeditor
+              id="reference"
+              name="reference"
+              [editor]="Editor"
+              [config]="editorConfig"
+              [(ngModel)]="test.reference"
+            ></ckeditor>
+          </div>
+        </div>
+
+        <!-- PRICE -->
         <div class="form-row">
-          <label class="form-label" for="price"> Precio </label>
+          <label class="form-label" for="price">
+            Precio
+          </label>
 
           <div class="form-field">
             <input
@@ -195,20 +140,26 @@
               #price="ngModel"
             />
 
-            <div class="validation-message" *ngIf="price.invalid && (price.dirty || price.touched)">
-              <div *ngIf="price.errors?.['required']">Precio es requerido</div>
+            <div
+              class="validation-message"
+              *ngIf="price.invalid && (price.dirty || price.touched)"
+            >
+              <div *ngIf="price.errors?.['required']">
+                Precio es requerido
+              </div>
 
-              <div *ngIf="price.errors?.['min']">El precio no debe ser negativo</div>
+              <div *ngIf="price.errors?.['min']">
+                El precio no debe ser negativo
+              </div>
             </div>
           </div>
         </div>
 
-        <!-- =================================================
-             CATEGORY
-        ================================================== -->
-
+        <!-- CATEGORY -->
         <div class="form-row">
-          <label class="form-label" for="testCategoryId"> Categoría del Test </label>
+          <label class="form-label" for="testCategoryId">
+            Categoría del Test
+          </label>
 
           <div class="form-field">
             <select
@@ -219,9 +170,14 @@
               required
               #testCategoryId="ngModel"
             >
-              <option [ngValue]="0">Seleccionar categoría</option>
+              <option [ngValue]="0">
+                Seleccionar categoría
+              </option>
 
-              <option *ngFor="let category of testCategories" [ngValue]="category.id">
+              <option
+                *ngFor="let category of testCategories"
+                [ngValue]="category.id"
+              >
                 {{ category.name }}
               </option>
             </select>
@@ -230,26 +186,27 @@
               class="validation-message"
               *ngIf="testCategoryId.invalid && (testCategoryId.dirty || testCategoryId.touched)"
             >
-              <div *ngIf="testCategoryId.errors?.['required']">La categoría es requerida</div>
+              <div *ngIf="testCategoryId.errors?.['required']">
+                La categoría es requerida
+              </div>
             </div>
           </div>
         </div>
 
-        <!-- =================================================
-             DIVIDER
-        ================================================== -->
-
+        <!-- DIVIDER -->
         <hr class="form-divider" />
 
-        <!-- =================================================
-             ACTIONS
-        ================================================== -->
-
+        <!-- ACTIONS -->
         <div class="form-actions">
-          <button type="button" class="btn btn-cancel" [routerLink]="['/tests']">Cancelar</button>
+          <button
+            type="button"
+            class="btn btn-cancel"
+            [routerLink]="['/tests']"
+          >
+            Cancelar
+          </button>
 
           <!-- CREATE -->
-
           <button
             type="submit"
             class="btn btn-primary-action"
@@ -262,7 +219,6 @@
           </button>
 
           <!-- EDIT -->
-
           <ng-template #editBlock>
             <button
               type="submit"
@@ -275,6 +231,7 @@
             </button>
           </ng-template>
         </div>
+
       </form>
     </div>
   </div>

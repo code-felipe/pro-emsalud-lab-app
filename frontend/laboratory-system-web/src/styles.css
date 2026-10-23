@@ -1,4 +1,5 @@
 /* You can add global styles to this file, and also import other style files */
+@import 'ckeditor5/ckeditor5.css';
 
 @import './styles/_list.css';
 @import './styles/_form.css';
@@ -7,6 +8,7 @@
 @import './styles/_user-card.css';
 @import './styles/_upload-picture.css';
 @import './styles/_template.css';
+@import './styles/_ckeditor.css';
 
 @font-face {
   font-family: 'Fraunces';
