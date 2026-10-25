@@ -43,8 +43,8 @@
 }
 
 .report-icon {
-  width: 48px;
-  height: 48px;
+  width: 75px;
+  height: 75px;
   padding: 0;
   display: flex;
   align-items: center;
@@ -63,7 +63,7 @@
 
 .report-title {
   color: var(--teal-deep);
-  font-size: 10px;
+  font-size: 14px;
   font-weight: 700;
   line-height: 1.2;
 }
@@ -71,7 +71,7 @@
 .report-subtitle {
   margin-top: 2px;
   color: var(--ink-soft);
-  font-size: 10px;
+  font-size: 14px;
   line-height: 1.2;
 }
 
@@ -490,8 +490,8 @@
 }
 
 .report-company img {
-  width: 58px;
-  height: 58px;
+  width: 150px;
+  height: 150px;
   flex: 0 0 48px;
   object-fit: contain;
   opacity: 0.9;
@@ -506,6 +506,8 @@
   padding-left: 7px;
   border-left: 1px solid var(--line);
 }
+
+
 
 .report-company-location {
   color: var(--teal-deep);
@@ -627,7 +629,7 @@
 /* Encabezado */
 
 .order-report.generating-pdf .report-header { padding: 8px 10px; gap: 8px; }
-.order-report.generating-pdf .report-icon { width: 36px; height: 36px; }
+.order-report.generating-pdf .report-icon { width: 75px; height: 75px; }
 .order-report.generating-pdf .report-title { font-size: 10px; }
 .order-report.generating-pdf .report-subtitle { font-size: 10px; }
 .order-report.generating-pdf .report-order strong { font-size: 10px; }
@@ -809,7 +811,7 @@
   min-width: 0;
 }
 
-.order-report.generating-pdf .report-company img { width: 42px; height: 42px; flex: 0 0 42px; }
+.order-report.generating-pdf .report-company img { width: 75px; height: 75px; flex: 0 0 42px; }
 .order-report.generating-pdf .report-company-info { gap: 1px; padding-left: 5px; }
 .order-report.generating-pdf .report-company-location { font-size: 10px; line-height: 1.2; letter-spacing: 0; }
 .order-report.generating-pdf .report-company-info span { font-size: 10px; line-height: 1.2; }
@@ -878,7 +880,8 @@
 
   .report-company { grid-column: 1 / -1; gap: 6px; min-width: 0; }
 
-  .report-company img { width: 48px; height: 48px; flex-basis: 48px; }
+  .report-company img { width: 75px; height: 75px; flex-basis: 48px; }
+
 
   .report-company-location { font-size: 10px; }
 

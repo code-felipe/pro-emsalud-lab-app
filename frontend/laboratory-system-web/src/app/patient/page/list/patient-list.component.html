@@ -111,9 +111,13 @@
           <tr>
             <th>Código</th>
 
-            <th>Nombre</th>
+            <th>Primer Nombre</th>
 
-            <th>Apellido paterno</th>
+            <th>Segundo Nombre</th>
+
+            <th>Primer Apellido</th>
+
+            <th>Segundo Apellido</th>
 
             <th>Edad</th>
 
@@ -154,11 +158,22 @@
               </span>
             </td>
 
+            <td>
+              <span class="table-emphasis">
+                {{ patient.middleName }}
+              </span>
+            </td>
             <!-- FATHER LAST NAME -->
 
             <td>
               <span class="table-secondary">
                 {{ patient.fatherLastName }}
+              </span>
+            </td>
+
+            <td>
+              <span class="table-emphasis">
+                {{ patient.motherLastName }}
               </span>
             </td>
 
