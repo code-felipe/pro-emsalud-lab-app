@@ -2,7 +2,7 @@ package com.proemsalud.laboratory.catalog.dto.update;
 
 import java.math.BigDecimal;
 
-import com.proemsalud.laboratory.catalog.enumerate.TestType;
+import com.proemsalud.laboratory.catalog.enumerate.TestMethod;
 
 import jakarta.validation.constraints.DecimalMin;
 import jakarta.validation.constraints.Digits;
@@ -23,9 +23,11 @@ public class UpdateTestRequest {
 	
 	@NotBlank(message = "El nombre es obligatorio")
 	private String name;
-
+	
+	private String group;
+	
 	@NotNull(message = "El tipo de prueba es obligatorio")
-	private TestType testType;
+	private TestMethod testMethod;
 
 	private String reference;
 

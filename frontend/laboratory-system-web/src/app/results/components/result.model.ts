@@ -1,3 +1,5 @@
+import { TestMethod } from "../../catalog/test/components/test.model";
+
 export interface CreateTestResultRequest{
 
     testId: number;
@@ -24,9 +26,11 @@ export interface TestResultResponse{
     
     testName: string;
 
+    testGroup: string;
+
     categoryName: string;
 
-    testType: TestType;
+    testMethod: TestMethod;
 
     testReference: string;
 
@@ -47,11 +51,6 @@ export interface TestResultSearchResponse{
     message: string;
 
     testResults: TestResultResponse[]
-}
-
-export enum TestType {
-    CUANTITATIVA = 'CUANTITATIVA',
-    RAPIDA = 'RAPIDA'
 }
 
 

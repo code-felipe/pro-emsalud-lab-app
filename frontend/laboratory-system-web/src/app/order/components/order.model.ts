@@ -1,5 +1,5 @@
+import { TestMethod } from "../../catalog/test/components/test.model";
 import { Title } from "../../doctor/components/doctor.model";
-import { TestType } from "../../results/components/result.model";
 
 export interface CreateOrderRequest{
 
@@ -54,7 +54,9 @@ export interface TestResultReportResponse {
 
     testName: string;
 
-    testType: TestType;
+    testGroup: string;
+
+    testMethod: TestMethod;
 
     result: string;
 

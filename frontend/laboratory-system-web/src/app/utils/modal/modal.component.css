@@ -190,6 +190,45 @@
   }
 }
 
+/* =========================================================
+   PANTALLAS CON POCA ALTURA: 1366 x 768, entre otras
+   ========================================================= */
+
+@media (min-width: 601px) and (max-height: 800px) {
+
+  .modal-backdrop-custom {
+    padding: 12px;
+    overflow-y: auto;
+    align-items: flex-start;
+  }
+
+  .modal-dialog-custom {
+    max-height: calc(100vh - 24px);
+  }
+
+  .modal-dialog-custom.modal-report {
+    height: calc(100vh - 24px);
+    max-height: calc(100vh - 24px);
+  }
+
+  .modal-header-custom {
+    flex-shrink: 0;
+    padding: 12px 20px;
+  }
+
+  .modal-body-custom {
+    min-height: 0;
+    flex: 1 1 auto;
+    overflow-y: auto;
+    overflow-x: hidden;
+  }
+
+  .modal-footer-custom {
+    flex-shrink: 0;
+    padding: 10px 20px;
+  }
+}
+
 
 /* =========================================================
    RESPONSIVE

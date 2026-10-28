@@ -62,9 +62,10 @@ public class TestServiceImpl implements ITestService {
 						"La categoria no existe con id: " + request.getTestCategoryId()));
 
 		test.setName(request.getName());
+		test.setGroup(request.getGroup());
 		test.setPrice(request.getPrice());
 		test.setReference(request.getReference());
-		test.setTestType(request.getTestType());
+		test.setTestMethod(request.getTestMethod());
 		test.setCategory(category);
 
 		Test updated = testRepository.save(test);

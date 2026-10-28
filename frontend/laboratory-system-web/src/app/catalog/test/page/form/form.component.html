@@ -1,11 +1,8 @@
-
 <div class="form-page">
-  <ul
-    class="alert alert-danger list-unstyled api-error"
-    *ngIf="apiError?.errors as errors"
-  >
+  <ul class="alert alert-danger list-unstyled api-error" *ngIf="apiError?.errors as errors">
     <li *ngFor="let error of errors | keyvalue">
-      <b>{{ error.key }}</b>: {{ error.value }}
+      <b>{{ error.key }}</b
+      >: {{ error.value }}
     </li>
   </ul>
 
@@ -18,24 +15,19 @@
 
       <div>
         <h5 class="form-title">
-          {{ test.id != null ? 'Editar Test Referencial' : title }}
+          {{ test.id != null ? 'Editar Prueba Referencial' : title }}
         </h5>
 
-        <small class="form-subtitle">
-          Detalle del Test
-        </small>
+        <small class="form-subtitle"> Detalle de la Prueba </small>
       </div>
     </div>
 
     <!-- BODY -->
     <div class="form-card-body">
       <form #testForm="ngForm">
-
         <!-- NAME -->
         <div class="form-row">
-          <label class="form-label" for="name">
-            Nombre de Prueba
-          </label>
+          <label class="form-label" for="name">Nombre de Prueba</label>
 
           <div class="form-field">
             <input
@@ -50,13 +42,8 @@
               #name="ngModel"
             />
 
-            <div
-              class="validation-message"
-              *ngIf="name.invalid && (name.dirty || name.touched)"
-            >
-              <div *ngIf="name.errors?.['required']">
-                Nombre de prueba es requerido
-              </div>
+            <div class="validation-message" *ngIf="name.invalid && (name.dirty || name.touched)">
+              <div *ngIf="name.errors?.['required']">Nombre de prueba es requerido</div>
 
               <div *ngIf="name.errors?.['minlength']">
                 El nombre de prueba debe tener al menos 4 caracteres
@@ -65,49 +52,38 @@
           </div>
         </div>
 
-        <!-- TEST TYPE -->
+        <!-- TEST METHOD -->
         <div class="form-row">
-          <label class="form-label" for="testType">
-            Tipo de prueba
-          </label>
+          <label class="form-label" for="testMethod">Método de prueba</label>
 
           <div class="form-field">
             <select
-              id="testType"
+              id="testMethod"
               class="form-control form-input"
-              [(ngModel)]="test.testType"
-              name="testType"
+              [(ngModel)]="test.testMethod"
+              name="testMethod"
               required
-              #testType="ngModel"
+              #testMethod="ngModel"
             >
-              <option [ngValue]="undefined">
-                Seleccionar tipo
-              </option>
+              <option [ngValue]="undefined">Seleccionar tipo</option>
 
-              <option
-                *ngFor="let type of testTypes"
-                [ngValue]="type.value"
-              >
+              <option *ngFor="let type of testMethods" [ngValue]="type.value">
                 {{ type.label }}
               </option>
             </select>
 
             <div
               class="validation-message"
-              *ngIf="testType.invalid && (testType.dirty || testType.touched)"
+              *ngIf="testMethod.invalid && (testMethod.dirty || testMethod.touched)"
             >
-              <div *ngIf="testType.errors?.['required']">
-                El tipo es requerido
-              </div>
+              <div *ngIf="testMethod.errors?.['required']">El tipo es requerido</div>
             </div>
           </div>
         </div>
 
         <!-- REFERENCE: CKEDITOR -->
         <div class="form-row form-row-full">
-          <label class="form-label" for="reference">
-            Referencia
-          </label>
+          <label class="form-label" for="reference">Referencia</label>
 
           <div class="form-field">
             <ckeditor
@@ -120,11 +96,24 @@
           </div>
         </div>
 
+        <!-- GROUP: TEST NAME -->
+        <div class="form-row form-row-full">
+          <label class="form-label" for="group">Prueba Grupal</label>
+
+          <div class="form-field">
+            <ckeditor
+              id="group"
+              name="group"
+              [editor]="Editor"
+              [config]="editorConfig"
+              [(ngModel)]="test.group"
+            ></ckeditor>
+          </div>
+        </div>
+
         <!-- PRICE -->
         <div class="form-row">
-          <label class="form-label" for="price">
-            Precio
-          </label>
+          <label class="form-label" for="price">Precio</label>
 
           <div class="form-field">
             <input
@@ -140,26 +129,17 @@
               #price="ngModel"
             />
 
-            <div
-              class="validation-message"
-              *ngIf="price.invalid && (price.dirty || price.touched)"
-            >
-              <div *ngIf="price.errors?.['required']">
-                Precio es requerido
-              </div>
+            <div class="validation-message" *ngIf="price.invalid && (price.dirty || price.touched)">
+              <div *ngIf="price.errors?.['required']">Precio es requerido</div>
 
-              <div *ngIf="price.errors?.['min']">
-                El precio no debe ser negativo
-              </div>
+              <div *ngIf="price.errors?.['min']">El precio no debe ser negativo</div>
             </div>
           </div>
         </div>
 
         <!-- CATEGORY -->
         <div class="form-row">
-          <label class="form-label" for="testCategoryId">
-            Categoría del Test
-          </label>
+          <label class="form-label" for="testCategoryId">Categoría de la Prueba</label>
 
           <div class="form-field">
             <select
@@ -170,14 +150,9 @@
               required
               #testCategoryId="ngModel"
             >
-              <option [ngValue]="0">
-                Seleccionar categoría
-              </option>
+              <option [ngValue]="0">Seleccionar categoría</option>
 
-              <option
-                *ngFor="let category of testCategories"
-                [ngValue]="category.id"
-              >
+              <option *ngFor="let category of testCategories" [ngValue]="category.id">
                 {{ category.name }}
               </option>
             </select>
@@ -186,9 +161,7 @@
               class="validation-message"
               *ngIf="testCategoryId.invalid && (testCategoryId.dirty || testCategoryId.touched)"
             >
-              <div *ngIf="testCategoryId.errors?.['required']">
-                La categoría es requerida
-              </div>
+              <div *ngIf="testCategoryId.errors?.['required']">La categoría es requerida</div>
             </div>
           </div>
         </div>
@@ -198,13 +171,7 @@
 
         <!-- ACTIONS -->
         <div class="form-actions">
-          <button
-            type="button"
-            class="btn btn-cancel"
-            [routerLink]="['/tests']"
-          >
-            Cancelar
-          </button>
+          <button type="button" class="btn btn-cancel" [routerLink]="['/tests']">Cancelar</button>
 
           <!-- CREATE -->
           <button
@@ -231,7 +198,6 @@
             </button>
           </ng-template>
         </div>
-
       </form>
     </div>
   </div>

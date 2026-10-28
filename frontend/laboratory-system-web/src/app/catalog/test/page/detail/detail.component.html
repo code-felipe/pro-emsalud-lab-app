@@ -37,8 +37,8 @@
 
               <div class="col-12 col-sm-6">
                 <div class="detail-item">
-                  <span class="detail-label">Tipo de Test</span>
-                  <span class="detail-value">{{ testTypeLabels[test.testType] }}</span>
+                  <span class="detail-label">Método de Prueba</span>
+                  <span class="detail-value">{{ testMethodLabels[test.testMethod] }}</span>
                 </div>
               </div>
 
@@ -50,6 +50,19 @@
                     class="result-reference"
                     [class.text-muted-custom]="!test.reference"
                     [innerHTML]="test.reference || 'Referencia no especificada'"
+                  ></div>
+                </div>
+              </div>
+
+              <!-- Group: Test Name -->
+              <div class="col-12 col-sm-6">
+                <div class="detail-item">
+                  <span class="detail-label">Prueba Grupal</span>
+
+                  <div
+                    class="result-reference"
+                    [class.text-muted-custom]="!test.group"
+                    [innerHTML]="test.group || 'Prueba Grupal no especificada'"
                   ></div>
                 </div>
               </div>

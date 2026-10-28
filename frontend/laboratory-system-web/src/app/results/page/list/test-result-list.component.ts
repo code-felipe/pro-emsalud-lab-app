@@ -7,7 +7,6 @@ import { ModalComponent } from '../../../utils/modal/modal.component';
 import { ModalService } from '../../../utils/modal/modal-service';
 import { AlertService } from '../../../utils/alert/alert.service';
 import { FilterUtils } from '../../../utils/filter/filter-utils.model';
-import { HttpErrorResponse } from '@angular/common/http';
 import { TestResultFilterComponent } from '../filter/filter.component';
 import { TestResultResponse } from '../../components/result.model';
 import { TestResultFilter } from '../../components/result-filter.component';
@@ -31,6 +30,7 @@ import { TestResultService } from '../../components/result.service';
 export class TestResultComponentList implements OnInit {
 
   patientId!: number;
+  
   orderId!: number;
 
   results: TestResultResponse[] = [];

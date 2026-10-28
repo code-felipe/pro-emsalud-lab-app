@@ -22,8 +22,8 @@ import { HttpErrorResponse } from '@angular/common/http';
 
 import {
   CreateTestRequest,
+  TestMethod,
   TestResponse,
-  TestType,
   UpdateTestRequest,
 } from '../../components/test.model';
 
@@ -48,13 +48,14 @@ export class TestFormComponent implements OnInit {
 
   public test: CreateTestRequest & { id?: number } = {
     name: '',
-    testType: undefined as unknown as TestType,
+    group: '',
+    testMethod: undefined as unknown as TestMethod,
     reference: '',
     price: 0,
     testCategoryId: 0,
   };
 
-  public title: string = 'Nuevo Test Referencial';
+  public title: string = 'Nueva Prueba Referencial';
 
   public apiError: any = null;
 
@@ -92,24 +93,28 @@ public editorConfig = {
       'mergeTableCells',
     ],
   },
-  placeholder: 'Escribe la referencia del test...',
+  placeholder: 'Escribe los datos de la prueba...',
 };
 
-  public testTypes = [
+  public testMethods = [
     {
-      value: TestType.RAPIDA,
+      value: TestMethod.RAPIDA,
       label: 'Rápida',
     },
     {
-      value: TestType.CUANTITATIVA,
+      value: TestMethod.CUANTITATIVA,
       label: 'Cuantitativa',
     },
     {
-      value: TestType.SEMI_CUANTITATIVA,
+      value: TestMethod.SEMI_CUANTITATIVA,
       label: 'Semi Cuantitativa',
     },
+     {
+      value: TestMethod.AGLUTINACION_PORTA,
+      label: 'Aglutinación en Porta',
+    },
     {
-      value: TestType.OTROS,
+      value: TestMethod.OTROS,
       label: 'Otros',
     },
   ];
@@ -148,7 +153,8 @@ public editorConfig = {
           this.test = {
             id: response.id,
             name: response.name,
-            testType: response.testType,
+            group: response.group ?? '',
+            testMethod: response.testMethod,
             reference: response.reference ?? '',
             price: response.price,
             testCategoryId: response.testCategoryId,
@@ -197,7 +203,8 @@ public editorConfig = {
 
     const request: CreateTestRequest = {
       name: this.test.name.trim(),
-      testType: this.test.testType,
+      group: this.test.group.trim(),
+      testMethod: this.test.testMethod,
       reference: this.test.reference?.trim() || undefined,
       price: this.test.price,
       testCategoryId: this.test.testCategoryId,
@@ -243,7 +250,8 @@ public editorConfig = {
 
     const request: UpdateTestRequest = {
       name: this.test.name.trim(),
-      testType: this.test.testType,
+      group: this.test.group.trim(),
+      testMethod: this.test.testMethod,
       reference: this.test.reference?.trim() || undefined,
       price: this.test.price,
       testCategoryId: this.test.testCategoryId,

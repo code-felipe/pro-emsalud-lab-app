@@ -3,7 +3,7 @@ package com.proemsalud.laboratory.result.dto.response;
 import java.math.BigDecimal;
 import java.time.Instant;
 
-import com.proemsalud.laboratory.catalog.enumerate.TestType;
+import com.proemsalud.laboratory.catalog.enumerate.TestMethod;
 
 import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
@@ -25,9 +25,11 @@ public class TestResultResponse {
 	
 	private String testName;
 	
+	private String testGroup;
+	
 	private String categoryName;
 	
-	private TestType testType;
+	private TestMethod testMethod;
 	
 	private String testReference;
 	

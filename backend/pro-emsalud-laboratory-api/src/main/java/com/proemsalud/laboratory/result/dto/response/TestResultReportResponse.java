@@ -1,7 +1,7 @@
 package com.proemsalud.laboratory.result.dto.response;
 
 
-import com.proemsalud.laboratory.catalog.enumerate.TestType;
+import com.proemsalud.laboratory.catalog.enumerate.TestMethod;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -20,7 +20,9 @@ public class TestResultReportResponse {
 	
 	private String testName;
 	
-	private TestType testType;
+	private String testGroup;
+	
+	private TestMethod testMethod;
 	
 	private String result;
 	

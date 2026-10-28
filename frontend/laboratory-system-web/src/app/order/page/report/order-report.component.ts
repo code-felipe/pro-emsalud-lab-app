@@ -1,3 +1,4 @@
+
 import {
   Component,
   ElementRef,
@@ -11,6 +12,7 @@ import html2canvas from 'html2canvas';
 import jsPDF from 'jspdf';
 
 import { OrderReportResponse } from '../../components/order.model';
+import { TestMethod } from '../../../catalog/test/components/test.model';
 
 @Component({
   selector: 'app-order-report',
@@ -27,6 +29,13 @@ export class OrderReportComponent {
 
   downloadingPdf = false;
 
+  testMethodLabels: Record<TestMethod, string> = {
+  [TestMethod.CUANTITATIVA]: 'Cuantitativa',
+  [TestMethod.RAPIDA]: 'Rápida',
+  [TestMethod.SEMI_CUANTITATIVA]: 'Semi cuantitativa',
+  [TestMethod.AGLUTINACION_PORTA]: 'Aglutinación en porta',
+  [TestMethod.OTROS]: 'Otros',
+};
   async downloadPdf(): Promise<void> {
     if (!this.reportContent || !this.report) {
       return;
@@ -36,53 +45,94 @@ export class OrderReportComponent {
 
     const original = this.reportContent.nativeElement;
 
-    // Clon fuera del modal, con el ancho exacto del área útil del PDF.
+    // Crear una copia independiente del contenido del reporte.
     const clone = original.cloneNode(true) as HTMLElement;
     clone.classList.add('generating-pdf');
 
+    // Contenedor independiente del modal.
     const host = document.createElement('div');
+
     host.style.cssText = [
       'position:fixed',
       'left:-10000px',
       'top:0',
       'width:199.9mm',
+      'min-width:0',
+      'max-width:none',
       'height:auto',
       'overflow:visible',
       'background:#ffffff',
       'z-index:-1',
+      'box-sizing:border-box',
     ].join(';');
+
+    // Establecer las dimensiones de la copia.
+    clone.style.cssText += `
+      display: block;
+      width: 100%;
+      min-width: 0;
+      max-width: none;
+      height: auto;
+      max-height: none;
+      overflow: visible;
+      box-sizing: border-box;
+    `;
 
     host.appendChild(clone);
     document.body.appendChild(host);
 
+    let canvas: HTMLCanvasElement | undefined;
+
     try {
-      // Esperar fuentes, imágenes (logos) y el layout.
+      // Esperar a que las fuentes estén disponibles.
       await document.fonts.ready;
 
+      // Esperar a que terminen de cargar las imágenes.
       await Promise.all(
-        Array.from(clone.querySelectorAll('img')).map((img) =>
-          img.complete
-            ? Promise.resolve()
-            : new Promise<void>((resolve) => {
-                img.onload = () => resolve();
-                img.onerror = () => resolve();
-              })
+        Array.from(clone.querySelectorAll('img')).map(
+          async (img): Promise<void> => {
+            if (img.complete) {
+              if (img.decode) {
+                await img.decode().catch(() => undefined);
+              }
+              return;
+            }
+
+            await new Promise<void>((resolve) => {
+              img.onload = () => resolve();
+              img.onerror = () => resolve();
+            });
+          }
         )
       );
 
-      await new Promise<void>((resolve) =>
-        requestAnimationFrame(() =>
-          requestAnimationFrame(() => resolve())
-        )
-      );
+      // Permitir que el navegador calcule el diseño del clon.
+      await new Promise<void>((resolve) => {
+        requestAnimationFrame(() => {
+          requestAnimationFrame(() => resolve());
+        });
+      });
 
-      // Sin width/height/windowHeight: html2canvas mide el clon ya renderizado.
-      const canvas = await html2canvas(clone, {
+      // Comprobar el ancho calculado antes de la captura.
+      const cloneWidth = clone.getBoundingClientRect().width;
+
+      if (cloneWidth <= 0) {
+        throw new Error(
+          'El reporte no tiene un ancho válido para generar el PDF.'
+        );
+      }
+
+      // Capturar el reporte completo, sin depender del scroll del modal.
+      canvas = await html2canvas(clone, {
         scale: 3,
         useCORS: true,
         backgroundColor: '#ffffff',
         scrollX: 0,
         scrollY: 0,
+        width: Math.ceil(clone.scrollWidth),
+        height: Math.ceil(clone.scrollHeight),
+        windowWidth: Math.ceil(cloneWidth),
+        windowHeight: Math.ceil(clone.scrollHeight),
       });
 
       const pdf = new jsPDF({
@@ -100,10 +150,10 @@ export class OrderReportComponent {
       const contentWidth = pageWidth - margin * 2;
       const contentHeight = pageHeight - margin * 2;
 
-      // Escala para que todo el ancho de la captura entre en la página.
+      // Mantener la proporción de la captura al ajustar el ancho.
       const scale = contentWidth / canvas.width;
 
-      // Altura de cada fragmento de la imagen en píxeles.
+      // Altura máxima de imagen que cabe en cada página.
       const sliceHeight = Math.max(
         1,
         Math.floor(contentHeight / scale)
@@ -119,6 +169,7 @@ export class OrderReportComponent {
         );
 
         const pageCanvas = document.createElement('canvas');
+
         pageCanvas.width = canvas.width;
         pageCanvas.height = currentSliceHeight;
 
@@ -131,6 +182,7 @@ export class OrderReportComponent {
         }
 
         context.fillStyle = '#ffffff';
+
         context.fillRect(
           0,
           0,
@@ -168,19 +220,21 @@ export class OrderReportComponent {
         sourceY += currentSliceHeight;
         firstPage = false;
 
-        // Liberar memoria de los fragmentos intermedios.
+        // Liberar memoria de las capturas parciales.
         pageCanvas.width = 0;
         pageCanvas.height = 0;
       }
 
       pdf.save(`reporte-laboratorio-${this.report.id}.pdf`);
-
-      // Liberar la imagen original.
-      canvas.width = 0;
-      canvas.height = 0;
     } catch (error) {
       console.error('Error al generar el PDF:', error);
     } finally {
+      // Liberar memoria y retirar el clon.
+      if (canvas) {
+        canvas.width = 0;
+        canvas.height = 0;
+      }
+
       host.remove();
       this.downloadingPdf = false;
     }
@@ -190,15 +244,16 @@ export class OrderReportComponent {
     const patientPhone = this.report?.patientPhoneNumber;
 
     if (!patientPhone) {
-      console.warn('El paciente no tiene número de teléfono.');
+      console.warn(
+        'El paciente no tiene número de teléfono.'
+      );
       return;
     }
 
-    // Quitar espacios, guiones, paréntesis y otros caracteres.
+    // Eliminar espacios, guiones, paréntesis y otros caracteres.
     let phone = String(patientPhone).replace(/\D/g, '');
 
-    // Si es un número guatemalteco de 8 dígitos,
-    // agregar el código de país 502.
+    // Agregar el código de Guatemala a números de ocho dígitos.
     if (phone.length === 8) {
       phone = `502${phone}`;
     }
@@ -207,7 +262,8 @@ export class OrderReportComponent {
       'Hola, le compartimos su reporte de laboratorio.'
     );
 
-    const whatsappUrl = `https://wa.me/${phone}?text=${message}`;
+    const whatsappUrl =
+      `https://wa.me/${phone}?text=${message}`;
 
     window.open(whatsappUrl, '_blank');
   }

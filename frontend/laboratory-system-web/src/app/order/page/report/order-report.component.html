@@ -52,7 +52,7 @@
         <span class="report-label"> Solicitado Por </span>
 
         <strong>
-          {{ report.doctorTitle }}.
+          {{ report.doctorTitle != 'NA' ? report.doctorTitle : '' }}
           {{ report.doctorFullName }}
         </strong>
       </div>
@@ -91,59 +91,43 @@
 
       <!-- RESULTS TABLE -->
 
-      <div class="report-results-scroll">
-        <table class="report-results-table" *ngIf="report.results.length > 0">
-          <thead>
-            <tr>
-              <th>Prueba</th>
+      <div class="report-results-scroll" *ngIf="report.results.length > 0">
+        <div class="report-results-grid">
+          <!-- Encabezados -->
+          <div class="result-grid-header">Prueba</div>
+          <div class="result-grid-header">Prueba grupal</div>
+          <div class="result-grid-header">Resultado</div>
+          <div class="result-grid-header">Referencia</div>
+          <div class="result-grid-header">Método</div>
 
-              <th>Tipo</th>
+          <!-- Resultados -->
+          <ng-container *ngFor="let result of report.results">
+            <div class="result-grid-cell result-name" data-label="Prueba">
+              {{ result.testName }}
+            </div>
 
-              <th>Resultado</th>
+            <div class="result-grid-cell" data-label="Prueba grupal">
+              <div class="reference-content" [innerHTML]="result.testGroup || ''"></div>
+            </div>
 
-              <th>Referencia</th>
-            </tr>
-          </thead>
+            <div class="result-grid-cell" data-label="Resultado">
+              <div class="reference-content" [innerHTML]="result.result || 'N/A'"></div>
+            </div>
 
-          <tbody>
-            <tr *ngFor="let result of report.results">
-              <!-- PRUEBA -->
+            <div class="result-grid-cell" data-label="Referencia">
+              <div class="reference-content" [innerHTML]="result.reference || ''"></div>
+            </div>
 
-              <td class="result-name">
-                {{ result.testName }}
-              </td>
-
-              <!-- TIPO -->
-
-              <td>
-                <span class="result-type">
-                  {{ result.testType }}
-                </span>
-              </td>
-
-              <!-- RESULTADO -->
-
-              <td class="result-value">
-                <div class="reference-content" [innerHTML]="result.result || 'N/A'"></div>
-              </td>
-
-              <!-- REFERENCIA -->
-
-              <!-- REFERENCIA -->
-              <td class="result-reference">
-                <div class="reference-content" [innerHTML]="result.reference || 'N/A'"></div>
-              </td>
-            </tr>
-          </tbody>
-        </table>
-
-        <!-- EMPTY STATE -->
-
-        <div class="report-empty" *ngIf="report.results.length === 0">
-          <i class="bi bi-clipboard-x"></i>
-
-          <span> No hay resultados registrados para esta orden. </span>
+            <div class="result-grid-cell" data-label="Método">      
+              <span class="result-name">{{ testMethodLabels[result.testMethod || 'N/A'] }}</span>
+            </div>
+          </ng-container>
         </div>
+      </div>
+
+      <div class="report-empty" *ngIf="report.results.length === 0">
+        <i class="bi bi-clipboard-x"></i>
+        <span>No hay resultados registrados para esta orden.</span>
       </div>
     </div>
 
@@ -173,7 +157,11 @@
 
           <span>Tel. 4836-5187 | Tel. 4873-0645</span>
         </div>
-        <img src="/emelyn-tech.png" alt="Sello de técnico de laboratorio" class="footer-signature" />
+        <img
+          src="/emelyn-tech.png"
+          alt="Sello de técnico de laboratorio"
+          class="footer-signature"
+        />
 
         <!-- VALIDACIÓN -->
         <div class="report-validation">

@@ -1,125 +1,118 @@
-/* ===================================================== REPORT WRAPPER ===================================================== */
 
-.order-report-wrapper {
-  display: flex;
-  flex-direction: column;
-  width: 100%;
-  min-width: 0;
-  min-height: 0;
-}
-
-/* ===================================================== REPORT ===================================================== */
-
-.order-report {
-  width: 100%;
-  min-width: 0;
-  background: var(--paper-raised);
-  color: var(--ink);
-  border: 1px solid var(--line);
-  border-radius: var(--radius-s);
-  overflow: hidden;
-  box-sizing: border-box;
-  font-family: Inter, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-  font-size: 10px;
-}
-
-/* ===================================================== HEADER ===================================================== */
+/* =====================================================
+   CABECERA PRINCIPAL DEL REPORTE
+   ===================================================== */
 
 .report-header {
   display: flex;
   align-items: center;
   justify-content: space-between;
   gap: 12px;
-  padding: 12px 14px;
+  padding: 12px 16px;
   background: var(--teal-wash);
   border-bottom: 2px solid var(--teal);
+  box-sizing: border-box;
 }
 
 .report-brand {
   display: flex;
   align-items: center;
-  gap: 9px;
+  gap: 12px;
   min-width: 0;
 }
 
 .report-icon {
-  width: 75px;
-  height: 75px;
-  padding: 0;
+  width: 64px;
+  height: 64px;
+  flex: 0 0 64px;
   display: flex;
   align-items: center;
   justify-content: center;
-  border-radius: 14px;
-  flex-shrink: 0;
   overflow: hidden;
+  border-radius: 50%;
+  background: var(--paper-raised);
 }
 
 .report-icon img {
+  display: block;
   width: 100%;
   height: 100%;
   object-fit: contain;
-  border-radius: 50%;
 }
 
 .report-title {
   color: var(--teal-deep);
-  font-size: 14px;
-  font-weight: 700;
-  line-height: 1.2;
+  font-size: 16px;
+  font-weight: 750;
+  line-height: 1.3;
+  overflow-wrap: anywhere;
 }
 
 .report-subtitle {
-  margin-top: 2px;
+  margin-top: 4px;
   color: var(--ink-soft);
-  font-size: 14px;
-  line-height: 1.2;
+  font-size: 12px;
+  line-height: 1.3;
 }
 
-.report-subtitle h5 {
+.report-subtitle h4 {
   margin: 0;
-  font-size: 10px;
-  font-weight: inherit;
+  color: var(--teal);
+  font-size: 12px;
+  font-weight: 750;
+  letter-spacing: 0.1em;
 }
 
 .report-order {
   display: flex;
   flex-direction: column;
   align-items: flex-end;
-  min-width: 65px;
+  gap: 4px;
   flex-shrink: 0;
+  min-width: 65px;
 }
 
 .report-order strong {
   color: var(--teal-deep);
-  font-size: 10px;
-  font-weight: 700;
+  font-size: 16px;
+  font-weight: 800;
+  overflow-wrap: anywhere;
 }
+
+/* =====================================================
+   ETIQUETAS GENERALES
+   ===================================================== */
 
 .report-label {
   display: block;
   color: var(--ink-soft);
-  font-size: 10px;
-  font-weight: 700;
-  letter-spacing: 0.1em;
+  font-size: 9px;
+  font-weight: 750;
+  letter-spacing: 0.09em;
   text-transform: uppercase;
+  line-height: 1.4;
 }
 
-/* ===================================================== PATIENT / DOCTOR / DATE ===================================================== */
+/* =====================================================
+   CABECERA DE INFORMACIÓN DEL PACIENTE
+   ===================================================== */
 
 .report-info {
   display: grid;
-  grid-template-columns: 1.5fr 1.5fr 1fr;
-  border-bottom: 1px solid var(--line);
+  grid-template-columns: minmax(0, 1.5fr) minmax(0, 1.5fr) minmax(0, 1fr);
   background: var(--paper-raised);
+  border-bottom: 1px solid var(--line);
+  min-width: 0;
 }
 
 .report-info-block {
-  min-height: 48px;
-  min-width: 0;
-  padding: 7px 10px;
   display: flex;
   flex-direction: column;
   justify-content: center;
+  gap: 3px;
+  min-width: 0;
+  min-height: 58px;
+  padding: 9px 12px;
   border-right: 1px solid var(--line);
   box-sizing: border-box;
 }
@@ -129,439 +122,681 @@
 }
 
 .report-info-block strong {
-  margin-top: 2px;
   color: var(--ink);
-  font-size: 10px;
+  font-size: 11px;
   font-weight: 650;
-  line-height: 1.25;
-  overflow-wrap: break-word;
-  word-break: break-word;
+  line-height: 1.4;
+  overflow-wrap: anywhere;
 }
 
 .report-secondary {
-  margin-top: 2px;
   color: var(--ink-soft);
   font-size: 10px;
+  line-height: 1.4;
 }
 
-/* ===================================================== RESULTS SECTION ===================================================== */
+/* =====================================================
+   CABECERA DE LA SECCIÓN DE RESULTADOS
+   ===================================================== */
 
 .report-section {
-  padding: 9px;
   min-width: 0;
-  min-height: 0;
-  display: flex;
-  flex-direction: column;
+  padding: 12px;
   box-sizing: border-box;
 }
 
-/* ===================================================== RESULTS HEADER ===================================================== */
-
 .report-section-header {
   display: flex;
-  align-items: flex-end;
+  align-items: center;
   justify-content: space-between;
-  padding-bottom: 6px;
+  gap: 12px;
+  padding: 0 0 10px;
   border-bottom: 1px solid var(--line);
-  gap: 8px;
-  flex-shrink: 0;
 }
 
 .report-section-kicker {
   display: block;
-  margin-bottom: 1px;
+  margin-bottom: 3px;
   color: var(--teal);
-  font-size: 10px;
-  font-weight: 700;
-  letter-spacing: 0.12em;
+  font-size: 9px;
+  font-weight: 800;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
 }
 
 .report-section-header h3 {
   margin: 0;
   color: var(--ink);
-  font-size: 10px;
-  font-weight: 700;
+  font-size: 17px;
+  font-weight: 750;
+  line-height: 1.3;
 }
 
 .report-result-count {
-  padding: 2px 5px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  padding: 5px 9px;
   background: var(--teal-wash);
   color: var(--teal-deep);
   border: 1px solid #c9ddd5;
   border-radius: var(--radius-s);
   font-size: 10px;
-  font-weight: 600;
+  font-weight: 700;
+  line-height: 1.4;
   white-space: nowrap;
   flex-shrink: 0;
 }
 
-/* ===================================================== RESULTS SCROLL ===================================================== */
+/* =====================================================
+   CABECERAS DEL GRID DE RESULTADOS
+   ===================================================== */
 
-.report-results-scroll {
-  width: 100%;
-  min-width: 0;
-  max-height: 300px;
-  margin-top: 6px;
-
-  overflow-x: auto;
-  overflow-y: auto;
-
-  padding-bottom: 2px;
-}
-
-.report-results-scroll::-webkit-scrollbar {
-  width: 5px;
-  height: 5px;
-}
-
-.report-results-scroll::-webkit-scrollbar-track {
-  background: var(--paper);
+.report-results-grid {
+  border-top: 1px solid var(--line);
+  border-left: 1px solid var(--line);
   border-radius: var(--radius-s);
+  overflow: hidden;
 }
 
-.report-results-scroll::-webkit-scrollbar-thumb {
-  background: var(--teal);
-  border-radius: var(--radius-s);
-}
-
-.report-results-scroll::-webkit-scrollbar-thumb:hover {
-  background: var(--teal-deep);
-}
-
-/* ===================================================== RESULTS TABLE ===================================================== */
-
-.report-results-table {
-  width: 100%;
+.result-grid-header,
+.result-grid-cell {
   min-width: 0;
   max-width: 100%;
-  table-layout: fixed;
-}
-.report-results-table th:nth-child(1),
-.report-results-table td:nth-child(1) {
-  width: 12%;
-}
-.report-results-table th:nth-child(2),
-.report-results-table td:nth-child(2) {
-  width: 10%;
+  box-sizing: border-box;
+  overflow-wrap: anywhere;
 }
 
-.report-results-table th:nth-child(3),
-.report-results-table td:nth-child(3) {
-  width: 39%;
-}
-
-.report-results-table th:nth-child(4),
-.report-results-table td:nth-child(4) {
-  width: 39%;
-}
-
-
-.report-results-table thead {
-  position: sticky;
-  top: 0;
-  z-index: 2;
-}
-
-.report-results-table th {
-  padding: 4px 5px;
-  background: var(--teal-wash);
-  border-bottom: 1px solid var(--line-strong);
-  color: var(--teal-deep);
-  font-family: inherit;
-  font-size: 10px;
+.result-grid-cell.result-name {
+  color: var(--ink);
   font-weight: 700;
-  letter-spacing: 0.02em;
-  text-align: left;
-  text-transform: uppercase;
-  white-space: normal;
-  overflow-wrap: break-word;
-  word-break: break-word;
-  box-sizing: border-box;
 }
 
-.report-results-table tbody tr {
-  transition: background-color var(--transition-fast);
-}
-
-.report-results-table tbody tr:hover {
-  background: #faf9f6;
-}
-
-/* ===================================================== TABLE CELLS ===================================================== */
-
-.report-results-table td {
-  padding: 4px 5px;
-  border-bottom: 1px solid var(--line);
-  vertical-align: top;
-  line-height: 1.3;
-  font-family: inherit;
-  font-size: 10px;
-  font-weight: 400;
-  overflow-wrap: break-word;
-  word-break: break-word;
-  box-sizing: border-box;
-  min-width: 0;
-}
-
-.report-results-table tbody tr:last-child td {
-  border-bottom: none;
-}
-
-/* ===================================================== TEST NAME ===================================================== */
-
-.report-results-table .result-name {
-  color: var(--ink);
-  font-family: inherit;
-  font-size: 10px;
-  font-weight: 650;
-  text-transform: capitalize;
-}
-
-/* ===================================================== TEST TYPE ===================================================== */
-
-.report-results-table .result-type {
-  display: inline;
-  max-width: 100%;
-  padding: 0;
-  background: transparent;
-  color: var(--ink);
-  border: none;
-  border-radius: 0;
-  font-family: inherit;
-  font-size: 10px;
-  font-weight: 400;
-  line-height: inherit;
-  letter-spacing: normal;
-  text-transform: uppercase;
-  white-space: normal;
-  overflow-wrap: break-word;
-  word-break: break-word;
-  box-sizing: border-box;
-}
-
-/* ===================================================== RESULT VALUE AND REFERENCE ===================================================== */
-
-.report-results-table .result-value,
-.report-results-table .result-reference {
-  vertical-align: top;
-  min-width: 0;
-  padding: 6px;
-  color: var(--ink);
-  white-space: normal;
-  overflow-wrap: anywhere;
-  word-break: normal;
-}
-
-/* Contenido HTML renderizado */
-
-.report-results-table .reference-content {
-  width: 100%;
-  min-width: 0;
-  max-width: 100%;
-  font-family: inherit;
-  font-size: 10px;
-  line-height: 1.4;
-  overflow-wrap: anywhere;
-  word-break: normal;
-}
-
-.report-results-table .reference-content table {
-  width: 100% !important;
-  max-width: 100% !important;
-  border-collapse: collapse;
-  table-layout: auto;
-  margin: 4px 0;
-  font-size: inherit;
-}
-
-.report-results-table .reference-content th,
-.report-results-table .reference-content td {
-  padding: 3px 4px;
-  border: 1px solid var(--line);
-  text-align: left;
-  vertical-align: top;
-  overflow-wrap: anywhere;
-  word-break: normal;
-}
-
-.report-results-table .reference-content p {
-  margin: 0 0 4px;
-}
-
-.report-results-table .reference-content p:last-child {
-  margin-bottom: 0;
-}
-
-/* Imágenes y contenido ancho */
-
-.report-results-table .reference-content img {
-  max-width: 100%;
-  height: auto;
-}
-
-.report-results-table .result-text {
-  display: block;
-  width: 100%;
-  min-width: 0;
-  max-width: 100%;
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-
-  font-family: "Courier New", Consolas, monospace;
-  font-size: 10px;
-  font-weight: 400;
-  line-height: 1.3;
-
-  white-space: pre;
-  overflow-wrap: normal;
-  word-break: normal;
-  tab-size: 4;
-
-  color: inherit;
-  background: transparent;
-  border: none;
-}
-
-/* ===================================================== EMPTY STATE ===================================================== */
-
-.report-empty {
-  min-height: 60px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-direction: column;
-  gap: 4px;
-  background: var(--paper);
-  border: 1px dashed var(--line-strong);
-  border-radius: var(--radius-s);
-  color: var(--ink-soft);
-  font-size: 10px;
-}
-
-.report-empty i {
-  color: var(--brick);
-  font-size: 10px;
-}
-
-/* ===================================================== FOOTER NOTE ===================================================== */
+/* =====================================================
+   NOTA INFORMATIVA
+   ===================================================== */
 
 .report-note {
   display: flex;
   align-items: flex-start;
-  gap: 6px;
-  margin: 0 9px 7px;
-  padding: 5px 7px;
+  gap: 8px;
+  margin: 0 12px 10px;
+  padding: 9px 11px;
   background: var(--paper);
   border-left: 3px solid var(--amber);
   color: var(--ink-soft);
   font-size: 10px;
-  line-height: 1.3;
+  line-height: 1.5;
+  box-sizing: border-box;
 }
 
 .report-note i {
-  margin-top: 1px;
+  margin-top: 2px;
   color: var(--amber);
   flex-shrink: 0;
 }
 
-/* ===================================================== REPORT FOOTER ===================================================== */
+/* =====================================================
+   RESPONSIVE: CABECERAS EN MÓVIL
+   ===================================================== */
 
-.report-technician {
-  display: grid;
-  grid-template-columns: minmax(0, 1fr) minmax(85px, auto) auto;
-  align-items: center;
-  column-gap: 9px;
-  margin: 0 9px 9px;
+@media (max-width: 700px) {
+  .report-header {
+    align-items: flex-start;
+    gap: 10px;
+    padding: 12px;
+  }
+
+  .report-brand {
+    gap: 9px;
+  }
+
+  .report-icon {
+    width: 48px;
+    height: 48px;
+    flex-basis: 48px;
+  }
+
+  .report-title {
+    font-size: 14px;
+  }
+
+  .report-subtitle {
+    font-size: 11px;
+  }
+
+  .report-subtitle h4 {
+    font-size: 11px;
+  }
+
+  .report-order {
+    align-items: flex-end;
+    min-width: 55px;
+  }
+
+  .report-order strong {
+    font-size: 13px;
+  }
+
+  .report-info {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .report-info-block {
+    min-height: auto;
+    padding: 9px 12px;
+    border-right: none;
+    border-bottom: 1px solid var(--line);
+  }
+
+  .report-info-block:last-child {
+    border-bottom: none;
+  }
+
+  .report-section {
+    padding: 9px;
+  }
+
+  .report-section-header {
+    align-items: flex-start;
+    gap: 8px;
+  }
+
+  .report-section-header h3 {
+    font-size: 15px;
+  }
+
+  .report-result-count {
+    padding: 4px 6px;
+    font-size: 9px;
+  }
+
+  .report-note {
+    margin: 0 9px 9px;
+  }
+
+  /* Restaurar las cabeceras originales en el PDF */
+  .order-report.generating-pdf .report-header {
+    align-items: center;
+    flex-direction: row;
+    padding: 8px 10px;
+  }
+
+  .order-report.generating-pdf .report-info {
+    grid-template-columns: minmax(0, 1.5fr) minmax(0, 1.5fr) minmax(0, 1fr);
+  }
+
+  .order-report.generating-pdf .report-info-block {
+    min-height: 0;
+    padding: 5px 7px;
+    border-right: 1px solid var(--line);
+    border-bottom: none;
+  }
+
+  .order-report.generating-pdf .report-section-header {
+    align-items: center;
+  }
+
+  .order-report.generating-pdf .report-section-header h3 {
+    font-size: 10px;
+  }
+
+  .order-report.generating-pdf .report-title,
+  .order-report.generating-pdf .report-subtitle,
+  .order-report.generating-pdf .report-subtitle h4 {
+    font-size: 10px;
+  }
+}
+
+/* =====================================================
+   PDF: TAMAÑOS COMPACTOS PARA LAS CABECERAS
+   ===================================================== */
+
+.order-report.generating-pdf .report-header {
+  padding: 8px 10px;
+}
+
+.order-report.generating-pdf .report-title {
+  font-size: 11px;
+}
+
+.order-report.generating-pdf .report-subtitle,
+.order-report.generating-pdf .report-subtitle h4 {
+  font-size: 9px;
+}
+
+.order-report.generating-pdf .report-order strong {
+  font-size: 11px;
+}
+
+.order-report.generating-pdf .report-info-block {
+  min-height: 0;
+  padding: 5px 7px;
+}
+
+.order-report.generating-pdf .report-info-block strong {
+  font-size: 9px;
+}
+
+.order-report.generating-pdf .report-section {
+  padding: 6px;
+}
+
+.order-report.generating-pdf .report-section-header {
+  padding-bottom: 4px;
+}
+
+.order-report.generating-pdf .report-section-kicker,
+.order-report.generating-pdf .report-result-count {
+  font-size: 8px;
+}
+
+.order-report.generating-pdf .report-section-header h3 {
+  font-size: 11px;
+}
+
+.order-report.generating-pdf .report-note {
+  margin: 0 6px 5px;
+  padding: 4px 6px;
+  font-size: 9px;
+}
+
+
+/* =========================================
+   CONTENEDOR
+   ========================================= */
+
+.report-results-scroll {
+  width: 100%;
   min-width: 0;
-  padding-top: 7px;
-  border-top: 1px solid var(--line);
+  max-width: 100%;
+  max-height: 300px;
+  margin-top: 6px;
+  overflow: auto;
   box-sizing: border-box;
 }
 
-/* ===================================================== COMPANY ===================================================== */
+/* =========================================
+   GRID PRINCIPAL
+   ========================================= */
+
+.report-results-grid {
+  display: grid !important;
+
+  grid-template-columns:
+    minmax(0, 0.7fr)
+    minmax(0, 0.7fr)
+    minmax(0, 1.5fr)
+    minmax(0, 1.0fr)
+    minmax(0, 0.6fr) !important;
+
+  width: 100% !important;
+  min-width: 0 !important;
+  max-width: 100% !important;
+  box-sizing: border-box;
+}
+
+.result-grid-cell {
+  min-width: 0;
+  overflow-wrap: anywhere;
+  box-sizing: border-box;
+}
+
+/* =========================================
+   ENCABEZADOS
+   ========================================= */
+
+.result-grid-header {
+  position: sticky;
+  top: 0;
+  z-index: 2;
+
+  padding: 7px 6px;
+  background: var(--teal-wash);
+  color: var(--teal-deep);
+  border-bottom: 1px solid var(--line-strong);
+
+  font-size: 10px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.02em;
+
+  overflow-wrap: anywhere;
+  box-sizing: border-box;
+}
+
+/* =========================================
+   CELDAS
+   ========================================= */
+
+.result-grid-cell {
+  min-width: 0;
+  padding: 7px 6px;
+  border-bottom: 1px solid var(--line);
+
+  font-size: 10px;
+  line-height: 1.4;
+  vertical-align: top;
+
+  overflow-wrap: anywhere;
+  word-break: normal;
+  box-sizing: border-box;
+}
+
+.result-grid-cell:nth-child(10n + 6),
+.result-grid-cell:nth-child(10n + 7),
+.result-grid-cell:nth-child(10n + 8),
+.result-grid-cell:nth-child(10n + 9),
+.result-grid-cell:nth-child(10n + 10) {
+  background: var(--paper-raised);
+}
+
+/* Nombre de la prueba */
+
+.result-grid-cell.result-name {
+  color: var(--ink);
+  font-weight: 650;
+  text-transform: capitalize;
+}
+
+/* Método */
+
+.result-grid-cell .result-type {
+  display: inline;
+  color: var(--ink);
+  font-size: 10px;
+  font-weight: 400;
+  text-transform: uppercase;
+  white-space: normal;
+  overflow-wrap: anywhere;
+}
+
+/* =========================================
+   CONTENIDO HTML DINÁMICO
+   ========================================= */
+
+.result-grid-cell .reference-content {
+  display: block;
+  width: 100%;
+  min-width: 0;
+  max-width: 100%;
+  box-sizing: border-box;
+  overflow-wrap: anywhere;
+  word-break: break-word;
+}
+
+.result-grid-cell .reference-content p {
+  margin: 0 0 4px;
+}
+
+.result-grid-cell .reference-content p:last-child {
+  margin-bottom: 0;
+}
+.result-grid-cell .reference-content img {
+  max-width: 100% !important;
+  height: auto !important;
+}
+
+.order-report.generating-pdf .result-grid-cell .result-text {
+  display: block;
+  width: 100%;
+  min-width: 0;
+  max-width: 100%;
+  white-space: pre-wrap !important;
+  overflow-wrap: anywhere !important;
+  word-break: break-word !important;
+  box-sizing: border-box;
+}
+
+/* Tablas que estén dentro de resultado o referencia */
+
+.result-grid-cell .reference-content table {
+  width: 100% !important;
+  min-width: 0 !important;
+  max-width: 100% !important;
+  table-layout: fixed !important;
+  border-collapse: collapse;
+}
+
+.result-grid-cell .reference-content th,
+.result-grid-cell .reference-content td {
+  padding: 3px;
+  border: 1px solid var(--line);
+  overflow-wrap: anywhere;
+  word-break: normal;
+}
+
+/* =========================================
+   RESPONSIVE: MÓVILES
+   Cada resultado se convierte en tarjeta
+   ========================================= */
+
+@media (max-width: 700px) {
+  .report-results-scroll {
+    max-height: none;
+    overflow: visible;
+  }
+
+  .report-results-grid {
+    display: block;
+    width: 100%;
+    min-width: 0;
+  }
+
+  /* Ocultar encabezados de columnas */
+
+  .result-grid-header {
+    display: none;
+  }
+
+  /* Cada campo se presenta como fila etiquetada */
+
+  .result-grid-cell {
+    display: grid;
+    grid-template-columns: minmax(95px, 35%) minmax(0, 1fr);
+    gap: 8px;
+
+    width: 100%;
+    min-width: 0;
+    padding: 8px;
+    border-bottom: 1px solid var(--line);
+    background: transparent !important;
+  }
+
+  .result-grid-cell::before {
+    content: attr(data-label);
+    color: var(--teal-deep);
+    font-size: 9px;
+    font-weight: 700;
+    text-transform: uppercase;
+    overflow-wrap: anywhere;
+  }
+
+  /* Separación visual entre pruebas */
+
+  .result-grid-cell[data-label="Prueba"] {
+    margin-top: 10px;
+    background: var(--teal-wash) !important;
+    border-top: 1px solid var(--line);
+    font-weight: 700;
+  }
+
+  .result-grid-cell[data-label="Prueba"]::before {
+    content: "Prueba";
+  }
+
+  .result-grid-cell .reference-content {
+    min-width: 0;
+  }
+}
+
+/* =========================================
+   PDF
+   Mantener las cinco columnas en el documento
+   ========================================= */
+
+.order-report.generating-pdf .report-results-scroll {
+  width: 100% !important;
+  min-width: 0 !important;
+  max-width: 100% !important;
+  max-height: none !important;
+  height: auto !important;
+  overflow: visible !important;
+}
+
+.order-report.generating-pdf .report-results-grid {
+  display: grid !important;
+
+  grid-template-columns:
+    minmax(0, 0.4fr)
+    minmax(0, 0.4fr)
+    minmax(0, 1.8fr)
+    minmax(0, 0.5fr)
+    minmax(0, 0.4fr) !important;
+
+  width: 100% !important;
+  min-width: 0 !important;
+  max-width: 100% !important;
+  box-sizing: border-box;
+}
+
+.order-report.generating-pdf .result-grid-cell,
+.order-report.generating-pdf .result-grid-header {
+  min-width: 0 !important;
+  max-width: 100%;
+  box-sizing: border-box;
+  overflow-wrap: anywhere;
+  word-break: break-word;
+}
+
+.order-report.generating-pdf .result-grid-cell::before {
+  content: none !important;
+}
+
+.order-report.generating-pdf .result-grid-cell .reference-content {
+  font-size: 9px;
+  overflow-wrap: anywhere;
+}
+
+.order-report.generating-pdf .result-grid-cell .reference-content table {
+  width: 100% !important;
+  max-width: 100% !important;
+  table-layout: fixed !important;
+}
+
+
+/* =====================================================
+   FOOTER DEL REPORTE
+   ===================================================== */
+
+.report-technician {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  align-items: center;
+  gap: 12px;
+  margin: 0 12px 12px;
+  padding-top: 12px;
+  border-top: 1px solid var(--line);
+  min-width: 0;
+  box-sizing: border-box;
+}
+
+/* =====================================================
+   INFORMACIÓN DE LA EMPRESA Y SELLO
+   ===================================================== */
 
 .report-company {
   display: flex;
   align-items: center;
-  justify-content: space-around;
-  gap: 6px;
+  justify-content: flex-start;
+  gap: 12px;
   min-width: 0;
 }
 
-.report-company img {
-  width: 150px;
-  height: 150px;
-  flex: 0 0 48px;
-  object-fit: contain;
-  opacity: 0.9;
-}
+
 
 .report-company-info {
   display: flex;
   flex-direction: column;
   justify-content: center;
-  gap: 2px;
+  gap: 4px;
   min-width: 0;
-  padding-left: 7px;
-  border-left: 1px solid var(--line);
+  padding-left: 10px;
+  border-left: 2px solid var(--teal);
+  box-sizing: border-box;
 }
-
-
 
 .report-company-location {
   color: var(--teal-deep);
   font-size: 10px;
-  font-weight: 700;
-  line-height: 1.2;
-  letter-spacing: 0.02em;
+  font-weight: 800;
+  line-height: 1.4;
+  letter-spacing: 0.04em;
   text-transform: uppercase;
-  overflow-wrap: break-word;
-  word-break: break-word;
+  overflow-wrap: anywhere;
 }
 
 .report-company-info span {
   color: var(--ink-soft);
   font-size: 10px;
   font-weight: 500;
-  line-height: 1.25;
-  white-space: normal;
-  overflow-wrap: break-word;
-  word-break: break-word;
+  line-height: 1.4;
+  overflow-wrap: anywhere;
 }
 
-/* ===================================================== VALIDATION ===================================================== */
+.report-company img.footer-signature {
+  display: block;
+  width: 150px;
+  height: 100px;
+  flex: 0 0 90px;
+  object-fit: contain;
+  object-position: center;
+  opacity: 0.95;
+}
+
+/* =====================================================
+   VALIDACIÓN DEL PROFESIONAL
+   ===================================================== */
 
 .report-validation {
   display: flex;
   flex-direction: column;
   justify-content: center;
-  gap: 2px;
-  min-width: 85px;
-  padding-left: 7px;
+  gap: 5px;
+  min-width: 0;
+  max-width: 200px;
+  padding-left: 12px;
   border-left: 1px solid var(--line);
+  box-sizing: border-box;
 }
 
 .report-validation .report-label {
-  font-size: 10px;
-  line-height: 1.2;
+  color: var(--teal);
+  font-size: 9px;
+  letter-spacing: 0.07em;
+  line-height: 1.4;
 }
 
 .report-validation strong {
   color: var(--ink);
   font-size: 10px;
-  font-weight: 650;
-  line-height: 1.2;
-  white-space: normal;
+  font-weight: 700;
+  line-height: 1.5;
+  overflow-wrap: anywhere;
 }
 
-/* ===================================================== ACTIONS ===================================================== */
+/* =====================================================
+   BOTONES DE ACCIÓN
+   ===================================================== */
 
 .report-actions {
   display: flex;
   align-items: center;
-  gap: 5px;
-  flex-shrink: 0;
+  justify-content: flex-end;
+  flex-wrap: wrap;
+  gap: 7px;
+  min-width: 0;
 }
 
 .report-download-btn,
@@ -569,21 +804,28 @@
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  gap: 4px;
-  min-height: 27px;
-  padding: 5px 7px;
+  gap: 6px;
+  min-height: 34px;
+  padding: 8px 11px;
+  border: 1px solid transparent;
   border-radius: var(--radius-s);
-  color: #ffffff;
+  color: #fff;
+  font-family: inherit;
   font-size: 10px;
-  font-weight: 650;
+  font-weight: 700;
+  line-height: 1.3;
   white-space: nowrap;
   cursor: pointer;
-  transition: background-color var(--transition-fast), border-color var(--transition-fast), opacity var(--transition-fast);
+  box-sizing: border-box;
+  transition:
+    background-color var(--transition-fast),
+    border-color var(--transition-fast),
+    opacity var(--transition-fast);
 }
 
 .report-download-btn {
-  border: 1px solid var(--teal);
   background: var(--teal);
+  border-color: var(--teal);
 }
 
 .report-download-btn:hover:not(:disabled) {
@@ -592,18 +834,13 @@
 }
 
 .report-download-btn:disabled {
-  opacity: 0.65;
+  opacity: 0.6;
   cursor: wait;
 }
 
-.report-download-btn i,
-.report-whatsapp-btn i {
-  font-size: 10px;
-}
-
 .report-whatsapp-btn {
-  border: 1px solid #25d366;
   background: #25d366;
+  border-color: #25d366;
 }
 
 .report-whatsapp-btn:hover {
@@ -611,357 +848,229 @@
   border-color: #1ebe5d;
 }
 
-/* ===================================================== PDF GENERATION ===================================================== */
-
-.order-report.generating-pdf {
-  display: block;
-  width: 100% !important;
-  min-width: 0 !important;
-  max-width: none !important;
-  height: auto !important;
-  max-height: none !important;
-  overflow: visible !important;
-  box-sizing: border-box;
-  border-radius: 0;
-  font-size: 10px;
+.report-download-btn i,
+.report-whatsapp-btn i {
+  font-size: 13px;
+  flex-shrink: 0;
 }
 
-/* Encabezado */
+/* =====================================================
+   RESPONSIVE: TABLETS
+   ===================================================== */
 
-.order-report.generating-pdf .report-header { padding: 8px 10px; gap: 8px; }
-.order-report.generating-pdf .report-icon { width: 75px; height: 75px; }
-.order-report.generating-pdf .report-title { font-size: 10px; }
-.order-report.generating-pdf .report-subtitle { font-size: 10px; }
-.order-report.generating-pdf .report-order strong { font-size: 10px; }
-.order-report.generating-pdf .report-label { font-size: 10px; letter-spacing: 0; }
+@media (max-width: 900px) {
+  .report-technician {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 12px;
+  }
 
-/* Información del paciente */
+  .report-company {
+    flex-wrap: wrap;
+  }
 
-.order-report.generating-pdf .report-info-block { min-height: 0; padding: 5px 7px; }
-.order-report.generating-pdf .report-info-block strong { font-size: 10px; line-height: 1.2; }
-.order-report.generating-pdf .report-secondary { font-size: 10px; }
+  .report-validation {
+    max-width: none;
+    padding: 10px 0 0;
+    border-left: none;
+    border-top: 1px solid var(--line);
+  }
 
-/* Sección de resultados */
-
-.order-report.generating-pdf .report-section { padding: 6px; }
-.order-report.generating-pdf .report-section-header { padding-bottom: 4px; gap: 5px; }
-.order-report.generating-pdf .report-section-kicker { font-size: 10px; letter-spacing: 0; }
-.order-report.generating-pdf .report-section-header h3 { font-size: 10px; }
-.order-report.generating-pdf .report-result-count { padding: 2px 4px; font-size: 10px; }
-
-/* Mostrar todos los resultados, sin scroll */
-
-.order-report.generating-pdf .report-results-scroll {
-  width: 100% !important;
-  min-width: 0 !important;
-  max-width: 100% !important;
-  height: auto !important;
-  max-height: none !important;
-  margin-top: 4px;
-  padding-bottom: 0;
-  overflow: visible !important;
+  .report-actions {
+    justify-content: flex-start;
+  }
 }
 
-/* Tabla PDF: misma distribución de columnas */
+/* =====================================================
+   RESPONSIVE: MÓVILES
+   ===================================================== */
 
-.order-report.generating-pdf .report-results-table {
-  width: 100% !important;
-  min-width: 0 !important;
-  max-width: 100% !important;
-  table-layout: fixed !important;
-  border-collapse: collapse;
-  font-size: 10px;
+@media (max-width: 700px) {
+  .report-technician {
+    margin: 0 9px 9px;
+    padding-top: 10px;
+    gap: 10px;
+  }
+
+  .report-company {
+    align-items: center;
+    gap: 9px;
+  }
+
+  .report-company-info {
+    flex: 1 1 150px;
+    padding-left: 8px;
+  }
+
+  .report-company-location {
+    font-size: 9px;
+  }
+
+  .report-company-info span {
+    font-size: 9px;
+  }
+
+  .report-validation {
+    gap: 4px;
+  }
+
+  .report-validation strong {
+    font-size: 10px;
+  }
+
+  .report-actions {
+    display: flex;
+    width: 100%;
+    flex-wrap: wrap;
+    gap: 7px;
+  }
+
+  .report-download-btn,
+  .report-whatsapp-btn {
+    flex: 1 1 auto;
+    min-height: 36px;
+    padding: 8px 10px;
+  }
 }
 
-.order-report.generating-pdf .report-results-table th:nth-child(1),
-.order-report.generating-pdf .report-results-table td:nth-child(1) {
-  width: 12% !important;
-}
-
-.order-report.generating-pdf .report-results-table th:nth-child(2),
-.order-report.generating-pdf .report-results-table td:nth-child(2) {
-  width: 10% !important;
-}
-
-.order-report.generating-pdf .report-results-table th:nth-child(3),
-.order-report.generating-pdf .report-results-table td:nth-child(3),
-.order-report.generating-pdf .report-results-table th:nth-child(4),
-.order-report.generating-pdf .report-results-table td:nth-child(4) {
-  width: 39% !important;
-}
-
-.order-report.generating-pdf .report-results-table .reference-content {
-  width: 100%;
-  max-width: 100%;
-  font-size: 9px;
-  overflow-wrap: anywhere;
-}
-
-.order-report.generating-pdf .report-results-table .reference-content table {
-  width: 100% !important;
-  max-width: 100% !important;
-  table-layout: auto;
-  border-collapse: collapse;
-}
-
-.order-report.generating-pdf .report-results-table thead { position: static !important; }
-
-.order-report.generating-pdf .report-results-table th {
-  padding: 3px 4px;
-  font-size: 10px;
-  letter-spacing: 0;
-  white-space: normal;
-  overflow-wrap: break-word;
-  word-break: break-word;
-}
-
-.order-report.generating-pdf .report-results-table td {
-  padding: 3px 4px;
-  font-size: 10px;
-  line-height: 1.3;
-  vertical-align: top;
-  max-width: none;
-  overflow: visible;
-  overflow-wrap: break-word;
-  word-break: break-word;
-}
-
-/* Nombre de la prueba */
-
-.order-report.generating-pdf .report-results-table .result-name { font-size: 10px; }
-
-/* Tipo */
-
-.order-report.generating-pdf .report-results-table .result-type {
-  font-family: inherit;
-  font-size: 9px;
-  font-weight: 400;
-  line-height: inherit;
-  padding: 0;
-  border: none;
-  background: transparent;
-  color: var(--ink);
-  white-space: normal;
-  overflow-wrap: break-word;
-  word-break: break-word;
-}
-
-/* Resultado y referencia */
-
-.order-report.generating-pdf .report-results-table .result-value,
-.order-report.generating-pdf .report-results-table .result-reference {
-  width: auto;
-  min-width: 0;
-  font-size: 9px;
-  white-space: normal;
-  overflow: visible;
-  overflow-wrap: break-word;
-  word-break: break-word;
-}
-
-.order-report.generating-pdf .report-results-table .result-text {
-  display: block;
-  width: max-content;
-  min-width: 100%;
-  max-width: none;
-  height: auto;
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-
-  font-family: "Courier New", Consolas, monospace;
-  font-size: 10px;
-  font-weight: 400;
-  line-height: 1.3;
-
-  white-space: pre !important;
-  overflow: visible !important;
-  overflow-wrap: normal !important;
-  word-break: normal !important;
-  tab-size: 4;
-}
-
-/* Nota */
-
-.order-report.generating-pdf .report-note {
-  margin: 0 6px 5px;
-  padding: 4px 6px;
-  font-size: 10px;
-  line-height: 1.2;
-}
-
-/* Footer PDF */
+/* =====================================================
+   PDF: FOOTER COMPACTO
+   ===================================================== */
 
 .order-report.generating-pdf .report-technician {
   display: grid !important;
-  grid-template-columns: minmax(0, 1fr) minmax(75px, auto) !important;
-  column-gap: 8px;
-  row-gap: 4px;
-  margin: 0 6px 6px;
-  padding-top: 5px;
+  grid-template-columns: minmax(0, 1fr) minmax(85px, 160px) !important;
   align-items: center;
+  gap: 8px;
+  margin: 0 6px 6px;
+  padding-top: 6px;
 }
 
 .order-report.generating-pdf .report-company {
-  grid-column: 1;
-  grid-row: 1;
   display: flex;
   align-items: center;
-  gap: 5px;
+  gap: 6px;
   min-width: 0;
+  flex-wrap: nowrap;
 }
 
-.order-report.generating-pdf .report-company img { width: 75px; height: 75px; flex: 0 0 42px; }
-.order-report.generating-pdf .report-company-info { gap: 1px; padding-left: 5px; }
-.order-report.generating-pdf .report-company-location { font-size: 10px; line-height: 1.2; letter-spacing: 0; }
-.order-report.generating-pdf .report-company-info span { font-size: 10px; line-height: 1.2; }
+.order-report.generating-pdf .report-company-info {
+  gap: 2px;
+  padding-left: 5px;
+}
+
+.order-report.generating-pdf .report-company-location {
+  font-size: 8px;
+  line-height: 1.3;
+  letter-spacing: 0;
+}
+
+.order-report.generating-pdf .report-company-info span {
+  font-size: 8px;
+  line-height: 1.3;
+}
+
+.order-report.generating-pdf .report-company img.footer-signature {
+  width: 130px;
+  height: 100px;
+  flex: 0 0 55px;
+}
 
 .order-report.generating-pdf .report-validation {
-  grid-column: 2;
-  grid-row: 1;
   min-width: 0;
-  padding-left: 6px;
+  max-width: none;
+  padding-left: 7px;
+  border-left: 1px solid var(--line);
+  border-top: none;
 }
 
-.order-report.generating-pdf .report-validation .report-label { font-size: 10px; }
-.order-report.generating-pdf .report-validation strong { font-size: 10px; line-height: 1.2; white-space: normal; }
-
-/* Botones fuera del PDF */
-
-.order-report.generating-pdf .report-actions { display: none !important; }
-
-/* Evitar efectos visuales durante la captura */
-
-.order-report.generating-pdf .report-results-table tbody tr,
-.order-report.generating-pdf .report-results-table tbody tr:hover {
-  background: transparent !important;
-  transition: none !important;
+.order-report.generating-pdf .report-validation .report-label {
+  font-size: 8px;
 }
 
-/* ===================================================== RESPONSIVE: BROWSER ===================================================== */
+.order-report.generating-pdf .report-validation strong {
+  font-size: 8px;
+  line-height: 1.3;
+}
 
-@media (max-width: 700px) {
-  .report-header { align-items: flex-start; flex-direction: column; padding: 12px; }
+.order-report.generating-pdf .report-actions {
+  display: none !important;
+}
 
-  .report-order { align-items: flex-start; }
-
-  .report-info { grid-template-columns: 1fr; }
-
-  .report-info-block { min-height: auto; padding: 8px 10px; border-right: none; border-bottom: 1px solid var(--line); }
-
-  .report-info-block:last-child { border-bottom: none; }
-
-  .report-section { padding: 8px; }
-
-  .report-results-scroll {  width: 100%;
-  min-width: 0;
-  max-height: 300px;
-  margin-top: 6px;
-  overflow-y: auto;
-  overflow-x: auto;
-  padding-bottom: 2px;
-  scrollbar-width: thin;
-  scrollbar-color: var(--teal) var(--paper);}
-
-  .report-results-table { min-width: 540px; table-layout: fixed; }
-
-  .report-results-table th,
-  .report-results-table td { padding: 5px; }
-
-  .report-note { margin: 0 8px 7px; }
-
-  .report-technician {
-    grid-template-columns: minmax(0, 1fr) auto;
-    column-gap: 7px;
-    row-gap: 7px;
-    margin: 0 8px 8px;
-    align-items: center;
+/* Anular el diseño móvil durante la generación del PDF */
+@media (max-width: 900px) {
+  .order-report.generating-pdf .report-technician {
+    grid-template-columns: minmax(0, 1fr) minmax(85px, 160px) !important;
   }
 
-  .report-company { grid-column: 1 / -1; gap: 6px; min-width: 0; }
-
-  .report-company img { width: 75px; height: 75px; flex-basis: 48px; }
-
-
-  .report-company-location { font-size: 10px; }
-
-  .report-company-info span { font-size: 10px; white-space: normal; overflow-wrap: break-word; word-break: break-word; }
-
-  .report-validation { grid-column: 1; min-width: 0; padding-left: 6px; }
-
-  .report-validation .report-label { font-size: 10px; }
-
-  .report-validation strong { font-size: 10px; white-space: normal; }
-
-  .report-actions { grid-column: 2; justify-self: end; }
-
-  .report-download-btn,
-  .report-whatsapp-btn { min-height: 27px; padding: 5px 7px; font-size: 10px; }
-
-  .report-download-btn i,
-  .report-whatsapp-btn i { font-size: 10px; }
-
-  /* PDF: ignorar el ancho mínimo del modo móvil */
-
-  .order-report.generating-pdf .report-info { grid-template-columns: 1.5fr 1.5fr 1fr; }
-
-  .order-report.generating-pdf .report-results-table {
-    width: 100% !important;
-    min-width: 0 !important;
-    max-width: 100% !important;
-    table-layout: fixed !important;
+  .order-report.generating-pdf .report-company {
+    flex-wrap: nowrap;
   }
 
-  .order-report.generating-pdf .report-technician { grid-template-columns: minmax(0, 1fr) minmax(75px, auto) !important; }
-
-  .order-report.generating-pdf .report-company { grid-column: 1; }
-
-  .order-report.generating-pdf .report-validation { grid-column: 2; }
+  .order-report.generating-pdf .report-validation {
+    padding: 0 0 0 7px;
+    border-left: 1px solid var(--line);
+    border-top: none;
+  }
 }
 
-/* ===================================================== PRINT ===================================================== */
+/* =====================================================
+   IMPRESIÓN
+   ===================================================== */
 
 @media print {
-  @page { size: letter portrait; margin: 8mm; }
-
-  .report-results-scroll { max-height: none !important; height: auto !important; overflow: visible !important; }
-
-  .report-results-table { width: 100% !important; min-width: 0 !important; table-layout: fixed !important; }
-
-.report-results-table col.col-test { width: 10%; }
-.report-results-table col.col-type { width: 10%; }
-.report-results-table col.col-result { width: 40%; }
-.report-results-table col.col-reference { width: 40%; }
-
-  .report-results-table .result-value,
-  .report-results-table .result-reference { overflow: visible !important; white-space: normal !important; }
-
-  .report-results-table .result-text {
-  display: block;
-  width: max-content;
-  min-width: 100%;
-  max-width: none;
-
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-
-  font-family: "Courier New", Consolas, monospace;
-  font-size: 10px;
-  font-weight: 400;
-  line-height: 1.3;
-
-  white-space: pre;
-  overflow-wrap: normal;
-  word-break: normal;
-  tab-size: 4;
-
-  color: inherit;
-  background: transparent;
-  border: none;
+  .report-technician {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(85px, 160px);
+    break-inside: avoid;
+    page-break-inside: avoid;
   }
 
-  .report-results-table tr { break-inside: avoid; page-break-inside: avoid; }
+  .report-actions {
+    display: none !important;
+  }
+}
 
-  .report-actions { display: none !important; }
+
+/* =========================================
+   IMPRESIÓN
+   ========================================= */
+
+@media print {
+  .report-results-scroll {
+    width: 100% !important;
+    max-width: 100% !important;
+    max-height: none !important;
+    overflow: visible !important;
+  }
+
+  .report-results-grid {
+    display: grid !important;
+    grid-template-columns:
+      minmax(0, 1.1fr)
+      minmax(0, 1.2fr)
+      minmax(0, 0.9fr)
+      minmax(0, 1.5fr)
+      minmax(0, 1.6fr) !important;
+
+    width: 100% !important;
+    min-width: 0 !important;
+  }
+
+  .result-grid-header {
+    position: static !important;
+  }
+
+  .result-grid-cell {
+    display: block !important;
+    min-width: 0;
+    overflow-wrap: anywhere;
+  }
+
+  .result-grid-cell::before {
+    content: none !important;
+  }
+
+  .report-actions {
+    display: none !important;
+  }
 }

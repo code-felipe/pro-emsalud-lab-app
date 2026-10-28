@@ -3,7 +3,7 @@ package com.proemsalud.laboratory.catalog.domain;
 import java.math.BigDecimal;
 import java.time.Instant;
 
-import com.proemsalud.laboratory.catalog.enumerate.TestType;
+import com.proemsalud.laboratory.catalog.enumerate.TestMethod;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -39,9 +39,12 @@ public class Test {
 	
 	private String name;
 	
+	@Column(name="test_group", columnDefinition = "TEXT")
+	private String group;
+	
 	@Enumerated(EnumType.STRING)
-	@Column(name = "test_type")
-	private TestType testType;
+	@Column(name = "test_method")
+	private TestMethod testMethod;
 	
 	@Column(name = "reference", columnDefinition = "TEXT")
 	private String reference;

@@ -4,7 +4,7 @@ import { FormsModule } from '@angular/forms';
 import Swal from 'sweetalert2';
 import { CommonModule } from '@angular/common';
 
-import { TestResponse, TestType } from '../../components/test.model';
+import { TestMethod, TestResponse } from '../../components/test.model';
 import { TestService } from '../../components/test.service';
 
 @Component({
@@ -20,17 +20,18 @@ export class TestDetailComponent implements OnInit  {
 
     test: TestResponse | null = null;
 
-    title: string =  "Detalle del Test Referencia";
+    title: string =  "Detalle de la Prueba Referencial";
 
     pictureSelected!: File;
 
     hasError = false;
 
-  testTypeLabels: Record<TestType, string> = {
-  [TestType.CUANTITATIVA]: 'Cuantitativa',
-  [TestType.RAPIDA]: 'Rápida',
-  [TestType.SEMI_CUANTITATIVA]: 'Semi-cuantitativa',
-  [TestType.OTROS]: 'Otros',
+  testMethodLabels: Record<TestMethod, string> = {
+  [TestMethod.CUANTITATIVA]: 'Cuantitativa',
+  [TestMethod.RAPIDA]: 'Rápida',
+  [TestMethod.SEMI_CUANTITATIVA]: 'Semi-cuantitativa',
+  [TestMethod.AGLUTINACION_PORTA]: 'Aglutinación porta',
+  [TestMethod.OTROS]: 'Otros',
 };
 
 

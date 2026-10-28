@@ -2,7 +2,7 @@ import { Component, inject, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 
-import { TestResponse, TestType } from '../../components/test.model';
+import { TestMethod, TestResponse } from '../../components/test.model';
 import {TestFilter,} from '../../components/test-filter.component';
 
 import { TestService } from '../../components/test.service';
@@ -54,11 +54,12 @@ export class TestsComponentList implements OnInit {
   protected readonly isAdmin = this.authService.isAdmin;
   protected readonly isUser = this.authService.isUser;
 
-  testTypeLabels: Record<TestType, string> = {
-  [TestType.CUANTITATIVA]: 'Cuantitativa',
-  [TestType.RAPIDA]: 'Rápida',
-  [TestType.SEMI_CUANTITATIVA]: 'SEMI_CUANTITATIVA',
-  [TestType.OTROS]: 'Otros',
+  testMethodLabels: Record<TestMethod, string> = {
+  [TestMethod.CUANTITATIVA]: 'Cuantitativa',
+  [TestMethod.RAPIDA]: 'Rápida',
+  [TestMethod.SEMI_CUANTITATIVA]: 'Semi Cuantitativa',
+  [TestMethod.AGLUTINACION_PORTA]: 'Aglutinación Porta',
+  [TestMethod.OTROS]: 'Otros',
 };
 
 
