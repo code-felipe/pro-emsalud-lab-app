@@ -670,6 +670,10 @@
   word-break: break-word;
 }
 
+.order-report.generating-pdf .result-grid-cell{
+  font-size: 12px;
+}
+
 .order-report.generating-pdf .result-grid-cell::before {
   content: none !important;
 }
@@ -966,7 +970,7 @@
 .order-report.generating-pdf .report-company-location,
 .order-report.generating-pdf .report-company-info span {
   display: block;
-  font-size: 8px;
+  font-size: 12px;
   line-height: 1.3;
 }
 
@@ -997,7 +1001,7 @@
 .order-report.generating-pdf .report-validation .report-label,
 .order-report.generating-pdf .report-validation strong {
   display: block;
-  font-size: 8px;
+  font-size: 12px;
   line-height: 1.3;
 }
 
