@@ -1,4 +1,28 @@
 <div class="order-report-wrapper" *ngIf="report">
+  <!-- ACCIÓN -->
+  <div class="report-actions">
+    <button
+      type="button"
+      class="report-download-btn"
+      (click)="downloadPdf()"
+      [disabled]="downloadingPdf"
+    >
+      <i
+        class="bi"
+        [class.bi-file-earmark-pdf]="!downloadingPdf"
+        [class.bi-hourglass-split]="downloadingPdf"
+      ></i>
+
+      <span>
+        {{ downloadingPdf ? 'Generando PDF...' : 'Descargar PDF' }}
+      </span>
+    </button>
+    <button type="button" class="report-whatsapp-btn" (click)="openWhatsApp()">
+      <i class="bi bi-whatsapp"></i>
+
+      <span> WhatsApp </span>
+    </button>
+  </div>
   <!-- ===================================================== REPORT CONTENT Todo lo que esté dentro de #reportContent se exporta al PDF. ===================================================== -->
   <div #reportContent class="order-report">
     <!-- ===================================================
@@ -118,7 +142,7 @@
               <div class="reference-content" [innerHTML]="result.reference || ''"></div>
             </div>
 
-            <div class="result-grid-cell" data-label="Método">      
+            <div class="result-grid-cell" data-label="Método">
               <span class="result-name">{{ testMethodLabels[result.testMethod || 'N/A'] }}</span>
             </div>
           </ng-container>
@@ -168,30 +192,6 @@
           <span class="report-label"> Emelyn López </span>
 
           <strong>Bioanalista - Técnico en Laboratorio Clínico</strong>
-        </div>
-        <!-- ACCIÓN -->
-        <div class="report-actions">
-          <button
-            type="button"
-            class="report-download-btn"
-            (click)="downloadPdf()"
-            [disabled]="downloadingPdf"
-          >
-            <i
-              class="bi"
-              [class.bi-file-earmark-pdf]="!downloadingPdf"
-              [class.bi-hourglass-split]="downloadingPdf"
-            ></i>
-
-            <span>
-              {{ downloadingPdf ? 'Generando PDF...' : 'Descargar PDF' }}
-            </span>
-          </button>
-          <button type="button" class="report-whatsapp-btn" (click)="openWhatsApp()">
-            <i class="bi bi-whatsapp"></i>
-
-            <span> WhatsApp </span>
-          </button>
         </div>
       </div>
     </div>
