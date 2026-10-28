@@ -19,7 +19,16 @@ import { TestMethod } from '../../../catalog/test/components/test.model';
   standalone: true,
   imports: [CommonModule],
   templateUrl: './order-report.component.html',
-  styleUrl: './order-report.component.css',
+  styleUrls: [
+    './order-report.component.css',
+    './order-report-actions.component.css',
+    './order-report-header.component.css',
+    './order-report-info.component.css',
+    './order-report-results.component.css',
+    './order-report-note.component.css',
+    './order-report-footer.component.css',
+    './order-report-table.component.css'
+  ],
 })
 export class OrderReportComponent {
   @Input() report?: OrderReportResponse;
@@ -267,4 +276,45 @@ export class OrderReportComponent {
 
     window.open(whatsappUrl, '_blank');
   }
+
+private hasEditorContent(value: unknown): boolean {
+  if (value == null) {
+    return false;
+  }
+
+  const html = String(value).trim();
+
+  if (!html) {
+    return false;
+  }
+
+  const doc = new DOMParser().parseFromString(html, 'text/html');
+
+  // Eliminar elementos que no aportan texto al contenido.
+  doc.body.querySelectorAll('script, style').forEach((element) => {
+    element.remove();
+  });
+
+  const text = (doc.body.textContent ?? '')
+    .replace(/[\s\u00a0\u200b\u200c\u200d\uFEFF]/g, '');
+
+  return text.length > 0;
+}
+
+showResultDetails(): boolean {
+  const results = this.report?.results ?? [];
+
+  return results.some(
+    (result) =>
+      this.hasEditorContent(result.testGroup) ||
+      this.hasEditorContent(result.result) ||
+      this.hasEditorContent(result.reference)
+  );
+}
+
+hasColumnContent(field: 'testGroup' | 'result' | 'reference'): boolean {
+  return this.report?.results?.some(
+    (item) => this.hasEditorContent(item[field])
+  ) ?? false;
+}
 }

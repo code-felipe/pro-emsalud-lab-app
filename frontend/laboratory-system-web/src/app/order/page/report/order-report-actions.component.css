@@ -1,0 +1,93 @@
+
+/* =====================================================
+   BOTONES DE ACCIÓN
+   ===================================================== */
+
+.report-actions {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  flex-wrap: wrap;
+  gap: 7px;
+  min-width: 0;
+  margin-bottom: 10px;
+}
+
+.report-download-btn,
+.report-whatsapp-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  min-height: 34px;
+  padding: 8px 11px;
+  border: 1px solid transparent;
+  border-radius: var(--radius-s);
+  color: #fff;
+  font-family: inherit;
+  font-size: 10px;
+  font-weight: 700;
+  line-height: 1.3;
+  white-space: nowrap;
+  cursor: pointer;
+  box-sizing: border-box;
+  transition:
+    background-color var(--transition-fast),
+    border-color var(--transition-fast),
+    opacity var(--transition-fast);
+}
+
+.report-download-btn {
+  background: var(--teal);
+  border-color: var(--teal);
+}
+
+.report-download-btn:hover:not(:disabled) {
+  background: var(--teal-deep);
+  border-color: var(--teal-deep);
+}
+
+.report-download-btn:disabled {
+  opacity: 0.6;
+  cursor: wait;
+}
+
+.report-whatsapp-btn {
+  background: #25d366;
+  border-color: #25d366;
+}
+
+.report-whatsapp-btn:hover {
+  background: #1ebe5d;
+  border-color: #1ebe5d;
+}
+
+.report-download-btn i,
+.report-whatsapp-btn i {
+  font-size: 13px;
+  flex-shrink: 0;
+}
+
+/* Responsive */
+
+@media (max-width: 700px) {
+  .report-actions {
+    display: flex;
+    width: 100%;
+    flex-wrap: wrap;
+    gap: 7px;
+  }
+
+  .report-download-btn,
+  .report-whatsapp-btn {
+    flex: 1 1 auto;
+    min-height: 36px;
+    padding: 8px 10px;
+  }
+}
+
+/* PDF */
+
+.order-report.generating-pdf .report-actions {
+  display: none !important;
+}

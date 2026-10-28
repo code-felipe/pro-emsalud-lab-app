@@ -116,37 +116,49 @@
       <!-- RESULTS TABLE -->
 
       <div class="report-results-scroll" *ngIf="report.results.length > 0">
-        <div class="report-results-grid">
-          <!-- Encabezados -->
-          <div class="result-grid-header">Prueba</div>
-          <div class="result-grid-header">Prueba grupal</div>
-          <div class="result-grid-header">Resultado</div>
-          <div class="result-grid-header">Referencia</div>
-          <div class="result-grid-header">Método</div>
+        <table class="report-results-table">
+          <colgroup>
+            <col class="col-test" />
+            <col *ngIf="hasColumnContent('testGroup')" class="col-group" />
+            <col *ngIf="hasColumnContent('result')" class="col-result" />
+            <col *ngIf="hasColumnContent('reference')" class="col-reference" />
+            <col class="col-method" />
+          </colgroup>
 
-          <!-- Resultados -->
-          <ng-container *ngFor="let result of report.results">
-            <div class="result-grid-cell result-name" data-label="Prueba">
-              {{ result.testName }}
-            </div>
+          <thead>
+            <tr>
+              <th>Prueba</th>
+              <th *ngIf="hasColumnContent('testGroup')">Prueba grupal</th>
+              <th *ngIf="hasColumnContent('result')">Resultado</th>
+              <th *ngIf="hasColumnContent('reference')">Referencia</th>
+              <th>Método</th>
+            </tr>
+          </thead>
 
-            <div class="result-grid-cell" data-label="Prueba grupal">
-              <div class="reference-content" [innerHTML]="result.testGroup || ''"></div>
-            </div>
+          <tbody>
+            <tr *ngFor="let result of report.results">
+              <td class="result-name" data-label="Prueba">
+                {{ result.testName }}
+              </td>
 
-            <div class="result-grid-cell" data-label="Resultado">
-              <div class="reference-content" [innerHTML]="result.result || 'N/A'"></div>
-            </div>
+              <td *ngIf="hasColumnContent('testGroup')" data-label="Prueba grupal">
+                <div class="reference-content" [innerHTML]="result.testGroup || ''"></div>
+              </td>
 
-            <div class="result-grid-cell" data-label="Referencia">
-              <div class="reference-content" [innerHTML]="result.reference || ''"></div>
-            </div>
+              <td *ngIf="hasColumnContent('result')" data-label="Resultado">
+                <div class="reference-content" [innerHTML]="result.result || 'N/A'"></div>
+              </td>
 
-            <div class="result-grid-cell" data-label="Método">
-              <span class="result-name">{{ testMethodLabels[result.testMethod || 'N/A'] }}</span>
-            </div>
-          </ng-container>
-        </div>
+              <td *ngIf="hasColumnContent('reference')" data-label="Referencia">
+                <div class="reference-content" [innerHTML]="result.reference || ''"></div>
+              </td>
+
+              <td data-label="Método">
+                {{ testMethodLabels[result.testMethod || 'N/A'] }}
+              </td>
+            </tr>
+          </tbody>
+        </table>
       </div>
 
       <div class="report-empty" *ngIf="report.results.length === 0">

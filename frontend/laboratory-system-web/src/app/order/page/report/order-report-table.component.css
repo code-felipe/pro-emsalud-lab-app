@@ -1,0 +1,384 @@
+/* =========================================
+   TABLA DE RESULTADOS
+   ========================================= */
+
+/* Contenedor */
+.report-results-scroll {
+  width: 100%;
+  min-width: 0;
+  max-width: 100%;
+  max-height: 300px;
+  margin-top: 6px;
+  overflow: auto;
+  box-sizing: border-box;
+}
+
+/* Tabla principal */
+.report-results-table {
+  width: 100%;
+  min-width: 0;
+  table-layout: fixed;
+  border-collapse: separate;
+  border-spacing: 0;
+  border-top: 1px solid var(--line);
+  border-left: 1px solid var(--line);
+  border-radius: var(--radius-s);
+  overflow: hidden;
+}
+
+/* =========================================
+   ANCHOS DE LAS COLUMNAS
+   ========================================= */
+
+.report-results-table .col-test {
+  width: 10%;
+}
+
+.report-results-table .col-group {
+  width: 22%;
+}
+
+.report-results-table .col-result {
+  width: 24%;
+}
+
+.report-results-table .col-reference {
+  width: 27%;
+}
+
+.report-results-table .col-method {
+  width: 15%;
+}
+
+/* =========================================
+   ENCABEZADOS
+   ========================================= */
+
+.report-results-table th {
+  position: sticky;
+  top: 0;
+  z-index: 2;
+  padding: 7px 6px;
+  background: var(--teal-wash);
+  color: var(--teal-deep);
+  border-bottom: 1px solid var(--line-strong);
+  font-size: 10px;
+  font-weight: 700;
+  text-align: left;
+  text-transform: uppercase;
+  letter-spacing: 0.02em;
+  overflow-wrap: anywhere;
+  word-break: normal;
+  box-sizing: border-box;
+}
+
+/* =========================================
+   CELDAS
+   ========================================= */
+
+.report-results-table td {
+  padding: 7px 6px;
+  border-bottom: 1px solid var(--line);
+  font-size: 10px;
+  line-height: 1.4;
+  vertical-align: top;
+  overflow-wrap: anywhere;
+  word-break: normal;
+  box-sizing: border-box;
+}
+
+.report-results-table tbody tr:nth-child(even) {
+  background: var(--paper-raised);
+}
+
+.report-results-table td.result-name {
+  color: var(--ink);
+  font-weight: 650;
+  text-transform: capitalize;
+}
+
+/* Evitar que el contenido desborde las columnas */
+.report-results-table th,
+.report-results-table td {
+  min-width: 0;
+  max-width: 100%;
+}
+
+/* =========================================
+   CONTENIDO HTML DE CKEDITOR
+   ========================================= */
+
+.report-results-table .reference-content {
+  display: block;
+  width: 100%;
+  min-width: 0;
+  max-width: 100%;
+  overflow-wrap: anywhere;
+  word-break: break-word;
+  box-sizing: border-box;
+}
+
+.report-results-table .reference-content p {
+  margin: 0 0 4px;
+}
+
+.report-results-table .reference-content p:last-child {
+  margin-bottom: 0;
+}
+
+.report-results-table .reference-content img {
+  max-width: 100% !important;
+  height: auto !important;
+}
+
+/* Tablas HTML insertadas dentro de CKEditor */
+.report-results-table .reference-content table {
+  width: 100% !important;
+  min-width: 0 !important;
+  max-width: 100% !important;
+  table-layout: fixed !important;
+  border-collapse: collapse;
+}
+
+.report-results-table .reference-content th,
+.report-results-table .reference-content td {
+  padding: 3px;
+  border: 1px solid var(--line);
+  overflow-wrap: anywhere;
+  word-break: break-word;
+}
+
+/* =========================================
+   MÓVILES
+   ========================================= */
+
+@media (max-width: 700px) {
+  .report-results-scroll {
+    max-height: none;
+    overflow: visible;
+  }
+
+  .report-results-table,
+  .report-results-table tbody,
+  .report-results-table tr,
+  .report-results-table td {
+    display: block;
+    width: 100%;
+  }
+
+  .report-results-table {
+    border: none;
+    border-radius: 0;
+  }
+
+  .report-results-table thead {
+    display: none;
+  }
+
+  .report-results-table tbody tr {
+    margin-bottom: 10px;
+    border: 1px solid var(--line);
+    border-radius: var(--radius-s);
+    overflow: hidden;
+  }
+
+  .report-results-table td {
+    display: grid;
+    grid-template-columns: minmax(95px, 35%) minmax(0, 1fr);
+    gap: 8px;
+    padding: 8px;
+    background: transparent;
+  }
+
+  .report-results-table td::before {
+    content: attr(data-label);
+    color: var(--teal-deep);
+    font-size: 9px;
+    font-weight: 700;
+    text-transform: uppercase;
+    overflow-wrap: anywhere;
+  }
+
+  .report-results-table td.result-name {
+    display: block;
+    background: var(--teal-wash);
+    font-weight: 700;
+  }
+
+  .report-results-table td.result-name::before {
+    display: block;
+    margin-bottom: 4px;
+  }
+}
+
+/* =========================================
+   PDF
+   Mantener el formato de tabla incluso
+   cuando la ventana esté en tamaño móvil
+   ========================================= */
+
+.order-report.generating-pdf .report-results-scroll {
+  width: 100% !important;
+  min-width: 0 !important;
+  max-width: 100% !important;
+  max-height: none !important;
+  height: auto !important;
+  overflow: visible !important;
+}
+
+.order-report.generating-pdf .report-results-table {
+  display: table !important;
+  width: 100% !important;
+  min-width: 0 !important;
+  table-layout: fixed !important;
+  border-collapse: separate !important;
+  border-spacing: 0 !important;
+}
+
+/* Mantener los anchos de las columnas en PDF */
+.order-report.generating-pdf .report-results-table .col-test {
+  width: 10% !important;
+}
+
+.order-report.generating-pdf .report-results-table .col-group {
+  width: 24% !important;
+}
+
+.order-report.generating-pdf .report-results-table .col-result {
+  width: 24% !important;
+}
+
+.order-report.generating-pdf .report-results-table .col-reference {
+  width: 24% !important;
+}
+
+.order-report.generating-pdf .report-results-table .col-method {
+  width: 9% !important;
+}
+
+.order-report.generating-pdf .report-results-table thead {
+  display: table-header-group !important;
+}
+
+.order-report.generating-pdf .report-results-table tbody {
+  display: table-row-group !important;
+}
+
+.order-report.generating-pdf .report-results-table tr {
+  display: table-row !important;
+}
+
+.order-report.generating-pdf .report-results-table th,
+.order-report.generating-pdf .report-results-table td {
+  display: table-cell !important;
+  min-width: 0 !important;
+  max-width: 100%;
+  padding: 5px 4px;
+  font-size: 10px;
+  overflow-wrap: anywhere;
+  word-break: break-word;
+  box-sizing: border-box;
+}
+
+.order-report.generating-pdf .report-results-table th {
+  position: static !important;
+}
+
+.order-report.generating-pdf .report-results-table td::before {
+  content: none !important;
+}
+
+.order-report.generating-pdf .report-results-table .reference-content {
+  width: 100%;
+  min-width: 0;
+  max-width: 100%;
+  font-size: 9px;
+  overflow-wrap: anywhere;
+  word-break: break-word;
+}
+
+.order-report.generating-pdf
+.report-results-table .reference-content table {
+  width: 100% !important;
+  min-width: 0 !important;
+  max-width: 100% !important;
+  table-layout: fixed !important;
+}
+
+/* =========================================
+   IMPRESIÓN
+   ========================================= */
+
+@media print {
+  .report-results-scroll {
+    width: 100% !important;
+    min-width: 0 !important;
+    max-width: 100% !important;
+    max-height: none !important;
+    height: auto !important;
+    overflow: visible !important;
+  }
+
+  .report-results-table {
+    display: table !important;
+    width: 100% !important;
+    min-width: 0 !important;
+    table-layout: fixed !important;
+    border-collapse: separate !important;
+    border-spacing: 0 !important;
+  }
+
+  /* Mantener los anchos al imprimir */
+  .report-results-table .col-test {
+    width: 10% !important;
+  }
+
+  .report-results-table .col-group {
+    width: 24% !important;
+  }
+
+  .report-results-table .col-result {
+    width: 24% !important;
+  }
+
+  .report-results-table .col-reference {
+    width: 24% !important;
+  }
+
+  .report-results-table .col-method {
+    width: 9% !important;
+  }
+
+  .report-results-table thead {
+    display: table-header-group !important;
+  }
+
+  .report-results-table tbody {
+    display: table-row-group !important;
+  }
+
+  .report-results-table tr {
+    display: table-row !important;
+  }
+
+  .report-results-table th,
+  .report-results-table td {
+    display: table-cell !important;
+    min-width: 0 !important;
+    max-width: 100%;
+    overflow-wrap: anywhere;
+    word-break: break-word;
+  }
+
+  .report-results-table th {
+    position: static !important;
+  }
+
+  .report-results-table td::before {
+    content: none !important;
+  }
+
+  .report-actions {
+    display: none !important;
+  }
+}

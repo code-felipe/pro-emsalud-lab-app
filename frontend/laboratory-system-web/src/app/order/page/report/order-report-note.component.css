@@ -1,0 +1,40 @@
+
+/* =====================================================
+   NOTA INFORMATIVA
+   ===================================================== */
+
+.report-note {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+  margin: 0 12px 10px;
+  padding: 9px 11px;
+  background: var(--paper);
+  border-left: 3px solid var(--amber);
+  color: var(--ink-soft);
+  font-size: 10px;
+  line-height: 1.5;
+  box-sizing: border-box;
+}
+
+.report-note i {
+  margin-top: 2px;
+  color: var(--amber);
+  flex-shrink: 0;
+}
+
+/* PDF */
+
+.order-report.generating-pdf .report-note {
+  margin: 0 6px 5px;
+  padding: 4px 6px;
+  font-size: 9px;
+}
+
+/* Responsive */
+
+@media (max-width: 700px) {
+  .report-note {
+    margin: 0 9px 9px;
+  }
+}
