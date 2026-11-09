@@ -48,7 +48,6 @@ export class TestFormComponent implements OnInit {
 
   public test: CreateTestRequest & { id?: number } = {
     name: '',
-    group: '',
     testMethod: undefined as unknown as TestMethod,
     reference: '',
     price: 0,
@@ -153,7 +152,6 @@ public editorConfig = {
           this.test = {
             id: response.id,
             name: response.name,
-            group: response.group ?? '',
             testMethod: response.testMethod,
             reference: response.reference ?? '',
             price: response.price,
@@ -203,7 +201,6 @@ public editorConfig = {
 
     const request: CreateTestRequest = {
       name: this.test.name.trim(),
-      group: this.test.group.trim(),
       testMethod: this.test.testMethod,
       reference: this.test.reference?.trim() || undefined,
       price: this.test.price,
@@ -250,7 +247,6 @@ public editorConfig = {
 
     const request: UpdateTestRequest = {
       name: this.test.name.trim(),
-      group: this.test.group.trim(),
       testMethod: this.test.testMethod,
       reference: this.test.reference?.trim() || undefined,
       price: this.test.price,

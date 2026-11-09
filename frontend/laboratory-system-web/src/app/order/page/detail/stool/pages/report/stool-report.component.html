@@ -1,0 +1,160 @@
+<div class="report-page" *ngFor="let r of results">
+  <div class="report-card">
+    <!-- HEADER -->
+    <div class="report-header">
+      <div class="report-header-icon">
+        <!-- <i class="bi bi-beaker-fill"></i> -->
+         <span>&#x1F4A9;</span>
+      </div>
+
+      <div class="report-header-info">
+        <a
+          target="_blank"
+          [routerLink]="['/patients', patientId, 'orders', orderId, 'stools', r.id, 'detail']"
+        >
+          <h2 class="report-title">{{ title }}</h2>
+        </a>
+
+        <div class="report-meta">
+          <span>
+            <strong>Método:</strong>
+            {{ translateTestMethod(r.testMethod) }}
+          </span>
+
+          <span *ngIf="hasReference(r.reference)">
+            <strong>Referencia:</strong>
+            {{ r.reference }}
+          </span>
+        </div>
+      </div>
+    </div>
+
+    <!-- BODY -->
+    <div class="report-body">
+      <!-- =================================================
+       EXAMEN MACROSCÓPICO
+  ================================================== -->
+      <div class="report-section">
+        <div class="section-title">Examen macroscópico</div>
+
+        <div class="section-grid">
+          <div class="report-row">
+            <span class="row-label">Color</span>
+            <span class="row-value">{{ r.stoolResult.color || '—' }}</span>
+          </div>
+
+          <div class="report-row">
+            <span class="row-label">Consistencia</span>
+            <span class="row-value">{{ r.stoolResult.consistency || '—' }}</span>
+          </div>
+
+          <div class="report-row">
+            <span class="row-label">Moco</span>
+            <span class="row-value">{{ r.stoolResult.mucus || '—' }}</span>
+          </div>
+
+          <div class="report-row">
+            <span class="row-label">Sangre</span>
+            <span class="row-value">{{ r.stoolResult.blood || '—' }}</span>
+          </div>
+
+          <div class="report-row">
+            <span class="row-label">Restos alimenticios</span>
+            <span class="row-value">{{ r.stoolResult.foodRemains || '—' }}</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- =================================================
+       EXAMEN QUÍMICO
+  ================================================== -->
+      <div class="report-section">
+        <div class="section-title">Examen químico</div>
+
+        <div class="section-grid">
+          <div class="report-row">
+            <span class="row-label">pH</span>
+            <span class="row-value">{{ r.stoolResult.pH || '—' }}</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- =================================================
+       EXAMEN MICROSCÓPICO
+  ================================================== -->
+      <div class="report-section">
+        <div class="section-title">Examen microscópico</div>
+
+        <div class="section-grid">
+          <div class="report-row">
+            <span class="row-label">Leucocitos</span>
+            <span class="row-value">{{ r.stoolResult.leukocytes || '—' }}</span>
+          </div>
+
+          <div class="report-row">
+            <span class="row-label">Eritrocitos</span>
+            <span class="row-value">{{ r.stoolResult.erythrocytes || '—' }}</span>
+          </div>
+
+          <div class="report-row">
+            <span class="row-label">Levaduras</span>
+            <span class="row-value">{{ r.stoolResult.yeast || '—' }}</span>
+          </div>
+
+          <div class="report-row">
+            <span class="row-label">Células vegetales</span>
+            <span class="row-value">{{ r.stoolResult.vegetableCells || '—' }}</span>
+          </div>
+
+          <div class="report-row">
+            <span class="row-label">Fibras musculares</span>
+            <span class="row-value">{{ r.stoolResult.muscleFibers || '—' }}</span>
+          </div>
+
+          <div class="report-row">
+            <span class="row-label">Grasas</span>
+            <span class="row-value">{{ r.stoolResult.fats || '—' }}</span>
+          </div>
+
+          <div class="report-row">
+            <span class="row-label">Almidones</span>
+            <span class="row-value">{{ r.stoolResult.starches || '—' }}</span>
+          </div>
+
+          <div class="report-row">
+            <span class="row-label">Parásitos</span>
+            <span class="row-value">{{ r.stoolResult.parasites || '—' }}</span>
+          </div>
+
+          <div class="report-row">
+            <span class="row-label">Bacterias</span>
+            <span class="row-value">{{ r.stoolResult.bacteria || '—' }}</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- =================================================
+       OBSERVACIONES
+  ================================================== -->
+      <div class="report-section" *ngIf="r.stoolResult.observation">
+        <div class="section-title">Observaciones</div>
+
+        <div class="report-observation">
+          {{ r.stoolResult.observation }}
+        </div>
+      </div>
+    </div>
+
+    <!-- ACTIONS -->
+    <div class="report-actions no-print">
+      <button
+        type="button"
+        class="btn btn-cancel"
+        [routerLink]="['/patients', patientId, 'orders', orderId, 'stools']"
+      >
+        <i class="ti ti-arrow-left"></i>
+        Volver
+      </button>
+    </div>
+  </div>
+</div>

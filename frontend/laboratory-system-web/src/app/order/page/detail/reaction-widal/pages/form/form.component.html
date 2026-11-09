@@ -1,0 +1,441 @@
+<div class="form-page">
+  <div class="form-card">
+    <!-- HEADER -->
+    <div class="form-card-header">
+      <div class="form-header-icon">
+        <i class="bi bi-clipboard2-plus"></i>
+      </div>
+
+      <div>
+        <h2 class="form-title">
+          {{ title }}
+        </h2>
+
+        <div class="form-subtitle">
+          Selecciona la prueba e ingresa los resultados de la reacción de Widal.
+        </div>
+      </div>
+    </div>
+
+    <!-- BODY -->
+    <div class="form-card-body">
+      <form #widalForm="ngForm">
+        <!-- =================================================
+             TEST
+        ================================================== -->
+
+        <div class="form-row form-row-full">
+          <label class="form-label"> Prueba </label>
+
+          <div class="form-field">
+            <app-test-selector
+              [selectedTest]="selectedTest"
+              (testSelected)="onTestSelected($event)"
+            ></app-test-selector>
+
+            <div class="validation-message" *ngIf="!widalReaction.testId">
+              <div>El test es requerido</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- =================================================
+             WIDAL GRID (O | H)
+        ================================================== -->
+
+        <div class="widal-grid">
+          <!-- ================= COLUMNA O ================= -->
+          <section class="widal-col">
+            <h3 class="widal-col-title">Salmonella Typhi O</h3>
+
+            <div class="widal-row">
+              <span class="widal-row-label">1/20</span>
+              <div class="radio-group">
+                <label class="radio-pill radio-pill-pos">
+                  <input
+                    type="radio"
+                    name="o_1_20"
+                    [value]="true"
+                    [(ngModel)]="widalReaction.widalResult.salmonellaTyphiO_1_20"
+                  />
+                  <span>Positivo</span>
+                </label>
+                <label class="radio-pill radio-pill-neg">
+                  <input
+                    type="radio"
+                    name="o_1_20"
+                    [value]="false"
+                    [(ngModel)]="widalReaction.widalResult.salmonellaTyphiO_1_20"
+                  />
+                  <span>Negativo</span>
+                </label>
+              </div>
+            </div>
+
+            <div class="widal-row">
+              <span class="widal-row-label">1/40</span>
+              <div class="radio-group">
+                <label class="radio-pill radio-pill-pos">
+                  <input
+                    type="radio"
+                    name="o_1_40"
+                    [value]="true"
+                    [(ngModel)]="widalReaction.widalResult.salmonellaTyphiO_1_40"
+                  />
+                  <span>Positivo</span>
+                </label>
+                <label class="radio-pill radio-pill-neg">
+                  <input
+                    type="radio"
+                    name="o_1_40"
+                    [value]="false"
+                    [(ngModel)]="widalReaction.widalResult.salmonellaTyphiO_1_40"
+                  />
+                  <span>Negativo</span>
+                </label>
+              </div>
+            </div>
+
+            <div class="widal-row">
+              <span class="widal-row-label">1/80</span>
+              <div class="radio-group">
+                <label class="radio-pill radio-pill-pos">
+                  <input
+                    type="radio"
+                    name="o_1_80"
+                    [value]="true"
+                    [(ngModel)]="widalReaction.widalResult.salmonellaTyphiO_1_80"
+                  />
+                  <span>Positivo</span>
+                </label>
+                <label class="radio-pill radio-pill-neg">
+                  <input
+                    type="radio"
+                    name="o_1_80"
+                    [value]="false"
+                    [(ngModel)]="widalReaction.widalResult.salmonellaTyphiO_1_80"
+                  />
+                  <span>Negativo</span>
+                </label>
+              </div>
+            </div>
+
+            <div class="widal-row">
+              <span class="widal-row-label">1/160</span>
+              <div class="radio-group">
+                <label class="radio-pill radio-pill-pos">
+                  <input
+                    type="radio"
+                    name="o_1_160"
+                    [value]="true"
+                    [(ngModel)]="widalReaction.widalResult.salmonellaTyphiO_1_160"
+                  />
+                  <span>Positivo</span>
+                </label>
+                <label class="radio-pill radio-pill-neg">
+                  <input
+                    type="radio"
+                    name="o_1_160"
+                    [value]="false"
+                    [(ngModel)]="widalReaction.widalResult.salmonellaTyphiO_1_160"
+                  />
+                  <span>Negativo</span>
+                </label>
+              </div>
+            </div>
+
+            <div class="widal-row">
+              <span class="widal-row-label">1/320</span>
+              <div class="radio-group">
+                <label class="radio-pill radio-pill-pos">
+                  <input
+                    type="radio"
+                    name="o_1_320"
+                    [value]="true"
+                    [(ngModel)]="widalReaction.widalResult.salmonellaTyphiO_1_320"
+                  />
+                  <span>Positivo</span>
+                </label>
+                <label class="radio-pill radio-pill-neg">
+                  <input
+                    type="radio"
+                    name="o_1_320"
+                    [value]="false"
+                    [(ngModel)]="widalReaction.widalResult.salmonellaTyphiO_1_320"
+                  />
+                  <span>Negativo</span>
+                </label>
+              </div>
+            </div>
+
+            <div class="widal-row widal-row-result">
+              <span class="widal-row-label">Resultado</span>
+              <div class="radio-group">
+                <label class="radio-pill radio-pill-pos">
+                  <input
+                    type="radio"
+                    name="o_result"
+                    [value]="true"
+                    [(ngModel)]="widalReaction.widalResult.salmonellaTyphiOResult"
+                  />
+                  <span>Positivo</span>
+                </label>
+                <label class="radio-pill radio-pill-neg">
+                  <input
+                    type="radio"
+                    name="o_result"
+                    [value]="false"
+                    [(ngModel)]="widalReaction.widalResult.salmonellaTyphiOResult"
+                  />
+                  <span>Negativo</span>
+                </label>
+              </div>
+            </div>
+
+            <div class="widal-row widal-row-titulation">
+              <span class="widal-row-label">Titulación</span>
+              <div class="radio-group radio-group-wrap">
+                <label class="radio-pill" *ngFor="let t of titulations">
+                  <input
+                    type="radio"
+                    name="o_titulation"
+                    [value]="t"
+                    [(ngModel)]="widalReaction.widalResult.salmonellaTyphiOResultTitulation"
+                  />
+                  <span>{{ titulationLabels[t] }}</span>
+                </label>
+              </div>
+            </div>
+          </section>
+
+          <!-- ================= COLUMNA H ================= -->
+          <section class="widal-col">
+            <h3 class="widal-col-title">Salmonella Typhi H</h3>
+
+            <div class="widal-row">
+              <span class="widal-row-label">1/20</span>
+              <div class="radio-group">
+                <label class="radio-pill radio-pill-pos">
+                  <input
+                    type="radio"
+                    name="h_1_20"
+                    [value]="true"
+                    [(ngModel)]="widalReaction.widalResult.salmonellaTyphiH_1_20"
+                  />
+                  <span>Positivo</span>
+                </label>
+                <label class="radio-pill radio-pill-neg">
+                  <input
+                    type="radio"
+                    name="h_1_20"
+                    [value]="false"
+                    [(ngModel)]="widalReaction.widalResult.salmonellaTyphiH_1_20"
+                  />
+                  <span>Negativo</span>
+                </label>
+              </div>
+            </div>
+
+            <div class="widal-row">
+              <span class="widal-row-label">1/40</span>
+              <div class="radio-group">
+                <label class="radio-pill radio-pill-pos">
+                  <input
+                    type="radio"
+                    name="h_1_40"
+                    [value]="true"
+                    [(ngModel)]="widalReaction.widalResult.salmonellaTyphiH_1_40"
+                  />
+                  <span>Positivo</span>
+                </label>
+                <label class="radio-pill radio-pill-neg">
+                  <input
+                    type="radio"
+                    name="h_1_40"
+                    [value]="false"
+                    [(ngModel)]="widalReaction.widalResult.salmonellaTyphiH_1_40"
+                  />
+                  <span>Negativo</span>
+                </label>
+              </div>
+            </div>
+
+            <div class="widal-row">
+              <span class="widal-row-label">1/80</span>
+              <div class="radio-group">
+                <label class="radio-pill radio-pill-pos">
+                  <input
+                    type="radio"
+                    name="h_1_80"
+                    [value]="true"
+                    [(ngModel)]="widalReaction.widalResult.salmonellaTyphiH_1_80"
+                  />
+                  <span>Positivo</span>
+                </label>
+                <label class="radio-pill radio-pill-neg">
+                  <input
+                    type="radio"
+                    name="h_1_80"
+                    [value]="false"
+                    [(ngModel)]="widalReaction.widalResult.salmonellaTyphiH_1_80"
+                  />
+                  <span>Negativo</span>
+                </label>
+              </div>
+            </div>
+
+            <div class="widal-row">
+              <span class="widal-row-label">1/160</span>
+              <div class="radio-group">
+                <label class="radio-pill radio-pill-pos">
+                  <input
+                    type="radio"
+                    name="h_1_160"
+                    [value]="true"
+                    [(ngModel)]="widalReaction.widalResult.salmonellaTyphiH_1_160"
+                  />
+                  <span>Positivo</span>
+                </label>
+                <label class="radio-pill radio-pill-neg">
+                  <input
+                    type="radio"
+                    name="h_1_160"
+                    [value]="false"
+                    [(ngModel)]="widalReaction.widalResult.salmonellaTyphiH_1_160"
+                  />
+                  <span>Negativo</span>
+                </label>
+              </div>
+            </div>
+
+            <div class="widal-row">
+              <span class="widal-row-label">1/320</span>
+              <div class="radio-group">
+                <label class="radio-pill radio-pill-pos">
+                  <input
+                    type="radio"
+                    name="h_1_320"
+                    [value]="true"
+                    [(ngModel)]="widalReaction.widalResult.salmonellaTyphiH_1_320"
+                  />
+                  <span>Positivo</span>
+                </label>
+                <label class="radio-pill radio-pill-neg">
+                  <input
+                    type="radio"
+                    name="h_1_320"
+                    [value]="false"
+                    [(ngModel)]="widalReaction.widalResult.salmonellaTyphiH_1_320"
+                  />
+                  <span>Negativo</span>
+                </label>
+              </div>
+            </div>
+
+            <div class="widal-row widal-row-result">
+              <span class="widal-row-label">Resultado</span>
+              <div class="radio-group">
+                <label class="radio-pill radio-pill-pos">
+                  <input
+                    type="radio"
+                    name="h_result"
+                    [value]="true"
+                    [(ngModel)]="widalReaction.widalResult.salmonellaTyphiHResult"
+                  />
+                  <span>Positivo</span>
+                </label>
+                <label class="radio-pill radio-pill-neg">
+                  <input
+                    type="radio"
+                    name="h_result"
+                    [value]="false"
+                    [(ngModel)]="widalReaction.widalResult.salmonellaTyphiHResult"
+                  />
+                  <span>Negativo</span>
+                </label>
+              </div>
+            </div>
+
+            <div class="widal-row widal-row-titulation">
+              <span class="widal-row-label">Titulación</span>
+              <div class="radio-group radio-group-wrap">
+                <label class="radio-pill" *ngFor="let t of titulations">
+                  <input
+                    type="radio"
+                    name="h_titulation"
+                    [value]="t"
+                    [(ngModel)]="widalReaction.widalResult.salmonellaTyphiHResultTitulation"
+                  />
+                  <span>{{ titulationLabels[t] }}</span>
+                </label>
+              </div>
+            </div>
+          </section>
+        </div>
+
+        <!-- =================================================
+             OBSERVATION
+        ================================================== -->
+
+        <div class="form-row form-row-full">
+          <label class="form-label" for="observation"> Observación </label>
+
+          <div class="form-field">
+            <input
+              id="observation"
+              name="observation"
+              type="text"
+              class="form-control"
+              maxlength="255"
+              placeholder="Escribe una observación..."
+              [(ngModel)]="widalReaction.widalResult.observation"
+              #observation="ngModel"
+            />
+
+            <div class="form-subtitle">{{ widalReaction.widalResult.observation.length }}/255</div>
+          </div>
+        </div>
+
+        <!-- =================================================
+             ACTIONS
+        ================================================== -->
+
+        <div class="form-actions">
+          <!-- CANCEL -->
+          <button
+            type="button"
+            class="btn btn-cancel"
+            [routerLink]="['/patients', patientId, 'orders', orderId, 'widal-reactions']"
+          >
+            <i class="ti ti-x"></i>
+            Cancelar
+          </button>
+
+          <!-- CREATE -->
+          <button
+            *ngIf="!widalReactionId"
+            type="button"
+            class="btn btn-primary-action"
+            [disabled]="!widalReaction.testId || !isWidalResultValid()"
+            (click)="create()"
+          >
+            <i class="ti ti-plus"></i>
+            Crear reacción
+          </button>
+
+          <!-- UPDATE -->
+          <button
+            *ngIf="widalReactionId"
+            type="button"
+            class="btn btn-primary-action"
+            [disabled]="!widalReaction.testId || !isWidalResultValid()"
+            (click)="update()"
+          >
+            <i class="ti ti-edit"></i>
+            Actualizar reacción
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

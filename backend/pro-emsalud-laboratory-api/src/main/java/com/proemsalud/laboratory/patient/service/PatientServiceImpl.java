@@ -11,6 +11,7 @@ import com.proemsalud.laboratory.catalog.domain.Test;
 import com.proemsalud.laboratory.exception.ResourceNotFoundException;
 import com.proemsalud.laboratory.patient.domain.Patient;
 import com.proemsalud.laboratory.patient.dto.create.CreatePatientRequest;
+import com.proemsalud.laboratory.patient.dto.response.AllTestResultsHistory;
 import com.proemsalud.laboratory.patient.dto.response.PatientResponse;
 import com.proemsalud.laboratory.patient.dto.update.UpdatePatientRequest;
 import com.proemsalud.laboratory.patient.filter.PatientFilter;
@@ -101,6 +102,17 @@ public class PatientServiceImpl implements IPatientService {
 		return page.map(patientMapper::toResponse);
 	}
 	
+	@Override
+	public Page<AllTestResultsHistory> findAllTestResultsHistory(
+	        Long patientId,
+	        Pageable pageable
+	) {
+	    return patientRepository.findAllTestResultsByPatient(
+	            patientId,
+	            pageable
+	    );
+	}
+	
 	private String phoneNumberFormat(String number) {
 		return "+502" + number; 	    
 	}
@@ -112,4 +124,6 @@ public class PatientServiceImpl implements IPatientService {
 		patientRepository.delete(patient);
 		
 	}
+
+
 }

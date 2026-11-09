@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { catchError, map, Observable } from 'rxjs';
 import { PatientFilter } from './patient-filter.component';
-import { CreatePatientRequest, PatientResponse, UpdatePatientRequest } from './patient.model';
+import { AllTestResultsHistory, CreatePatientRequest, PatientResponse, UpdatePatientRequest } from './patient.model';
 import { Page } from '../../utils/paginator/paginator.model';
 import { FilterUtils } from '../../utils/filter/filter-utils.model';
 import { ApiResponse } from '../../utils/response/api-response';
@@ -42,6 +42,22 @@ export class PatientService {
   public deletePatient(id: number): Observable<ApiResponse> {
     return this.http.delete<ApiResponse>(`${this.url}/${id}`);
   }
+
+
+  public getPatientOrderResults(
+  patientId: number,
+  page: number = 0,
+  size: number = 10,
+  sort: string = 'orderCreatedAt,desc'
+): Observable<Page<AllTestResultsHistory>> {
+
+  return this.http.get<Page<AllTestResultsHistory>>(
+    `${this.url}/${patientId}/results`,
+    {
+      params: FilterUtils.buildHttpParams(page, size, undefined, sort)
+    }
+  );
+}
 
 //   public activateTest(id: number): Observable<ApiResponse>{
 //     return this.http.patch<ApiResponse>(`${this.url}/${id}/activate`, {});

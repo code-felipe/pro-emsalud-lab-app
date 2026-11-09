@@ -29,16 +29,25 @@ export class AuthService {
   public readonly canOperate = computed(() => this.isAdmin() || this.isUser());
 
   constructor(private http: HttpClient) {}
+  // ===  OLD VERSION OF LOGIN USING SESSION ===
+  // public login(credentials: LoginRequest): Observable<LoginResponse> {
+  //   return this.http.post<LoginResponse>(this.url, credentials).pipe(
+  //     tap(response => {
+  //       sessionStorage.setItem(this.tokenKey, response.token);
+  //       this.saveUser(response.user);
+  //     })
+  //   );
+  // }
 
+  //==== NEW VERSION USING LOCALSTORAGE
   public login(credentials: LoginRequest): Observable<LoginResponse> {
-    return this.http.post<LoginResponse>(this.url, credentials).pipe(
-      tap(response => {
-        sessionStorage.setItem(this.tokenKey, response.token);
-        this.saveUser(response.user);
-      })
-    );
-  }
-
+  return this.http.post<LoginResponse>(this.url, credentials).pipe(
+    tap(response => {
+      localStorage.setItem(this.tokenKey, response.token);
+      this.saveUser(response.user);
+    })
+  );
+}
   public loadCurrentUser(): Observable<UserResponse> {
     return this.http.get<UserResponse>(this.meUrl).pipe(
       tap(user => this.saveUser(user))
@@ -46,14 +55,22 @@ export class AuthService {
   }
 
   public getToken(): string | null {
-    return sessionStorage.getItem(this.tokenKey);
-  }
+  return localStorage.getItem(this.tokenKey);
+}
+  // public getToken(): string | null {
+  //   return sessionStorage.getItem(this.tokenKey);
+  // }
 
   public logout(): void {
-    sessionStorage.removeItem(this.tokenKey);
-    sessionStorage.removeItem(this.userKey);
-    this._user.set(null);
-  }
+  localStorage.removeItem(this.tokenKey);
+  localStorage.removeItem(this.userKey);
+  this._user.set(null);
+}
+  // public logout(): void {
+  //   sessionStorage.removeItem(this.tokenKey);
+  //   sessionStorage.removeItem(this.userKey);
+  //   this._user.set(null);
+  // }
 
   public getCurrentUsername(): string | null {
     const token = this.getToken();
@@ -72,21 +89,39 @@ export class AuthService {
   }
 
   private saveUser(user: UserResponse): void {
-    sessionStorage.setItem(this.userKey, JSON.stringify(user));
-    this._user.set(user);
-  }
+  localStorage.setItem(this.userKey, JSON.stringify(user));
+  this._user.set(user);
+}
+  // private saveUser(user: UserResponse): void {
+  //   sessionStorage.setItem(this.userKey, JSON.stringify(user));
+  //   this._user.set(user);
+  // }
 
   private readStoredUser(): UserResponse | null {
-    const raw = sessionStorage.getItem(this.userKey);
-    if (!raw) return null;
+  const raw = localStorage.getItem(this.userKey);
 
-    try {
-      const user = JSON.parse(raw) as UserResponse;
+  if (!raw) return null;
 
-      // Descarta usuarios guardados con el formato viejo (roles[])
-      return user?.role ? user : null;
-    } catch {
-      return null;
-    }
+  try {
+    const user = JSON.parse(raw) as UserResponse;
+
+    return user?.role ? user : null;
+
+  } catch {
+    return null;
   }
+}
+  // private readStoredUser(): UserResponse | null {
+  //   const raw = sessionStorage.getItem(this.userKey);
+  //   if (!raw) return null;
+
+  //   try {
+  //     const user = JSON.parse(raw) as UserResponse;
+
+  //     // Descarta usuarios guardados con el formato viejo (roles[])
+  //     return user?.role ? user : null;
+  //   } catch {
+  //     return null;
+  //   }
+  // }
 }

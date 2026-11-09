@@ -1,0 +1,283 @@
+
+:host {
+  display: block;
+  width: 100%;
+}
+
+/* =========================================
+   CONTENEDOR PRINCIPAL
+========================================= */
+
+.torch-report {
+  display: block;
+  width: 100%;
+  margin-top: 12px;
+  font-family: Arial, sans-serif;
+  box-sizing: border-box;
+}
+
+/* =========================================
+   GRID: DOS COLUMNAS O | H
+========================================= */
+
+.torch-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1rem;
+  width: 100%;
+  margin: 0 auto 1rem;
+}
+
+/* =========================================
+   COLUMNAS
+========================================= */
+
+.torch-col {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  border: 1px solid #cbdedb;
+  border-radius: 8px;
+  background: #fff;
+  overflow: hidden;
+}
+
+.torch-col a{
+  display: inline-block;
+  text-decoration: none;
+  transition: color 0.2s ease, transform 0.2s ease;
+  cursor: pointer;
+}
+
+.torch-col a h3:hover{
+  color: #04480b;
+  text-decoration: underline;
+  text-decoration-color: #04480b;
+  text-underline-offset: 3px;
+}
+
+/* =========================================
+   TÍTULOS
+========================================= */
+
+.torch-col-title {
+  margin: 0;
+  padding: 9px 12px;
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  color: #0f766e;
+  background: #e0f2ef;
+  border-bottom: 1px solid #cbdedb;
+}
+
+/* =========================================
+   FILAS GENERALES
+========================================= */
+
+.torch-row {
+  display: grid;
+  grid-template-columns: 75px minmax(0, 1fr);
+  align-items: center;
+  gap: 2rem;
+  padding: 7px 12px;
+  border-bottom: 1px solid #dce7e7;
+  min-width: 0;
+  box-sizing: border-box;
+}
+
+.torch-row:last-child {
+  border-bottom: none;
+}
+
+/* =========================================
+   ETIQUETAS
+========================================= */
+
+.torch-row-label {
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: #164e4a;
+}
+
+/* =========================================
+   RESULTADOS POSITIVOS Y NEGATIVOS
+========================================= */
+
+.torch-result {
+  display: inline-block;
+  width: fit-content;
+  min-width: 75px;
+  padding: 4px 10px;
+  text-align: center;
+  font-size:0.75rem;
+  font-weight: 700;
+  border-radius: 999px;
+  box-sizing: border-box;
+}
+
+.result-positive {
+  background: #fee2e2;
+  color: #b91c1c;
+  border: 1px solid #fecaca;
+}
+
+.result-negative {
+  background: #dcfce7;
+  color: #15803d;
+  border: 1px solid #bbf7d0;
+}
+
+/* =========================================
+   RESULTADO Y TITULACIÓN EN UNA FILA
+========================================= */
+
+.torch-final-results {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  border-top: 1px solid #cbdedb;
+  background: #f0fdfa;
+  width: 100%;
+  min-width: 0;
+}
+
+.torch-final-results .widal-row {
+  grid-template-columns: auto minmax(0, 1fr);
+  align-items: center;
+  gap: 5px;
+  padding: 7px 8px;
+  border-bottom: none;
+  min-width: 0;
+}
+
+.torch-final-results .widal-row-result {
+  border-right: 1px solid #cbdedb;
+}
+
+.torch-final-results .widal-row-label {
+  white-space: nowrap;
+  font-size: 0.75rem;
+}
+
+.torch-final-results .widal-result {
+  min-width: 0;
+  width: fit-content;
+  max-width: 100%;
+  padding: 4px 6px;
+  font-size: 0.75rem;
+}
+
+.torch-final-results .widal-titulation {
+  font-size: 0.75rem;
+  overflow-wrap: anywhere;
+}
+
+/* =========================================
+   TITULACIÓN
+========================================= */
+
+.torch-titulation {
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: #164e4a;
+}
+
+/* =========================================
+   OBSERVACIÓN
+========================================= */
+
+.torch-observation {
+  display: block;
+  width: 100%;
+  margin: 10px 0 auto;
+  padding: 10px 12px;
+  border: 1px solid #cbdedb;
+  border-radius: 8px;
+  background: #fff;
+  box-sizing: border-box;
+}
+
+.torch-reference{
+  display: block;
+  width: 100%;
+  margin: 0 auto;
+  padding: 10px 12px;
+  border: 1px solid #cbdedb;
+  border-radius: 8px;
+  background: #fff;
+  box-sizing: border-box;
+}
+
+.torch-reference .form-label {
+  display: block;
+  margin-bottom: 6px;
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: #0f766e;
+  text-transform: uppercase;
+}
+
+.torch-observation .form-label {
+  display: block;
+  margin-bottom: 6px;
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: #0f766e;
+  text-transform: uppercase;
+}
+
+.torch-observation .form-field {
+  width: 100%;
+}
+
+.observation-text {
+  margin: 0;
+  padding: 8px 10px;
+  min-height: 35px;
+  border: 1px solid #dce7e7;
+  border-radius: 6px;
+  background: #f0fdfa;
+  color: #475569;
+  font-size: 0.75rem;
+  line-height: 1.5;
+  overflow-wrap: anywhere;
+}
+
+/* =========================================
+   PDF
+========================================= */
+
+:host-context(.generating-pdf) .widal-grid,
+:host-context(.generating-pdf) .widal-col,
+:host-context(.generating-pdf) .widal-final-results,
+:host-context(.generating-pdf) .widal-observation {
+  break-inside: avoid;
+  page-break-inside: avoid;
+}
+
+/* =========================================
+   RESPONSIVE
+========================================= */
+
+@media (max-width: 768px) {
+  .torch-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* =========================================
+   IMPRESIÓN
+========================================= */
+
+@media print {
+  .torch-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .torch-col,
+  .torch-final-results,
+  .torch-observation {
+    break-inside: avoid;
+    page-break-inside: avoid;
+  }
+}

@@ -10,6 +10,11 @@ import com.proemsalud.laboratory.doctor.domain.Doctor;
 import com.proemsalud.laboratory.oder.enumerate.OrderStatus;
 import com.proemsalud.laboratory.patient.domain.Patient;
 import com.proemsalud.laboratory.result.domain.TestResult;
+import com.proemsalud.laboratory.test.simpleschemistry.domain.SimpleChemistry;
+import com.proemsalud.laboratory.test.stool.domain.Stool;
+import com.proemsalud.laboratory.test.torch.domain.Torch;
+import com.proemsalud.laboratory.test.urinalysis.domain.Urinalysis;
+import com.proemsalud.laboratory.test.widal.domain.WidalReaction;
 
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
@@ -62,11 +67,44 @@ public class Order {
 	@JoinColumn(name = "doctor_id", nullable = false)
 	private Doctor doctor;
 	
+//	@Builder.Default 
+//	@OneToMany(
+//			mappedBy = "order", fetch = FetchType.LAZY,
+//			cascade = CascadeType.ALL, orphanRemoval = true)//
+//	private List<TestResult> results = new ArrayList<>(); 
+//	
 	@Builder.Default //Avoid un-expected error when creates and  calculate the total price
 	@OneToMany(
 			mappedBy = "order", fetch = FetchType.LAZY,
 			cascade = CascadeType.ALL, orphanRemoval = true)
-	private List<TestResult> results = new ArrayList<>(); 
+	private List<SimpleChemistry> simpleChemistries = new ArrayList<>(); 
+	
+
+	@Builder.Default //Avoid un-expected error when creates and  calculate the total price
+	@OneToMany(
+			mappedBy = "order", fetch = FetchType.LAZY,
+			cascade = CascadeType.ALL, orphanRemoval = true)
+	private List<WidalReaction> widalReactions = new ArrayList<>(); 
+	
+	@Builder.Default //Avoid un-expected error when creates and  calculate the total price
+	@OneToMany(
+			mappedBy = "order", fetch = FetchType.LAZY,
+			cascade = CascadeType.ALL, orphanRemoval = true)
+	private List<Urinalysis> urinalysis = new ArrayList<>(); 
+	
+	@Builder.Default //Avoid un-expected error when creates and  calculate the total price
+	@OneToMany(
+			mappedBy = "order", fetch = FetchType.LAZY,
+			cascade = CascadeType.ALL, orphanRemoval = true)
+	private List<Stool> stools = new ArrayList<>();
+	
+	@Builder.Default //Avoid un-expected error when creates and  calculate the total price
+	@OneToMany(
+			mappedBy = "order", fetch = FetchType.LAZY,
+			cascade = CascadeType.ALL, orphanRemoval = true)
+	private List<Torch> torchs = new ArrayList<>(); 
+	
+	
 	
 	@PrePersist
 	protected void prePersist() {
@@ -81,10 +119,33 @@ public class Order {
 		updatedAt = Instant.now();
 	}
 	
-	public BigDecimal calcTotalPriceTestResults() {
-	    return results.stream()
+	public BigDecimal calcTotalPriceSimpleChemistry() {
+	    return simpleChemistries.stream()
 	            .map(result -> result.getUnitPrice())
 	            .reduce(BigDecimal.ZERO, (total, price) -> total.add(price));
 	}
-
+	
+	public BigDecimal calcTotalPriceWidalReaction() {
+	    return widalReactions.stream()
+	            .map(result -> result.getUnitPrice())
+	            .reduce(BigDecimal.ZERO, (total, price) -> total.add(price));
+	}
+	
+	public BigDecimal calcTotalUrinalysis() {
+		return urinalysis.stream()
+	            .map(result -> result.getUnitPrice())
+	            .reduce(BigDecimal.ZERO, (total, price) -> total.add(price));
+	}
+	
+	public BigDecimal calcTotalStool() {
+		return stools.stream()
+	            .map(result -> result.getUnitPrice())
+	            .reduce(BigDecimal.ZERO, (total, price) -> total.add(price));
+	}
+	
+	public BigDecimal calcTotalTorch() {
+		return torchs.stream()
+	            .map(result -> result.getUnitPrice())
+	            .reduce(BigDecimal.ZERO, (total, price) -> total.add(price));
+	}
 }

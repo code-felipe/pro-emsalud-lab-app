@@ -26,36 +26,36 @@ import jakarta.validation.Valid;
 @RequestMapping("/api/test-results")
 public class TestResultController {
 
-	@Autowired
-	private ITestResultService testResultService;
-
-	@GetMapping("/{id}")
-	public ResponseEntity<TestResultResponse> findById(@PathVariable Long id) {
-		return ResponseEntity.ok(testResultService.findById(id));
-	}
-
-
-	@PutMapping("/{id}")
-	public ResponseEntity<Map<String, Object>> update(@PathVariable Long id,
-			@Valid @RequestBody UpdateTestResultRequest request) {
-
-		TestResultResponse testResult = testResultService.update(id, request);
-
-		Map<String, Object> body = new HashMap<>();
-		body.put("message", "El resultado ha sido actualizado exitosamente");
-		body.put("testResult", testResult);
-
-		return ResponseEntity.ok(body);
-	}
-
-	@DeleteMapping("/{id}")
-	public ResponseEntity<Map<String, Object>> delete(@PathVariable Long id) {
-
-		testResultService.delete(id);
-
-		Map<String, Object> body = new HashMap<>();
-		body.put("message", "Resultado borrado exitosamente");
-
-		return ResponseEntity.ok(body);
-	}
+//	@Autowired
+//	private ITestResultService testResultService;
+//
+//	@GetMapping("/{id}")
+//	public ResponseEntity<TestResultResponse> findById(@PathVariable Long id) {
+//		return ResponseEntity.ok(testResultService.findById(id));
+//	}
+//
+//
+//	@PutMapping("/{id}")
+//	public ResponseEntity<Map<String, Object>> update(@PathVariable Long id,
+//			@Valid @RequestBody UpdateTestResultRequest request) {
+//
+//		TestResultResponse testResult = testResultService.update(id, request);
+//
+//		Map<String, Object> body = new HashMap<>();
+//		body.put("message", "El resultado ha sido actualizado exitosamente");
+//		body.put("testResult", testResult);
+//
+//		return ResponseEntity.ok(body);
+//	}
+//
+//	@DeleteMapping("/{id}")
+//	public ResponseEntity<Map<String, Object>> delete(@PathVariable Long id) {
+//
+//		testResultService.delete(id);
+//
+//		Map<String, Object> body = new HashMap<>();
+//		body.put("message", "Resultado borrado exitosamente");
+//
+//		return ResponseEntity.ok(body);
+//	}
 }

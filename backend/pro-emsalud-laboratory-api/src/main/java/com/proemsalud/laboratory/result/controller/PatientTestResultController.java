@@ -23,15 +23,15 @@ import com.proemsalud.laboratory.result.service.ITestResultService;
 @RequestMapping("/api/patients/{patientId}/test-results")
 public class PatientTestResultController {
 	
-	@Autowired
-	private ITestResultService testResultService;
-	
-	@GetMapping
-	public ResponseEntity<Page<TestResultResponse>> list(
-			TestResultFilter filter,
-			@PageableDefault(page = 0, size = 50, sort = "id", direction = Sort.Direction.DESC) Pageable pageable,
-			@PathVariable Long patientId) {
-
-		return ResponseEntity.ok(testResultService.findByPatientId(filter, patientId, pageable));
-	}
+//	@Autowired
+//	private ITestResultService testResultService;
+//	
+//	@GetMapping
+//	public ResponseEntity<Page<TestResultResponse>> list(
+//			TestResultFilter filter,
+//			@PageableDefault(page = 0, size = 50, sort = "id", direction = Sort.Direction.DESC) Pageable pageable,
+//			@PathVariable Long patientId) {
+//
+//		return ResponseEntity.ok(testResultService.findByPatientId(filter, patientId, pageable));
+//	}
 }

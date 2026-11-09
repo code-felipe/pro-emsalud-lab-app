@@ -1,0 +1,249 @@
+<div class="container-fluid test-detail-page">
+  <div class="row justify-content-center align-items-center min-vh-100 py-5">
+    <div class="col-12 col-md-10 col-lg-9 col-xl-8">
+      <div class="test-card" *ngIf="test as reaction">
+        <!-- Header -->
+        <div class="test-card-header">
+          <div>
+            <span class="section-label">Ficha Reacción de Widal</span>
+            <h1 class="test-title">{{ reaction.testName }}</h1>
+          </div>
+
+          <span class="status-badge status-active">
+            <span class="status-dot"></span>
+            Registrado
+          </span>
+        </div>
+
+        <!-- Body -->
+        <div class="test-card-body">
+          <!-- BASIC INFORMATION -->
+          <div class="detail-section">
+            <div class="section-heading">
+              <span>Información básica</span>
+            </div>
+
+            <div class="row g-4">
+              <div class="col-12 col-sm-6">
+                <div class="detail-item">
+                  <span class="detail-label">Reacción ID</span>
+                  <span class="detail-value">#{{ reaction.id }}</span>
+                </div>
+              </div>
+
+              <div class="col-12 col-sm-6">
+                <div class="detail-item">
+                  <span class="detail-label">Test ID</span>
+                  <span class="detail-value">#{{ reaction.testId }}</span>
+                </div>
+              </div>
+
+              <div class="col-12 col-sm-6">
+                <div class="detail-item">
+                  <span class="detail-label">Orden ID</span>
+                  <span class="detail-value">#{{ reaction.orderId }}</span>
+                </div>
+              </div>
+
+              <div class="col-12 col-sm-6">
+                <div class="detail-item">
+                  <span class="detail-label">Método de prueba</span>
+                  <span class="detail-value">
+                    {{ testMethodLabels[reaction.testMethod] || reaction.testMethod }}
+                  </span>
+                </div>
+              </div>
+
+              <div class="col-12 col-sm-6">
+                <div class="detail-item">
+                  <span class="detail-label">Referencia</span>
+                  <div
+                    class="result-reference"
+                    [class.text-muted-custom]="!reaction.testReference"
+                    [innerHTML]="reaction.testReference || 'Referencia no especificada'"
+                  ></div>
+                </div>
+              </div>
+
+              <div class="col-12 col-sm-6">
+                <div class="detail-item">
+                  <span class="detail-label">Precio</span>
+                  <span class="detail-value price">
+                    Q{{ reaction.unitPrice | number: '1.2-2' }}
+                  </span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- CATEGORY -->
+          <div class="detail-section">
+            <div class="section-heading">
+              <span>Categoría</span>
+            </div>
+
+            <div class="category-card">
+              <div class="category-icon">
+                <span>TC</span>
+              </div>
+
+              <div>
+                <span class="detail-label">Categoría</span>
+                <div class="category-name">
+                  {{ reaction.categoryName }}
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- SALMONELLA TYPHI O -->
+          <div class="detail-section">
+            <div class="section-heading">
+              <span>Salmonella Typhi O</span>
+            </div>
+
+            <div class="row g-4">
+              <div class="col-6 col-md-4 col-lg-2" *ngFor="let dilution of widalODilutions">
+                <div class="detail-item">
+                  <span class="detail-label">{{ dilution.label }}</span>
+
+                  <span
+                    class="detail-value"
+                    [class.text-success]="reaction.widalResult[dilution.key]"
+                    [class.text-danger]="!reaction.widalResult[dilution.key]"
+                  >
+                    {{ reaction.widalResult[dilution.key] ? 'Positivo' : 'Negativo' }}
+                  </span>
+                </div>
+              </div>
+
+              <div class="col-12 col-sm-6">
+                <div class="detail-item">
+                  <span class="detail-label">Resultado final O</span>
+                  <span
+                    class="detail-value"
+                    [class.text-success]="reaction.widalResult.salmonellaTyphiOResult"
+                    [class.text-danger]="!reaction.widalResult.salmonellaTyphiOResult"
+                  >
+                    {{ reaction.widalResult.salmonellaTyphiOResult ? 'Positivo' : 'Negativo' }}
+                  </span>
+                </div>
+              </div>
+
+              <div class="col-12 col-sm-6">
+                <div class="detail-item">
+                  <span class="detail-label">Titulación O</span>
+                  <span class="detail-value">
+                    {{
+                      widalTitulationLabels[reaction.widalResult.salmonellaTyphiOResultTitulation]
+                    }}
+                  </span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- SALMONELLA TYPHI H -->
+          <div class="detail-section">
+            <div class="section-heading">
+              <span>Salmonella Typhi H</span>
+            </div>
+
+            <div class="row g-4">
+              <div class="col-6 col-md-4 col-lg-2" *ngFor="let dilution of widalHDilutions">
+                <div class="detail-item">
+                  <span class="detail-label">{{ dilution.label }}</span>
+
+                  <span
+                    class="detail-value"
+                    [class.text-success]="reaction.widalResult[dilution.key]"
+                    [class.text-danger]="!reaction.widalResult[dilution.key]"
+                  >
+                    {{ reaction.widalResult[dilution.key] ? 'Positivo' : 'Negativo' }}
+                  </span>
+                </div>
+              </div>
+
+              <div class="col-12 col-sm-6">
+                <div class="detail-item">
+                  <span class="detail-label">Resultado final H</span>
+                  <span
+                    class="detail-value"
+                    [class.text-success]="reaction.widalResult.salmonellaTyphiHResult"
+                    [class.text-danger]="!reaction.widalResult.salmonellaTyphiHResult"
+                  >
+                    {{ reaction.widalResult.salmonellaTyphiHResult ? 'Positivo' : 'Negativo' }}
+                  </span>
+                </div>
+              </div>
+
+              <div class="col-12 col-sm-6">
+                <div class="detail-item">
+                  <span class="detail-label">Titulación H</span>
+                  <span class="detail-value">
+                    {{
+                      widalTitulationLabels[reaction.widalResult.salmonellaTyphiHResultTitulation]
+                    }}
+                  </span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- OBSERVATION -->
+          <div class="detail-section">
+            <div class="section-heading">
+              <span>Observaciones</span>
+            </div>
+
+            <div class="detail-item">
+              <span class="detail-label">Observación del resultado</span>
+
+              <div
+                class="result-reference"
+                [class.text-muted-custom]="!reaction.widalResult.observation"
+              >
+                {{ reaction.widalResult.observation || 'Sin observaciones' }}
+              </div>
+            </div>
+          </div>
+
+          <!-- DATES -->
+          <div class="detail-section mb-0">
+            <div class="section-heading">
+              <span>Información de registro</span>
+            </div>
+
+            <div class="row g-4">
+              <div class="col-12 col-sm-6">
+                <div class="detail-item">
+                  <span class="detail-label">Creado en</span>
+                  <span class="detail-value">
+                    {{ reaction.createdAt | date: 'medium' }}
+                  </span>
+                </div>
+              </div>
+
+              <div class="col-12 col-sm-6">
+                <div class="detail-item">
+                  <span class="detail-label">Última actualización</span>
+                  <span class="detail-value">
+                    {{ reaction.updatedAt | date: 'medium' }}
+                  </span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Footer -->
+        <div class="test-card-footer">
+           <button type="button" class="btn btn-back" [routerLink]="['/patients', patientId, 'orders', orderId, 'widal-reactions']">
+            <span class="me-2">←</span>
+            Volver
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

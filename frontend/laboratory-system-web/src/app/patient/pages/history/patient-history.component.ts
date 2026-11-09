@@ -1,97 +1,86 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 
 import { PaginatorComponent } from '../../../utils/paginator/paginator.component';
 import { ModalComponent } from '../../../utils/modal/modal.component';
-import { ModalService } from '../../../utils/modal/modal-service';
-import { AlertService } from '../../../utils/alert/alert.service';
-import { FilterUtils } from '../../../utils/filter/filter-utils.model';
-import { HttpErrorResponse } from '@angular/common/http';
-import { TestResultFilterComponent } from '../../../results/page/filter/filter.component';
-import { TestResultResponse } from '../../../results/components/result.model';
-import { TestResultFilter } from '../../../results/components/result-filter.component';
-import { TestResultService } from '../../../results/components/result.service';
-
-
+import { AllTestResultsHistory } from '../../components/patient.model';
+import { PatientService } from '../../components/patient.service';
 
 @Component({
   selector: 'app-test-result-list',
   standalone: true,
-
   imports: [
     CommonModule,
     RouterLink,
-    PaginatorComponent,
-    ModalComponent,
-    TestResultFilterComponent
+    PaginatorComponent
   ],
-
   templateUrl: './patient-history.component.html',
 })
 export class PatientHistoryComponent implements OnInit {
 
   patientId!: number;
-  orderId!: number;
 
-  results: TestResultResponse[] = [];
-
-  filter: TestResultFilter = {};
-
-  draftFilter: TestResultFilter = {};
+  results: AllTestResultsHistory[] = [];
 
   paginator: any;
 
   hasError = false;
 
-  title = 'Resultados';
-
+  title = 'Historial de resultados';
 
   constructor(
-    private testResultService: TestResultService,
+    private patientService: PatientService,
     private router: Router,
-    private modalService: ModalService,
-    private alertService: AlertService,
     private activatedRoute: ActivatedRoute
   ) {}
 
 ngOnInit(): void {
-  
- const patientId = Number(
-    this.activatedRoute.parent?.snapshot.paramMap.get('id')
-  );
 
-  const orderId = Number(
-    this.activatedRoute.snapshot.paramMap.get('orderId')
-  );
+  console.group('🔍 DEBUG PATIENT HISTORY');
 
-  this.patientId = patientId;
-  this.orderId = orderId;
+  console.log('Current URL:', this.router.url);
 
-  console.log('patientId:', patientId);
-  console.log('orderId:', orderId);
+  console.log('Current route:', this.activatedRoute.snapshot.params);
 
-  this.activatedRoute.queryParamMap.subscribe((params) => {
+  console.log('Parent route:', this.activatedRoute.parent?.snapshot.params);
 
-    const page = params.get('page')
-      ? +params.get('page')!
-      : 0;
+  const patientParam =
+    this.activatedRoute.parent?.snapshot.paramMap.get('id');
 
-    const size = params.get('size')
-      ? +params.get('size')!
-      : 30;
+  console.log('Patient ID parameter:', patientParam);
 
-    const sort = params.get('sort')
-      ?? 'createdAt,desc';
+  this.patientId = Number(patientParam);
 
-    this.filter = FilterUtils.buildTestResultFilter(params);
-    
-    console.log('Test-result filter:', this.filter);
-    console.log('Loading orders for patient:', this.patientId);
+  console.log('Patient ID converted:', this.patientId);
+
+  if (!patientParam || !Number.isInteger(this.patientId) || this.patientId <= 0) {
+
+    console.error('❌ Patient ID inválido');
+
+    this.hasError = true;
+
+    console.groupEnd();
+
+    return;
+  }
+
+  console.log('✅ Patient ID válido:', this.patientId);
+
+  console.groupEnd();
+
+  this.activatedRoute.queryParamMap.subscribe(params => {
+
+    const page = Number(params.get('page') ?? 0);
+    const size = Number(params.get('size') ?? 10);
+    const sort = params.get('sort') ?? 'orderCreatedAt,desc';
+
+    console.log('📄 Pagination:', { page, size, sort });
+
     this.loadTestResults(page, size, sort);
+
   });
 }
-
 
   private loadTestResults(
     page: number,
@@ -99,268 +88,123 @@ ngOnInit(): void {
     sort: string
   ): void {
 
-    this.testResultService.getTestResultsByPatientId(
+    console.group('🚀 HTTP REQUEST - PATIENT HISTORY');
+
+    console.log('Patient ID:', this.patientId);
+    console.log('Page:', page);
+    console.log('Size:', size);
+    console.log('Sort:', sort);
+
+    console.log(
+      'Expected endpoint:',
+      `http://localhost:8080/api/patients/${this.patientId}/results`
+    );
+
+    console.groupEnd();
+
+    this.patientService.getPatientOrderResults(
       this.patientId,
       page,
       size,
-      this.filter,
       sort
-    )
-    .subscribe({
+    ).subscribe({
 
       next: (response) => {
 
-        this.results = response.content;
-        // console.log(this.orders)
+        console.group('✅ HTTP RESPONSE - PATIENT HISTORY');
+
+        console.log('Full response:', response);
+        console.log('Content:', response.content);
+        console.log('Total elements:', response.totalElements);
+        console.log('Total pages:', response.totalPages);
+        console.log('Current page:', response.number);
+        console.log('Page size:', response.size);
+        console.log('Number of elements:', response.numberOfElements);
+        console.log('Is empty:', response.empty);
+
+        if (response.content?.length > 0) {
+
+          console.table(response.content);
+
+        } else {
+
+          console.warn('⚠️ No se encontraron resultados para este paciente');
+
+        }
+
+        console.groupEnd();
+
+        this.results = response.content ?? [];
+
         this.paginator = response;
 
         this.hasError = false;
 
+        console.log('📦 Results assigned:', this.results);
+
       },
 
-      error: (err) => {
+      error: (error) => {
+
+        console.group('❌ HTTP ERROR - PATIENT HISTORY');
+
+        console.error('Full error:', error);
+        console.error('Status:', error.status);
+        console.error('Status text:', error.statusText);
+        console.error('Error body:', error.error);
+        console.error('URL:', error.url);
+
+        console.groupEnd();
 
         this.hasError = true;
 
-        console.error(err);
-
-      },
+      }
 
     });
   }
-
-  public delete(result: TestResultResponse): void {
-
-    this.alertService
-      .confirmDelete(result.id.toString())
-      .then(confirmed => {
-
-        if (!confirmed) {
-          return;
-        }
-
-        this.testResultService
-          .deleteTestResult(result.id)
-          .subscribe({
-
-            next: (response) => {
-
-              this.results = this.results.filter(
-                o => o.id !== result.id
-              );
-
-              this.alertService.success(
-                response.message,
-                'Test Result eliminado'
-              );
-
-            },
-
-            error: (error) => {
-
-              console.error(error);
-
-              this.alertService.error(
-                'No fue posible eliminar el resultado.'
-              );
-
-            }
-
-          });
-
-      });
-  }
-
-  public onApplyFilters(newFilter: TestResultFilter): void {
-
-    const cleanedParams = {
-
-      page: 0,
-
-      search: newFilter.search ?? null,
-
-      priceMin: newFilter.priceMin ?? null,
-
-      priceMax: newFilter.priceMax ?? null,
-
-      createdAtAfter: newFilter.createdAtAfter ?? null,
-
-      createdAtBefore: newFilter.createdAtBefore ?? null,
-
-      updatedAtAfter: newFilter.updatedAtAfter ?? null,
-
-      updatedAtBefore: newFilter.updatedAtBefore ?? null,
-
-    };
-
-    this.router.navigate([], {
-
-      queryParams: cleanedParams,
-
-      queryParamsHandling: 'merge',
-
-    });
-  }
-
-
-  onSearch(event: Event): void {
-
-    const input = event.target as HTMLInputElement;
-
-    const search = input.value.trim();
-
-    this.router.navigate([], {
-
-      queryParams: {
-
-        page: 0,
-
-        search: search || null
-
-      },
-
-      queryParamsHandling: 'merge'
-
-    });
-  }
-
-
-clearSearch(): void {
-
-  this.router.navigate([], {
-    queryParams: {
-      page: 0,
-      search: null
-    },
-    queryParamsHandling: 'merge'
-  });
-}
-
-
 
   onAscendingDate(): void {
 
     this.router.navigate([], {
-
       queryParams: {
-
         page: 0,
-
-        sort: 'createdAt,asc'
-
+        sort: 'orderCreatedAt,asc'
       },
-
       queryParamsHandling: 'merge'
-
     });
-  }
 
+  }
 
   onDescendingDate(): void {
 
     this.router.navigate([], {
-
       queryParams: {
-
         page: 0,
-
-        sort: 'createdAt,desc'
-
+        sort: 'orderCreatedAt,desc'
       },
-
       queryParamsHandling: 'merge'
-
     });
+
   }
 
-  openFilterModal(): void {
-
-    this.draftFilter = {
-      ...this.filter
-    };
-
-    this.modalService.openModal({
-
-      type: 'filter',
-
-      title: 'Filtros',
-
-    });
-  }
-
-
-  applyFilters(): void {
-
-    this.onApplyFilters(this.draftFilter);
-
-    this.modalService.closeModal();
-  }
-
-
-  closeFilterModal(): void {
-
-    this.modalService.closeModal();
-  }
-
-
-  resetModal(): void {
-
-    this.draftFilter = {};
-
-    this.filter = {};
+  public onPageChange(page: number): void {
 
     this.router.navigate([], {
-
       queryParams: {
-
-        page: 0,
-
-        priceMin: null,
-
-        priceMax: null,
-
-        createdAtAfter: null,
-
-        createdAtBefore: null,
-
-        updatedAtAfter: null,
-
-        updatedAtBefore: null,
-
+        page: page
       },
-
-      queryParamsHandling: 'merge',
-
+      queryParamsHandling: 'merge'
     });
+
+  }
+
+  public goBack(): void {
+
+    this.router.navigate([
+      '/patients',
+      this.patientId
+    ]);
+
   }
 
 }
-//   public toggleStatus(order: OrderResponse): void {
-
-//   const isCompleted = order.status === OrderStatus.COMPLETED;
-
-//   const request$ = isCompleted
-//     ? this.orderService.inProgress(order.id)
-//     : this.orderService.completed(order.id);
-
-//   request$.subscribe({
-
-//     next: (response) => {
-
-//       order.status = isCompleted
-//         ? OrderStatus.IN_PROGRESS
-//         : OrderStatus.COMPLETED;
-
-//       this.alertService.success(response.message, 'Orden');
-//     },
-
-//     error: (err: HttpErrorResponse) => {
-
-//       this.alertService.error(
-//         err.error?.message ?? 'No fue posible cambiar el estado de la orden.',
-//         'Error'
-//       );
-//     },
-
-//   });
-// }

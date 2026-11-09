@@ -39,9 +39,6 @@ public class Test {
 	
 	private String name;
 	
-	@Column(name="test_group", columnDefinition = "TEXT")
-	private String group;
-	
 	@Enumerated(EnumType.STRING)
 	@Column(name = "test_method")
 	private TestMethod testMethod;

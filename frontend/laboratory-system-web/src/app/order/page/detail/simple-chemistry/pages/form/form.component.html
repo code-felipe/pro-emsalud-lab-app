@@ -1,0 +1,109 @@
+<div class="form-page">
+  <div class="form-card">
+    <!-- HEADER -->
+    <div class="form-card-header">
+      <div class="form-header-icon">
+        <i class="bi bi-clipboard2-plus"></i>
+      </div>
+
+      <div>
+        <h2 class="form-title">
+          {{ title }}
+        </h2>
+
+        <div class="form-subtitle">Selecciona el test e ingresa el resultado.</div>
+      </div>
+    </div>
+
+    <!-- BODY -->
+    <div class="form-card-body">
+      <form #resultForm="ngForm">
+        <!-- =================================================
+             TEST
+        ================================================== -->
+
+        <div class="form-row form-row-full">
+          <label class="form-label"> Test </label>
+
+          <div class="form-field">
+            <app-test-selector
+              [selectedTest]="selectedTest"
+              (testSelected)="onTestSelected($event)"
+            ></app-test-selector>
+
+            <div class="validation-message" *ngIf="!testResult.testId">
+              <div>El test es requerido</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- =================================================
+             RESULT: CKEDITOR 5
+        ================================================== -->
+
+        <div class="form-row form-row-full">
+          <label class="form-label" for="result"> Resultado </label>
+
+          <div class="form-field">
+            <ckeditor
+              id="result"
+              name="result"
+              [editor]="Editor"
+              [config]="editorConfig"
+              [(ngModel)]="testResult.result"
+              #result="ngModel"
+            ></ckeditor>
+
+            <!-- VALIDATION -->
+            <div
+              class="validation-message"
+              *ngIf="(result.dirty || result.touched) && !hasResultContent()"
+            >
+              <div>El resultado es requerido</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- =================================================
+             ACTIONS
+        ================================================== -->
+
+        <div class="form-actions">
+          <!-- CANCEL -->
+          <button
+            type="button"
+            class="btn btn-cancel"
+            [routerLink]="['/patients', patientId, 'orders', orderId, 'simple-chemistry']"
+          >
+            <i class="ti ti-x"></i>
+            Cancelar
+          </button>
+
+          <!-- CREATE -->
+          <button
+            *ngIf="!testResultId"
+            type="button"
+            class="btn btn-primary-action"
+            [disabled]="!testResult.testId || !hasResultContent()"
+            (click)="create()"
+          >
+            <i class="ti ti-plus"></i>
+            Crear resultado
+          </button>
+
+          <!-- UPDATE -->
+          <button
+            *ngIf="testResultId"
+            type="button"
+            class="btn btn-primary-action"
+            [disabled]="!testResult.testId || !hasResultContent()"
+            (click)="update()"
+          >
+            <i class="ti ti-edit"></i>
+            Actualizar resultado
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

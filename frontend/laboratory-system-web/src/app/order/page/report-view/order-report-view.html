@@ -1,0 +1,199 @@
+<!-- LOADING -->
+<div class="report-loading" *ngIf="loading">
+  <i class="bi bi-hourglass-split"></i>
+  <span>Generando reporte...</span>
+</div>
+
+<!-- ERROR -->
+<div class="report-error" *ngIf="hasError">
+  <i class="bi bi-exclamation-circle"></i>
+  <h3>No se pudo cargar el reporte</h3>
+  <p>Verifica que la orden exista e inténtalo nuevamente.</p>
+</div>
+<div class="order-report-wrapper" *ngIf="report">
+  <!-- <a class="btn-back" [routerLink]="['/patients', patientId, 'orders', orderId, 'test-menu']">
+    <i class="bi bi-arrow-left"></i>
+    Volver a la orden
+  </a> -->
+  <!-- ACCIÓN -->
+  <div class="report-actions">
+    <button
+      type="button"
+      class="report-download-btn"
+      (click)="downloadPdf()"
+      [disabled]="downloadingPdf"
+    >
+      <i
+        class="bi"
+        [class.bi-file-earmark-pdf]="!downloadingPdf"
+        [class.bi-hourglass-split]="downloadingPdf"
+      ></i>
+
+      <span>
+        {{ downloadingPdf ? 'Generando PDF...' : 'Descargar PDF' }}
+      </span>
+    </button>
+    <button type="button" class="report-whatsapp-btn" (click)="openWhatsApp()">
+      <i class="bi bi-whatsapp"></i>
+
+      <span> WhatsApp </span>
+    </button>
+  </div>
+  <!-- ===================================================== REPORT CONTENT Todo lo que esté dentro de #reportContent se exporta al PDF. ===================================================== -->
+  <div #reportContent class="order-report">
+    <!-- ===================================================
+     REPORT HEADER
+     =================================================== -->
+
+    <div class="report-header">
+      <div class="report-brand">
+        <div class="report-icon">
+          <img src="/proemsalud-icon.svg" alt="Proemsalud logo" />
+        </div>
+
+        <div>
+          <div class="report-title">Reporte de Laboratorio Clínico</div>
+
+          <div class="report-subtitle">
+            <h3>PROEMSALUD</h3>
+          </div>
+        </div>
+      </div>
+
+      <div class="report-order">
+        <span class="report-label"> ORDEN </span>
+
+        <strong> #{{ report.id }} </strong>
+      </div>
+    </div>
+
+    <!-- ===================================================
+     PATIENT / DOCTOR INFORMATION
+     =================================================== -->
+
+    <div class="report-info">
+      <!-- PACIENTE -->
+
+      <div class="report-info-block">
+        <span class="report-label"> Paciente </span>
+
+        <strong>
+          {{ report.patientFullName }}
+        </strong>
+
+        <span class="report-secondary" *ngIf="report.patientAge">
+          {{ report.patientAge }}
+        </span>
+      </div>
+
+      <!-- MÉDICO -->
+
+      <div class="report-info-block">
+        <span class="report-label"> Solicitado Por </span>
+
+        <strong>
+          {{ report.doctorTitle != 'NA' ? report.doctorTitle : '' }}
+          {{ report.doctorFullName }}
+        </strong>
+      </div>
+
+      <!-- FECHA -->
+
+      <div class="report-info-block">
+        <span class="report-label"> Fecha </span>
+
+        <strong>
+          {{ report.createdAt | date: 'dd/MM/yyyy HH:mm' }}
+        </strong>
+      </div>
+    </div>
+
+    <!-- ===================================================
+     RESULTS
+=================================================== -->
+
+    <div class="report-section">
+      <div class="report-section-header">
+        <div>
+          <span class="report-section-kicker"> LABORATORIO </span>
+
+          <h3>Resultados</h3>
+        </div>
+      </div>
+
+      <!-- RESULTADOS GENERALES -->
+
+      <!-- QUÍMICAS SIMPLES -->
+      <app-simple-chemistry-report
+        *ngIf="report.simpleChemistries.length > 0"
+        [results]="report.simpleChemistries"
+      >
+      </app-simple-chemistry-report>
+      <!-- WIDAL -->
+      <app-widal-report
+        *ngIf="report.widalReactions.length > 0"
+        [widalReactionResults]="report.widalReactions">
+      </app-widal-report>
+
+      <!-- URINALYSIS -->
+       <app-urinalysis-report
+         *ngIf="report.urinalysis.length > 0"
+        [results]="report.urinalysis">
+       </app-urinalysis-report>
+
+      <!-- STOOL -->
+      <app-stool-report
+        *ngIf="report.stools.length > 0"
+        [results]="report.stools">
+      </app-stool-report>
+
+      <!-- TORCH -->
+       <app-torch-report
+       *ngIf="report.torchs.length > 0"
+        [torchResults]="report.torchs">
+       </app-torch-report>
+    </div>
+    
+
+    <!-- ===================================================
+     REPORT NOTE
+     =================================================== -->
+
+    <div class="report-note">
+      <i class="bi bi-info-circle"></i>
+
+      <span> Este reporte corresponde a los resultados registrados en la orden indicada. </span>
+    </div>
+
+    <!-- ===================================================
+     TECHNICIAN SEAL
+     =================================================== -->
+
+    <div class="report-technician">
+      <!-- SELLO + INFORMACIÓN DE LA EMPRESA -->
+      <div class="report-company">
+        <div class="report-company-info">
+          <strong class="report-company-location"> San Antonio Huista · Cantón Central </strong>
+
+          <span> Lunes - Viernes 7:30–1:00 · 2:00–5:00 </span>
+
+          <span> Sabado - Domingo 7:30–1:00</span>
+
+          <span>Tel. 4836-5187 | Tel. 4873-0645</span>
+        </div>
+        <img
+          src="/emelyn-tech.png"
+          alt="Sello de técnico de laboratorio"
+          class="footer-signature"
+        />
+
+        <!-- VALIDACIÓN -->
+        <div class="report-validation">
+          <span class="report-label"> Emelyn López </span>
+
+          <strong>Bioanalista - Técnico en Laboratorio Clínico</strong>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

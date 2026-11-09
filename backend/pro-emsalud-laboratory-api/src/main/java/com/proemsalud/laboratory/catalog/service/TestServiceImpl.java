@@ -22,6 +22,11 @@ import com.proemsalud.laboratory.catalog.repository.ITestRepository;
 import com.proemsalud.laboratory.catalog.specification.TestSpecification;
 import com.proemsalud.laboratory.exception.ResourceNotFoundException;
 import com.proemsalud.laboratory.result.repository.ITestResultRepository;
+import com.proemsalud.laboratory.test.simpleschemistry.repository.ISimpleChemistryRepository;
+import com.proemsalud.laboratory.test.stool.repository.IStoolRepository;
+import com.proemsalud.laboratory.test.torch.repository.ITorchRepository;
+import com.proemsalud.laboratory.test.urinalysis.repository.IUrinalysisRepository;
+import com.proemsalud.laboratory.test.widal.repository.IWidalReactionRepository;
 
 @Service
 public class TestServiceImpl implements ITestService {
@@ -33,7 +38,19 @@ public class TestServiceImpl implements ITestService {
 	private TestCategoryRepository testCategoryRepository;
 	
 	@Autowired
-	private ITestResultRepository testResultRepository;
+	private ISimpleChemistryRepository simpleChemistryRepository;
+	
+	@Autowired
+	private IStoolRepository stoolRepository;
+	
+	@Autowired
+	private IUrinalysisRepository urinalysisRepository;
+	
+	@Autowired
+	private ITorchRepository torchRepository;
+	
+	@Autowired
+	private IWidalReactionRepository widalRepository;
 
 	@Autowired
 	private TestMapper testMapper;
@@ -62,7 +79,6 @@ public class TestServiceImpl implements ITestService {
 						"La categoria no existe con id: " + request.getTestCategoryId()));
 
 		test.setName(request.getName());
-		test.setGroup(request.getGroup());
 		test.setPrice(request.getPrice());
 		test.setReference(request.getReference());
 		test.setTestMethod(request.getTestMethod());
@@ -129,11 +145,35 @@ public class TestServiceImpl implements ITestService {
 		Test test = testRepository.findById(id)
 				.orElseThrow(() -> new ResourceNotFoundException("El test no existe con id: " + id));
 		
-		if (testResultRepository.existsByTestId(id)) {
+		if (simpleChemistryRepository.existsByTestId(id)) {
 		        throw new IllegalArgumentException(
 		            "No se puede eliminar el test porque está siendo utilizado en resultados de pacientes."
 		        );
 		    }
+		
+		if (urinalysisRepository.existsByTestId(id)) {
+	        throw new IllegalArgumentException(
+	            "No se puede eliminar el test porque está siendo utilizado en resultados de pacientes."
+	        );
+	    }
+		
+		if (stoolRepository.existsByTestId(id)) {
+	        throw new IllegalArgumentException(
+	            "No se puede eliminar el test porque está siendo utilizado en resultados de pacientes."
+	        );
+	    }
+		
+		if (widalRepository.existsByTestId(id)) {
+	        throw new IllegalArgumentException(
+	            "No se puede eliminar el test porque está siendo utilizado en resultados de pacientes."
+	        );
+	    }
+		
+		if (torchRepository.existsByTestId(id)) {
+	        throw new IllegalArgumentException(
+	            "No se puede eliminar el test porque está siendo utilizado en resultados de pacientes."
+	        );
+	    }
 		
 		testRepository.delete(test);
 		

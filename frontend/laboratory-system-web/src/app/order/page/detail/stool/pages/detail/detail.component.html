@@ -1,0 +1,331 @@
+<div class="container-fluid test-detail-page">
+  <div class="row justify-content-center align-items-center min-vh-100 py-5">
+    <div class="col-12 col-md-10 col-lg-9 col-xl-8">
+      <div class="test-card" *ngIf="test as stool">
+        <!-- HEADER -->
+        <div class="test-card-header">
+          <div>
+            <span class="section-label">Ficha de Coproanálisis</span>
+            <h1 class="test-title">{{ stool.testName }}</h1>
+          </div>
+
+          <span class="status-badge status-active">
+            <span class="status-dot"></span>
+            Registrado
+          </span>
+        </div>
+
+        <!-- BODY -->
+        <div class="test-card-body">
+          <!-- INFORMACIÓN BÁSICA -->
+          <div class="detail-section">
+            <div class="section-heading">
+              <span>Información básica</span>
+            </div>
+
+            <div class="row g-3">
+              <div class="col-12 col-sm-6">
+                <div class="detail-item">
+                  <span class="detail-label">Coproanálisis ID</span>
+                  <span class="detail-value">#{{ stool.id }}</span>
+                </div>
+              </div>
+
+              <div class="col-12 col-sm-6">
+                <div class="detail-item">
+                  <span class="detail-label">Test ID</span>
+                  <span class="detail-value">#{{ stool.testId }}</span>
+                </div>
+              </div>
+
+              <div class="col-12 col-sm-6">
+                <div class="detail-item">
+                  <span class="detail-label">Orden ID</span>
+                  <span class="detail-value">#{{ stool.orderId }}</span>
+                </div>
+              </div>
+
+              <div class="col-12 col-sm-6">
+                <div class="detail-item">
+                  <span class="detail-label">Método de prueba</span>
+                  <span class="detail-value">
+                    {{ testMethodLabels[stool.testMethod] || stool.testMethod }}
+                  </span>
+                </div>
+              </div>
+
+              <div class="col-12 col-sm-6">
+                <div class="detail-item">
+                  <span class="detail-label">Precio</span>
+                  <span class="detail-value price"> Q{{ stool.unitPrice | number: '1.2-2' }} </span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- CATEGORÍA -->
+          <div class="detail-section">
+            <div class="section-heading">
+              <span>Categoría</span>
+            </div>
+
+            <div class="category-card">
+              <div class="category-icon">
+                <span>ST</span>
+              </div>
+
+              <div>
+                <span class="detail-label">Categoría</span>
+                <div class="category-name">
+                  {{ stool.categoryName }}
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- EXAMEN MACROSCÓPICO -->
+          <div class="detail-section">
+            <div class="section-heading">
+              <span>Examen macroscópico</span>
+            </div>
+
+            <div class="row g-3">
+              <!-- COLOR -->
+              <div class="col-12 col-sm-6 col-md-4">
+                <div class="detail-item">
+                  <span class="detail-label">Color</span>
+                  <span class="detail-value">
+                    {{ stool.stoolResult.color || '—' }}
+                  </span>
+                </div>
+              </div>
+
+              <!-- CONSISTENCIA -->
+              <div class="col-12 col-sm-6 col-md-4">
+                <div class="detail-item">
+                  <span class="detail-label">Consistencia</span>
+                  <span class="detail-value">
+                    {{ stool.stoolResult.consistency || '—' }}
+                  </span>
+                </div>
+              </div>
+
+              <!-- MOCO -->
+              <div class="col-12 col-sm-6 col-md-4">
+                <div class="detail-item">
+                  <span class="detail-label">Moco</span>
+                  <span class="detail-value">
+                    {{ stool.stoolResult.mucus || '—' }}
+                  </span>
+                </div>
+              </div>
+
+              <!-- SANGRE -->
+              <div class="col-12 col-sm-6 col-md-4">
+                <div class="detail-item">
+                  <span class="detail-label">Sangre</span>
+                  <span class="detail-value">
+                    {{ stool.stoolResult.blood || '—' }}
+                  </span>
+                </div>
+              </div>
+
+              <!-- RESTOS ALIMENTICIOS -->
+              <div class="col-12 col-sm-6 col-md-4">
+                <div class="detail-item">
+                  <span class="detail-label">Restos alimenticios</span>
+                  <span class="detail-value">
+                    {{ stool.stoolResult.foodRemains || '—' }}
+                  </span>
+                </div>
+              </div>
+
+              <!-- PH -->
+              <div class="col-12 col-sm-6 col-md-4">
+                <div class="detail-item">
+                  <span class="detail-label">pH</span>
+                  <span class="detail-value">
+                    {{ stool.stoolResult.pH || '—' }}
+                  </span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- EXAMEN MICROSCÓPICO -->
+          <div class="detail-section">
+            <div class="section-heading">
+              <span>Examen microscópico</span>
+            </div>
+
+            <div class="row g-3">
+              <!-- LEUCOCITOS -->
+              <div class="col-12 col-sm-6 col-md-4">
+                <div class="detail-item">
+                  <span class="detail-label">Leucocitos</span>
+                  <span class="detail-value">
+                    {{ stool.stoolResult.leukocytes || '—' }}
+                  </span>
+                </div>
+              </div>
+
+              <!-- ERITROCITOS -->
+              <div class="col-12 col-sm-6 col-md-4">
+                <div class="detail-item">
+                  <span class="detail-label">Eritrocitos</span>
+                  <span class="detail-value">
+                    {{ stool.stoolResult.erythrocytes || '—' }}
+                  </span>
+                </div>
+              </div>
+
+              <!-- LEVADURAS -->
+              <div class="col-12 col-sm-6 col-md-4">
+                <div class="detail-item">
+                  <span class="detail-label">Levaduras</span>
+                  <span class="detail-value">
+                    {{ stool.stoolResult.yeast || '—' }}
+                  </span>
+                </div>
+              </div>
+
+              <!-- CÉLULAS VEGETALES -->
+              <div class="col-12 col-sm-6 col-md-4">
+                <div class="detail-item">
+                  <span class="detail-label">Células vegetales</span>
+                  <span class="detail-value">
+                    {{ stool.stoolResult.vegetableCells || '—' }}
+                  </span>
+                </div>
+              </div>
+
+              <!-- FIBRAS MUSCULARES -->
+              <div class="col-12 col-sm-6 col-md-4">
+                <div class="detail-item">
+                  <span class="detail-label">Fibras musculares</span>
+                  <span class="detail-value">
+                    {{ stool.stoolResult.muscleFibers || '—' }}
+                  </span>
+                </div>
+              </div>
+
+              <!-- GRASAS -->
+              <div class="col-12 col-sm-6 col-md-4">
+                <div class="detail-item">
+                  <span class="detail-label">Grasas</span>
+                  <span class="detail-value">
+                    {{ stool.stoolResult.fats || '—' }}
+                  </span>
+                </div>
+              </div>
+
+              <!-- ALMIDONES -->
+              <div class="col-12 col-sm-6 col-md-4">
+                <div class="detail-item">
+                  <span class="detail-label">Almidones</span>
+                  <span class="detail-value">
+                    {{ stool.stoolResult.starches || '—' }}
+                  </span>
+                </div>
+              </div>
+
+              <!-- PARÁSITOS -->
+              <div class="col-12 col-sm-6 col-md-4">
+                <div class="detail-item">
+                  <span class="detail-label">Parásitos</span>
+                  <span class="detail-value">
+                    {{ stool.stoolResult.parasites || '—' }}
+                  </span>
+                </div>
+              </div>
+
+              <!-- BACTERIAS -->
+              <div class="col-12 col-sm-6 col-md-4">
+                <div class="detail-item">
+                  <span class="detail-label">Bacterias</span>
+                  <span class="detail-value">
+                    {{ stool.stoolResult.bacteria || '—' }}
+                  </span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- OBSERVACIONES Y REFERENCIA -->
+          <div class="detail-section">
+            <div class="section-heading">
+              <span>Observaciones y referencia</span>
+            </div>
+
+            <div class="row g-3">
+              <!-- OBSERVACIONES -->
+              <div class="col-12">
+                <div class="detail-item">
+                  <span class="detail-label">Observaciones</span>
+
+                  <div
+                    class="result-reference"
+                    [class.text-muted-custom]="!stool.stoolResult.observation"
+                    [innerHTML]="stool.stoolResult.observation || 'Sin observaciones'"
+                  ></div>
+                </div>
+              </div>
+
+              <!-- REFERENCIA -->
+              <div class="col-12">
+                <div class="detail-item">
+                  <span class="detail-label">Referencia</span>
+
+                  <div
+                    class="result-reference"
+                    [class.text-muted-custom]="!stool.testReference"
+                    [innerHTML]="stool.testReference || 'Referencia no especificada'"
+                  ></div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- INFORMACIÓN DE REGISTRO -->
+          <div class="detail-section mb-0">
+            <div class="section-heading">
+              <span>Información de registro</span>
+            </div>
+
+            <div class="row g-3">
+              <div class="col-12 col-sm-6">
+                <div class="detail-item">
+                  <span class="detail-label">Creado en</span>
+                  <span class="detail-value">
+                    {{ stool.createdAt | date: 'medium' }}
+                  </span>
+                </div>
+              </div>
+
+              <div class="col-12 col-sm-6">
+                <div class="detail-item">
+                  <span class="detail-label">Última actualización</span>
+                  <span class="detail-value">
+                    {{ stool.updatedAt | date: 'medium' }}
+                  </span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- FOOTER -->
+        <div class="test-card-footer">
+          <button
+            type="button"
+            class="btn btn-back"
+            [routerLink]="['/patients', patientId, 'orders', orderId, 'stools']"
+          >
+            <span class="me-2">←</span>
+            Volver
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

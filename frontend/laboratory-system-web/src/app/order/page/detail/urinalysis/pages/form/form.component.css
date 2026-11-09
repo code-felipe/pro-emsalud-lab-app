@@ -1,0 +1,145 @@
+.form-card-body > form {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.form-card-body > form > .form-row,
+.form-card-body > form > .urinalysis-sections,
+.form-card-body > form > .form-actions {
+  width: 100%;
+}
+/* =====================================================
+   URINALYSIS SECTIONS
+===================================================== */
+
+.urinalysis-sections {
+  display: flex;
+  flex-direction: column;
+  gap: 28px;
+  margin-top: 30px;
+}
+
+.urinalysis-section {
+  padding: 20px;
+  border: 1px solid var(--border-color, #e5e7eb);
+  border-radius: 12px;
+  background: var(--card-background, #fff);
+}
+
+.urinalysis-section-header {
+  margin-bottom: 22px;
+  padding-bottom: 12px;
+  border-bottom: 1px solid var(--border-color, #e5e7eb);
+}
+
+.urinalysis-section-header h3 {
+  margin: 0;
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--text-primary, #263445);
+}
+
+/* =====================================================
+   FIELDS GRID
+===================================================== */
+
+.urinalysis-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 22px 25px;
+}
+
+.urinalysis-grid .form-row {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+
+/* =====================================================
+   RADIO GROUP
+===================================================== */
+
+.urinalysis-radio-group {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+  min-height: 42px;
+}
+
+.urinalysis-radio-group .radio-pill {
+  cursor: pointer;
+  margin: 0;
+}
+
+.urinalysis-radio-group .radio-pill input {
+  display: none;
+}
+
+.urinalysis-radio-group .radio-pill span {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 42px;
+  padding: 9px 13px;
+  border: 1px solid #dce2e9;
+  border-radius: 7px;
+  background: #fff;
+  color: #475569;
+  font-size: 13px;
+  font-weight: 600;
+  transition: all 0.2s ease;
+}
+
+.urinalysis-radio-group .radio-pill input:checked + span {
+  background: #e8f1ff;
+  border-color: #3b82f6;
+  color: #2563eb;
+}
+
+.urinalysis-radio-group .radio-pill:hover span {
+  border-color: #93b4e8;
+}
+
+/* =====================================================
+   REQUIRED
+===================================================== */
+
+.required-mark {
+  color: #dc3545;
+  margin-left: 2px;
+}
+
+/* =====================================================
+   OBSERVATION
+===================================================== */
+
+.urinalysis-observation {
+  margin-top: 25px;
+}
+
+.urinalysis-observation textarea {
+  resize: vertical;
+}
+
+/* =====================================================
+   RESPONSIVE
+===================================================== */
+
+@media (max-width: 768px) {
+
+  .urinalysis-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .urinalysis-section {
+    padding: 15px;
+  }
+
+  .urinalysis-radio-group {
+    gap: 6px;
+  }
+
+}

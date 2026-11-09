@@ -21,6 +21,7 @@ import { OrderService } from '../../components/order.service';
 import { FilterUtils } from '../../../utils/filter/filter-utils.model';
 
 import { OrderReportComponent } from '../report/order-report.component';
+import { OrderReportView } from '../report-view/order-report-view';
 
 
 @Component({
@@ -33,7 +34,8 @@ import { OrderReportComponent } from '../report/order-report.component';
     PaginatorComponent,
     ModalComponent,
     OrderFilterComponent,
-    OrderReportComponent
+    // OrderReportComponent, //=== OLD VERSION 1.0.4
+    // OrderReportView
   ],
 
   templateUrl: './order-list.component.html',
@@ -261,60 +263,20 @@ export class OrderComponentList implements OnInit {
 
   }
 
-  public openOrderReport(
-    order: OrderResponse
-  ): void {
+public openOrderReport(order: OrderResponse): void {
 
-    // Limpiamos el reporte anterior
-    this.selectedOrderReport = undefined;
+  const url = this.router.serializeUrl(
+    this.router.createUrlTree([
+      '/patients',
+      this.patientId,
+      'orders',
+      order.id,
+      'report'
+    ])
+  );
 
-    // Activamos loading
-    this.reportLoading = true;
-
-
-    // Abrimos modal
-    this.modalService.openModal({
-
-      type: 'report',
-
-      title: `Reporte de Orden #${order.id}`,
-
-    });
-
-    this.orderService
-      .getOrderReport(
-        this.patientId,
-        order.id
-      )
-      .subscribe({
-
-        next: (response) => {
-
-          this.selectedOrderReport = response;
-
-          this.reportLoading = false;
-
-        },
-
-        error: (err: HttpErrorResponse) => {
-
-          this.reportLoading = false;
-
-          console.error(err);
-
-          this.modalService.closeModal();
-
-          this.alertService.error(
-            err.error?.message ??
-              'No fue posible cargar el reporte.',
-            'Reporte'
-          );
-
-        }
-
-      });
-
-  }
+  window.open(url, '_blank', 'noopener,noreferrer');
+}
 
   public closeOrderReport(): void {
 

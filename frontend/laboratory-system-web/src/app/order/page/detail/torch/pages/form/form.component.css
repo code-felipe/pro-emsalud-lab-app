@@ -1,0 +1,269 @@
+
+/* =====================================================
+   FORM LAYOUT
+===================================================== */
+
+:host {
+  display: block;
+  width: 100%;
+}
+
+.form-card-body > form {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+}
+
+.form-card-body > form > .form-row,
+.form-card-body > form > .torch-grid,
+.form-card-body > form > .form-actions {
+  width: 100%;
+}
+
+.form-header-icon {
+   background: #7954A1;
+  color: #F0EAF7;
+}
+
+/* =====================================================
+   TORCH GRID
+===================================================== */
+
+.torch-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 22px;
+  width: 100%;
+  margin: 30px 0 25px;
+  align-items: stretch;
+}
+
+/* =====================================================
+   TORCH COLUMNS
+===================================================== */
+
+.torch-col {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  border: 1px solid #e5e7eb;
+  border-radius: 12px;
+  background: #fff;
+  overflow: hidden;
+}
+
+/* =====================================================
+   COLUMN HEADER
+===================================================== */
+
+.torch-col-header {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  padding: 16px 18px;
+  margin: 0;
+  background: #f8fafc;
+  border-bottom: 1px solid #e5e7eb;
+}
+
+.torch-col-header h3 {
+  margin: 0;
+  font-size: 16px;
+  font-weight: 700;
+  color: #263445;
+}
+
+.torch-col-header span {
+  font-size: 12px;
+  font-weight: 500;
+  color: #64748b;
+}
+
+/* =====================================================
+   TORCH FIELDS
+===================================================== */
+
+.torch-fields {
+  display: flex;
+  flex-direction: column;
+}
+
+/* =====================================================
+   TORCH ROW
+===================================================== */
+
+.torch-row {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding: 17px 18px;
+  border-bottom: 1px solid #f1f1f1;
+  min-width: 0;
+}
+
+.torch-row:last-child {
+  border-bottom: none;
+}
+
+/* =====================================================
+   FIELD LABEL
+===================================================== */
+
+.torch-row-label {
+  font-size: 13px;
+  font-weight: 600;
+  line-height: 1.4;
+  color: #374151;
+}
+
+/* =====================================================
+   RADIO GROUP
+===================================================== */
+
+.torch-radio-group {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 10px;
+  width: 100%;
+}
+
+/* =====================================================
+   RADIO PILL
+===================================================== */
+
+.radio-pill {
+  position: relative;
+  display: block;
+  min-width: 0;
+  margin: 0;
+  cursor: pointer;
+}
+
+.radio-pill input {
+  position: absolute;
+  opacity: 0;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  cursor: pointer;
+}
+
+.radio-pill span {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  min-height: 38px;
+  padding: 9px 5px;
+  border: 1px solid #dce2e9;
+  border-radius: 8px;
+  background: #fff;
+  color: #64748b;
+  font-size: 11px;
+  font-weight: 700;
+  text-align: center;
+  transition: all 0.2s ease;
+  user-select: none;
+}
+
+/* HOVER */
+
+.radio-pill:hover span {
+  border-color: #94a3b8;
+}
+
+/* FOCUS */
+
+.radio-pill input:focus-visible + span {
+  outline: 2px solid #3b82f6;
+  outline-offset: 2px;
+}
+
+/* =====================================================
+   REACTIVO
+===================================================== */
+
+.radio-pill-pos input:checked + span {
+  background: #fef2f2;
+  border-color: #ef4444;
+  color: #dc2626;
+}
+
+/* =====================================================
+   NO REACTIVO
+===================================================== */
+
+.radio-pill-neg input:checked + span {
+  background: #ecfdf5;
+  border-color: #22c55e;
+  color: #15803d;
+}
+
+/* =====================================================
+   REQUIRED
+===================================================== */
+
+.required-mark {
+  color: #dc3545;
+  margin-left: 2px;
+}
+
+/* =====================================================
+   ACTIONS
+===================================================== */
+
+.form-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 12px;
+  margin-top: 15px;
+}
+
+/* =====================================================
+   RESPONSIVE
+===================================================== */
+
+@media (max-width: 900px) {
+  .torch-grid {
+    gap: 15px;
+  }
+
+  .torch-row {
+    padding: 14px;
+  }
+}
+
+@media (max-width: 768px) {
+  .torch-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .torch-col-header {
+    padding: 14px;
+  }
+
+  .torch-row {
+    padding: 15px;
+  }
+
+  .torch-radio-group {
+    gap: 8px;
+  }
+}
+
+@media (max-width: 480px) {
+  .radio-pill span {
+    font-size: 10px;
+    padding: 9px 3px;
+  }
+
+  .form-actions {
+    flex-direction: column-reverse;
+  }
+
+  .form-actions button {
+    width: 100%;
+  }
+}

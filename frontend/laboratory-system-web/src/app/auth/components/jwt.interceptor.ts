@@ -16,7 +16,7 @@ export class JwtInterceptor implements HttpInterceptor {
     next: HttpHandler
   ): Observable<HttpEvent<unknown>> {
 
-    const token = sessionStorage.getItem('token');
+    const token = localStorage.getItem('token');
 
     const isApiRequest =
       request.url.startsWith('http://localhost:8080/api/');

@@ -1,0 +1,21 @@
+.list-title__heading {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.list-title__heading > i {
+  font-size: 1.8rem;
+  color: #A87912;
+}
+
+.test-type-badge {
+  padding: 5px 10px;
+  border-radius: 20px;
+  background: #FFF3CD;
+  color: #A87912;
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.6px;
+}

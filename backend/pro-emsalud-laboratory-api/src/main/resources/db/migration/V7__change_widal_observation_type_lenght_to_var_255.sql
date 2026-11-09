@@ -1,0 +1,2 @@
+ALTER TABLE widal_reaction
+MODIFY COLUMN observation VARCHAR(255) NULL;

@@ -5,6 +5,12 @@ import java.util.List;
 
 import com.proemsalud.laboratory.doctor.enumerate.Title;
 import com.proemsalud.laboratory.result.dto.response.TestResultReportResponse;
+import com.proemsalud.laboratory.test.simpleschemistry.dto.response.SimpleChemistryReportResponse;
+import com.proemsalud.laboratory.test.simpleschemistry.dto.response.SimpleChemistryResponse;
+import com.proemsalud.laboratory.test.stool.dto.response.StoolReportResponse;
+import com.proemsalud.laboratory.test.torch.dto.response.TorchReportResponse;
+import com.proemsalud.laboratory.test.urinalysis.dto.response.UrinalysisReportResponse;
+import com.proemsalud.laboratory.test.widal.dto.response.WidalReactionReportResponse;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -35,6 +41,14 @@ public class OrderReportResponse {
 	
 	private Instant createdAt;
 	
-	private List<TestResultReportResponse> results;
+	private List<SimpleChemistryReportResponse> simpleChemistries;
+	
+	private List<WidalReactionReportResponse> widalReactions;
+	
+	private List<UrinalysisReportResponse> urinalysis;
+	
+	private List<StoolReportResponse> stools;
+	
+	private List<TorchReportResponse> torchs;
 	
 }

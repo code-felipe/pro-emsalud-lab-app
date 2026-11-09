@@ -4,6 +4,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
 import com.proemsalud.laboratory.patient.dto.create.CreatePatientRequest;
+import com.proemsalud.laboratory.patient.dto.response.AllTestResultsHistory;
 import com.proemsalud.laboratory.patient.dto.response.PatientResponse;
 import com.proemsalud.laboratory.patient.dto.update.UpdatePatientRequest;
 import com.proemsalud.laboratory.patient.filter.PatientFilter;
@@ -19,5 +20,7 @@ public interface IPatientService {
 	Page<PatientResponse> findAll(PatientFilter filter, Pageable pageable);
 	
 	void delete(Long id);
+	
+	public Page<AllTestResultsHistory>findAllTestResultsHistory(Long patientId, Pageable pageable);
 	
 }

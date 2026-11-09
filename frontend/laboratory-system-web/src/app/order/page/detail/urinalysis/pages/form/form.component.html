@@ -1,0 +1,159 @@
+<div class="form-page">
+  <div class="form-card">
+    <!-- HEADER -->
+    <div class="form-card-header">
+      <div class="form-header-icon">
+        <i class="bi bi-measuring-cup"></i>
+      </div>
+
+      <div>
+        <h2 class="form-title">{{ title }}</h2>
+
+        <div class="form-subtitle">
+          Selecciona la prueba e ingresa los resultados del uroanálisis.
+        </div>
+      </div>
+    </div>
+
+    <!-- BODY -->
+    <div class="form-card-body">
+      <form #urinalysisForm="ngForm">
+        <!-- TEST -->
+        <div class="form-row form-row-full">
+          <label class="form-label">Prueba</label>
+
+          <div class="form-field">
+            <app-test-selector
+              [selectedTest]="selectedTest"
+              (testSelected)="onTestSelected($event)"
+            ></app-test-selector>
+
+            <div class="validation-message" *ngIf="!urinalysis.testId">
+              <div>El test es requerido</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- URINALYSIS SECTIONS -->
+        <div class="urinalysis-sections">
+          <section class="urinalysis-section" *ngFor="let section of sections">
+            <div class="urinalysis-section-header">
+              <h3>{{ section }}</h3>
+            </div>
+
+            <div class="urinalysis-grid">
+              <div class="form-row" *ngFor="let field of getFieldsBySection(section)">
+                <label class="form-label" [for]="field.name">
+                  {{ field.label }}
+                  <span class="required-mark">*</span>
+                </label>
+
+                <div class="form-field">
+                  <!-- SELECT -->
+                  <select
+                    *ngIf="field.type === 'select'"
+                    class="form-control"
+                    [id]="field.name"
+                    [name]="field.name"
+                    [(ngModel)]="urinalysis.urinalysisResult[field.name]"
+                    required
+                  >
+                    <option value="" disabled>Seleccionar {{ field.label.toLowerCase() }}</option>
+
+                    <option *ngFor="let option of field.options" [value]="option">
+                      {{ option }}
+                    </option>
+                  </select>
+
+                  <!-- RADIO -->
+                  <div class="urinalysis-radio-group" *ngIf="field.type === 'radio'">
+                    <label class="radio-pill" *ngFor="let option of field.options">
+                      <input
+                        type="radio"
+                        [name]="field.name"
+                        [value]="option"
+                        [(ngModel)]="urinalysis.urinalysisResult[field.name]"
+                      />
+
+                      <span>{{ option }}</span>
+                    </label>
+                  </div>
+
+                  <!-- TEXT -->
+                  <input
+                    *ngIf="field.type === 'text'"
+                    type="text"
+                    class="form-control"
+                    [id]="field.name"
+                    [name]="field.name"
+                    [placeholder]="'Ingresar ' + field.label.toLowerCase()"
+                    [(ngModel)]="urinalysis.urinalysisResult[field.name]"
+                    required
+                  />
+                </div>
+              </div>
+            </div>
+          </section>
+        </div>
+
+        <!-- OBSERVATION -->
+        <div class="form-row form-row-full urinalysis-observation">
+          <label class="form-label" for="observation"> Observación </label>
+
+          <div class="form-field">
+            <textarea
+              id="observation"
+              name="observation"
+              class="form-control"
+              rows="3"
+              maxlength="255"
+              placeholder="Escribe una observación..."
+              [(ngModel)]="urinalysis.urinalysisResult.observation"
+            ></textarea>
+
+            <div class="form-subtitle">
+              {{ urinalysis.urinalysisResult.observation?.length ?? 0 }}/255
+            </div>
+          </div>
+        </div>
+
+        <!-- ACTIONS -->
+        <div class="form-actions">
+          <!-- CANCEL -->
+          <button
+            type="button"
+            class="btn btn-cancel"
+            [routerLink]="['/patients', patientId, 'orders', orderId, 'urinalysis']"
+          >
+            <i class="ti ti-x"></i>
+            Cancelar
+          </button>
+
+          <!-- CREATE -->
+          <button
+            *ngIf="!urinalysisId"
+            type="button"
+            class="btn btn-primary-action"
+            [disabled]="!isUrinalysisResultValid() || !urinalysis.testId"
+            (click)="create()"
+          >
+            <i class="ti ti-plus"></i>
+            Crear uroanálisis
+          </button>
+
+          <!-- UPDATE -->
+          <button
+            *ngIf="urinalysisId"
+            type="button"
+            class="btn btn-primary-action"
+            [disabled]="!isUrinalysisResultValid() || !urinalysis.testId"
+            (click)="update()"
+          >
+            <i class="ti ti-edit"></i>
+            Actualizar uroanálisis
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

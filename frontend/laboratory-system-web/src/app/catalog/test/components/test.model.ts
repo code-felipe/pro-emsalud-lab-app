@@ -10,8 +10,6 @@ export interface TestForm {
 export interface CreateTestRequest {
   name: string;
 
-  group: string;
-
   testMethod: TestMethod;
 
   reference?: string;
@@ -23,8 +21,6 @@ export interface CreateTestRequest {
 
 export interface UpdateTestRequest {
   name: string;
-
-  group: string;
 
   testMethod: TestMethod;
 
@@ -40,8 +36,6 @@ export interface TestResponse {
     id: number;
 
     name: string;
-
-    group: string | null;
 
     testMethod: TestMethod;
 

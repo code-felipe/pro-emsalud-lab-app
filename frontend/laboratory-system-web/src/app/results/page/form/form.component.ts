@@ -239,7 +239,6 @@ export class TestResultFormComponent implements OnInit {
           this.selectedTest = {
             id: response.testId,
             name: response.testName,
-            group: response.testGroup,
             testMethod: response.testMethod,
             reference: response.testReference,
             price: response.unitPrice,

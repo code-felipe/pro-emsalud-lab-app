@@ -1,5 +1,10 @@
 import { TestMethod } from "../../catalog/test/components/test.model";
 import { Title } from "../../doctor/components/doctor.model";
+import { WidalReactionReportResponse } from "../page/detail/reaction-widal/components/widal-model";
+import { SimpleChemistryReportResponse, SimpleChemistryResponse } from "../page/detail/simple-chemistry/components/simple-chemistry.model";
+import { StoolReportResponse } from "../page/detail/stool/component/stool.model";
+import { TorchReportResponse } from "../page/detail/torch/components/torch.model";
+import { UrinalysisReportResponse } from "../page/detail/urinalysis/component/urinalysis.model";
 
 export interface CreateOrderRequest{
 
@@ -81,6 +86,18 @@ export interface OrderReportResponse {
   createdAt: string;
 
   results: TestResultReportResponse[];
+
+  simpleChemistries: SimpleChemistryReportResponse[];
+
+  widalReactions: WidalReactionReportResponse[];
+
+  urinalysis: UrinalysisReportResponse[];
+
+  stools: StoolReportResponse[];
+
+  torchs: TorchReportResponse[];
+  
+
 }
 
 

@@ -1,0 +1,171 @@
+<div class="test-menu">
+  <header class="test-menu__header">
+    <div>
+      <span class="test-menu__eyebrow">GESTIÓN DE LABORATORIO</span>
+      <h2>Área de resultados</h2>
+      <p>Selecciona un examen para gestionar sus resultados.</p>
+
+      <!-- VOLVER A LAS ÓRDENES -->
+      <a class="btn-back" [routerLink]="['/patients', patientId]">
+        <i class="bi bi-arrow-left"></i>
+        Órdenes
+      </a>
+    </div>
+
+    <div class="test-menu__order">
+      <span>Paciente #{{ patientId }}</span>
+      <span class="test-menu__separator"></span>
+      <span>Orden #{{ orderId }}</span>
+    </div>
+  </header>
+
+  <div *ngIf="hasError" class="test-menu__error">
+    <i class="bi bi-exclamation-circle"></i>
+    No se pudo identificar al paciente o la orden.
+  </div>
+
+  <div class="test-menu__grid" *ngIf="!hasError">
+
+    <!-- WIDAL -->
+    <a
+      class="test-card test-card--brick"
+      [routerLink]="['/patients', patientId, 'orders', orderId, 'widal-reactions']"
+    >
+      <div class="test-card__top">
+        <div class="test-card__icon">
+          <i class="bi bi-grid-3x3-gap"></i>
+        </div>
+        <i class="bi bi-arrow-up-right test-card__arrow"></i>
+      </div>
+
+      <div class="test-card__content">
+        <span class="test-card__category">SEROLOGÍA</span>
+        <h3>Prueba - Reacción de Widal</h3>
+        <p>Reacciones de aglutinación y diluciones seriadas.</p>
+      </div>
+
+      <div class="test-card__footer">
+        <span>Ver exámenes</span>
+        <i class="bi bi-chevron-right"></i>
+      </div>
+    </a>
+
+    <!-- PANEL TORCH -->
+    <a
+      class="test-card test-card--torch"
+      [routerLink]="['/patients', patientId, 'orders', orderId, 'torchs']"
+    >
+      <div class="test-card__top">
+        <div class="test-card__icon">
+          <i class="bi bi-shield-check"></i>
+        </div>
+        <i class="bi bi-arrow-up-right test-card__arrow"></i>
+      </div>
+
+      <div class="test-card__content">
+        <span class="test-card__category">INMUNOLOGÍA</span>
+        <h3>Panel TORCH</h3>
+        <p>Resultados de anticuerpos IgG e IgM.</p>
+      </div>
+
+      <div class="test-card__footer">
+        <span>Ver exámenes</span>
+        <i class="bi bi-chevron-right"></i>
+      </div>
+    </a>
+
+    <!-- BETA-HCG -->
+    <!-- <a
+      class="test-card test-card--brick"
+      [routerLink]="['/patients', patientId, 'orders', orderId, 'detail', 'beta-hcg']"
+    >
+      <div class="test-card__top">
+        <div class="test-card__icon">
+          <i class="bi bi-eyedropper"></i>
+        </div>
+        <i class="bi bi-arrow-up-right test-card__arrow"></i>
+      </div>
+
+      <div class="test-card__content">
+        <span class="test-card__category">HORMONAS</span>
+        <h3>Subunidad beta-hCG</h3>
+        <p>Resultados de gonadotropina coriónica humana.</p>
+      </div>
+
+      <div class="test-card__footer">
+        <span>Ver exámenes</span>
+        <i class="bi bi-chevron-right"></i>
+      </div>
+    </a> -->
+
+    <!-- ORINA -->
+    <a
+      class="test-card test-card--urine"
+      [routerLink]="['/patients', patientId, 'orders', orderId, 'urinalysis']"
+    >
+      <div class="test-card__top">
+        <div class="test-card__icon">
+          <i class="bi bi-measuring-cup"></i>
+        </div>
+        <i class="bi bi-arrow-up-right test-card__arrow"></i>
+      </div>
+
+      <div class="test-card__content">
+        <span class="test-card__category">UROANÁLISIS</span>
+        <h3>Examen de orina</h3>
+        <p>Hallazgos físicos, químicos y microscópicos.</p>
+      </div>
+
+      <div class="test-card__footer">
+        <span>Ver exámenes</span>
+        <i class="bi bi-chevron-right"></i>
+      </div>
+    </a>
+    <!-- HECES -->
+    <a
+      class="test-card test-card--heces"
+      [routerLink]="['/patients', patientId, 'orders', orderId, 'stools']"
+    >
+      <div class="test-card__top">
+        <div class="test-card__icon">
+          <span>&#x1F4A9;</span>
+        </div>
+        <i class="bi bi-arrow-up-right test-card__arrow"></i>
+      </div>
+
+      <div class="test-card__content">
+        <span class="test-card__category">PARASITOLOGÍA</span>
+        <h3>Examen de heces</h3>
+        <p>Hallazgos macroscópicos y microscópicos.</p>
+      </div>
+
+      <div class="test-card__footer">
+        <span>Ver exámenes</span>
+        <i class="bi bi-chevron-right"></i>
+      </div>
+    </a>
+        <!-- PRUEBAS SIMPLES -->
+    <a
+      class="test-card test-card--teal"
+      [routerLink]="['/patients', patientId, 'orders', orderId, 'simple-chemistry']"
+    >
+      <div class="test-card__top">
+        <div class="test-card__icon">
+          <i class="bi bi-droplet-half"></i>
+        </div>
+        <i class="bi bi-arrow-up-right test-card__arrow"></i>
+      </div>
+
+      <div class="test-card__content">
+        <span class="test-card__category">QUÍMICAS - OTRAS</span>
+        <h3>Pruebas simples</h3>
+        <p>Resultados, unidades y valores de referencia.</p>
+      </div>
+
+      <div class="test-card__footer">
+        <span>Ver exámenes</span>
+        <i class="bi bi-chevron-right"></i>
+      </div>
+    </a>
+  </div>
+</div>

@@ -30,8 +30,6 @@ import lombok.Setter;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-@Entity
-@Table(name = "test_results")
 public class TestResult {
 
 	@Id

@@ -1,0 +1,161 @@
+<div class="form-page">
+  <div class="form-card">
+    <!-- HEADER -->
+    <div class="form-card-header">
+      <span class="test-icon">&#x1F4A9;</span>
+
+      <div>
+        <h2 class="form-title">{{ title }}</h2>
+
+        <div class="form-subtitle">
+          Selecciona la prueba e ingresa los resultados del coproanálisis.
+        </div>
+      </div>
+    </div>
+
+    <!-- BODY -->
+    <div class="form-card-body">
+      <form #stoolForm="ngForm">
+        <!-- TEST -->
+        <div class="form-row form-row-full">
+          <label class="form-label">Prueba</label>
+
+          <div class="form-field">
+            <app-test-selector
+              [selectedTest]="selectedTest"
+              (testSelected)="onTestSelected($event)"
+            ></app-test-selector>
+
+            <div class="validation-message" *ngIf="!stool.testId">
+              <div>El test es requerido</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- STOOL SECTIONS -->
+        <div class="urinalysis-sections">
+          <section class="urinalysis-section" *ngFor="let section of sections">
+            <!-- SECTION HEADER -->
+            <div class="urinalysis-section-header">
+              <h3>{{ section }}</h3>
+            </div>
+
+            <!-- FIELDS GRID -->
+            <div class="urinalysis-grid">
+              <div class="form-row" *ngFor="let field of getFieldsBySection(section)">
+                <label class="form-label" [for]="field.name">
+                  {{ field.label }}
+                  <span class="required-mark">*</span>
+                </label>
+
+                <div class="form-field">
+                  <!-- SELECT -->
+                  <select
+                    *ngIf="field.type === 'select'"
+                    class="form-control"
+                    [id]="field.name"
+                    [name]="field.name"
+                    [ngModel]="getFieldValue(field)"
+                    (ngModelChange)="setFieldValue(field, $event)"
+                    required
+                  >
+                    <option value="" disabled>Seleccionar {{ field.label.toLowerCase() }}</option>
+
+                    <option *ngFor="let option of field.options" [value]="option">
+                      {{ option }}
+                    </option>
+                  </select>
+
+                  <!-- RADIO -->
+                  <div class="urinalysis-radio-group" *ngIf="field.type === 'radio'">
+                    <label class="radio-pill" *ngFor="let option of field.options">
+                      <input
+                        type="radio"
+                        [name]="field.name"
+                        [value]="option"
+                        [ngModel]="getFieldValue(field)"
+                        (ngModelChange)="setFieldValue(field, $event)"
+                        required
+                      />
+
+                      <span>{{ option }}</span>
+                    </label>
+                  </div>
+
+                  <!-- TEXT -->
+                  <input
+                    *ngIf="field.type === 'text'"
+                    type="text"
+                    class="form-control"
+                    [id]="field.name"
+                    [name]="field.name"
+                    [placeholder]="'Ingresar ' + field.label.toLowerCase()"
+                    [ngModel]="getFieldValue(field)"
+                    (ngModelChange)="setFieldValue(field, $event)"
+                    required
+                  />
+                </div>
+              </div>
+            </div>
+          </section>
+        </div>
+
+        <!-- OBSERVATION -->
+        <div class="form-row form-row-full urinalysis-observation">
+          <label class="form-label" for="observation"> Observación </label>
+
+          <div class="form-field">
+            <textarea
+              id="observation"
+              name="observation"
+              class="form-control"
+              rows="3"
+              maxlength="255"
+              placeholder="Escribe una observación..."
+              [(ngModel)]="stool.stoolResult.observation"
+            ></textarea>
+
+            <div class="form-subtitle">{{ stool.stoolResult.observation?.length ?? 0 }}/255</div>
+          </div>
+        </div>
+
+        <!-- ACTIONS -->
+        <div class="form-actions">
+          <!-- CANCEL -->
+          <button
+            type="button"
+            class="btn btn-cancel"
+            [routerLink]="['/patients', patientId, 'orders', orderId, 'stools']"
+          >
+            <i class="ti ti-x"></i>
+            Cancelar
+          </button>
+
+          <!-- CREATE -->
+          <button
+            *ngIf="!stoolId"
+            type="button"
+            class="btn btn-primary-action"
+            [disabled]="!isStoolResultValid() || !stool.testId"
+            (click)="create()"
+          >
+            <i class="ti ti-plus"></i>
+            Crear coproanálisis
+          </button>
+
+          <!-- UPDATE -->
+          <button
+            *ngIf="stoolId"
+            type="button"
+            class="btn btn-primary-action"
+            [disabled]="!isStoolResultValid() || !stool.testId"
+            (click)="update()"
+          >
+            <i class="ti ti-edit"></i>
+            Actualizar coproanálisis
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

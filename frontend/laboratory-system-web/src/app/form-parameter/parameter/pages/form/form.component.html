@@ -1,0 +1,241 @@
+<div class="form-page">
+  <ul class="alert alert-danger list-unstyled api-error" *ngIf="apiError?.errors as errors">
+    <li *ngFor="let error of errors | keyvalue">
+      <b>{{ error.key }}</b
+      >: {{ error.value }}
+    </li>
+  </ul>
+
+  <div class="form-card">
+    <!-- HEADER -->
+
+    <div class="form-card-header">
+      <div class="form-header-icon">
+        <i class="bi bi-clipboard2-pulse"></i>
+      </div>
+
+      <div>
+        <h5 class="form-title">
+          {{ parameter.id != null ? 'Editar Parámetro' : title }}
+        </h5>
+
+        <small class="form-subtitle"> Configuración del Parámetro </small>
+      </div>
+    </div>
+
+    <!-- BODY -->
+
+    <div class="form-card-body">
+      <form #parameterForm="ngForm">
+        <!-- NAME -->
+
+        <div class="form-row">
+          <label class="form-label">Nombre</label>
+
+          <div class="form-field">
+            <input
+              type="text"
+              class="form-control form-input"
+              placeholder="Ej: Color de orina"
+              [(ngModel)]="parameter.name"
+              name="name"
+              required
+              minlength="2"
+              #name="ngModel"
+            />
+
+            <div class="validation-message" *ngIf="name.invalid && (name.dirty || name.touched)">
+              <div *ngIf="name.errors?.['required']">El nombre es requerido</div>
+
+              <div *ngIf="name.errors?.['minlength']">
+                El nombre debe tener al menos 2 caracteres
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- EXAM TYPE -->
+
+        <div class="form-row">
+          <label class="form-label">Tipo de Examen</label>
+
+          <div class="form-field">
+            <select
+              class="form-control form-input"
+              [(ngModel)]="parameter.examType"
+              name="examType"
+              required
+              #examType="ngModel"
+            >
+              <option [ngValue]="undefined">Seleccionar examen</option>
+
+              <option *ngFor="let exam of examTypes" [ngValue]="exam.value">
+                {{ exam.label }}
+              </option>
+            </select>
+
+            <div class="validation-message" *ngIf="examType.invalid && examType.touched">
+              El tipo de examen es requerido
+            </div>
+          </div>
+        </div>
+
+        <!-- INPUT TYPE -->
+
+        <div class="form-row">
+          <label class="form-label">Tipo de Entrada</label>
+
+          <div class="form-field">
+            <select
+              class="form-control form-input"
+              [(ngModel)]="parameter.inputType"
+              name="inputType"
+              required
+              #inputType="ngModel"
+            >
+              <option [ngValue]="undefined">Seleccionar tipo</option>
+
+              <option *ngFor="let input of inputTypes" [ngValue]="input.value">
+                {{ input.label }}
+              </option>
+            </select>
+
+            <div class="validation-message" *ngIf="inputType.invalid && inputType.touched">
+              El tipo de entrada es requerido
+            </div>
+          </div>
+        </div>
+
+        <!-- DISPLAY ORDER -->
+
+        <div class="form-row">
+          <label class="form-label">Orden de Visualización</label>
+
+          <div class="form-field">
+            <input
+              type="number"
+              class="form-control form-input"
+              [(ngModel)]="parameter.displayOrder"
+              name="displayOrder"
+              required
+              min="1"
+              #displayOrder="ngModel"
+            />
+
+            <div class="validation-message" *ngIf="displayOrder.invalid && displayOrder.touched">
+              El orden debe ser mayor que cero
+            </div>
+          </div>
+        </div>
+
+        <!-- OPTIONS -->
+
+        <hr class="form-divider" />
+
+        <div class="form-row">
+          <label class="form-label">Opciones del Parámetro</label>
+
+          <div class="form-field">
+            <!-- SELECT / RADIO -->
+
+            <ng-container
+              *ngIf="
+                parameter.inputType === InputType.SELECT || parameter.inputType === InputType.RADIO
+              "
+            >
+              <div
+                *ngFor="let option of parameter.options; let i = index"
+                class="d-flex gap-2 mb-2 align-items-center"
+              >
+                <input
+                  type="text"
+                  class="form-control form-input"
+                  [placeholder]="'Escribe la opción ' + (i + 1)"
+                  [(ngModel)]="option.value"
+                  [name]="'option-' + i"
+                  required
+                  minlength="1"
+                />
+
+                <button
+                  type="button"
+                  class="btn table-action delete"
+                  (click)="removeOption(i)"
+                  title="Eliminar opción"
+                >
+                  <i class="bi bi-trash"></i>
+                </button>
+              </div>
+
+              <button type="button" class="btn btn-create mt-2" (click)="addOption()">
+                <i class="bi bi-plus-lg"></i>
+                Agregar opción
+              </button>
+
+              <small class="text-muted d-block mt-2">
+                Agrega las opciones que estarán disponibles para este parámetro.
+              </small>
+            </ng-container>
+
+            <!-- TEXT / NUMBER -->
+
+            <div
+              *ngIf="
+                parameter.inputType === InputType.TEXT || parameter.inputType === InputType.NUMBER
+              "
+            >
+              <small class="text-muted"> Este tipo de entrada no requiere opciones. </small>
+            </div>
+
+            <!-- NO INPUT TYPE -->
+
+            <div *ngIf="!parameter.inputType">
+              <small class="text-muted">
+                Selecciona primero un tipo de entrada para configurar sus opciones.
+              </small>
+            </div>
+          </div>
+        </div>
+
+        <!-- DIVIDER -->
+
+        <hr class="form-divider" />
+
+        <!-- ACTIONS -->
+
+        <div class="form-actions">
+          <button type="button" class="btn btn-cancel" [routerLink]="['/parameters']">
+            Cancelar
+          </button>
+
+          <!-- CREATE -->
+
+          <button
+            type="submit"
+            class="btn btn-primary-action"
+            (click)="create()"
+            *ngIf="!parameter.id; else editBlock"
+            [disabled]="!parameterForm.form.valid"
+          >
+            <i class="ti ti-plus"></i>
+            Crear
+          </button>
+
+          <!-- UPDATE -->
+
+          <ng-template #editBlock>
+            <button
+              type="submit"
+              class="btn btn-primary-action"
+              (click)="update()"
+              [disabled]="!parameterForm.form.valid"
+            >
+              <i class="ti ti-edit"></i>
+              Editar
+            </button>
+          </ng-template>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

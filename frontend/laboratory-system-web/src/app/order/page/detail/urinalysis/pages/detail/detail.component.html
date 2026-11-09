@@ -1,0 +1,340 @@
+<div class="container-fluid test-detail-page">
+  <div class="row justify-content-center align-items-center min-vh-100 py-5">
+    <div class="col-12 col-md-10 col-lg-9 col-xl-8">
+      <div class="test-card" *ngIf="test as urinalysis">
+        <!-- Header -->
+        <div class="test-card-header">
+          <div>
+            <span class="section-label">Ficha de Uroanálisis</span>
+            <h1 class="test-title">{{ urinalysis.testName }}</h1>
+          </div>
+
+          <span class="status-badge status-active">
+            <span class="status-dot"></span>
+            Registrado
+          </span>
+        </div>
+
+        <!-- Body -->
+        <div class="test-card-body">
+          <!-- INFORMACIÓN BÁSICA -->
+          <div class="detail-section">
+            <div class="section-heading">
+              <span>Información básica</span>
+            </div>
+
+            <div class="row g-3">
+              <div class="col-12 col-sm-6">
+                <div class="detail-item">
+                  <span class="detail-label">Uroanálisis ID</span>
+                  <span class="detail-value">#{{ urinalysis.id }}</span>
+                </div>
+              </div>
+
+              <div class="col-12 col-sm-6">
+                <div class="detail-item">
+                  <span class="detail-label">Test ID</span>
+                  <span class="detail-value">#{{ urinalysis.testId }}</span>
+                </div>
+              </div>
+
+              <div class="col-12 col-sm-6">
+                <div class="detail-item">
+                  <span class="detail-label">Orden ID</span>
+                  <span class="detail-value">#{{ urinalysis.orderId }}</span>
+                </div>
+              </div>
+
+              <div class="col-12 col-sm-6">
+                <div class="detail-item">
+                  <span class="detail-label">Método de prueba</span>
+                  <span class="detail-value">
+                    {{ testMethodLabels[urinalysis.testMethod] || urinalysis.testMethod }}
+                  </span>
+                </div>
+              </div>
+
+              <div class="col-12 col-sm-6">
+                <div class="detail-item">
+                  <span class="detail-label">Precio</span>
+                  <span class="detail-value price">
+                    Q{{ urinalysis.unitPrice | number: '1.2-2' }}
+                  </span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- CATEGORÍA -->
+          <div class="detail-section">
+            <div class="section-heading">
+              <span>Categoría</span>
+            </div>
+
+            <div class="category-card">
+              <div class="category-icon">
+                <span>UR</span>
+              </div>
+
+              <div>
+                <span class="detail-label">Categoría</span>
+                <div class="category-name">
+                  {{ urinalysis.categoryName }}
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- =================================================
+               EXAMEN FÍSICO
+          ================================================== -->
+          <div class="detail-section">
+            <div class="section-heading">
+              <span>Examen físico</span>
+            </div>
+
+            <div class="row g-3">
+              <div class="col-12 col-sm-6 col-md-4">
+                <div class="detail-item">
+                  <span class="detail-label">Color</span>
+                  <span class="detail-value">{{ urinalysis.urinalysisResult.color || '—' }}</span>
+                </div>
+              </div>
+
+              <div class="col-12 col-sm-6 col-md-4">
+                <div class="detail-item">
+                  <span class="detail-label">Aspecto</span>
+                  <span class="detail-value">{{ urinalysis.urinalysisResult.appearance || '—' }}</span>
+                </div>
+              </div>
+
+              <div class="col-12 col-sm-6 col-md-4">
+                <div class="detail-item">
+                  <span class="detail-label">Densidad</span>
+                  <span class="detail-value">{{ urinalysis.urinalysisResult.specificGravity || '—' }}</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- =================================================
+               EXAMEN QUÍMICO
+          ================================================== -->
+          <div class="detail-section">
+            <div class="section-heading">
+              <span>Examen químico</span>
+            </div>
+
+            <div class="row g-3">
+              <div class="col-12 col-sm-6 col-md-4">
+                <div class="detail-item">
+                  <span class="detail-label">pH</span>
+                  <span class="detail-value">{{ urinalysis.urinalysisResult.pH || '—' }}</span>
+                </div>
+              </div>
+
+              <div class="col-12 col-sm-6 col-md-4">
+                <div class="detail-item">
+                  <span class="detail-label">Leucocitos</span>
+                  <span class="detail-value">{{ urinalysis.urinalysisResult.leukocytes || '—' }}</span>
+                </div>
+              </div>
+
+              <div class="col-12 col-sm-6 col-md-4">
+                <div class="detail-item">
+                  <span class="detail-label">Nitritos</span>
+                  <span class="detail-value">{{ urinalysis.urinalysisResult.nitrites || '—' }}</span>
+                </div>
+              </div>
+
+              <div class="col-12 col-sm-6 col-md-4">
+                <div class="detail-item">
+                  <span class="detail-label">Urobilinógeno</span>
+                  <span class="detail-value">{{ urinalysis.urinalysisResult.urobilinogen || '—' }}</span>
+                </div>
+              </div>
+
+              <div class="col-12 col-sm-6 col-md-4">
+                <div class="detail-item">
+                  <span class="detail-label">Proteínas</span>
+                  <span class="detail-value">{{ urinalysis.urinalysisResult.protein || '—' }}</span>
+                </div>
+              </div>
+
+              <div class="col-12 col-sm-6 col-md-4">
+                <div class="detail-item">
+                  <span class="detail-label">Glucosa</span>
+                  <span class="detail-value">{{ urinalysis.urinalysisResult.glucose || '—' }}</span>
+                </div>
+              </div>
+
+              <div class="col-12 col-sm-6 col-md-4">
+                <div class="detail-item">
+                  <span class="detail-label">Cetonas</span>
+                  <span class="detail-value">{{ urinalysis.urinalysisResult.ketones || '—' }}</span>
+                </div>
+              </div>
+
+              <div class="col-12 col-sm-6 col-md-4">
+                <div class="detail-item">
+                  <span class="detail-label">Bilirrubina</span>
+                  <span class="detail-value">{{ urinalysis.urinalysisResult.bilirubin || '—' }}</span>
+                </div>
+              </div>
+
+              <div class="col-12 col-sm-6 col-md-4">
+                <div class="detail-item">
+                  <span class="detail-label">Eritrocitos</span>
+                  <span class="detail-value">{{ urinalysis.urinalysisResult.erythrocytes || '—' }}</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- =================================================
+               EXAMEN MICROSCÓPICO
+          ================================================== -->
+          <div class="detail-section">
+            <div class="section-heading">
+              <span>Examen microscópico</span>
+            </div>
+
+            <div class="row g-3">
+              <div class="col-12 col-sm-6 col-md-4">
+                <div class="detail-item">
+                  <span class="detail-label">Leucocitos</span>
+                  <span class="detail-value">{{ urinalysis.urinalysisResult.microscopicLeukocytes || '—' }}</span>
+                </div>
+              </div>
+
+              <div class="col-12 col-sm-6 col-md-4">
+                <div class="detail-item">
+                  <span class="detail-label">Eritrocitos</span>
+                  <span class="detail-value">{{ urinalysis.urinalysisResult.microscopicErythrocytes || '—' }}</span>
+                </div>
+              </div>
+
+              <div class="col-12 col-sm-6 col-md-4">
+                <div class="detail-item">
+                  <span class="detail-label">Células epiteliales</span>
+                  <span class="detail-value">{{ urinalysis.urinalysisResult.epithelialCells || '—' }}</span>
+                </div>
+              </div>
+
+              <div class="col-12 col-sm-6 col-md-4">
+                <div class="detail-item">
+                  <span class="detail-label">Bacterias</span>
+                  <span class="detail-value">{{ urinalysis.urinalysisResult.bacteria || '—' }}</span>
+                </div>
+              </div>
+
+              <div class="col-12 col-sm-6 col-md-4">
+                <div class="detail-item">
+                  <span class="detail-label">Moco</span>
+                  <span class="detail-value">{{ urinalysis.urinalysisResult.mucus || '—' }}</span>
+                </div>
+              </div>
+
+              <div class="col-12 col-sm-6 col-md-4">
+                <div class="detail-item">
+                  <span class="detail-label">Cristales</span>
+                  <span class="detail-value">{{ urinalysis.urinalysisResult.crystals || '—' }}</span>
+                </div>
+              </div>
+
+              <div class="col-12 col-sm-6 col-md-4">
+                <div class="detail-item">
+                  <span class="detail-label">Levaduras</span>
+                  <span class="detail-value">{{ urinalysis.urinalysisResult.yeast || '—' }}</span>
+                </div>
+              </div>
+
+              <div class="col-12 col-sm-6 col-md-4">
+                <div class="detail-item">
+                  <span class="detail-label">Otros</span>
+                  <span class="detail-value">{{ urinalysis.urinalysisResult.others || '—' }}</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- =================================================
+               OBSERVACIONES Y REFERENCIA
+          ================================================== -->
+          <div class="detail-section">
+            <div class="section-heading">
+              <span>Observaciones y referencia</span>
+            </div>
+
+            <div class="row g-3">
+              <div class="col-12">
+                <div class="detail-item">
+                  <span class="detail-label">Observaciones</span>
+
+                  <div
+                    class="result-reference"
+                    [class.text-muted-custom]="!urinalysis.urinalysisResult.observation"
+                    [innerHTML]="urinalysis.urinalysisResult.observation || 'Sin observaciones'"
+                  ></div>
+                </div>
+              </div>
+
+              <div class="col-12">
+                <div class="detail-item">
+                  <span class="detail-label">Referencia</span>
+
+                  <div
+                    class="result-reference"
+                    [class.text-muted-custom]="!urinalysis.testReference"
+                    [innerHTML]="urinalysis.testReference || 'Referencia no especificada'"
+                  ></div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- =================================================
+               FECHAS
+          ================================================== -->
+          <div class="detail-section mb-0">
+            <div class="section-heading">
+              <span>Información de registro</span>
+            </div>
+
+            <div class="row g-3">
+              <div class="col-12 col-sm-6">
+                <div class="detail-item">
+                  <span class="detail-label">Creado en</span>
+                  <span class="detail-value">
+                    {{ urinalysis.createdAt | date: 'medium' }}
+                  </span>
+                </div>
+              </div>
+
+              <div class="col-12 col-sm-6">
+                <div class="detail-item">
+                  <span class="detail-label">Última actualización</span>
+                  <span class="detail-value">
+                    {{ urinalysis.updatedAt | date: 'medium' }}
+                  </span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Footer -->
+        <div class="test-card-footer">
+          <button
+            type="button"
+            class="btn btn-back"
+            [routerLink]="['/patients', patientId, 'orders', orderId, 'urinalysis']"
+          >
+            <span class="me-2">←</span>
+            Volver
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

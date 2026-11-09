@@ -15,7 +15,6 @@ public class TestMapper {
 	public Test toEntity(CreateTestRequest request, TestCategory category) {
 		return Test.builder()
 			.name(request.getName())
-			.group(request.getGroup())
 			.testMethod(request.getTestMethod())
 			.reference(normalizeBlank(request.getReference()))
 			.price(request.getPrice())
@@ -27,7 +26,6 @@ public class TestMapper {
 		return TestResponse.builder()
 			.id(test.getId())
 			.name(test.getName())
-			.group(test.getGroup())
 			.testMethod(test.getTestMethod())
 			.reference(test.getReference())
 			.price(test.getPrice())

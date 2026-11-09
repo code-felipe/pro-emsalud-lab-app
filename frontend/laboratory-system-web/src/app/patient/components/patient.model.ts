@@ -44,3 +44,14 @@ export enum Gender {
   MALE = 'MALE',
   FEMALE = 'FEMALE'
 }
+
+export interface AllTestResultsHistory {
+  id: number;
+  testId: number;
+  testName: string;
+  unitPrice: number;
+  orderId: number;
+  orderCreatedAt: string;
+  orderUpdatedAt: string;
+  testType: string;
+}

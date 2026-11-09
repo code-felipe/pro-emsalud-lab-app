@@ -1,0 +1,243 @@
+<div class="container-fluid test-detail-page">
+  <div class="row justify-content-center align-items-center min-vh-100 py-5">
+    <div class="col-12 col-md-10 col-lg-9 col-xl-8">
+      <div class="test-card" *ngIf="test as torch">
+        <!-- Header -->
+        <div class="test-card-header">
+          <div>
+            <span class="section-label">Ficha Panel Torch</span>
+            <h1 class="test-title">{{ torch.testName }}</h1>
+          </div>
+
+          <span class="status-badge status-active">
+            <span class="status-dot"></span>
+            Registrado
+          </span>
+        </div>
+
+        <!-- Body -->
+        <div class="test-card-body">
+          <!-- BASIC INFORMATION -->
+          <div class="detail-section">
+            <div class="section-heading">
+              <span>Información básica</span>
+            </div>
+
+            <div class="row g-4">
+              <div class="col-12 col-sm-6">
+                <div class="detail-item">
+                  <span class="detail-label">Torch ID</span>
+                  <span class="detail-value">#{{ torch.id }}</span>
+                </div>
+              </div>
+
+              <div class="col-12 col-sm-6">
+                <div class="detail-item">
+                  <span class="detail-label">Test ID</span>
+                  <span class="detail-value">#{{ torch.testId }}</span>
+                </div>
+              </div>
+
+              <div class="col-12 col-sm-6">
+                <div class="detail-item">
+                  <span class="detail-label">Orden ID</span>
+                  <span class="detail-value">#{{ torch.orderId }}</span>
+                </div>
+              </div>
+
+              <div class="col-12 col-sm-6">
+                <div class="detail-item">
+                  <span class="detail-label">Método de prueba</span>
+                  <span class="detail-value">
+                    {{ testMethodLabels[torch.testMethod] || torch.testMethod }}
+                  </span>
+                </div>
+              </div>
+
+              <div class="col-12 col-sm-6">
+                <div class="detail-item">
+                  <span class="detail-label">Referencia</span>
+                  <div
+                    class="result-reference"
+                    [class.text-muted-custom]="!torch.testReference"
+                    [innerHTML]="torch.testReference || 'Referencia no especificada'"
+                  ></div>
+                </div>
+              </div>
+
+              <div class="col-12 col-sm-6">
+                <div class="detail-item">
+                  <span class="detail-label">Precio</span>
+                  <span class="detail-value price"> Q{{ torch.unitPrice | number: '1.2-2' }} </span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- CATEGORY -->
+          <div class="detail-section">
+            <div class="section-heading">
+              <span>Categoría</span>
+            </div>
+
+            <div class="category-card">
+              <div class="category-icon">
+                <span>TC</span>
+              </div>
+
+              <div>
+                <span class="detail-label">Categoría</span>
+                <div class="category-name">
+                  {{ torch.categoryName }}
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- TORCH IgG -->
+          <div class="detail-section">
+            <div class="section-heading">
+              <span>Resultados Torch IgG</span>
+            </div>
+
+            <div class="row g-4">
+              <!-- Toxoplasma -->
+              <div class="col-12 col-sm-6">
+                <div class="detail-item">
+                  <span class="detail-label">Toxoplasma IgG</span>
+                  <span class="detail-value" [class.text-muted-custom]="!torch.torchIgG.toxoplasma">
+                    {{ torch.torchIgG.toxoplasma || 'Sin resultado' }}
+                  </span>
+                </div>
+              </div>
+
+              <!-- Cytomegalovirus -->
+              <div class="col-12 col-sm-6">
+                <div class="detail-item">
+                  <span class="detail-label">Citomegalovirus IgG</span>
+                  <span
+                    class="detail-value"
+                    [class.text-muted-custom]="!torch.torchIgG.cytomegalovirus"
+                  >
+                    {{ torch.torchIgG.cytomegalovirus || 'Sin resultado' }}
+                  </span>
+                </div>
+              </div>
+
+              <!-- Rubella -->
+              <div class="col-12 col-sm-6">
+                <div class="detail-item">
+                  <span class="detail-label">Rubéola IgG</span>
+                  <span class="detail-value" [class.text-muted-custom]="!torch.torchIgG.rubella">
+                    {{ torch.torchIgG.rubella || 'Sin resultado' }}
+                  </span>
+                </div>
+              </div>
+
+              <!-- Herpes -->
+              <div class="col-12 col-sm-6">
+                <div class="detail-item">
+                  <span class="detail-label">Herpes IgG</span>
+                  <span class="detail-value" [class.text-muted-custom]="!torch.torchIgG.herpes">
+                    {{ torch.torchIgG.herpes || 'Sin resultado' }}
+                  </span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- TORCH IgM -->
+          <div class="detail-section">
+            <div class="section-heading">
+              <span>Resultados Torch IgM</span>
+            </div>
+
+            <div class="row g-4">
+              <!-- Toxoplasma -->
+              <div class="col-12 col-sm-6">
+                <div class="detail-item">
+                  <span class="detail-label">Toxoplasma IgM</span>
+                  <span class="detail-value" [class.text-muted-custom]="!torch.torchIgM.toxoplasma">
+                    {{ torch.torchIgM.toxoplasma || 'Sin resultado' }}
+                  </span>
+                </div>
+              </div>
+
+              <!-- Cytomegalovirus -->
+              <div class="col-12 col-sm-6">
+                <div class="detail-item">
+                  <span class="detail-label">Citomegalovirus IgM</span>
+                  <span
+                    class="detail-value"
+                    [class.text-muted-custom]="!torch.torchIgM.cytomegalovirus"
+                  >
+                    {{ torch.torchIgM.cytomegalovirus || 'Sin resultado' }}
+                  </span>
+                </div>
+              </div>
+
+              <!-- Rubella -->
+              <div class="col-12 col-sm-6">
+                <div class="detail-item">
+                  <span class="detail-label">Rubéola IgM</span>
+                  <span class="detail-value" [class.text-muted-custom]="!torch.torchIgM.rubella">
+                    {{ torch.torchIgM.rubella || 'Sin resultado' }}
+                  </span>
+                </div>
+              </div>
+
+              <!-- Herpes -->
+              <div class="col-12 col-sm-6">
+                <div class="detail-item">
+                  <span class="detail-label">Herpes IgM</span>
+                  <span class="detail-value" [class.text-muted-custom]="!torch.torchIgM.herpes">
+                    {{ torch.torchIgM.herpes || 'Sin resultado' }}
+                  </span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- DATES -->
+          <div class="detail-section mb-0">
+            <div class="section-heading">
+              <span>Información de registro</span>
+            </div>
+
+            <div class="row g-4">
+              <div class="col-12 col-sm-6">
+                <div class="detail-item">
+                  <span class="detail-label">Creado en</span>
+                  <span class="detail-value">
+                    {{ torch.createdAt | date: 'medium' }}
+                  </span>
+                </div>
+              </div>
+
+              <div class="col-12 col-sm-6">
+                <div class="detail-item">
+                  <span class="detail-label">Última actualización</span>
+                  <span class="detail-value">
+                    {{ torch.updatedAt | date: 'medium' }}
+                  </span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Footer -->
+        <div class="test-card-footer">
+          <button
+            type="button"
+            class="btn btn-back"
+            [routerLink]="['/patients', patientId, 'orders', orderId, 'torchs']"
+          >
+            <span class="me-2">←</span>
+            Volver
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

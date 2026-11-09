@@ -1,0 +1,152 @@
+<div class="report-page" *ngFor="let r of results">
+  <div class="report-card">
+    <!-- HEADER -->
+    <div class="report-header">
+      <div class="report-header-icon">
+        <i class="bi bi-measuring-cup"></i>
+      </div>
+
+      <div class="report-header-info">
+        <a target="_blank" [routerLink]="['/patients', patientId, 'orders', orderId, 'urinalysis', r.id, 'detail']"><h2 class="report-title">{{ title }}</h2></a>
+        <div class="report-meta">
+          <span><strong>Método:</strong> {{ translateTestMethod(r.testMethod) }}</span>
+          <span *ngIf="hasReference(r.reference)">
+            <strong>Referencia:</strong> {{ r.reference }}
+          </span>
+        </div>
+      </div>
+    </div>
+
+    <!-- BODY -->
+    <div class="report-body">
+      <!-- =================================================
+           EXAMEN FÍSICO
+      ================================================== -->
+      <div class="report-section">
+        <div class="section-title">Examen físico</div>
+        <div class="section-grid">
+          <div class="report-row">
+            <span class="row-label">Color</span>
+            <span class="row-value">{{ r.urinalysisResult.color || '—' }}</span>
+          </div>
+          <div class="report-row">
+            <span class="row-label">Aspecto</span>
+            <span class="row-value">{{ r.urinalysisResult.appearance || '—' }}</span>
+          </div>
+          <div class="report-row">
+            <span class="row-label">Densidad</span>
+            <span class="row-value">{{ r.urinalysisResult.specificGravity || '—' }}</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- =================================================
+           EXAMEN QUÍMICO
+      ================================================== -->
+      <div class="report-section">
+        <div class="section-title">Examen químico</div>
+        <div class="section-grid">
+          <div class="report-row">
+            <span class="row-label">pH</span>
+            <span class="row-value">{{ r.urinalysisResult.pH || '—' }}</span>
+          </div>
+          <div class="report-row">
+            <span class="row-label">Leucocitos</span>
+            <span class="row-value">{{ r.urinalysisResult.leukocytes || '—' }}</span>
+          </div>
+          <div class="report-row">
+            <span class="row-label">Nitritos</span>
+            <span class="row-value">{{ r.urinalysisResult.nitrites || '—' }}</span>
+          </div>
+          <div class="report-row">
+            <span class="row-label">Urobilinógeno</span>
+            <span class="row-value">{{ r.urinalysisResult.urobilinogen || '—' }}</span>
+          </div>
+          <div class="report-row">
+            <span class="row-label">Proteínas</span>
+            <span class="row-value">{{ r.urinalysisResult.protein || '—' }}</span>
+          </div>
+          <div class="report-row">
+            <span class="row-label">Glucosa</span>
+            <span class="row-value">{{ r.urinalysisResult.glucose || '—' }}</span>
+          </div>
+          <div class="report-row">
+            <span class="row-label">Cetonas</span>
+            <span class="row-value">{{ r.urinalysisResult.ketones || '—' }}</span>
+          </div>
+          <div class="report-row">
+            <span class="row-label">Bilirrubina</span>
+            <span class="row-value">{{ r.urinalysisResult.bilirubin || '—' }}</span>
+          </div>
+          <div class="report-row">
+            <span class="row-label">Eritrocitos</span>
+            <span class="row-value">{{ r.urinalysisResult.erythrocytes || '—' }}</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- =================================================
+           EXAMEN MICROSCÓPICO
+      ================================================== -->
+      <div class="report-section">
+        <div class="section-title">Examen microscópico</div>
+        <div class="section-grid">
+          <div class="report-row">
+            <span class="row-label">Leucocitos</span>
+            <span class="row-value">{{ r.urinalysisResult.microscopicLeukocytes || '—' }}</span>
+          </div>
+          <div class="report-row">
+            <span class="row-label">Eritrocitos</span>
+            <span class="row-value">{{ r.urinalysisResult.microscopicErythrocytes || '—' }}</span>
+          </div>
+          <div class="report-row">
+            <span class="row-label">Células epiteliales</span>
+            <span class="row-value">{{ r.urinalysisResult.epithelialCells || '—' }}</span>
+          </div>
+          <div class="report-row">
+            <span class="row-label">Bacterias</span>
+            <span class="row-value">{{ r.urinalysisResult.bacteria || '—' }}</span>
+          </div>
+          <div class="report-row">
+            <span class="row-label">Moco</span>
+            <span class="row-value">{{ r.urinalysisResult.mucus || '—' }}</span>
+          </div>
+          <div class="report-row">
+            <span class="row-label">Cristales</span>
+            <span class="row-value">{{ r.urinalysisResult.crystals || '—' }}</span>
+          </div>
+          <div class="report-row">
+            <span class="row-label">Levaduras</span>
+            <span class="row-value">{{ r.urinalysisResult.yeast || '—' }}</span>
+          </div>
+          <div class="report-row">
+            <span class="row-label">Otros</span>
+            <span class="row-value">{{ r.urinalysisResult.others || '—' }}</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- =================================================
+           OBSERVACIONES
+      ================================================== -->
+      <div class="report-section" *ngIf="r.urinalysisResult.observation">
+        <div class="section-title">Observaciones</div>
+        <div class="report-observation">
+          {{ r.urinalysisResult.observation }}
+        </div>
+      </div>
+    </div>
+
+    <!-- ACTIONS (no se imprimen) -->
+    <div class="report-actions no-print">
+      <button
+        type="button"
+        class="btn btn-cancel"
+        [routerLink]="['/patients', patientId, 'orders', orderId, 'urinalysis']"
+      >
+        <i class="ti ti-arrow-left"></i>
+        Volver
+      </button>
+    </div>
+  </div>
+</div>

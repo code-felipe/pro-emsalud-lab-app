@@ -1,0 +1,160 @@
+<div class="form-page">
+  <div class="form-card">
+    <!-- HEADER -->
+    <div class="form-card-header">
+      <div class="form-header-icon">
+        <i class="bi bi-shield-check"></i>
+      </div>
+
+      <div>
+        <h2 class="form-title">{{ title }}</h2>
+
+        <div class="form-subtitle">
+          Selecciona la prueba e ingresa los resultados del panel TORCH. Puedes completar los campos
+          que necesites.
+        </div>
+      </div>
+    </div>
+
+    <!-- BODY -->
+    <div class="form-card-body">
+      <form #torchForm="ngForm">
+        <!-- TEST -->
+        <div class="form-row form-row-full">
+          <label class="form-label">Prueba</label>
+
+          <div class="form-field">
+            <app-test-selector
+              [selectedTest]="selectedTest"
+              (testSelected)="onTestSelected($event)"
+            ></app-test-selector>
+
+            <div class="validation-message" *ngIf="!torch.testId">
+              <div>El test es requerido</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- TORCH GRID -->
+        <div class="torch-grid">
+          <!-- ================= TORCH IgG ================= -->
+          <section class="torch-col">
+            <div class="torch-col-header">
+              <h3>TORCH IgG</h3>
+              <span>Inmunoglobulina G</span>
+            </div>
+
+            <div class="torch-fields">
+              <div class="torch-row" *ngFor="let field of torchIgGFields">
+                <label class="torch-row-label">
+                  {{ field.label }}
+                </label>
+
+                <div class="torch-radio-group">
+                  <label
+                    class="radio-pill"
+                    [class.radio-pill-pos]="option === 'POSITIVO'"
+                    [class.radio-pill-neg]="option === 'NEGATIVO'"
+                    [class.active]="getIgGFieldValue(field) === option"
+                    *ngFor="let option of field.options"
+                  >
+                    <input
+                      type="radio"
+                      [name]="'igg_' + field.name"
+                      [id]="'igg_' + field.name + '_' + option"
+                      [value]="option"
+                      [ngModel]="getIgGFieldValue(field)"
+                      (ngModelChange)="setIgGFieldValue(field, $event)"
+                    />
+
+                    <span>{{ option }}</span>
+                  </label>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          <!-- ================= TORCH IgM ================= -->
+          <section class="torch-col">
+            <div class="torch-col-header">
+              <h3>TORCH IgM</h3>
+              <span>Inmunoglobulina M</span>
+            </div>
+
+            <div class="torch-fields">
+              <div class="torch-row" *ngFor="let field of torchIgMFields">
+                <label class="torch-row-label">
+                  {{ field.label }}
+                </label>
+
+                <div class="torch-radio-group">
+                  <label
+                    class="radio-pill"
+                    [class.radio-pill-pos]="option === 'POSITIVO'"
+                    [class.radio-pill-neg]="option === 'NEGATIVO'"
+                    [class.active]="getIgMFieldValue(field) === option"
+                    *ngFor="let option of field.options"
+                  >
+                    <input
+                      type="radio"
+                      [name]="'igm_' + field.name"
+                      [id]="'igm_' + field.name + '_' + option"
+                      [value]="option"
+                      [ngModel]="getIgMFieldValue(field)"
+                      (ngModelChange)="setIgMFieldValue(field, $event)"
+                    />
+
+                    <span>{{ option }}</span>
+                  </label>
+                </div>
+              </div>
+            </div>
+          </section>
+        </div>
+
+        <!-- ACTIONS -->
+        <div class="form-actions">
+          <!-- CANCEL -->
+          <button
+            type="button"
+            class="btn btn-cancel"
+            [routerLink]="['/patients', patientId, 'orders', orderId, 'torchs']"
+          >
+            <i class="ti ti-x"></i>
+            Cancelar
+          </button>
+
+          <!-- RESET -->
+          <button type="button" class="btn btn-secondary" (click)="resetForm()">
+            <i class="ti ti-refresh"></i>
+            Restablecer
+          </button>
+
+          <!-- CREATE -->
+          <button
+            *ngIf="!torchId"
+            type="button"
+            class="btn btn-primary-action"
+            [disabled]="!torch.testId"
+            (click)="create()"
+          >
+            <i class="ti ti-plus"></i>
+            Crear panel TORCH
+          </button>
+
+          <!-- UPDATE -->
+          <button
+            *ngIf="torchId"
+            type="button"
+            class="btn btn-primary-action"
+            [disabled]="!torch.testId"
+            (click)="update()"
+          >
+            <i class="ti ti-edit"></i>
+            Actualizar panel TORCH
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

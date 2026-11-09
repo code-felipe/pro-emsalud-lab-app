@@ -1,0 +1,55 @@
+<div class="simple-chemistry-report" *ngIf="results.length > 0">
+  <!-- SECTION HEADER -->
+  <div class="simple-report-header">
+    <div class="simple-report-title"></div>
+  </div>
+
+  <!-- RESULTS TABLE -->
+  <div class="simple-report-table-wrapper">
+    <table class="simple-report-table">
+      <colgroup>
+        <col class="col-test" />
+        <col class="col-result" />
+
+        <col *ngIf="hasAnyReference" class="col-reference" />
+
+        <col class="col-method" />
+      </colgroup>
+
+      <thead>
+        <tr>
+          <th>Prueba</th>
+          <th>Resultado</th>
+
+          <th *ngIf="hasAnyReference">Valores de referencia</th>
+
+          <th>Método</th>
+        </tr>
+      </thead>
+
+      <tbody>
+        <tr *ngFor="let result of results; let i = index">
+          <!-- PRUEBA -->
+          <td class="col-test">
+            <a [routerLink]="['/patients', patientId, 'orders', orderId, 'simple-chemistry', result.id, 'detail']"><strong>{{ result.testName }}</strong></a>
+          </td>
+
+          <!-- RESULTADO -->
+          <td class="col-result">
+            <strong [innerHTML]="result.result || 'N/A'"></strong>
+          </td>
+
+          <!-- REFERENCIA -->
+          <td *ngIf="hasAnyReference" class="col-reference">
+            <div *ngIf="hasReference(result.reference)" [innerHTML]="result.reference"></div>
+          </td>
+
+          <!-- MÉTODO -->
+          <td class="col-method">
+            {{ translateTestMethod(result.testMethod) }}
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

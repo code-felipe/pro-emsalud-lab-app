@@ -1,0 +1,163 @@
+<div class="container-fluid test-detail-page">
+  <div class="row justify-content-center align-items-center min-vh-100 py-5">
+    <div class="col-12 col-md-10 col-lg-9 col-xl-8">
+      <div class="test-card" *ngIf="test as chemistry">
+        <!-- Header -->
+        <div class="test-card-header">
+          <div>
+            <span class="section-label">Ficha de Química Simple</span>
+            <h1 class="test-title">{{ chemistry.testName }}</h1>
+          </div>
+
+          <span class="status-badge status-active">
+            <span class="status-dot"></span>
+            Registrado
+          </span>
+        </div>
+
+        <!-- Body -->
+        <div class="test-card-body">
+          <!-- BASIC INFORMATION -->
+          <div class="detail-section">
+            <div class="section-heading">
+              <span>Información básica</span>
+            </div>
+
+            <div class="row g-4">
+              <div class="col-12 col-sm-6">
+                <div class="detail-item">
+                  <span class="detail-label">Química Simple ID</span>
+                  <span class="detail-value">#{{ chemistry.id }}</span>
+                </div>
+              </div>
+
+              <div class="col-12 col-sm-6">
+                <div class="detail-item">
+                  <span class="detail-label">Test ID</span>
+                  <span class="detail-value">#{{ chemistry.testId }}</span>
+                </div>
+              </div>
+
+              <div class="col-12 col-sm-6">
+                <div class="detail-item">
+                  <span class="detail-label">Orden ID</span>
+                  <span class="detail-value">#{{ chemistry.orderId }}</span>
+                </div>
+              </div>
+
+              <div class="col-12 col-sm-6">
+                <div class="detail-item">
+                  <span class="detail-label">Método de prueba</span>
+                  <span class="detail-value">
+                    {{ testMethodLabels[chemistry.testMethod] || chemistry.testMethod }}
+                  </span>
+                </div>
+              </div>
+
+              <div class="col-12 col-sm-6">
+                <div class="detail-item">
+                  <span class="detail-label">Precio</span>
+                  <span class="detail-value price">
+                    Q{{ chemistry.unitPrice | number: '1.2-2' }}
+                  </span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- CATEGORY -->
+          <div class="detail-section">
+            <div class="section-heading">
+              <span>Categoría</span>
+            </div>
+
+            <div class="category-card">
+              <div class="category-icon">
+                <span>QC</span>
+              </div>
+
+              <div>
+                <span class="detail-label">Categoría</span>
+                <div class="category-name">
+                  {{ chemistry.categoryName }}
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- TEST RESULT -->
+          <div class="detail-section">
+            <div class="section-heading">
+              <span>Resultado de la prueba</span>
+            </div>
+
+            <div class="row g-4">
+              <div class="col-12">
+                <div class="detail-item">
+                  <span class="detail-label">Resultado</span>
+
+                  <div
+                    class="result-reference"
+                    [class.text-muted-custom]="!chemistry.result"
+                    [innerHTML]="chemistry.result ? chemistry.result : 'Sin resultado registrado'"
+                  ></div>
+                </div>
+              </div>
+
+              <div class="col-12">
+                <div class="detail-item">
+                  <span class="detail-label">Referencia</span>
+
+                  <div
+                    class="result-reference"
+                    [class.text-muted-custom]="!chemistry.testReference"
+                    [innerHTML]="chemistry.testReference || 'Referencia no especificada'"
+                  ></div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- DATES -->
+          <div class="detail-section mb-0">
+            <div class="section-heading">
+              <span>Información de registro</span>
+            </div>
+
+            <div class="row g-4">
+              <div class="col-12 col-sm-6">
+                <div class="detail-item">
+                  <span class="detail-label">Creado en</span>
+                  <span class="detail-value">
+                    {{ chemistry.createdAt | date: 'medium' }}
+                  </span>
+                </div>
+              </div>
+
+              <div class="col-12 col-sm-6">
+                <div class="detail-item">
+                  <span class="detail-label">Última actualización</span>
+                  <span class="detail-value">
+                    {{ chemistry.updatedAt | date: 'medium' }}
+                  </span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Footer -->
+        <div class="test-card-footer">
+          <button
+            type="button"
+            class="btn btn-back"
+            [routerLink]="['/patients', patientId, 'orders', orderId, 'simple-chemistry']"
+          >
+            <span class="me-2">←</span>
+            Volver
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

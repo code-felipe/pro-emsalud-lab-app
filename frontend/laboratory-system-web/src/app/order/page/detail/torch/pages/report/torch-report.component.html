@@ -1,0 +1,82 @@
+<div class="torch-report" *ngFor="let torch of torchResults">
+  <div class="torch-grid">
+    <!-- ================= TORCH IgG ================= -->
+    <section class="torch-col">
+      <a [routerLink]="['/patients', patientId, 'orders', orderId, 'torchs', torch.id, 'detail']">
+        <h3 class="torch-col-title">Torch IgG</h3>
+      </a>
+
+      <div class="torch-row">
+        <span class="torch-row-label">Toxoplasma</span>
+        <span class="torch-result" [ngClass]="getResultClass(torch.torchIgG?.toxoplasma)">
+          {{ displayResult(torch.torchIgG?.toxoplasma) }}
+        </span>
+      </div>
+
+      <div class="torch-row">
+        <span class="torch-row-label">Citomegalovirus</span>
+        <span class="torch-result" [ngClass]="getResultClass(torch.torchIgG?.cytomegalovirus)">
+          {{ displayResult(torch.torchIgG?.cytomegalovirus) }}
+        </span>
+      </div>
+
+      <div class="torch-row">
+        <span class="torch-row-label">Rubéola</span>
+        <span class="torch-result" [ngClass]="getResultClass(torch.torchIgG?.rubella)">
+          {{ displayResult(torch.torchIgG?.rubella) }}
+        </span>
+      </div>
+
+      <div class="torch-row">
+        <span class="torch-row-label">Herpes</span>
+        <span class="torch-result" [ngClass]="getResultClass(torch.torchIgG?.herpes)">
+          {{ displayResult(torch.torchIgG?.herpes) }}
+        </span>
+      </div>
+    </section>
+
+    <!-- ================= TORCH IgM ================= -->
+    <section class="torch-col">
+      <a [routerLink]="['/patients', patientId, 'orders', orderId, 'torchs', torch.id, 'detail']">
+        <h3 class="torch-col-title">Torch IgM</h3>
+      </a>
+
+      <div class="torch-row">
+        <span class="torch-row-label">Toxoplasma</span>
+        <span class="torch-result" [ngClass]="getResultClass(torch.torchIgM?.toxoplasma)">
+          {{ displayResult(torch.torchIgM?.toxoplasma) }}
+        </span>
+      </div>
+
+      <div class="torch-row">
+        <span class="torch-row-label">Citomegalovirus</span>
+        <span class="torch-result" [ngClass]="getResultClass(torch.torchIgM?.cytomegalovirus)">
+          {{ displayResult(torch.torchIgM?.cytomegalovirus) }}
+        </span>
+      </div>
+
+      <div class="torch-row">
+        <span class="torch-row-label">Rubéola</span>
+        <span class="torch-result" [ngClass]="getResultClass(torch.torchIgM?.rubella)">
+          {{ displayResult(torch.torchIgM?.rubella) }}
+        </span>
+      </div>
+
+      <div class="torch-row">
+        <span class="torch-row-label">Herpes</span>
+        <span class="torch-result" [ngClass]="getResultClass(torch.torchIgM?.herpes)">
+          {{ displayResult(torch.torchIgM?.herpes) }}
+        </span>
+      </div>
+    </section>
+  </div>
+
+  <!-- ================= REFERENCIA ================= -->
+  <div class="form-row form-row-full torch-reference" *ngIf="torch.reference">
+    <label class="form-label">Referencia</label>
+
+    <div class="form-field">
+      <p class="observation-text" [innerHTML]="torch.reference"></p>
+    </div>
+  </div>
+</div>

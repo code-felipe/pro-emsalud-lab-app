@@ -32,39 +32,39 @@ import jakarta.validation.Valid;
 @RequestMapping("/api/patients/{patientId}/orders/{orderId}/test-results")
 public class PatientOrderTestResultController {
 	
-	@Autowired
-	private ITestResultService testResultService;
-
-	@GetMapping
-	public ResponseEntity<Page<TestResultResponse>> list(
-			TestResultFilter filter,
-			@PageableDefault(page = 0, size = 50, sort = "id", direction = Sort.Direction.DESC) Pageable pageable,
-			@PathVariable Long patientId,
-			@PathVariable Long orderId) {
-
-		return ResponseEntity.ok(testResultService.findAll(filter, pageable, orderId, patientId));
-	}
-
-	@PostMapping
-	public ResponseEntity<Map<String, Object>> create(@Valid @RequestBody CreateTestResultRequest request,
-			@PathVariable Long patientId,
-			@PathVariable Long orderId
-			) {
-
-		TestResultResponse result = testResultService.create(request, orderId, patientId);
-
-		Map<String, Object> body = new HashMap<>();
-
-		body.put("message", "Resultado creado exitosamente");
-		body.put("result", result);
-
-		return ResponseEntity.created(URI.create("/api/test-results/" + result.getId())).body(body);
-	}
-	
-	@GetMapping("/{testResultId}")
-	public ResponseEntity<TestResultResponse> getOne(@PathVariable Long patientId, @PathVariable Long orderId,
-			@PathVariable Long testResultId) {
-
-		return ResponseEntity.ok(testResultService.findByIdAndOrderIdAndPatientId(testResultId, orderId, patientId));
-	}
+//	@Autowired
+//	private ITestResultService testResultService;
+//
+//	@GetMapping
+//	public ResponseEntity<Page<TestResultResponse>> list(
+//			TestResultFilter filter,
+//			@PageableDefault(page = 0, size = 50, sort = "id", direction = Sort.Direction.DESC) Pageable pageable,
+//			@PathVariable Long patientId,
+//			@PathVariable Long orderId) {
+//
+//		return ResponseEntity.ok(testResultService.findAll(filter, pageable, orderId, patientId));
+//	}
+//
+//	@PostMapping
+//	public ResponseEntity<Map<String, Object>> create(@Valid @RequestBody CreateTestResultRequest request,
+//			@PathVariable Long patientId,
+//			@PathVariable Long orderId
+//			) {
+//
+//		TestResultResponse result = testResultService.create(request, orderId, patientId);
+//
+//		Map<String, Object> body = new HashMap<>();
+//
+//		body.put("message", "Resultado creado exitosamente");
+//		body.put("result", result);
+//
+//		return ResponseEntity.created(URI.create("/api/test-results/" + result.getId())).body(body);
+//	}
+//	
+//	@GetMapping("/{testResultId}")
+//	public ResponseEntity<TestResultResponse> getOne(@PathVariable Long patientId, @PathVariable Long orderId,
+//			@PathVariable Long testResultId) {
+//
+//		return ResponseEntity.ok(testResultService.findByIdAndOrderIdAndPatientId(testResultId, orderId, patientId));
+//	}
 }

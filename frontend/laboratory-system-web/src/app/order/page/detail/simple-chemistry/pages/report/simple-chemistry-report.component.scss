@@ -1,0 +1,231 @@
+
+/* =========================================
+   TABLA DE QUÍMICAS SIMPLES
+   ========================================= */
+
+.simple-report-table-wrapper {
+  width: 100%;
+  margin-top: 12px;
+}
+
+.simple-report-table {
+  width: 100%;
+  table-layout: fixed;
+  border-collapse: collapse;
+  font-family: Arial, sans-serif;
+  font-size: 12px;
+}
+
+/* =========================================
+   COLUMNAS
+   ========================================= */
+
+.simple-report-table .col-number {
+  width: 5%;
+}
+
+.simple-report-table .col-test {
+  width: 23%;
+}
+
+.simple-report-table .col-result {
+  width: 19%;
+}
+
+.simple-report-table .col-reference {
+  width: 35%;
+}
+
+.simple-report-table .col-method {
+  width: 18%;
+}
+
+/* =========================================
+   ENCABEZADOS
+   ========================================= */
+
+.simple-report-table th {
+  padding: 8px 7px;
+  background: #e0f2ef;
+  color: #0f766e;
+  border: 1px solid #cbdedb;
+  font-size: 12px;
+  font-weight: 700;
+  text-align: left;
+  text-transform: uppercase;
+  vertical-align: middle;
+}
+
+/* =========================================
+   CELDAS
+   ========================================= */
+
+.simple-report-table td {
+  padding: 2px 3px;
+  border: 1px solid #dce7e7;
+  color: #475569;
+  vertical-align: top;
+  line-height: 1.4;
+  overflow-wrap: anywhere;
+  word-break: break-word;
+}
+
+/* =========================================
+   FILAS ALTERNADAS
+   ========================================= */
+
+.simple-report-table tbody tr:nth-child(even) {
+  background: #f0fdfa;
+}
+
+/* =========================================
+   NÚMERO
+   ========================================= */
+
+.simple-report-table .col-number {
+  text-align: center;
+  color: #0f766e;
+  font-weight: 700;
+}
+
+/* =========================================
+   NOMBRE DE PRUEBA
+   ========================================= */
+.simple-report-table .col-test a {
+  display: inline-block;
+  color: #164e4a;
+  text-decoration: none;
+  transition: color 0.2s ease, transform 0.2s ease;
+  cursor: pointer;
+}
+
+.simple-report-table .col-test a:hover {
+  color: #0d9488;
+  text-decoration: underline;
+  text-decoration-color: #0d9488;
+  text-underline-offset: 3px;
+}
+.simple-report-table .col-test a strong {
+  display: block;
+  margin: 0;
+  padding: 0;
+  color: inherit;
+  font-weight: 700;
+  line-height: 1.4;
+}
+
+.simple-report-table .col-test span {
+  display: block;
+  margin-top: 3px;
+  padding: 0;
+  color: #64748b;
+  font-size: 12px;
+  line-height: 1.4;
+}
+
+/* =========================================
+   RESULTADO
+   ========================================= */
+
+.simple-report-table .col-result strong {
+  display: block;
+  margin: 0;
+  padding: 0;
+  color: #0f766e;
+  font-weight: 700;
+  line-height: 1.4;
+}
+
+/* NORMALIZAR HTML DINÁMICO DE RESULTADO */
+
+.simple-report-table .col-result strong p,
+.simple-report-table .col-result strong div,
+.simple-report-table .col-result strong span {
+  margin-top: 0 !important;
+  margin-bottom: 0 !important;
+  padding-top: 0 !important;
+  padding-bottom: 0 !important;
+  line-height: 1.4;
+}
+
+/* =========================================
+   REFERENCIA
+   ========================================= */
+
+.simple-report-table .col-reference {
+  font-size: 12px;
+}
+
+.simple-report-table .col-reference div {
+  display: block;
+  margin: 0;
+  padding: 0;
+  line-height: 1.4;
+}
+
+/* NORMALIZAR HTML DINÁMICO DE REFERENCIA */
+
+.simple-report-table .col-reference p,
+.simple-report-table .col-reference div,
+.simple-report-table .col-reference span,
+.simple-report-table .col-reference ul,
+.simple-report-table .col-reference ol,
+.simple-report-table .col-reference li {
+  margin-top: 0 !important;
+  margin-bottom: 0 !important;
+  padding-top: 0 !important;
+  padding-bottom: 0 !important;
+  line-height: 1.4;
+}
+
+/* =========================================
+   MÉTODO
+   ========================================= */
+
+.simple-report-table .col-method {
+  font-size: 12px;
+}
+
+/* =========================================
+   PDF
+   ========================================= */
+
+.order-report.generating-pdf .simple-report-table {
+  width: 100% !important;
+  table-layout: fixed !important;
+  border-collapse: collapse !important;
+}
+
+.order-report.generating-pdf .simple-report-table th,
+.order-report.generating-pdf .simple-report-table td {
+  padding: 6px 5px;
+  font-size: 9px;
+  overflow-wrap: anywhere;
+  word-break: break-word;
+  vertical-align: top;
+}
+
+.order-report.generating-pdf .simple-report-table tr {
+  break-inside: avoid;
+  page-break-inside: avoid;
+}
+
+/* =========================================
+   IMPRESIÓN
+   ========================================= */
+
+@media print {
+  .simple-report-table {
+    width: 100%;
+    table-layout: fixed;
+  }
+
+  .simple-report-table thead {
+    display: table-header-group;
+  }
+
+  .simple-report-table tr {
+    break-inside: avoid;
+    page-break-inside: avoid;
+  }
+}

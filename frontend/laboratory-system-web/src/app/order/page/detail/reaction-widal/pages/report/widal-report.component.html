@@ -1,0 +1,215 @@
+<div class="widal-report" *ngFor="let reaction of widalReactionResults">
+  <div class="widal-grid">
+    <!-- ================= COLUMNA O ================= -->
+    <section class="widal-col">
+      <a
+        [routerLink]="[
+          '/patients',
+          patientId,
+          'orders',
+          orderId,
+          'widal-reactions',
+          reaction.id,
+          'detail',
+        ]"
+        ><h3 class="widal-col-title">Salmonella Typhi O</h3></a
+      >
+
+      <div class="widal-row">
+        <span class="widal-row-label">1/20</span>
+        <span
+          class="widal-result"
+          [ngClass]="
+            reaction.widalResult.salmonellaTyphiO_1_20 ? 'result-positive' : 'result-negative'
+          "
+        >
+          {{ translateResultMethod(reaction.widalResult.salmonellaTyphiO_1_20.toString()) }}
+        </span>
+      </div>
+
+      <div class="widal-row">
+        <span class="widal-row-label">1/40</span>
+        <span
+          class="widal-result"
+          [ngClass]="
+            reaction.widalResult.salmonellaTyphiO_1_40 ? 'result-positive' : 'result-negative'
+          "
+        >
+          {{ translateResultMethod(reaction.widalResult.salmonellaTyphiO_1_40.toString()) }}
+        </span>
+      </div>
+
+      <div class="widal-row">
+        <span class="widal-row-label">1/80</span>
+        <span
+          class="widal-result"
+          [ngClass]="
+            reaction.widalResult.salmonellaTyphiO_1_80 ? 'result-positive' : 'result-negative'
+          "
+        >
+          {{ translateResultMethod(reaction.widalResult.salmonellaTyphiO_1_80.toString()) }}
+        </span>
+      </div>
+
+      <div class="widal-row">
+        <span class="widal-row-label">1/160</span>
+        <span
+          class="widal-result"
+          [ngClass]="
+            reaction.widalResult.salmonellaTyphiO_1_160 ? 'result-positive' : 'result-negative'
+          "
+        >
+          {{ translateResultMethod(reaction.widalResult.salmonellaTyphiO_1_160.toString()) }}
+        </span>
+      </div>
+
+      <div class="widal-row">
+        <span class="widal-row-label">1/320</span>
+        <span
+          class="widal-result"
+          [ngClass]="
+            reaction.widalResult.salmonellaTyphiO_1_320 ? 'result-positive' : 'result-negative'
+          "
+        >
+          {{ translateResultMethod(reaction.widalResult.salmonellaTyphiO_1_320.toString()) }}
+        </span>
+      </div>
+
+      <div class="widal-final-results">
+        <div class="widal-row widal-row-result">
+          <span class="widal-row-label">Resultado</span>
+          <span
+            class="widal-result"
+            [ngClass]="
+              reaction.widalResult.salmonellaTyphiOResult ? 'result-positive' : 'result-negative'
+            "
+          >
+            {{ translateResultMethod(reaction.widalResult.salmonellaTyphiOResult.toString()) }}
+          </span>
+        </div>
+
+        <div class="widal-row widal-row-titulation">
+          <span class="widal-row-label">Titulación</span>
+          <span class="widal-titulation">
+            {{ translateTitulationResult(reaction.widalResult.salmonellaTyphiOResultTitulation) }}
+          </span>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= COLUMNA H ================= -->
+    <section class="widal-col">
+        <a
+        [routerLink]="[
+          '/patients',
+          patientId,
+          'orders',
+          orderId,
+          'widal-reactions',
+          reaction.id,
+          'detail',
+        ]"
+        ><h3 class="widal-col-title">Salmonella Typhi H</h3></a
+      >
+
+      <div class="widal-row">
+        <span class="widal-row-label">1/20</span>
+        <span
+          class="widal-result"
+          [ngClass]="
+            reaction.widalResult.salmonellaTyphiH_1_20 ? 'result-positive' : 'result-negative'
+          "
+        >
+          {{ translateResultMethod(reaction.widalResult.salmonellaTyphiH_1_20.toString()) }}
+        </span>
+      </div>
+
+      <div class="widal-row">
+        <span class="widal-row-label">1/40</span>
+        <span
+          class="widal-result"
+          [ngClass]="
+            reaction.widalResult.salmonellaTyphiH_1_40 ? 'result-positive' : 'result-negative'
+          "
+        >
+          {{ translateResultMethod(reaction.widalResult.salmonellaTyphiH_1_40.toString()) }}
+        </span>
+      </div>
+
+      <div class="widal-row">
+        <span class="widal-row-label">1/80</span>
+        <span
+          class="widal-result"
+          [ngClass]="
+            reaction.widalResult.salmonellaTyphiH_1_80 ? 'result-positive' : 'result-negative'
+          "
+        >
+          {{ translateResultMethod(reaction.widalResult.salmonellaTyphiH_1_80.toString()) }}
+        </span>
+      </div>
+
+      <div class="widal-row">
+        <span class="widal-row-label">1/160</span>
+        <span
+          class="widal-result"
+          [ngClass]="
+            reaction.widalResult.salmonellaTyphiH_1_160 ? 'result-positive' : 'result-negative'
+          "
+        >
+          {{ translateResultMethod(reaction.widalResult.salmonellaTyphiH_1_160.toString()) }}
+        </span>
+      </div>
+
+      <div class="widal-row">
+        <span class="widal-row-label">1/320</span>
+        <span
+          class="widal-result"
+          [ngClass]="
+            reaction.widalResult.salmonellaTyphiH_1_320 ? 'result-positive' : 'result-negative'
+          "
+        >
+          {{ translateResultMethod(reaction.widalResult.salmonellaTyphiH_1_320.toString()) }}
+        </span>
+      </div>
+
+      <div class="widal-final-results">
+        <div class="widal-row widal-row-result">
+          <span class="widal-row-label">Resultado</span>
+          <span
+            class="widal-result"
+            [ngClass]="
+              reaction.widalResult.salmonellaTyphiHResult ? 'result-positive' : 'result-negative'
+            "
+          >
+            {{ translateResultMethod(reaction.widalResult.salmonellaTyphiHResult.toString()) }}
+          </span>
+        </div>
+
+        <div class="widal-row widal-row-titulation">
+          <span class="widal-row-label">Titulación</span>
+          <span class="widal-titulation">
+            {{ translateTitulationResult(reaction.widalResult.salmonellaTyphiHResultTitulation) }}
+          </span>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <!-- ================= REFERENCIA ================= -->
+  <div class="form-row form-row-full widal-reference">
+    <label class="form-label">Referencia</label>
+    <div class="form-field">
+      <p class="observation-text" [innerHTML]="reaction.reference ? reaction.reference : ''"></p>
+    </div>
+  </div>
+
+  <!-- ================= OBSERVACIÓN ================= -->
+  <div class="form-row form-row-full widal-observation">
+    <label class="form-label">Observación</label>
+    <div class="form-field">
+      <p class="observation-text">
+        {{ reaction.widalResult.observation || 'Sin observaciones' }}
+      </p>
+    </div>
+  </div>
+</div>
