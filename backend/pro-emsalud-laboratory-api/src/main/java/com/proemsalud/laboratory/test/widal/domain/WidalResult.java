@@ -75,11 +75,11 @@ public class WidalResult {
     private Boolean salmonellaTyphiHResult;
 
     @Enumerated(EnumType.STRING)
-    @Column(name = "salmonella_typhi_o_result_titulation", nullable = false)
+    @Column(name = "salmonella_typhi_o_result_titulation", nullable = true)
     private WidalTitulation salmonellaTyphiOResultTitulation;
 
     @Enumerated(EnumType.STRING)
-    @Column(name = "salmonella_typhi_h_result_titulation", nullable = false)
+    @Column(name = "salmonella_typhi_h_result_titulation", nullable = true)
     private WidalTitulation salmonellaTyphiHResultTitulation;
 
     @Column(name = "observation", length = 255, nullable = true)

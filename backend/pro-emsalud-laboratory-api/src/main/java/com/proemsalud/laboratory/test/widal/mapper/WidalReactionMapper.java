@@ -1,5 +1,7 @@
 package com.proemsalud.laboratory.test.widal.mapper;
 
+import java.util.TreeSet;
+
 import org.springframework.stereotype.Component;
 
 import com.proemsalud.laboratory.catalog.domain.Test;
@@ -31,7 +33,7 @@ public class WidalReactionMapper {
 				.categoryName(widal.getTest().getCategory().getName())
 				.testReference(widal.getTest().getReference())
 				.orderId(widal.getOrder().getId())
-				.testMethod(widal.getTest().getTestMethod())
+				.testMethods(new TreeSet<>(widal.getTest().getTestMethods()))
 				.testId(widal.getTest().getId())
 				.createdAt(widal.getCreatedAt())
 				.updatedAt(widal.getUpdatedAt())
@@ -42,7 +44,7 @@ public class WidalReactionMapper {
 		return WidalReactionReportResponse.builder()
 				.id(widal.getId())
 				.testName(widal.getTest().getName())
-				.testMethod(widal.getTest().getTestMethod())
+				.testMethods(new TreeSet<>(widal.getTest().getTestMethods()))
 				.widalResult(widal.getWidalResult())
 				.reference(widal.getTest().getReference())
 				.build();

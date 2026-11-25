@@ -1,4 +1,15 @@
 <div class="torch-report" *ngFor="let torch of torchResults">
+  <!-- ================= MÉTODOS DE PRUEBA ================= -->
+  <div class="form-row form-row-full torch-methods p-1">
+    <label class="form-label">Métodos de prueba</label>
+
+    <div class="form-field">
+      <p class="observation-text">
+        {{ torch.testMethods.length ? (torch.testMethods | testMethods) : 'No especificado' }}
+      </p>
+    </div>
+  </div>
+
   <div class="torch-grid">
     <!-- ================= TORCH IgG ================= -->
     <section class="torch-col">
@@ -8,6 +19,10 @@
 
       <div class="torch-row">
         <span class="torch-row-label">Toxoplasma</span>
+<<<<<<< HEAD
+=======
+
+>>>>>>> main
         <span class="torch-result" [ngClass]="getResultClass(torch.torchIgG.toxoplasma)">
           {{ displayResult(torch.torchIgG.toxoplasma) }}
         </span>
@@ -15,6 +30,10 @@
 
       <div class="torch-row">
         <span class="torch-row-label">Citomegalovirus</span>
+<<<<<<< HEAD
+=======
+
+>>>>>>> main
         <span class="torch-result" [ngClass]="getResultClass(torch.torchIgG.cytomegalovirus)">
           {{ displayResult(torch.torchIgG.cytomegalovirus) }}
         </span>
@@ -22,6 +41,10 @@
 
       <div class="torch-row">
         <span class="torch-row-label">Rubéola</span>
+<<<<<<< HEAD
+=======
+
+>>>>>>> main
         <span class="torch-result" [ngClass]="getResultClass(torch.torchIgG.rubella)">
           {{ displayResult(torch.torchIgG.rubella) }}
         </span>
@@ -29,6 +52,10 @@
 
       <div class="torch-row">
         <span class="torch-row-label">Herpes</span>
+<<<<<<< HEAD
+=======
+
+>>>>>>> main
         <span class="torch-result" [ngClass]="getResultClass(torch.torchIgG.herpes)">
           {{ displayResult(torch.torchIgG.herpes) }}
         </span>
@@ -43,6 +70,10 @@
 
       <div class="torch-row">
         <span class="torch-row-label">Toxoplasma</span>
+<<<<<<< HEAD
+=======
+
+>>>>>>> main
         <span class="torch-result" [ngClass]="getResultClass(torch.torchIgM.toxoplasma)">
           {{ displayResult(torch.torchIgM.toxoplasma) }}
         </span>
@@ -50,6 +81,10 @@
 
       <div class="torch-row">
         <span class="torch-row-label">Citomegalovirus</span>
+<<<<<<< HEAD
+=======
+
+>>>>>>> main
         <span class="torch-result" [ngClass]="getResultClass(torch.torchIgM.cytomegalovirus)">
           {{ displayResult(torch.torchIgM.cytomegalovirus) }}
         </span>
@@ -57,6 +92,10 @@
 
       <div class="torch-row">
         <span class="torch-row-label">Rubéola</span>
+<<<<<<< HEAD
+=======
+
+>>>>>>> main
         <span class="torch-result" [ngClass]="getResultClass(torch.torchIgM.rubella)">
           {{ displayResult(torch.torchIgM.rubella) }}
         </span>
@@ -64,6 +103,10 @@
 
       <div class="torch-row">
         <span class="torch-row-label">Herpes</span>
+<<<<<<< HEAD
+=======
+
+>>>>>>> main
         <span class="torch-result" [ngClass]="getResultClass(torch.torchIgM.herpes)">
           {{ displayResult(torch.torchIgM.herpes) }}
         </span>

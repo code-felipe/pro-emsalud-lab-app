@@ -7,6 +7,7 @@ import { CommonModule } from '@angular/common';
 import { TestMethod } from '../../../../../../catalog/test/components/test.model';
 import { SimpleChemistryResponse } from '../../components/simple-chemistry.model';
 import { SimpleChemistryService } from '../../components/simple-chemistry.service';
+import { TestMethodsPipe } from '../../../../../../utils/test-methods/test-methods.pipe';
 
 @Component({
   selector: 'app-widal-reaction-detail',
@@ -14,7 +15,8 @@ import { SimpleChemistryService } from '../../components/simple-chemistry.servic
   imports: [
     RouterLink,
     FormsModule,
-    CommonModule
+    CommonModule,
+    TestMethodsPipe
   ],
   templateUrl: './detail.component.html',
   styleUrl: './detail.component.css',
@@ -30,13 +32,13 @@ export class SimpleChemistryDetailComponent implements OnInit {
   public patientId!: number;
   public orderId!: number;
 
-  testMethodLabels: Record<TestMethod, string> = {
-    [TestMethod.CUANTITATIVA]: 'Cuantitativa',
-    [TestMethod.RAPIDA]: 'Rápida',
-    [TestMethod.SEMI_CUANTITATIVA]: 'Semi-cuantitativa',
-    [TestMethod.AGLUTINACION_PORTA]: 'Aglutinación porta',
-    [TestMethod.OTROS]: 'Otros',
-  };
+  // testMethodLabels: Record<TestMethod, string> = {
+  //   [TestMethod.CUANTITATIVA]: 'Cuantitativa',
+  //   [TestMethod.RAPIDA]: 'Rápida',
+  //   [TestMethod.SEMI_CUANTITATIVA]: 'Semi-cuantitativa',
+  //   [TestMethod.AGLUTINACION_PORTA]: 'Aglutinación porta',
+  //   [TestMethod.OTROS]: 'Otros',
+  // };
   constructor(
     private route: ActivatedRoute,
     private testService: SimpleChemistryService

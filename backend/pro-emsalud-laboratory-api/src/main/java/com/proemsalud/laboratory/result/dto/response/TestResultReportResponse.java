@@ -1,6 +1,8 @@
 package com.proemsalud.laboratory.result.dto.response;
 
 
+import java.util.Set;
+
 import com.proemsalud.laboratory.catalog.enumerate.TestMethod;
 
 import lombok.AllArgsConstructor;
@@ -22,7 +24,7 @@ public class TestResultReportResponse {
 	
 	private String testGroup;
 	
-	private TestMethod testMethod;
+	private Set<TestMethod> testMethods;
 	
 	private String result;
 	

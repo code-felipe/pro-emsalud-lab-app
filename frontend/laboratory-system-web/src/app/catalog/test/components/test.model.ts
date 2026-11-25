@@ -10,7 +10,7 @@ export interface TestForm {
 export interface CreateTestRequest {
   name: string;
 
-  testMethod: TestMethod;
+  testMethods: TestMethod[];
 
   reference?: string;
 
@@ -22,7 +22,7 @@ export interface CreateTestRequest {
 export interface UpdateTestRequest {
   name: string;
 
-  testMethod: TestMethod;
+  testMethods: TestMethod[];
 
   reference?: string;
 
@@ -37,7 +37,7 @@ export interface TestResponse {
 
     name: string;
 
-    testMethod: TestMethod;
+    testMethods: TestMethod[];
 
     reference: string | null;   // el backend puede devolver null explícito
 
@@ -62,10 +62,29 @@ export interface TestSearchResponse{
 }
 
 export enum TestMethod {
-    CUANTITATIVA = 'CUANTITATIVA',
-    RAPIDA = 'RAPIDA',
-    SEMI_CUANTITATIVA= 'SEMI_CUANTITATIVA',
-    AGLUTINACION_PORTA = 'AGLUTINACION_PORTA',
-    OTROS = 'OTROS'
+  CUANTITATIVA = 'CUANTITATIVA',
+  RAPIDA = 'RAPIDA',
+  SEMI_CUANTITATIVA = 'SEMI_CUANTITATIVA',
+  AGLUTINACION_PORTA = 'AGLUTINACION_PORTA',
+  OTROS = 'OTROS',
+  PHYSICAL = 'PHYSICAL',
+  CHEMISTRY = 'CHEMISTRY',
+  MICROSCOPY = 'MICROSCOPY'
     
 }
+
+export const TEST_METHOD_LABELS: Record<TestMethod, string> = {
+  [TestMethod.CUANTITATIVA]: 'Cuantitativa',
+  [TestMethod.RAPIDA]: 'Rápida',
+  [TestMethod.SEMI_CUANTITATIVA]: 'Semi-cuantitativa',
+  [TestMethod.AGLUTINACION_PORTA]: 'Aglutinación en porta',
+  [TestMethod.OTROS]: 'Otros',
+  [TestMethod.PHYSICAL]: 'Físico',
+  [TestMethod.CHEMISTRY]: 'Químico',
+  [TestMethod.MICROSCOPY]: 'Microscopía'
+};
+
+export const TEST_METHOD_OPTIONS = Object.values(TestMethod).map(value => ({
+  value,
+  label: TEST_METHOD_LABELS[value]
+}));

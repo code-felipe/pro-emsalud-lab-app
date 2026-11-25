@@ -5,7 +5,9 @@ export enum WidalTitulation {
   EN_1_40 = 'EN_1_40',
   EN_1_80 = 'EN_1_80',
   EN_1_160 = 'EN_1_160',
-  EN_1_320 = 'EN_1_320'
+  EN_1_320 = 'EN_1_320',
+  N_A = 'N_A'
+
 }
 
 export interface WidalResult {
@@ -47,7 +49,7 @@ export interface WidalReactionResponse {
   widalResult: WidalResult;
   testName: string;
   categoryName: string;
-  testMethod: TestMethod;
+  testMethods: TestMethod[];
   testReference: string;
   orderId: number;
   unitPrice: number;
@@ -60,7 +62,7 @@ export interface WidalReactionReportResponse {
   id: number;
   widalResult: WidalResult;
   testName: string;
-  testMethod: TestMethod;
+  testMethods: TestMethod[];
   reference: string;
   
 }

@@ -1,5 +1,4 @@
 <div class="order-report-wrapper" *ngIf="report">
-
   <div class="report-actions">
     <button
       type="button"
@@ -24,8 +23,6 @@
     </button>
   </div>
   <div #reportContent class="order-report">
-
-
     <div class="report-header">
       <div class="report-brand">
         <div class="report-icon">
@@ -48,10 +45,7 @@
       </div>
     </div>
 
-
     <div class="report-info">
-
-
       <div class="report-info-block">
         <span class="report-label"> Paciente </span>
 
@@ -64,8 +58,6 @@
         </span>
       </div>
 
-
-
       <div class="report-info-block">
         <span class="report-label"> Solicitado Por </span>
 
@@ -74,8 +66,6 @@
           {{ report.doctorFullName }}
         </strong>
       </div>
-
-
 
       <div class="report-info-block">
         <span class="report-label"> Fecha </span>
@@ -86,11 +76,7 @@
       </div>
     </div>
 
-
-
     <div class="report-section">
-
-
       <div class="report-section-header">
         <div>
           <span class="report-section-kicker"> LABORATORIO </span>
@@ -104,7 +90,6 @@
           resultado(s)
         </span>
       </div>
-
 
       <div class="report-results-scroll" *ngIf="report.results.length > 0">
         <table class="report-results-table">
@@ -144,8 +129,10 @@
                 <div class="reference-content" [innerHTML]="result.reference || ''"></div>
               </td>
 
-              <td data-label="Método">
-                {{ testMethodLabels[result.testMethod || 'N/A'] }}
+              <td data-label="Métodos">
+                {{
+                  result.testMethods.length ? (result.testMethods | testMethods) : 'No especificado'
+                }}
               </td>
             </tr>
           </tbody>
@@ -158,17 +145,13 @@
       </div>
     </div>
 
-
-
     <div class="report-note">
       <i class="bi bi-info-circle"></i>
 
       <span> Este reporte corresponde a los resultados registrados en la orden indicada. </span>
     </div>
 
-
     <div class="report-technician">
-
       <div class="report-company">
         <div class="report-company-info">
           <strong class="report-company-location"> San Antonio Huista · Cantón Central </strong>
@@ -184,7 +167,6 @@
           alt="Sello de técnico de laboratorio"
           class="footer-signature"
         />
-
 
         <div class="report-validation">
           <span class="report-label"> Emelyn López </span>

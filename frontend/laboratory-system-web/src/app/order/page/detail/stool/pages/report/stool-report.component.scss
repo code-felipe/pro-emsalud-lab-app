@@ -64,10 +64,33 @@
 
 .report-meta {
   display: flex;
+  align-items: baseline;
   flex-wrap: wrap;
   gap: 4px 14px;
   font-size: 0.75rem;
   margin-top: 2px;
+}
+
+.meta-item {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 4px;
+}
+
+.meta-item strong {
+  color: #0f766e;
+  white-space: nowrap;
+}
+
+.reference-content {
+  display: inline;
+  font-weight: normal;
+}
+
+.reference-content p {
+  display: inline !important;
+  margin: 0 !important;
+  padding: 0 !important;
 }
 
 /* ================= BODY ================= */
@@ -105,10 +128,6 @@
   padding: 2px 6px;
   font-size: 0.8rem;
   border-bottom: 1px dotted #cfe3df;
-}
-
-.row-label {
-  color: #475569;
 }
 
 .row-value {
@@ -154,6 +173,7 @@
   background: #0f766e;
   color: #fff;
 }
+
 
 /* ================= RESPONSIVE ================= */
 @media (max-width: 640px) {

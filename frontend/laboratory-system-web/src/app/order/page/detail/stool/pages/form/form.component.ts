@@ -214,7 +214,7 @@ export class StoolFormComponent implements OnInit {
 
             id: response.testId,
             name: response.testName,
-            testMethod: response.testMethod,
+            testMethods: response.testMethods,
             reference: response.testReference,
             price: response.unitPrice,
             active: true,

@@ -45,11 +45,11 @@
                 </div>
               </div>
 
-              <div class="col-12 col-sm-6">
+             <div class="col-12 col-sm-6">
                 <div class="detail-item">
-                  <span class="detail-label">Método de prueba</span>
+                  <span class="detail-label">Métodos de prueba</span>
                   <span class="detail-value">
-                    {{ testMethodLabels[urinalysis.testMethod] || urinalysis.testMethod }}
+                    {{ urinalysis.testMethods | testMethods }}
                   </span>
                 </div>
               </div>

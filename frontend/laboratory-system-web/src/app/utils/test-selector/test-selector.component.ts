@@ -5,13 +5,15 @@ import { HttpErrorResponse } from '@angular/common/http';
 import Swal from 'sweetalert2';
 import { TestResponse } from '../../catalog/test/components/test.model';
 import { TestService } from '../../catalog/test/components/test.service';
+import { TestMethodsPipe } from '../test-methods/test-methods.pipe';
 
 @Component({
   selector: 'app-test-selector',
   standalone: true,
   imports: [
     CommonModule,
-    FormsModule
+    FormsModule,
+    TestMethodsPipe
   ],
   templateUrl: './test-selector.component.html',
   styleUrl: './test-selector.component.css',

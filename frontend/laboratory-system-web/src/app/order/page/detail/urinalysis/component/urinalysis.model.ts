@@ -57,7 +57,7 @@ export interface UrinalysisResponse{
 
     categoryName: string;
 
-    testMethod: TestMethod;
+    testMethods: TestMethod[];
 
     testReference: string;
 
@@ -78,8 +78,8 @@ export interface UrinalysisReportResponse{
     urinalysisResult: UrinalysisResult;
 
     testName: string;
-
-    testMethod: TestMethod;
+    
+    testMethods: TestMethod[];
 
     reference: string;
 

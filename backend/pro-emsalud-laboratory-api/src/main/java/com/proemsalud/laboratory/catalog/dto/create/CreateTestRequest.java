@@ -1,12 +1,14 @@
 package com.proemsalud.laboratory.catalog.dto.create;
 
 import java.math.BigDecimal;
+import java.util.Set;
 
 import com.proemsalud.laboratory.catalog.enumerate.TestMethod;
 
 import jakarta.validation.constraints.DecimalMin;
 import jakarta.validation.constraints.Digits;
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -27,8 +29,8 @@ public class CreateTestRequest {
 	
 	private String group; // optional
 
-	@NotNull(message = "El tipo de prueba es obligatorio")
-	private TestMethod testMethod;
+	@NotEmpty(message = "Debes seleccionar al menos un método")
+	private Set<TestMethod> testMethods;
 
 	private String reference; // opcional — puede ser null (ej. Rotavirus)
 

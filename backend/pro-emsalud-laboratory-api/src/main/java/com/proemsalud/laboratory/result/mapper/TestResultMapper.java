@@ -1,5 +1,7 @@
 package com.proemsalud.laboratory.result.mapper;
 
+import java.util.TreeSet;
+
 import org.springframework.stereotype.Component;
 
 import com.proemsalud.laboratory.catalog.domain.Test;
@@ -31,18 +33,18 @@ public class TestResultMapper {
 				.categoryName(testResult.getTest().getCategory().getName())
 				.testReference(testResult.getTest().getReference())
 				.orderId(testResult.getOrder().getId())
-				.testMethod(testResult.getTest().getTestMethod())
+				.testMethods(new TreeSet<>(testResult.getTest().getTestMethods()))
 				.testId(testResult.getTest().getId())
 				.createdAt(testResult.getCreatedAt())
 				.updatedAt(testResult.getUpdatedAt())
 				.build();
 	}
-	
+
 	public TestResultReportResponse toReport(TestResult testResult) {
 		return TestResultReportResponse.builder()
 				.id(testResult.getId())
 				.testName(testResult.getTest().getName())
-				.testMethod(testResult.getTest().getTestMethod())
+				.testMethods(new TreeSet<>(testResult.getTest().getTestMethods()))
 				.result(testResult.getResult())
 				.reference(testResult.getTest().getReference())
 				.build();

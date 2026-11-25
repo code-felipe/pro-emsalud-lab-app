@@ -97,7 +97,7 @@ public class Patient {
 	}
 	
 	public String getFullName() {
-		return this.firstName +" "+ this.middleName +" "+ this.motherLastName +" "+ this.fatherLastName;
+		return this.firstName +" "+ this.middleName +" "+ this.fatherLastName +" "+ this.motherLastName;
 	}
 	
 	public String calculateAgeDisplay() {

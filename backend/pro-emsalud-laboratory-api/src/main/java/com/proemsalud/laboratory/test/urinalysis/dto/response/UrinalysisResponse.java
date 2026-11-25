@@ -2,6 +2,7 @@ package com.proemsalud.laboratory.test.urinalysis.dto.response;
 
 import java.math.BigDecimal;
 import java.time.Instant;
+import java.util.Set;
 
 import com.proemsalud.laboratory.catalog.enumerate.TestMethod;
 import com.proemsalud.laboratory.test.urinalysis.domain.UrinalysisResult;
@@ -28,7 +29,7 @@ public class UrinalysisResponse {
 	
 	private String categoryName;
 	
-	private TestMethod testMethod;
+	private Set<TestMethod> testMethods;
 	
 	private String testReference;
 	

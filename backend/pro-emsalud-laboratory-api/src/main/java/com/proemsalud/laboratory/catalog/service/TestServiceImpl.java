@@ -56,6 +56,7 @@ public class TestServiceImpl implements ITestService {
 	private TestMapper testMapper;
 
 	@Override
+	@Transactional
 	public TestResponse create(CreateTestRequest request) {
 
 		TestCategory category = testCategoryRepository.findById(request.getTestCategoryId())
@@ -69,6 +70,7 @@ public class TestServiceImpl implements ITestService {
 	}
 
 	@Override
+	@Transactional
 	public TestResponse update(Long id, UpdateTestRequest request) {
 
 		Test test = testRepository.findById(id)
@@ -81,7 +83,8 @@ public class TestServiceImpl implements ITestService {
 		test.setName(request.getName());
 		test.setPrice(request.getPrice());
 		test.setReference(request.getReference());
-		test.setTestMethod(request.getTestMethod());
+		test.getTestMethods().clear();
+		test.getTestMethods().addAll(request.getTestMethods());
 		test.setCategory(category);
 
 		Test updated = testRepository.save(test);
@@ -130,6 +133,7 @@ public class TestServiceImpl implements ITestService {
 	}
 
 	@Override
+	@Transactional
 	public void activate(Long id) {
 
 		Test test = testRepository.findById(id)
@@ -141,6 +145,7 @@ public class TestServiceImpl implements ITestService {
 	}
 
 	@Override
+	@Transactional
 	public void delete(Long id) {
 		Test test = testRepository.findById(id)
 				.orElseThrow(() -> new ResourceNotFoundException("El test no existe con id: " + id));

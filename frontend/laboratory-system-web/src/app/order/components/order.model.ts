@@ -61,7 +61,7 @@ export interface TestResultReportResponse {
 
     testGroup: string;
 
-    testMethod: TestMethod;
+    testMethods: TestMethod[];
 
     result: string;
 

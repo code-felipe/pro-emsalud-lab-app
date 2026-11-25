@@ -10,6 +10,7 @@ import { AlertService } from '../../../../../../utils/alert/alert.service';
 import { FilterUtils } from '../../../../../../utils/filter/filter-utils.model';
 import { TorchResponse } from '../../components/torch.model';
 import { TorchService } from '../../components/torch.service';
+import { TestMethodsPipe } from '../../../../../../utils/test-methods/test-methods.pipe';
 
 
 
@@ -23,7 +24,8 @@ import { TorchService } from '../../components/torch.service';
     RouterLink,
     PaginatorComponent,
     ModalComponent,
-    TestResultFilterComponent
+    TestResultFilterComponent,
+    TestMethodsPipe
   ],
 
   templateUrl: './torch-list.component.html',

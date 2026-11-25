@@ -7,6 +7,7 @@ import { CommonModule } from '@angular/common';
 import { TestMethod } from '../../../../../../catalog/test/components/test.model';
 import { StoolResponse} from '../../component/stool.model';
 import { StoolService } from '../../component/stool.service';
+import { TestMethodsPipe } from '../../../../../../utils/test-methods/test-methods.pipe';
 
 @Component({
   selector: 'app-stool-detail',
@@ -14,7 +15,8 @@ import { StoolService } from '../../component/stool.service';
   imports: [
     RouterLink,
     FormsModule,
-    CommonModule
+    CommonModule,
+    TestMethodsPipe
   ],
   templateUrl: './detail.component.html',
   styleUrl: './detail.component.css',
@@ -30,13 +32,13 @@ export class StoolDetailComponent implements OnInit {
   public patientId!: number;
   public orderId!: number;
 
-  testMethodLabels: Record<TestMethod, string> = {
-    [TestMethod.CUANTITATIVA]: 'Cuantitativa',
-    [TestMethod.RAPIDA]: 'Rápida',
-    [TestMethod.SEMI_CUANTITATIVA]: 'Semi-cuantitativa',
-    [TestMethod.AGLUTINACION_PORTA]: 'Aglutinación porta',
-    [TestMethod.OTROS]: 'Otros',
-  };
+  // testMethodLabels: Record<TestMethod, string> = {
+  //   [TestMethod.CUANTITATIVA]: 'Cuantitativa',
+  //   [TestMethod.RAPIDA]: 'Rápida',
+  //   [TestMethod.SEMI_CUANTITATIVA]: 'Semi-cuantitativa',
+  //   [TestMethod.AGLUTINACION_PORTA]: 'Aglutinación porta',
+  //   [TestMethod.OTROS]: 'Otros',
+  // };
   constructor(
     private route: ActivatedRoute,
     private testService: StoolService

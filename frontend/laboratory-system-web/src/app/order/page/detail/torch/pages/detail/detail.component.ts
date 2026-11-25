@@ -9,6 +9,7 @@ import { TorchService } from '../../components/torch.service';
 
 import { TestMethod } from '../../../../../../catalog/test/components/test.model';
 import { TorchResponse } from '../../components/torch.model';
+import { TestMethodsPipe } from '../../../../../../utils/test-methods/test-methods.pipe';
 
 @Component({
   selector: 'app-torch-detail',
@@ -16,7 +17,8 @@ import { TorchResponse } from '../../components/torch.model';
   imports: [
     RouterLink,
     FormsModule,
-    CommonModule
+    CommonModule,
+    TestMethodsPipe
   ],
   templateUrl: './detail.component.html',
   styleUrl: './detail.component.css',
@@ -32,13 +34,13 @@ export class TorchDetailComponent implements OnInit {
   public patientId!: number;
   public orderId!: number;
 
-  testMethodLabels: Record<TestMethod, string> = {
-    [TestMethod.CUANTITATIVA]: 'Cuantitativa',
-    [TestMethod.RAPIDA]: 'Rápida',
-    [TestMethod.SEMI_CUANTITATIVA]: 'Semi-cuantitativa',
-    [TestMethod.AGLUTINACION_PORTA]: 'Aglutinación porta',
-    [TestMethod.OTROS]: 'Otros',
-  };
+  // testMethodLabels: Record<TestMethod, string> = {
+  //   [TestMethod.CUANTITATIVA]: 'Cuantitativa',
+  //   [TestMethod.RAPIDA]: 'Rápida',
+  //   [TestMethod.SEMI_CUANTITATIVA]: 'Semi-cuantitativa',
+  //   [TestMethod.AGLUTINACION_PORTA]: 'Aglutinación porta',
+  //   [TestMethod.OTROS]: 'Otros',
+  // };
 
   constructor(
     private route: ActivatedRoute,

@@ -1,5 +1,7 @@
 package com.proemsalud.laboratory.test.simpleschemistry.mapper;
 
+import java.util.TreeSet;
+
 import org.springframework.stereotype.Component;
 
 import com.proemsalud.laboratory.catalog.domain.Test;
@@ -31,7 +33,7 @@ public class SimpleChemistryMapper {
 				.categoryName(simpleChemistry.getTest().getCategory().getName())
 				.testReference(simpleChemistry.getTest().getReference())
 				.orderId(simpleChemistry.getOrder().getId())
-				.testMethod(simpleChemistry.getTest().getTestMethod())
+				.testMethods(new TreeSet<>(simpleChemistry.getTest().getTestMethods()))
 				.testId(simpleChemistry.getTest().getId())
 				.createdAt(simpleChemistry.getCreatedAt())
 				.updatedAt(simpleChemistry.getUpdatedAt())
@@ -42,7 +44,7 @@ public class SimpleChemistryMapper {
 		return SimpleChemistryReportResponse.builder()
 				.id(simpleChemistry.getId())
 				.testName(simpleChemistry.getTest().getName())
-				.testMethod(simpleChemistry.getTest().getTestMethod())
+				.testMethods(new TreeSet<>(simpleChemistry.getTest().getTestMethods()))
 				.result(simpleChemistry.getResult())
 				.reference(simpleChemistry.getTest().getReference())
 				.build();

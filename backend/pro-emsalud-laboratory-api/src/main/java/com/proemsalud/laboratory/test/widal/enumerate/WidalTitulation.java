@@ -6,5 +6,6 @@ public enum WidalTitulation {
 	EN_1_40,
 	EN_1_80,
 	EN_1_160,
-	EN_1_320
+	EN_1_320,
+	N_A
 }

@@ -2,6 +2,7 @@ package com.proemsalud.laboratory.catalog.dto.response;
 
 import java.math.BigDecimal;
 import java.time.Instant;
+import java.util.Set;
 
 import com.proemsalud.laboratory.catalog.enumerate.TestMethod;
 
@@ -24,7 +25,7 @@ public class TestResponse {
 	
 	private String group;
 
-	private TestMethod testMethod;
+	private Set<TestMethod> testMethods;
 
 	private String reference;
 

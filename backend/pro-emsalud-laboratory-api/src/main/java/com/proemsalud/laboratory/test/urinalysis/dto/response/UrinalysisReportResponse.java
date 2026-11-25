@@ -1,5 +1,7 @@
 package com.proemsalud.laboratory.test.urinalysis.dto.response;
 
+import java.util.Set;
+
 import com.proemsalud.laboratory.catalog.enumerate.TestMethod;
 import com.proemsalud.laboratory.test.urinalysis.domain.UrinalysisResult;
 
@@ -22,7 +24,7 @@ public class UrinalysisReportResponse {
 	
 	private String testName;
 	
-	private TestMethod testMethod;
+	private Set<TestMethod> testMethods;
 	
 	private String reference;
 }

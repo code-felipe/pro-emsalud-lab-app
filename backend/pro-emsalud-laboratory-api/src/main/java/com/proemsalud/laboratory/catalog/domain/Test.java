@@ -2,10 +2,14 @@ package com.proemsalud.laboratory.catalog.domain;
 
 import java.math.BigDecimal;
 import java.time.Instant;
+import java.util.Set;
+import java.util.HashSet;
 
 import com.proemsalud.laboratory.catalog.enumerate.TestMethod;
 
+import jakarta.persistence.CollectionTable;
 import jakarta.persistence.Column;
+import jakarta.persistence.ElementCollection;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
@@ -39,9 +43,12 @@ public class Test {
 	
 	private String name;
 	
+	@ElementCollection(fetch = FetchType.EAGER)
+	@CollectionTable(name = "test_test_method", joinColumns = @JoinColumn(name = "test_id"))
 	@Enumerated(EnumType.STRING)
-	@Column(name = "test_method")
-	private TestMethod testMethod;
+	@Column(name = "test_method", nullable = false, length = 150)
+	@Builder.Default
+	private Set<TestMethod> testMethods = new HashSet<>();
 	
 	@Column(name = "reference", columnDefinition = "TEXT")
 	private String reference;

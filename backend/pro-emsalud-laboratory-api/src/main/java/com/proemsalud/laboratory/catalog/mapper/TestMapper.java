@@ -1,6 +1,8 @@
 package com.proemsalud.laboratory.catalog.mapper;
 
 
+import java.util.HashSet;
+
 import org.springframework.stereotype.Component;
 
 import com.proemsalud.laboratory.catalog.domain.Test;
@@ -15,7 +17,7 @@ public class TestMapper {
 	public Test toEntity(CreateTestRequest request, TestCategory category) {
 		return Test.builder()
 			.name(request.getName())
-			.testMethod(request.getTestMethod())
+			.testMethods(new HashSet<>(request.getTestMethods()))
 			.reference(normalizeBlank(request.getReference()))
 			.price(request.getPrice())
 			.category(category)
@@ -26,7 +28,7 @@ public class TestMapper {
 		return TestResponse.builder()
 			.id(test.getId())
 			.name(test.getName())
-			.testMethod(test.getTestMethod())
+			.testMethods(new HashSet<>(test.getTestMethods()))
 			.reference(test.getReference())
 			.price(test.getPrice())
 			.active(test.getActive())

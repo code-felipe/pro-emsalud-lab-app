@@ -6,12 +6,15 @@ import { CommonModule } from '@angular/common';
 
 import { TestMethod, TestResponse } from '../../components/test.model';
 import { TestService } from '../../components/test.service';
+import { TestMethodsPipe } from '../../../../utils/test-methods/test-methods.pipe';
 
 @Component({
   selector: 'app-test-detail',
   imports: [
-    RouterLink, FormsModule,
+    RouterLink, 
+    FormsModule,
     CommonModule,
+    TestMethodsPipe
   ],
   templateUrl: './detail.component.html',
   styleUrl: './detail.component.css',
@@ -26,13 +29,13 @@ export class TestDetailComponent implements OnInit  {
 
     hasError = false;
 
-  testMethodLabels: Record<TestMethod, string> = {
-  [TestMethod.CUANTITATIVA]: 'Cuantitativa',
-  [TestMethod.RAPIDA]: 'Rápida',
-  [TestMethod.SEMI_CUANTITATIVA]: 'Semi-cuantitativa',
-  [TestMethod.AGLUTINACION_PORTA]: 'Aglutinación porta',
-  [TestMethod.OTROS]: 'Otros',
-};
+//   testMethodLabels: Record<TestMethod, string> = {
+//   [TestMethod.CUANTITATIVA]: 'Cuantitativa',
+//   [TestMethod.RAPIDA]: 'Rápida',
+//   [TestMethod.SEMI_CUANTITATIVA]: 'Semi-cuantitativa',
+//   [TestMethod.AGLUTINACION_PORTA]: 'Aglutinación porta',
+//   [TestMethod.OTROS]: 'Otros',
+// };
 
 
   constructor(

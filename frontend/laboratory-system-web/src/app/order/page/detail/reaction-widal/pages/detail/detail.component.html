@@ -45,11 +45,12 @@
                 </div>
               </div>
 
+              <!-- Methods -->
               <div class="col-12 col-sm-6">
                 <div class="detail-item">
-                  <span class="detail-label">Método de prueba</span>
+                  <span class="detail-label">Métodos de prueba</span>
                   <span class="detail-value">
-                    {{ testMethodLabels[reaction.testMethod] || reaction.testMethod }}
+                    {{ reaction.testMethods | testMethods }}
                   </span>
                 </div>
               </div>
@@ -238,7 +239,11 @@
 
         <!-- Footer -->
         <div class="test-card-footer">
-           <button type="button" class="btn btn-back" [routerLink]="['/patients', patientId, 'orders', orderId, 'widal-reactions']">
+          <button
+            type="button"
+            class="btn btn-back"
+            [routerLink]="['/patients', patientId, 'orders', orderId, 'widal-reactions']"
+          >
             <span class="me-2">←</span>
             Volver
           </button>

@@ -59,10 +59,33 @@
 
 .report-meta {
   display: flex;
+  align-items: baseline;
   flex-wrap: wrap;
   gap: 4px 14px;
   font-size: 0.75rem;
   margin-top: 2px;
+}
+
+.meta-item {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 4px;
+}
+
+.meta-item strong {
+  color: #0f766e;
+  white-space: nowrap;
+}
+
+.reference-content {
+  display: inline;
+  font-weight: normal;
+}
+
+.reference-content p {
+  display: inline !important;
+  margin: 0 !important;
+  padding: 0 !important;
 }
 
 /* ================= BODY ================= */
@@ -102,9 +125,6 @@
   border-bottom: 1px dotted #cfe3df;
 }
 
-.row-label {
-  color: #475569;
-}
 
 .row-value {
   color: #0f172a;
@@ -117,6 +137,15 @@
   padding: 4px 8px;
   white-space: pre-line;
   color: #0f172a;
+}
+
+.reference-row {
+  display: block;
+}
+
+.row-label{
+  display: flex;
+  gap: 0.5rem;
 }
 
 /* ================= ACTIONS ================= */
