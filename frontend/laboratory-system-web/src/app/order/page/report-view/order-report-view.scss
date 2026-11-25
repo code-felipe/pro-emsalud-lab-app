@@ -67,13 +67,49 @@
 }
 
 /* =====================================================
+   REPORT WARNING
+===================================================== */
+
+.report-warning {
+  max-width: 850px;
+  margin: 0 auto 18px;
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  padding: 14px 16px;
+  background: #fff7e6;
+  border: 1px solid #f5c76b;
+  border-radius: 8px;
+  color: #805b10;
+  box-sizing: border-box;
+
+  i {
+    font-size: 22px;
+    margin-top: 2px;
+    flex-shrink: 0;
+  }
+
+  strong {
+    display: block;
+    font-size: 12px;
+    margin-bottom: 5px;
+  }
+
+  p {
+    font-size: 12px;
+    margin: 0;
+    line-height: 1.5;
+  }
+}
+
+/* =====================================================
    REPORT DOCUMENT
 ===================================================== */
 
 .order-report {
   width: 100%;
   max-width: 850px;
-  min-height: 900px;
+  min-height: auto;
   margin: 0 auto;
   padding: 38px 42px;
   background: #fff;
@@ -82,6 +118,15 @@
   box-shadow: 0 5px 25px rgba(15, 23, 42, 0.06);
   color: #1e293b;
   box-sizing: border-box;
+}
+
+/* =====================================================
+   TEST BLOCKS
+===================================================== */
+
+.report-test-block {
+  display: block;
+  width: 100%;
 }
 
 /* =====================================================
@@ -130,6 +175,10 @@
   letter-spacing: 2px;
 }
 
+/* =====================================================
+   REPORT ORDER
+===================================================== */
+
 .report-order {
   display: flex;
   flex-direction: column;
@@ -159,7 +208,6 @@
   text-transform: uppercase;
   letter-spacing: 0.8px;
 }
-
 
 .report-secondary {
   font-size: 12px;
@@ -269,12 +317,10 @@
 }
 
 .report-company {
-    display: flex;
-    justify-content: space-evenly;
-//   display: grid;
-//   grid-template-columns: 1fr auto 1fr;
-//   align-items: end;
-//   gap: 15px;
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  gap: 12px;
 }
 
 .report-company-info {
@@ -332,11 +378,10 @@
   }
 
   .report-company {
-    grid-template-columns: 1fr auto;
+    flex-wrap: wrap;
   }
 
   .report-validation {
-    grid-column: 1 / -1;
     align-items: flex-start;
     text-align: left;
   }
@@ -390,12 +435,11 @@
   }
 
   .report-company {
-    grid-template-columns: 1fr;
-    justify-items: start;
+    flex-direction: column;
+    align-items: flex-start;
   }
 
   .report-validation {
-    grid-column: auto;
     align-items: flex-start;
     text-align: left;
   }
@@ -417,7 +461,8 @@
     background: #fff;
   }
 
-  .report-actions {
+  .report-actions,
+  .report-warning {
     display: none !important;
   }
 

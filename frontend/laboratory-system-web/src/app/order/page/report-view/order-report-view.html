@@ -10,13 +10,12 @@
   <h3>No se pudo cargar el reporte</h3>
   <p>Verifica que la orden exista e inténtalo nuevamente.</p>
 </div>
+
 <div class="order-report-wrapper" *ngIf="report">
-  <!-- <a class="btn-back" [routerLink]="['/patients', patientId, 'orders', orderId, 'test-menu']">
-    <i class="bi bi-arrow-left"></i>
-    Volver a la orden
-  </a> -->
-  <!-- ACCIÓN -->
+
+  <!-- ACCIONES -->
   <div class="report-actions">
+
     <button
       type="button"
       class="report-download-btn"
@@ -33,63 +32,81 @@
         {{ downloadingPdf ? 'Generando PDF...' : 'Descargar PDF' }}
       </span>
     </button>
-    <button type="button" class="report-whatsapp-btn" (click)="openWhatsApp()">
+
+    <button
+      type="button"
+      class="report-whatsapp-btn"
+      (click)="openWhatsApp()"
+    >
       <i class="bi bi-whatsapp"></i>
-
-      <span> WhatsApp </span>
+      <span>WhatsApp</span>
     </button>
-  </div>
-  <!-- ===================================================== REPORT CONTENT Todo lo que esté dentro de #reportContent se exporta al PDF. ===================================================== -->
-  <div #reportContent class="order-report">
-    <!-- ===================================================
-     REPORT HEADER
-     =================================================== -->
 
+  </div>
+
+  <!-- ADVERTENCIA -->
+  <div class="report-warning" *ngIf="willExceedPage">
+
+    <i class="bi bi-exclamation-triangle-fill"></i>
+
+    <div>
+      <strong>Posible corte de resultados en el PDF</strong>
+
+      <p>
+        Uno de los exámenes podría quedar dividido entre dos páginas.
+        Se recomienda generar una orden independiente para evitar
+        que los resultados se corten.
+      </p>
+    </div>
+
+  </div>
+
+  <!-- CONTENIDO DEL PDF -->
+  <div #reportContent class="order-report">
+
+    <!-- HEADER -->
     <div class="report-header">
+
       <div class="report-brand">
+
         <div class="report-icon">
           <img src="/proemsalud-icon.svg" alt="Proemsalud logo" />
         </div>
 
         <div>
-          <div class="report-title">Reporte de Laboratorio Clínico</div>
+          <div class="report-title">
+            Reporte de Laboratorio Clínico
+          </div>
 
           <div class="report-subtitle">
             <h3>PROEMSALUD</h3>
           </div>
         </div>
+
       </div>
 
       <div class="report-order">
-        <span class="report-label"> ORDEN </span>
-
-        <strong> #{{ report.id }} </strong>
+        <span class="report-label">ORDEN</span>
+        <strong>#{{ report.id }}</strong>
       </div>
+
     </div>
 
-    <!-- ===================================================
-     PATIENT / DOCTOR INFORMATION
-     =================================================== -->
-
+    <!-- INFORMACIÓN -->
     <div class="report-info">
-      <!-- PACIENTE -->
 
       <div class="report-info-block">
-        <span class="report-label"> Paciente </span>
+        <span class="report-label">Paciente</span>
 
-        <strong>
-          {{ report.patientFullName }}
-        </strong>
+        <strong>{{ report.patientFullName }}</strong>
 
         <span class="report-secondary" *ngIf="report.patientAge">
           {{ report.patientAge }}
         </span>
       </div>
 
-      <!-- MÉDICO -->
-
       <div class="report-info-block">
-        <span class="report-label"> Solicitado Por </span>
+        <span class="report-label">Solicitado Por</span>
 
         <strong>
           {{ report.doctorTitle != 'NA' ? report.doctorTitle : '' }}
@@ -97,103 +114,124 @@
         </strong>
       </div>
 
-      <!-- FECHA -->
-
       <div class="report-info-block">
-        <span class="report-label"> Fecha </span>
+        <span class="report-label">Fecha</span>
 
         <strong>
           {{ report.createdAt | date: 'dd/MM/yyyy HH:mm' }}
         </strong>
       </div>
+
     </div>
 
-    <!-- ===================================================
-     RESULTS
-=================================================== -->
-
+    <!-- RESULTADOS -->
     <div class="report-section">
+
       <div class="report-section-header">
         <div>
-          <span class="report-section-kicker"> LABORATORIO </span>
-
+          <span class="report-section-kicker">LABORATORIO</span>
           <h3>Resultados</h3>
         </div>
       </div>
 
-      <!-- RESULTADOS GENERALES -->
-
-      <!-- QUÍMICAS SIMPLES -->
-      <app-simple-chemistry-report
+      <!-- QUÍMICA SIMPLE -->
+      <div
+        class="report-test-block"
         *ngIf="report.simpleChemistries.length > 0"
-        [results]="report.simpleChemistries"
       >
-      </app-simple-chemistry-report>
+        <app-simple-chemistry-report
+          [results]="report.simpleChemistries"
+        ></app-simple-chemistry-report>
+      </div>
+
       <!-- WIDAL -->
-      <app-widal-report
+      <div
+        class="report-test-block"
         *ngIf="report.widalReactions.length > 0"
-        [widalReactionResults]="report.widalReactions">
-      </app-widal-report>
+      >
+        <app-widal-report
+          [widalReactionResults]="report.widalReactions"
+        ></app-widal-report>
+      </div>
 
       <!-- URINALYSIS -->
-       <app-urinalysis-report
-         *ngIf="report.urinalysis.length > 0"
-        [results]="report.urinalysis">
-       </app-urinalysis-report>
+      <div
+        class="report-test-block"
+        *ngIf="report.urinalysis.length > 0"
+      >
+        <app-urinalysis-report
+          [results]="report.urinalysis"
+        ></app-urinalysis-report>
+      </div>
 
       <!-- STOOL -->
-      <app-stool-report
+      <div
+        class="report-test-block"
         *ngIf="report.stools.length > 0"
-        [results]="report.stools">
-      </app-stool-report>
+      >
+        <app-stool-report
+          [results]="report.stools"
+        ></app-stool-report>
+      </div>
 
       <!-- TORCH -->
-       <app-torch-report
-       *ngIf="report.torchs.length > 0"
-        [torchResults]="report.torchs">
-       </app-torch-report>
+      <div
+        class="report-test-block"
+        *ngIf="report.torchs.length > 0"
+      >
+        <app-torch-report
+          [torchResults]="report.torchs"
+        ></app-torch-report>
+      </div>
+
     </div>
-    
 
-    <!-- ===================================================
-     REPORT NOTE
-     =================================================== -->
-
+    <!-- NOTA -->
     <div class="report-note">
       <i class="bi bi-info-circle"></i>
 
-      <span> Este reporte corresponde a los resultados registrados en la orden indicada. </span>
+      <span>
+        Este reporte corresponde a los resultados registrados
+        en la orden indicada.
+      </span>
     </div>
 
-    <!-- ===================================================
-     TECHNICIAN SEAL
-     =================================================== -->
-
+    <!-- SELLO -->
     <div class="report-technician">
-      <!-- SELLO + INFORMACIÓN DE LA EMPRESA -->
+
       <div class="report-company">
+
         <div class="report-company-info">
-          <strong class="report-company-location"> San Antonio Huista · Cantón Central </strong>
 
-          <span> Lunes - Viernes 7:30–1:00 · 2:00–5:00 </span>
+          <strong class="report-company-location">
+            San Antonio Huista · Cantón Central
+          </strong>
 
-          <span> Sabado - Domingo 7:30–1:00</span>
-
+          <span>Lunes - Viernes 7:30–1:00 · 2:00–5:00</span>
+          <span>Sabado - Domingo 7:30–1:00</span>
           <span>Tel. 4836-5187 | Tel. 4873-0645</span>
+
         </div>
+
         <img
           src="/emelyn-tech.png"
           alt="Sello de técnico de laboratorio"
           class="footer-signature"
         />
 
-        <!-- VALIDACIÓN -->
         <div class="report-validation">
-          <span class="report-label"> Emelyn López </span>
 
-          <strong>Bioanalista - Técnico en Laboratorio Clínico</strong>
+          <span class="report-label">Emelyn López</span>
+
+          <strong>
+            Bioanalista - Técnico en Laboratorio Clínico
+          </strong>
+
         </div>
+
       </div>
+
     </div>
+
   </div>
 </div>
