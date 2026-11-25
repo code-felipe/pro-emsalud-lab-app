@@ -52,31 +52,26 @@
           </div>
         </div>
 
-        <!-- TEST METHOD -->
+        <!-- TEST METHODS (CHECKBOXES) -->
         <div class="form-row">
-          <label class="form-label" for="testMethod">Método de prueba</label>
+          <label class="form-label">Métodos de prueba</label>
 
           <div class="form-field">
-            <select
-              id="testMethod"
-              class="form-control form-input"
-              [(ngModel)]="test.testMethod"
-              name="testMethod"
-              required
-              #testMethod="ngModel"
-            >
-              <option [ngValue]="undefined">Seleccionar tipo</option>
+            <div class="form-check" *ngFor="let m of methodOptions">
+              <input
+                class="form-check-input"
+                type="checkbox"
+                [id]="'method-' + m.value"
+                [checked]="isSelected(m.value)"
+                (change)="toggleMethod(m.value, $any($event.target).checked)"
+              />
+              <label class="form-check-label" [for]="'method-' + m.value">
+                {{ m.label }}
+              </label>
+            </div>
 
-              <option *ngFor="let type of testMethods" [ngValue]="type.value">
-                {{ type.label }}
-              </option>
-            </select>
-
-            <div
-              class="validation-message"
-              *ngIf="testMethod.invalid && (testMethod.dirty || testMethod.touched)"
-            >
-              <div *ngIf="testMethod.errors?.['required']">El tipo es requerido</div>
+            <div class="validation-message" *ngIf="methodsTouched && test.testMethods.length === 0">
+              <div>Selecciona al menos un método</div>
             </div>
           </div>
         </div>
@@ -166,7 +161,7 @@
             class="btn btn-primary-action"
             (click)="create()"
             *ngIf="!test.id; else editBlock"
-            [disabled]="!testForm.form.valid"
+            [disabled]="!testForm.form.valid || test.testMethods.length === 0"
           >
             <i class="ti ti-plus"></i>
             Crear
@@ -178,7 +173,7 @@
               type="submit"
               class="btn btn-primary-action"
               (click)="update()"
-              [disabled]="!testForm.form.valid"
+              [disabled]="!testForm.form.valid || test.testMethods.length === 0"
             >
               <i class="ti ti-edit"></i>
               Editar

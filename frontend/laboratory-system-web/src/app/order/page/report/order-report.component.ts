@@ -13,11 +13,12 @@ import jsPDF from 'jspdf';
 
 import { OrderReportResponse } from '../../components/order.model';
 import { TestMethod } from '../../../catalog/test/components/test.model';
+import { TestMethodsPipe } from '../../../utils/test-methods/test-methods.pipe';
 
 @Component({
   selector: 'app-order-report',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, TestMethodsPipe],
   templateUrl: './order-report.component.html',
   styleUrls: [
     './order-report.component.css',
@@ -38,13 +39,13 @@ export class OrderReportComponent {
 
   downloadingPdf = false;
 
-  testMethodLabels: Record<TestMethod, string> = {
-  [TestMethod.CUANTITATIVA]: 'Cuantitativa',
-  [TestMethod.RAPIDA]: 'Rápida',
-  [TestMethod.SEMI_CUANTITATIVA]: 'Semi cuantitativa',
-  [TestMethod.AGLUTINACION_PORTA]: 'Aglutinación en porta',
-  [TestMethod.OTROS]: 'Otros',
-};
+//   testMethodLabels: Record<TestMethod, string> = {
+//   [TestMethod.CUANTITATIVA]: 'Cuantitativa',
+//   [TestMethod.RAPIDA]: 'Rápida',
+//   [TestMethod.SEMI_CUANTITATIVA]: 'Semi cuantitativa',
+//   [TestMethod.AGLUTINACION_PORTA]: 'Aglutinación en porta',
+//   [TestMethod.OTROS]: 'Otros',
+// };
   async downloadPdf(): Promise<void> {
     if (!this.reportContent || !this.report) {
       return;

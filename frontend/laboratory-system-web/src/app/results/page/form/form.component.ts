@@ -239,7 +239,7 @@ export class TestResultFormComponent implements OnInit {
           this.selectedTest = {
             id: response.testId,
             name: response.testName,
-            testMethod: response.testMethod,
+            testMethods: response.testMethods,
             reference: response.testReference,
             price: response.unitPrice,
             active: true,
@@ -248,7 +248,6 @@ export class TestResultFormComponent implements OnInit {
             testCategoryId: 0,
             testCategoryName: response.categoryName,
           };
-
           this.title = 'Editar Resultado';
         },
 

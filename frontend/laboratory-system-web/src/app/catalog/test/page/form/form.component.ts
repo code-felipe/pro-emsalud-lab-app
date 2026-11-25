@@ -1,4 +1,3 @@
-
 import { Component, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { Router, RouterLink, ActivatedRoute } from '@angular/router';
@@ -22,6 +21,7 @@ import { HttpErrorResponse } from '@angular/common/http';
 
 import {
   CreateTestRequest,
+  TEST_METHOD_OPTIONS,
   TestMethod,
   TestResponse,
   UpdateTestRequest,
@@ -48,7 +48,7 @@ export class TestFormComponent implements OnInit {
 
   public test: CreateTestRequest & { id?: number } = {
     name: '',
-    testMethod: undefined as unknown as TestMethod,
+    testMethods: [],
     reference: '',
     price: 0,
     testCategoryId: 0,
@@ -58,65 +58,46 @@ export class TestFormComponent implements OnInit {
 
   public apiError: any = null;
 
+  public methodsTouched = false;
+
   public Editor = ClassicEditor;
 
-public editorConfig = {
-  licenseKey: 'GPL',
-  plugins: [
-    Essentials,
-    Paragraph,
-    Bold,
-    Italic,
-    Link,
-    List,
-    Table,
-    TableToolbar,
-  ],
-  toolbar: [
-    'undo',
-    'redo',
-    '|',
-    'bold',
-    'italic',
-    '|',
-    'link',
-    'bulletedList',
-    'numberedList',
-    '|',
-    'insertTable',
-  ],
-  table: {
-    contentToolbar: [
-      'tableColumn',
-      'tableRow',
-      'mergeTableCells',
+  public editorConfig = {
+    licenseKey: 'GPL',
+    plugins: [
+      Essentials,
+      Paragraph,
+      Bold,
+      Italic,
+      Link,
+      List,
+      Table,
+      TableToolbar,
     ],
-  },
-  placeholder: 'Escribe los datos de la prueba...',
-};
+    toolbar: [
+      'undo',
+      'redo',
+      '|',
+      'bold',
+      'italic',
+      '|',
+      'link',
+      'bulletedList',
+      'numberedList',
+      '|',
+      'insertTable',
+    ],
+    table: {
+      contentToolbar: [
+        'tableColumn',
+        'tableRow',
+        'mergeTableCells',
+      ],
+    },
+    placeholder: 'Escribe los datos de la prueba...',
+  };
 
-  public testMethods = [
-    {
-      value: TestMethod.RAPIDA,
-      label: 'Rápida',
-    },
-    {
-      value: TestMethod.CUANTITATIVA,
-      label: 'Cuantitativa',
-    },
-    {
-      value: TestMethod.SEMI_CUANTITATIVA,
-      label: 'Semi Cuantitativa',
-    },
-     {
-      value: TestMethod.AGLUTINACION_PORTA,
-      label: 'Aglutinación en Porta',
-    },
-    {
-      value: TestMethod.OTROS,
-      label: 'Otros',
-    },
-  ];
+  public methodOptions = TEST_METHOD_OPTIONS;
 
   public testCategories: TestCategoryResponse[] = [];
 
@@ -131,6 +112,40 @@ public editorConfig = {
   ngOnInit(): void {
     this.loadTestCategories();
     this.loadTest();
+  }
+
+  // =====================================================
+  // METHODS (CHECKBOXES)
+  // =====================================================
+
+  public isSelected(method: TestMethod): boolean {
+    return this.test.testMethods.includes(method);
+  }
+
+  public toggleMethod(method: TestMethod, checked: boolean): void {
+    this.methodsTouched = true;
+
+    if (checked) {
+      if (!this.isSelected(method)) {
+        this.test.testMethods = [...this.test.testMethods, method];
+      }
+    } else {
+      this.test.testMethods = this.test.testMethods.filter(
+        (m) => m !== method
+      );
+    }
+  }
+
+  private hasMethods(): boolean {
+    if (this.test.testMethods.length === 0) {
+      this.methodsTouched = true;
+      this.alertService.error(
+        'Debes seleccionar al menos un método',
+        'Error'
+      );
+      return false;
+    }
+    return true;
   }
 
   // =====================================================
@@ -152,7 +167,7 @@ public editorConfig = {
           this.test = {
             id: response.id,
             name: response.name,
-            testMethod: response.testMethod,
+            testMethods: [...response.testMethods],
             reference: response.reference ?? '',
             price: response.price,
             testCategoryId: response.testCategoryId,
@@ -199,9 +214,13 @@ public editorConfig = {
   public create(): void {
     this.apiError = null;
 
+    if (!this.hasMethods()) {
+      return;
+    }
+
     const request: CreateTestRequest = {
       name: this.test.name.trim(),
-      testMethod: this.test.testMethod,
+      testMethods: this.test.testMethods,
       reference: this.test.reference?.trim() || undefined,
       price: this.test.price,
       testCategoryId: this.test.testCategoryId,
@@ -245,9 +264,13 @@ public editorConfig = {
       return;
     }
 
+    if (!this.hasMethods()) {
+      return;
+    }
+
     const request: UpdateTestRequest = {
       name: this.test.name.trim(),
-      testMethod: this.test.testMethod,
+      testMethods: this.test.testMethods,
       reference: this.test.reference?.trim() || undefined,
       price: this.test.price,
       testCategoryId: this.test.testCategoryId,

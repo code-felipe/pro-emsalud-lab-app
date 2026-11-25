@@ -28,7 +28,7 @@ export interface SimpleChemistryResponse{
     
     categoryName: string;
 
-    testMethod: TestMethod;
+    testMethods: TestMethod[];
 
     testReference: string;
 
@@ -48,8 +48,8 @@ export interface SimpleChemistryReportResponse{
     id: number;
 
     testName: string;
-
-    testMethod: TestMethod;
+    
+    testMethods: TestMethod[];
 
     result: string;
 

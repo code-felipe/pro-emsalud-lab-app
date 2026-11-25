@@ -1,5 +1,7 @@
 package com.proemsalud.laboratory.test.urinalysis.mapper;
 
+import java.util.TreeSet;
+
 import org.springframework.stereotype.Component;
 
 import com.proemsalud.laboratory.catalog.domain.Test;
@@ -34,7 +36,7 @@ public class UrinalysisMapper {
 				.categoryName(uri.getTest().getCategory().getName())
 				.testReference(uri.getTest().getReference())
 				.orderId(uri.getOrder().getId())
-				.testMethod(uri.getTest().getTestMethod())
+				.testMethods(new TreeSet<>(uri.getTest().getTestMethods()))
 				.testId(uri.getTest().getId())
 				.createdAt(uri.getCreatedAt())
 				.updatedAt(uri.getUpdatedAt())
@@ -45,7 +47,7 @@ public class UrinalysisMapper {
 		return UrinalysisReportResponse.builder()
 				.id(uri.getId())
 				.testName(uri.getTest().getName())
-				.testMethod(uri.getTest().getTestMethod())
+				.testMethods(new TreeSet<>(uri.getTest().getTestMethods()))
 				.urinalysisResult(uri.getUrinalysisResult())
 				.reference(uri.getTest().getReference())
 				.build();

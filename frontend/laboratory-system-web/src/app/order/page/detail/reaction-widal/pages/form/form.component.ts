@@ -83,6 +83,7 @@ export class WidalReactionFormComponent implements OnInit {
       salmonellaTyphiH_1_80: null,
       salmonellaTyphiH_1_160: null,
       salmonellaTyphiH_1_320: null,
+      
 
       salmonellaTyphiOResult: null,
       salmonellaTyphiHResult: null,
@@ -123,7 +124,8 @@ export class WidalReactionFormComponent implements OnInit {
     [WidalTitulation.EN_1_40]: '1:40',
     [WidalTitulation.EN_1_80]: '1:80',
     [WidalTitulation.EN_1_160]: '1:160',
-    [WidalTitulation.EN_1_320]: '1:320'
+    [WidalTitulation.EN_1_320]: '1:320',
+    [WidalTitulation.N_A]: 'N/A'
   };
 
 
@@ -221,7 +223,7 @@ export class WidalReactionFormComponent implements OnInit {
           this.selectedTest = {
             id: response.testId,
             name: response.testName,
-            testMethod: response.testMethod,
+            testMethods: response.testMethods,
             reference: response.testReference,
             price: response.unitPrice,
             active: true,
@@ -300,7 +302,7 @@ export class WidalReactionFormComponent implements OnInit {
     !!result.salmonellaTyphiOResultTitulation &&
     !!result.salmonellaTyphiHResultTitulation;
 
-  return allBooleansSelected && titulationsSelected;
+  return allBooleansSelected;
 }
 
 

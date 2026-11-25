@@ -155,7 +155,11 @@
             <!-- TEST METHOD -->
             <td>
               <span class="table-secondary">
-                {{ result.testMethod }}
+                {{
+                  result.testMethods.length
+                    ? (result.testMethods | testMethods)
+                    : 'No especificado'
+                }}
               </span>
             </td>
 

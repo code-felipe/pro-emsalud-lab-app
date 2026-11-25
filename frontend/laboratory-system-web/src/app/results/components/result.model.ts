@@ -30,7 +30,7 @@ export interface TestResultResponse{
 
     categoryName: string;
 
-    testMethod: TestMethod;
+    testMethods: TestMethod[];
 
     testReference: string;
 

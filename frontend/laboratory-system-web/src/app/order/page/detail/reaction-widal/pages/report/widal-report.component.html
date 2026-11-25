@@ -1,4 +1,14 @@
 <div class="widal-report" *ngFor="let reaction of widalReactionResults">
+  <!-- ================= MÉTODOS DE PRUEBA ================= -->
+  <div class="form-row form-row-full widal-methods p-1">
+    <label class="form-label">Métodos de prueba</label>
+    <div class="form-field">
+      <p class="observation-text">
+        {{ reaction.testMethods | testMethods }}
+      </p>
+    </div>
+  </div>
+
   <div class="widal-grid">
     <!-- ================= COLUMNA O ================= -->
     <section class="widal-col">
@@ -12,8 +22,9 @@
           reaction.id,
           'detail',
         ]"
-        ><h3 class="widal-col-title">Salmonella Typhi O</h3></a
       >
+        <h3 class="widal-col-title">Salmonella Typhi O</h3>
+      </a>
 
       <div class="widal-row">
         <span class="widal-row-label">1/20</span>
@@ -99,7 +110,7 @@
 
     <!-- ================= COLUMNA H ================= -->
     <section class="widal-col">
-        <a
+      <a
         [routerLink]="[
           '/patients',
           patientId,
@@ -109,8 +120,9 @@
           reaction.id,
           'detail',
         ]"
-        ><h3 class="widal-col-title">Salmonella Typhi H</h3></a
       >
+        <h3 class="widal-col-title">Salmonella Typhi H</h3>
+      </a>
 
       <div class="widal-row">
         <span class="widal-row-label">1/20</span>
@@ -199,7 +211,7 @@
   <div class="form-row form-row-full widal-reference">
     <label class="form-label">Referencia</label>
     <div class="form-field">
-      <p class="observation-text" [innerHTML]="reaction.reference ? reaction.reference : ''"></p>
+      <p class="observation-text" [innerHTML]="reaction.reference || ''"></p>
     </div>
   </div>
 

@@ -1,19 +1,23 @@
+
 import { Component, Input, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { SimpleChemistryReportResponse } from '../../components/simple-chemistry.model';
 import { ActivatedRoute, RouterLink } from '@angular/router';
+
+import { SimpleChemistryReportResponse } from '../../components/simple-chemistry.model';
+import { TestMethodsPipe } from '../../../../../../utils/test-methods/test-methods.pipe';
 
 @Component({
   selector: 'app-simple-chemistry-report',
   standalone: true,
   imports: [
     CommonModule,
-    RouterLink
+    RouterLink,
+    TestMethodsPipe
   ],
   templateUrl: './simple-chemistry-report.component.html',
   styleUrl: './simple-chemistry-report.component.scss'
 })
-export class SimpleChemistryReportComponent implements OnInit  {
+export class SimpleChemistryReportComponent implements OnInit {
 
   @Input() results: SimpleChemistryReportResponse[] = [];
 
@@ -21,8 +25,7 @@ export class SimpleChemistryReportComponent implements OnInit  {
   public orderId!: number;
 
   constructor(
-    private route: ActivatedRoute,
-
+    private route: ActivatedRoute
   ) {}
 
   ngOnInit(): void {
@@ -30,7 +33,6 @@ export class SimpleChemistryReportComponent implements OnInit  {
   }
 
   private loadRouteParams(): void {
-
     const patientId = this.route.parent?.snapshot.paramMap.get('id');
     const orderId = this.route.snapshot.paramMap.get('orderId');
 
@@ -43,30 +45,11 @@ export class SimpleChemistryReportComponent implements OnInit  {
     }
   }
 
-  private readonly testMethodTranslations: Record<string, string> = {
-    CUANTITATIVA: 'Cuantitativo',
-    RAPIDA: 'Prueba rápida',
-    SEMI_CUANTITATIVA: 'Semi-cuantitativo',
-    AGLUTINACION_PORTA: 'Aglutinación en portaobjetos',
-    OTROS: 'Otros'
-  };
-
-translateTestMethod(method?: string | null): string {
-    if (!method) {
-      return 'No especificado';
-    }
-
-    return this.testMethodTranslations[method] ?? method;
+  get hasAnyReference(): boolean {
+    return this.results.some(r => this.hasReference(r.reference));
   }
 
-
-get hasAnyReference(): boolean {
-  return this.results.some(r => this.hasReference(r.reference));
-}
-
-hasReference(reference: any): boolean {
-  return typeof reference === 'string' && reference.trim().length > 0;
-}
-
-
+  hasReference(reference: string | null | undefined): boolean {
+    return typeof reference === 'string' && reference.trim().length > 0;
+  }
 }

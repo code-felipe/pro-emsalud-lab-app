@@ -17,6 +17,7 @@ import { TestCategoryResponse } from '../../../test-category/components/test-cat
 import { TestCategoryService } from '../../../test-category/components/test-category.service';
 import { AlertService } from '../../../../utils/alert/alert.service';
 import { AuthService } from '../../../../auth/components/auth.service';
+import { TestMethodsPipe } from '../../../../utils/test-methods/test-methods.pipe';
 
 
 @Component({
@@ -28,7 +29,8 @@ import { AuthService } from '../../../../auth/components/auth.service';
     RouterLink,
     PaginatorComponent,
     ModalComponent,
-    TestFilterComponent
+    TestFilterComponent,
+    TestMethodsPipe
   ],
 
   templateUrl: './test-list.component.html',
@@ -54,13 +56,13 @@ export class TestsComponentList implements OnInit {
   protected readonly isAdmin = this.authService.isAdmin;
   protected readonly isUser = this.authService.isUser;
 
-  testMethodLabels: Record<TestMethod, string> = {
-  [TestMethod.CUANTITATIVA]: 'Cuantitativa',
-  [TestMethod.RAPIDA]: 'Rápida',
-  [TestMethod.SEMI_CUANTITATIVA]: 'Semi Cuantitativa',
-  [TestMethod.AGLUTINACION_PORTA]: 'Aglutinación Porta',
-  [TestMethod.OTROS]: 'Otros',
-};
+//   testMethodLabels: Record<TestMethod, string> = {
+//   [TestMethod.CUANTITATIVA]: 'Cuantitativa',
+//   [TestMethod.RAPIDA]: 'Rápida',
+//   [TestMethod.SEMI_CUANTITATIVA]: 'Semi Cuantitativa',
+//   [TestMethod.AGLUTINACION_PORTA]: 'Aglutinación Porta',
+//   [TestMethod.OTROS]: 'Otros',
+// };
 
 
 

@@ -28,10 +28,22 @@
       </thead>
 
       <tbody>
-        <tr *ngFor="let result of results; let i = index">
+        <tr *ngFor="let result of results">
           <!-- PRUEBA -->
           <td class="col-test">
-            <a [routerLink]="['/patients', patientId, 'orders', orderId, 'simple-chemistry', result.id, 'detail']"><strong>{{ result.testName }}</strong></a>
+            <a
+              [routerLink]="[
+                '/patients',
+                patientId,
+                'orders',
+                orderId,
+                'simple-chemistry',
+                result.id,
+                'detail',
+              ]"
+            >
+              <strong>{{ result.testName }}</strong>
+            </a>
           </td>
 
           <!-- RESULTADO -->
@@ -44,9 +56,11 @@
             <div *ngIf="hasReference(result.reference)" [innerHTML]="result.reference"></div>
           </td>
 
-          <!-- MÉTODO -->
+          <!-- MÉTODOS -->
           <td class="col-method">
-            {{ translateTestMethod(result.testMethod) }}
+            {{
+              result.testMethods.length ? (result.testMethods | testMethods) : 'No especificado'
+            }}
           </td>
         </tr>
       </tbody>

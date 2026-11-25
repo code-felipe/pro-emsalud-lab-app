@@ -1,5 +1,7 @@
 package com.proemsalud.laboratory.test.simpleschemistry.dto.response;
 
+import java.util.Set;
+
 import com.proemsalud.laboratory.catalog.enumerate.TestMethod;
 
 import lombok.AllArgsConstructor;
@@ -19,7 +21,7 @@ public class SimpleChemistryReportResponse {
 	
 	private String testName;
 	
-	private TestMethod testMethod;
+	private Set<TestMethod> testMethods;
 	
 	private String result;
 	

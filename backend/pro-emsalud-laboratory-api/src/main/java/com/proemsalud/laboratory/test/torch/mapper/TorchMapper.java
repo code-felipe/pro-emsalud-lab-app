@@ -1,5 +1,7 @@
 package com.proemsalud.laboratory.test.torch.mapper;
 
+import java.util.TreeSet;
+
 import org.springframework.stereotype.Component;
 
 import com.proemsalud.laboratory.catalog.domain.Test;
@@ -36,7 +38,7 @@ public class TorchMapper {
 				.categoryName(torch.getTest().getCategory().getName())
 				.testReference(torch.getTest().getReference())
 				.orderId(torch.getOrder().getId())
-				.testMethod(torch.getTest().getTestMethod())
+				.testMethods(new TreeSet<>(torch.getTest().getTestMethods()))
 				.testId(torch.getTest().getId())
 				.createdAt(torch.getCreatedAt())
 				.updatedAt(torch.getUpdatedAt())
@@ -47,7 +49,7 @@ public class TorchMapper {
 		return TorchReportResponse.builder()
 				.id(torch.getId())
 				.testName(torch.getTest().getName())
-				.testMethod(torch.getTest().getTestMethod())
+				.testMethods(new TreeSet<>(torch.getTest().getTestMethods()))
 				.torchIgG(torch.getTorchIgG())
 				.torchIgM(torch.getTorchIgM())
 				.reference(torch.getTest().getReference())

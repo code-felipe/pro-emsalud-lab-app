@@ -1,5 +1,7 @@
 package com.proemsalud.laboratory.test.stool.dto.response;
 
+import java.util.Set;
+
 import com.proemsalud.laboratory.catalog.enumerate.TestMethod;
 import com.proemsalud.laboratory.test.stool.domain.StoolResult;
 
@@ -22,7 +24,7 @@ public class StoolReportResponse {
 	
 	private String testName;
 	
-	private TestMethod testMethod;
+	private Set<TestMethod> testMethods;
 	
 	private String reference;
 }

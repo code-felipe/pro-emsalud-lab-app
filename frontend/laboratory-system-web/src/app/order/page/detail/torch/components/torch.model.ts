@@ -34,7 +34,7 @@ export interface TorchResponse {
   torchIgM: TorchIgM;
   testName: string;
   categoryName: string;
-  testMethod: TestMethod;
+  testMethods: TestMethod[];
   testReference: string;
   orderId: number;
   unitPrice: number;
@@ -47,6 +47,6 @@ export interface TorchReportResponse {
   torchIgG: TorchIgG;
   torchIgM: TorchIgM;
   testName: string;
-  testMethod: TestMethod;
+  testMethods: TestMethod[];
   reference: string;
 }

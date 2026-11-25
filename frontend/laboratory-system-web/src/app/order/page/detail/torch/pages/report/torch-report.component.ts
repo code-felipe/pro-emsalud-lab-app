@@ -2,14 +2,17 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ActivatedRoute, RouterLink } from '@angular/router';
+
 import { TorchReportResponse } from '../../components/torch.model';
+import { TestMethodsPipe } from '../../../../../../utils/test-methods/test-methods.pipe';
 
 @Component({
   selector: 'app-torch-report',
   standalone: true,
   imports: [
     CommonModule,
-    RouterLink
+    RouterLink,
+    TestMethodsPipe
   ],
   templateUrl: './torch-report.component.html',
   styleUrl: './torch-report.component.scss'
@@ -30,7 +33,6 @@ export class TorchReportComponent implements OnInit {
   }
 
   private loadRouteParams(): void {
-
     const patientId = this.route.parent?.snapshot.paramMap.get('id');
     const orderId = this.route.snapshot.paramMap.get('orderId');
 
@@ -43,41 +45,21 @@ export class TorchReportComponent implements OnInit {
     }
   }
 
-  private readonly testMethodTranslations: Record<string, string> = {
-    CUANTITATIVA: 'Cuantitativo',
-    RAPIDA: 'Prueba rápida',
-    SEMI_CUANTITATIVA: 'Semi-cuantitativo',
-    AGLUTINACION_PORTA: 'Aglutinación en portaobjetos',
-    OTROS: 'Otros'
-  };
-
-  translateTestMethod(method?: string | null): string {
-
-    if (!method) {
-      return 'No especificado';
+  public displayResult(value?: string | null): string {
+    if (value == null || value.trim() === '') {
+      return 'N/A';
     }
 
-    return this.testMethodTranslations[method] ?? method;
+    return value;
   }
 
+  public getResultClass(value?: string | null): string {
+    if (!value || value.trim() === '') {
+      return 'result-negative';
+    }
 
-public displayResult(value?: string | null): string {
-  if (value == null || value.trim() === '') {
-    return 'N/A';
+    return value.toUpperCase() === 'POSITIVO'
+      ? 'result-positive'
+      : 'result-negative';
   }
-
-  return value;
-}
-
-public getResultClass(value?: string | null): string {
-  if (!value || value.trim() === '') {
-    return 'result-negative';
-  }
-
-  return value.toUpperCase() === 'POSITIVO'
-    ? 'result-positive'
-    : 'result-negative';
-}
-
-
 }

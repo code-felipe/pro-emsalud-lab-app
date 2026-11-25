@@ -1,5 +1,7 @@
 package com.proemsalud.laboratory.test.stool.mapper;
 
+import java.util.TreeSet;
+
 import org.springframework.stereotype.Component;
 
 import com.proemsalud.laboratory.catalog.domain.Test;
@@ -30,7 +32,7 @@ public class StoolMapper {
 				.categoryName(stool.getTest().getCategory().getName())
 				.testReference(stool.getTest().getReference())
 				.orderId(stool.getOrder().getId())
-				.testMethod(stool.getTest().getTestMethod())
+				.testMethods(new TreeSet<>(stool.getTest().getTestMethods()))
 				.testId(stool.getTest().getId())
 				.createdAt(stool.getCreatedAt())
 				.updatedAt(stool.getUpdatedAt())
@@ -41,7 +43,7 @@ public class StoolMapper {
 		return StoolReportResponse.builder()
 				.id(stool.getId())
 				.testName(stool.getTest().getName())
-				.testMethod(stool.getTest().getTestMethod())
+				.testMethods(new TreeSet<>(stool.getTest().getTestMethods()))
 				.stoolResult(stool.getStoolResult())
 				.reference(stool.getTest().getReference())
 				.build();

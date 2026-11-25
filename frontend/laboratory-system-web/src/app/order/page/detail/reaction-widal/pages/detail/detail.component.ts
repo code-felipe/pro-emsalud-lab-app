@@ -11,6 +11,7 @@ import {
 } from '../../components/widal-model';
 
 import { TestMethod } from '../../../../../../catalog/test/components/test.model';
+import { TestMethodsPipe } from '../../../../../../utils/test-methods/test-methods.pipe';
 
 @Component({
   selector: 'app-widal-reaction-detail',
@@ -18,7 +19,8 @@ import { TestMethod } from '../../../../../../catalog/test/components/test.model
   imports: [
     RouterLink,
     FormsModule,
-    CommonModule
+    CommonModule,
+    TestMethodsPipe
   ],
   templateUrl: './detail.component.html',
   styleUrl: './detail.component.css',
@@ -34,20 +36,21 @@ export class WidalReactionDetailComponent implements OnInit {
   public patientId!: number;
   public orderId!: number;
 
-  testMethodLabels: Record<TestMethod, string> = {
-    [TestMethod.CUANTITATIVA]: 'Cuantitativa',
-    [TestMethod.RAPIDA]: 'Rápida',
-    [TestMethod.SEMI_CUANTITATIVA]: 'Semi-cuantitativa',
-    [TestMethod.AGLUTINACION_PORTA]: 'Aglutinación porta',
-    [TestMethod.OTROS]: 'Otros',
-  };
+  // testMethodLabels: Record<TestMethod, string> = {
+  //   [TestMethod.CUANTITATIVA]: 'Cuantitativa',
+  //   [TestMethod.RAPIDA]: 'Rápida',
+  //   [TestMethod.SEMI_CUANTITATIVA]: 'Semi-cuantitativa',
+  //   [TestMethod.AGLUTINACION_PORTA]: 'Aglutinación porta',
+  //   [TestMethod.OTROS]: 'Otros',
+  // };
 
   widalTitulationLabels: Record<WidalTitulation, string> = {
     [WidalTitulation.EN_1_20]: '1:20',
     [WidalTitulation.EN_1_40]: '1:40',
     [WidalTitulation.EN_1_80]: '1:80',
     [WidalTitulation.EN_1_160]: '1:160',
-    [WidalTitulation.EN_1_320]: '1:320'
+    [WidalTitulation.EN_1_320]: '1:320',
+    [WidalTitulation.N_A]: 'N/A'
   };
 
   widalODilutions = [

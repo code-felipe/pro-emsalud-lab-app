@@ -40,7 +40,7 @@ export interface StoolResponse {
   stoolResult: StoolResult;
   testName: string;
   categoryName: string;
-  testMethod: TestMethod;
+  testMethods: TestMethod[];
   testReference: string;
   orderId: number;
   unitPrice: number;
@@ -52,6 +52,6 @@ export interface StoolReportResponse {
   id: number;
   stoolResult: StoolResult;
   testName: string;
-  testMethod: TestMethod;
+  testMethods: TestMethod[];
   reference: string;
 }

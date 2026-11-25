@@ -1,5 +1,7 @@
 package com.proemsalud.laboratory.test.torch.dto.response;
 
+import java.util.Set;
+
 import com.proemsalud.laboratory.catalog.enumerate.TestMethod;
 import com.proemsalud.laboratory.test.stool.domain.StoolResult;
 import com.proemsalud.laboratory.test.torch.domain.TorchIgG;
@@ -26,7 +28,7 @@ public class TorchReportResponse {
 	
 	private String testName;
 	
-	private TestMethod testMethod;
-	
+	private Set<TestMethod> testMethods;
+
 	private String reference;
 }

@@ -47,9 +47,9 @@
 
               <div class="col-12 col-sm-6">
                 <div class="detail-item">
-                  <span class="detail-label">Método de prueba</span>
+                  <span class="detail-label">Métodos de prueba</span>
                   <span class="detail-value">
-                    {{ testMethodLabels[stool.testMethod] || stool.testMethod }}
+                    {{ stool.testMethods | testMethods }}
                   </span>
                 </div>
               </div>
